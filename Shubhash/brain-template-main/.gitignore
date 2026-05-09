@@ -1,0 +1,57 @@
+# Obsidian — local-only state
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/graph.json
+
+# Plugin data — gitignore by default, then re-include the configs we DO want shared
+.obsidian/plugins/*/data.json
+
+# Re-include obsidian-git config (auto-pull/push intervals shared across devices)
+!.obsidian/plugins/obsidian-git/data.json
+
+# DO NOT re-include the Local REST API config — it stores your API key
+# Each device must paste the key manually after install
+
+# Smart Connections embeddings (large, local)
+.smart-env/
+
+# Obsidian trash
+.trash/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor swap files
+*.swp
+*.swo
+*~
+
+# iCloud sync junk
+* 2.md
+* 2.json
+* 2/
+
+# Vault-local secrets
+.api-key.local
+.env
+.env.local
+
+# Vault-local Claude state (don't ship per-user state in template clones)
+.claude/projects/
+.claude/sessions/
+
+# Editors
+.vscode/
+.idea/
+
+# Backups
+*.bak
+*.tmp

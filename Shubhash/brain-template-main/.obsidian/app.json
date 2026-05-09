@@ -1,0 +1,14 @@
+{
+  "promptDelete": false,
+  "alwaysUpdateLinks": true,
+  "useMarkdownLinks": false,
+  "newLinkFormat": "shortest",
+  "attachmentFolderPath": "raw/attachments",
+  "newFileLocation": "current",
+  "showLineNumber": false,
+  "spellcheck": true,
+  "userIgnoreFilters": [
+    "^\\.git/",
+    "^raw/_inbox/"
+  ]
+}
