@@ -1,0 +1,50 @@
+{
+  "brand": "retechuk",
+  "version": "1",
+  "generated_at": "2026-04-25",
+  "source": "intake-skill",
+  "output_type": "landing",
+  "audience": {
+    "who": "UK women, broadly 25-45, shopping for everyday wear — knits, polo necks, cardigans, tees — that fits a multitasking life with kids and work.",
+    "pain": "Want comfortable, considered everyday pieces without choosing between style and practicality, and a low-friction online buy (delivery + returns)."
+  },
+  "offer": {
+    "what": "Everyday women's clothing — knits, polo necks, cardigans, tees, kids clothing",
+    "value_prop": "Comfortable, considered everyday pieces for women who work with no boundaries — with free UK delivery and returns.",
+    "format": "ecommerce"
+  },
+  "cta": {
+    "primary": {
+      "label": "Shop new arrivals",
+      "url": "/collections/new"
+    },
+    "secondary": {
+      "label": "Read our story",
+      "url": "/about"
+    }
+  },
+  "vibe": {
+    "adjectives": ["feminine", "editorial", "warm", "considered"],
+    "tone": "Designed for women buying for themselves. Warm without being twee, soft without being saccharine. Editorial polish over template energy. The kind of styling that says 'someone who knows fashion put this together' — not 'we picked a template'."
+  },
+  "constraints": {
+    "must_include": [
+      "Hero — brand promise + curated category visual",
+      "Featured collections (Knits / Polos / Cardigans / Tees)",
+      "Brand story strip — 'everyday clothing for women who work with no boundaries'",
+      "Trust strip — free UK delivery + free returns",
+      "New arrivals grid (anchors primary CTA)",
+      "Editorial / lookbook moment — styled photography, not packshots",
+      "Footer with secondary CTA — 'Read our story'"
+    ],
+    "must_avoid": [
+      "Cool-grey corporate palette (current site reads slightly masculine)",
+      "Sans-only type stack with no editorial voice",
+      "Stock photography",
+      "Countdown timers, fake scarcity, urgency banners (wrong archetype — brand-homepage not offer-landing)",
+      "Single dominant CTA above the fold (brand-homepage = multi-CTA)",
+      "Kids clothing on homepage (small share of business, dilutes feminine-editorial read — nav-only)",
+      "Rewards / loyalty programme on homepage (low conversion volume without high-street brand recognition)"
+    ]
+  }
+}

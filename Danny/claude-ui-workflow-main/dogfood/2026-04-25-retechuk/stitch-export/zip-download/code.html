@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RE TECH UK - Effortlessly Layered</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e4e2dd",
+                        "inverse-on-surface": "#f2f1ec",
+                        "primary": "#481925",
+                        "secondary": "#8b4d48",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#534520",
+                        "surface-variant": "#e4e2dd",
+                        "on-tertiary-container": "#bca87a",
+                        "secondary-fixed-dim": "#ffb4ac",
+                        "secondary-container": "#ffb0a8",
+                        "outline-variant": "#d6c2c4",
+                        "on-secondary-fixed-variant": "#6e3632",
+                        "on-surface-variant": "#524345",
+                        "surface-container": "#f0eee9",
+                        "surface-tint": "#884d59",
+                        "tertiary-container": "#4b3d19",
+                        "tertiary-fixed": "#f7e0af",
+                        "primary-fixed-dim": "#feb2c0",
+                        "on-primary-container": "#de96a4",
+                        "tertiary": "#332705",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1b1c19",
+                        "outline": "#847375",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-primary-fixed-variant": "#6d3642",
+                        "on-primary-fixed": "#370b18",
+                        "surface-container-low": "#f5f3ee",
+                        "on-secondary-container": "#7a403b",
+                        "surface-dim": "#dbdad5",
+                        "surface-bright": "#fbf9f4",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "background": "#fbf9f4",
+                        "tertiary-fixed-dim": "#dac495",
+                        "surface": "#fbf9f4",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#eae8e3",
+                        "secondary-fixed": "#ffdad6",
+                        "inverse-surface": "#30312e",
+                        "primary-container": "#632e3a",
+                        "inverse-primary": "#feb2c0",
+                        "on-secondary-fixed": "#380c0a",
+                        "primary-fixed": "#ffd9de",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-background": "#1b1c19"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "margin-desktop": "64px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Noto Serif"],
+                        "label-caps": ["Manrope"],
+                        "headline-lg": ["Noto Serif"],
+                        "display-hero": ["Noto Serif"],
+                        "body-md": ["Manrope"],
+                        "body-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["28px", { "lineHeight": "1.3", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "display-hero": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            /* Paper grain texture */
+            background-color: #fbf9f4;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+        .petal-blur-pink {
+            background: radial-gradient(circle, rgba(222, 150, 164, 0.15) 0%, rgba(251, 249, 244, 0) 70%);
+        }
+        .petal-blur-yellow {
+            background: radial-gradient(circle, rgba(247, 224, 175, 0.15) 0%, rgba(251, 249, 244, 0) 70%);
+        }
+        .petal-blur-purple {
+            background: radial-gradient(circle, rgba(99, 46, 58, 0.08) 0%, rgba(251, 249, 244, 0) 70%);
+        }
+        .organic-circle {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(99, 46, 58, 0.1);
+            border-radius: 43% 57% 55% 45% / 46% 38% 62% 54%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .organic-underline {
+            position: relative;
+            display: inline-block;
+        }
+        .organic-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: -5%;
+            width: 110%;
+            height: 8px;
+            border-bottom: 2px solid rgba(99, 46, 58, 0.3);
+            border-radius: 50% / 100% 100% 0 0;
+            transform: rotate(-1deg);
+        }
+    </style>
+</head>
+<body class="text-on-background min-h-screen relative overflow-x-hidden">
+<!-- Decorative Blurs -->
+<div class="fixed top-[-100px] left-[-100px] w-[500px] h-[500px] petal-blur-pink rounded-full -z-10 pointer-events-none"></div>
+<div class="fixed top-[20%] right-[-150px] w-[600px] h-[600px] petal-blur-yellow rounded-full -z-10 pointer-events-none"></div>
+<div class="fixed bottom-[-200px] left-[10%] w-[800px] h-[800px] petal-blur-purple rounded-full -z-10 pointer-events-none"></div>
+<!-- TopAppBar -->
+<nav class="bg-[#F9F7F2] dark:bg-stone-950 font-serif text-sm tracking-widest uppercase docked full-width top-0 z-50 border-b border-stone-200 dark:border-stone-800 flat no shadows sticky">
+<div class="flex justify-between items-center w-full px-6 py-4 md:px-12 max-w-[1440px] mx-auto">
+<!-- Brand Logo -->
+<div class="text-xl font-bold tracking-tighter text-[#632E3A] dark:text-rose-100 font-serif scale-95 duration-200 ease-in-out">
+                RE TECH UK
+            </div>
+<!-- Desktop Navigation -->
+<div class="hidden md:flex space-x-8 items-center">
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#632E3A] transition-colors hover:opacity-70 transition-opacity duration-300" href="#">SHOP</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#632E3A] transition-colors hover:opacity-70 transition-opacity duration-300" href="#">ABOUT</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#632E3A] transition-colors hover:opacity-70 transition-opacity duration-300" href="#">JOURNAL</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#632E3A] transition-colors hover:opacity-70 transition-opacity duration-300" href="#">CONTACT</a>
+</div>
+<!-- Trailing Icons -->
+<div class="flex space-x-4 items-center text-[#632E3A] dark:text-rose-200">
+<a class="hover:opacity-70 transition-opacity duration-300" href="#"><span class="material-symbols-outlined" data-icon="search">search</span></a>
+<a class="hover:opacity-70 transition-opacity duration-300" href="#"><span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span></a>
+<a class="hover:opacity-70 transition-opacity duration-300" href="#"><span class="material-symbols-outlined" data-icon="person">person</span></a>
+</div>
+</div>
+</nav>
+<main class="max-w-[1440px] mx-auto">
+<!-- Hero Section -->
+<section class="px-6 md:px-12 py-12 md:py-24 relative">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<div class="md:col-span-5 md:col-start-2 z-10 flex flex-col items-start gap-6 relative">
+<!-- Organic Motif -->
+<div class="organic-circle top-[-50px] left-[-80px]"></div>
+<h1 class="font-display-hero text-display-hero text-primary uppercase">
+                        EFFORTLESSLY <br/><span class="organic-underline">LAYERED</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                        Your go-to layer for cooler moments.
+                    </p>
+<div class="flex flex-wrap items-center gap-6 mt-4">
+<a class="bg-primary-container text-on-primary-container px-8 py-4 rounded-full font-label-caps text-label-caps hover:bg-primary transition-colors" href="#">
+                            SHOP NEW ARRIVALS
+                        </a>
+<a class="font-headline-md text-headline-md text-primary-container underline decoration-outline-variant underline-offset-8 hover:text-primary transition-colors text-lg" href="#">
+                            Read Our Story
+                        </a>
+</div>
+</div>
+<div class="md:col-span-6 relative mt-12 md:mt-0">
+<img alt="Woman wearing a soft purple knitted cardigan standing in an sunlit outdoor field with long grass, editorial soft focus style, natural gentle lighting" class="w-full h-auto aspect-[4/5] object-cover rounded-xl shadow-sm" data-alt="Woman wearing a soft purple knitted cardigan standing in an sunlit outdoor field with long grass, editorial soft focus style, natural gentle lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzYSb_ttOEpZoabqHxSqU4PlVuvagMd_1kPp4RdH7q13o2h4cLO2Eb_orKMi-geabCWAEiGp_S_amY8Zh57Fk1ZayBhxDF_2YUzk0ylgXE_fLkuV4dtEcd5iexvxoHhLgIzVYK7Rq1oC39wFES2bdeNVPqowNGQFRfFAuatvMGXNwCXX106L59Ro7XlJ47wpAgf7fBdedpOHzwHC4X0-zgq_NuTLfJS5YU6ONP9zNij0zHM2AffJ1FDHyYP7beqz74vfT51U85iw"/>
+<div class="absolute inset-0 petal-blur-purple opacity-30 pointer-events-none rounded-xl"></div>
+</div>
+</div>
+</section>
+<!-- Trust Strip -->
+<section class="py-8 border-y border-surface-container-highest my-section-gap">
+<div class="flex justify-center items-center gap-12 font-label-caps text-label-caps text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="local_shipping">local_shipping</span>
+<span>Free UK Delivery</span>
+</div>
+<div class="w-1 h-1 bg-outline-variant rounded-full hidden md:block"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="sync">sync</span>
+<span>Free Returns</span>
+</div>
+</div>
+</section>
+<!-- Featured Collections -->
+<section class="px-6 md:px-12 py-12 relative">
+<div class="organic-circle top-[10%] right-[5%] w-[400px] h-[400px]"></div>
+<h2 class="font-headline-lg text-headline-lg text-center mb-16 text-primary">Curated Collections</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- KNITS -->
+<a class="group block relative overflow-hidden rounded-lg aspect-[3/4]" href="#">
+<img alt="Close up of textured neutral tone chunky knit sweater fabric folding naturally" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Close up of textured neutral tone chunky knit sweater fabric folding naturally" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg8yrBJsC0uvdu9LwgzdBoCZvaN1lkcB77K3PSFHbFZUqY9M61KpniWO8K1ebZ-WvxjUc0-eke5Nz5VLOQf8a2-15bBBSOwFtyeYcGILfgv_vT3niNb8AewOoqybyuObByi_3Mr5ko03dY8BC_o00JTNS1r7xkUzx0JIh-cOl99GLGfXBghjrAUJeDilov7Q2yyUZ9VRFx7Rn2ujTQY74BXXl9m-Lp0JRF_cEin7bROf27iMT1ed0W3LhIe-fjnM4XhIyEHD_HoA"/>
+<div class="absolute inset-0 bg-surface/20 group-hover:bg-surface/10 transition-colors"></div>
+<div class="absolute bottom-0 w-full text-center pb-8 pt-12 bg-gradient-to-t from-surface to-transparent">
+<span class="font-label-caps text-label-caps text-primary tracking-widest">KNITS</span>
+</div>
+</a>
+<!-- POLOS -->
+<a class="group block relative overflow-hidden rounded-lg aspect-[3/4] md:mt-12" href="#">
+<img alt="Soft beige collared polo shirt folded on a wooden table, minimal styling, soft morning light" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Soft beige collared polo shirt folded on a wooden table, minimal styling, soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1NhGP-CG5P7M_-kMriaq0ssJKdMvLf4Aj_RoLq0RPmRXUXV0VFASdbQrZfHjkNKO2-Fj6NHIsCOnILvdXzwXtNSRU1Md-gCWx7SxH9W5JNqOiZ8wlDkeV2UzyD1Lh0sXa1WZzhwzBrxp4qrizvbU-LxK2q2OALpYdRaxZoWFkmUpaNmzj2ix9Apt0qfs8BvPxlgVzkAwCB5wl7nckoXuHwpx0my2HfXN5s0HpB8fisHj1v1CqyRh9JOBay9aezfGcEWNbeKPPhg"/>
+<div class="absolute inset-0 bg-surface/20 group-hover:bg-surface/10 transition-colors"></div>
+<div class="absolute bottom-0 w-full text-center pb-8 pt-12 bg-gradient-to-t from-surface to-transparent">
+<span class="font-label-caps text-label-caps text-primary tracking-widest">POLOS</span>
+</div>
+</a>
+<!-- CARDIGANS -->
+<a class="group block relative overflow-hidden rounded-lg aspect-[3/4]" href="#">
+<img alt="Detail shot of buttons on a fine knit dusty pink cardigan, tactile editorial style" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Detail shot of buttons on a fine knit dusty pink cardigan, tactile editorial style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsyE4RMnOuDf4Wn96Y0l3Jdp4T6zLcOFeZPG6XK7JvXAKG4uQSU8XmT-Zkc81rWcttAhd3uZjlVPfFnthQYxZukY8PcoKju1-8qpCC1wGlHCg1yqAe9jcvLTe-UQuY-f-UkqVt84-0fh6GiPVxJgH6QOiyJRfn8NpLYou7nFtPJco2WLO6irmxP-KndsENAZqUBqOLBof0-CQf-KcEPft3RycUYzMjRB1HUqiRMy8YEi9N_GkaO2DbdfVv2-goQkzLab4grUjIAw"/>
+<div class="absolute inset-0 bg-surface/20 group-hover:bg-surface/10 transition-colors"></div>
+<div class="absolute bottom-0 w-full text-center pb-8 pt-12 bg-gradient-to-t from-surface to-transparent">
+<span class="font-label-caps text-label-caps text-primary tracking-widest">CARDIGANS</span>
+</div>
+</a>
+<!-- TEES -->
+<a class="group block relative overflow-hidden rounded-lg aspect-[3/4] md:mt-12" href="#">
+<img alt="Crisp white cotton t-shirt hanging on a simple wooden hanger against an off-white textured wall" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Crisp white cotton t-shirt hanging on a simple wooden hanger against an off-white textured wall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz1_pBrczgL7m024tsRj_bhcU3ic3IwCv2BmqMDmKoBO-NiCYIBJfFbFN4LW5c2NUwb71-gsrvJSg9WVKklUJdMqeyraNr1C_vplfAEoajqRb8jSjjQjI1GJ0G1L2NUksHqImYE7YGdyyI2hpqe_HDyhbTdVZ-PxG3SZUboIt1hUt7O0BXZvzglRGLhwGb50KDhRJl9gJGqkJJXI_mNcdfgdOt0i3ZNl_LdOduv-iF68gnvI66THWl8NafCjhCP1NJG06hWryVrw"/>
+<div class="absolute inset-0 bg-surface/20 group-hover:bg-surface/10 transition-colors"></div>
+<div class="absolute bottom-0 w-full text-center pb-8 pt-12 bg-gradient-to-t from-surface to-transparent">
+<span class="font-label-caps text-label-caps text-primary tracking-widest">TEES</span>
+</div>
+</a>
+</div>
+</section>
+<!-- Brand Story Strip -->
+<section class="py-32 px-6 relative">
+<div class="absolute inset-0 petal-blur-yellow opacity-40 rounded-full w-3/4 h-full mx-auto -z-10"></div>
+<p class="font-headline-lg text-headline-lg text-center text-primary-container italic max-w-3xl mx-auto leading-relaxed">
+                Everyday clothing for women who work with no boundaries.
+            </p>
+</section>
+<!-- New Arrivals Grid -->
+<section class="px-6 md:px-12 py-12 mb-section-gap">
+<div class="flex justify-between items-end mb-12">
+<h2 class="font-headline-lg text-headline-lg text-primary">New Arrivals</h2>
+<a class="font-label-caps text-label-caps text-primary-container hover:text-primary transition-colors border-b border-primary-container pb-1" href="#">VIEW ALL</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-16">
+<!-- Product 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] overflow-hidden rounded bg-surface-container-low mb-6">
+<img alt="Woman wearing a long ribbed knit dress in warm taupe, editorial outdoor setting with soft lighting" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" data-alt="Woman wearing a long ribbed knit dress in warm taupe, editorial outdoor setting with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdtMEmJ3Fr17BIPq2L7AQquzfw6L1DuQmyTOQeR9mhwtnlQNMVxhq2Y8zvbW9CbQQxiuu-BQlVNO7_SlJx4kYMubYQESP3ABajiXsF4jFn2EyNqXDNeJ-8ugn6rq7AgKrGdG8xMiqW2zpOvL72F9Tmo_XKzS_-QhC_Lswgnnfvgd9-pX-tppE00ubmIxoz4Vp7Rd2X91ekp2QOMCjVjybt1tuLFiRO-Jgd1R4QES3t1a-ew8oI_jnyPWinh3gkrKGen9jKjFXM3A"/>
+</div>
+<div class="text-center space-y-2">
+<h3 class="font-body-md text-body-md text-on-surface">Ribbed knit dress</h3>
+<p class="font-body-md text-body-md text-outline">£70</p>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] overflow-hidden rounded bg-surface-container-low mb-6">
+<img alt="Relaxed-fit cream polo shirt styled effortlessly on a mannequin against a warm plaster wall" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" data-alt="Relaxed-fit cream polo shirt styled effortlessly on a mannequin against a warm plaster wall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4fUQP8fOugtvKneban5Aj8jnIaSBfxZe3Pn0nbCyOL3GhOlhX7tdXT9RcLK9pHc6FNJcDY3mU0KZpqgHYitOxnfW_g9OkFQR-SzUam9I-EGTBeS9ZMsX_d4ly_eOjnBu3Wu10puMKG8xmjyvyKlVm-6pMg8bvMhwBQN5_6vhYvS4hPJK9_v4Bk0-4uDx350ZLm-RFanSM5WK-aajx-8049ZWdzRm5qyZevGAcCpBdUBvsbfh9WLRoauRQfqoPOjRpc2opLHEjJw"/>
+</div>
+<div class="text-center space-y-2">
+<h3 class="font-body-md text-body-md text-on-surface">Relaxed-fit Polo</h3>
+<p class="font-body-md text-body-md text-outline">£72</p>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] overflow-hidden rounded bg-surface-container-low mb-6">
+<img alt="Chunky knitted cardigan in soft aubergine draped over a wooden chair back, soft natural window light" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" data-alt="Chunky knitted cardigan in soft aubergine draped over a wooden chair back, soft natural window light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR5w_87oxMjgCyzn0mtmPRea0eZnr2oUBedMboNnrTdAuVYU_GokMdTnREJ2g4rSEjXIYBGc_usgrTAZrpO0hqnqm8YMaX7sbgotZlrSqByNVfYT17swyXVWG8AIELGPnVxkYG1pnP4ocudMeb5-rmZmbJiiNTYkzFYouaXkRu565XIjnSxreZ5UYGNo8J7kjpFM7xnxqqLgGfW7Q8VvFUL86fJ---IAlqaPgUBsdrybHa4opJRH72cHQnAfGY32M3Gq1FRPNvBg"/>
+</div>
+<div class="text-center space-y-2">
+<h3 class="font-body-md text-body-md text-on-surface">Knitted Cardigan</h3>
+<p class="font-body-md text-body-md text-outline">£75</p>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] overflow-hidden rounded bg-surface-container-low mb-6">
+<img alt="Soft basic cotton tee in light heather grey folded neatly, minimal aesthetic, warm shadows" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" data-alt="Soft basic cotton tee in light heather grey folded neatly, minimal aesthetic, warm shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsYzyFbd9kUbmdWTRn6fOVh4Xr9USY94c22eiFSrvwWOTIr94z--DmCtgdguoGY5MCPC-FS6x_3eSHrLsqDymqkEx3dV2He-3AKdSRd4slf1Rvo1rB0zBvRBaJVsmXMjDgYLPJZUwhtmNXa6tN9Xwbt2rEadvfQHVyMRukdVDb5NlmTXXQeG1_Lp_Yd6gAuM7h9E_i0yBopN1pAN_nCmFHa5g2bNxtK1YakYIs0YNqXux3P4Nz4GYtfF_FPsdF2gusPooRLsrIwQ"/>
+</div>
+<div class="text-center space-y-2">
+<h3 class="font-body-md text-body-md text-on-surface">Soft basic Tee</h3>
+<p class="font-body-md text-body-md text-outline">£75</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Editorial Lookbook -->
+<section class="mb-section-gap relative">
+<div class="w-full h-[716px] md:h-[870px] relative overflow-hidden">
+<img alt="Woman wearing a flowy pastel cream dress standing in a vast sunlit golden field, wide editorial shot, gentle breeze, serene mood" class="w-full h-full object-cover" data-alt="Woman wearing a flowy pastel cream dress standing in a vast sunlit golden field, wide editorial shot, gentle breeze, serene mood" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJaEQW8rOK9Wmjvi92n0VyeMr3WYGLF2PXtAA577SyjmOpshqnga-pXwB4gYBIW9FR22obj4OJgc2OYr_Y1DguDMGABqb9bjAl1F2hGMJCStPEqevkP_3d1IXSutk2eq7d0eKfInkilp08tWJ6wk7H0N-FVww1afdj9X2j3UsEU5avGB2wjH7f3tn6e7OqKTNPgU3gz87F7Qz7wa1QtcaHYfoI_gWf3lbFuNHyLcVoWodPbBV7eDZgujak8X80Fhi3mVs7r-RVvg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-80"></div>
+<div class="absolute bottom-0 left-0 w-full p-6 md:p-16 flex justify-center">
+<div class="bg-surface/80 backdrop-blur-md p-8 md:p-12 max-w-2xl text-center rounded-xl border border-surface-container-highest shadow-[0_20px_40px_rgba(99,46,58,0.05)]">
+<p class="font-headline-md text-headline-md text-primary italic leading-relaxed">
+                            Embrace the gentle flow of the season with pieces designed for movement and comfort.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#F9F7F2] dark:bg-stone-950 font-serif text-xs tracking-wider uppercase full-width border-t border-stone-200 dark:border-stone-800 mt-20 flat no shadows opacity-80 hover:opacity-100 transition-all">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 w-full px-6 py-12 md:px-12 max-w-7xl mx-auto">
+<!-- Brand Column -->
+<div class="col-span-1 md:col-span-1 flex flex-col justify-between">
+<div class="text-lg font-bold tracking-tighter text-[#632E3A] dark:text-rose-100 font-serif mb-4">
+                    RE TECH UK
+                </div>
+<div class="mt-8 md:mt-auto text-stone-500 dark:text-stone-400">
+                    © 2026 Re Tech UK
+                </div>
+</div>
+<!-- Links Columns -->
+<div class="col-span-1 md:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-8">
+<div class="flex flex-col space-y-4">
+<span class="text-[#632E3A] font-bold">OUR WORLD</span>
+<a class="text-stone-500 dark:text-stone-400 hover:underline decoration-stone-300 underline-offset-4" href="#">Journal</a>
+<a class="text-stone-500 dark:text-stone-400 hover:underline decoration-stone-300 underline-offset-4" href="#">About Us</a>
+<a class="text-stone-500 dark:text-stone-400 hover:underline decoration-stone-300 underline-offset-4" href="#">Sustainability</a>
+</div>
+<div class="flex flex-col space-y-4">
+<span class="text-[#632E3A] font-bold">HELP</span>
+<a class="text-stone-500 dark:text-stone-400 hover:underline decoration-stone-300 underline-offset-4" href="#">Contact</a>
+<a class="text-stone-500 dark:text-stone-400 hover:underline decoration-stone-300 underline-offset-4" href="#">Delivery</a>
+<a class="text-stone-500 dark:text-stone-400 hover:underline decoration-stone-300 underline-offset-4" href="#">Returns</a>
+</div>
+<div class="flex flex-col space-y-4">
+<span class="text-[#632E3A] font-bold">LEGAL</span>
+<a class="text-stone-500 dark:text-stone-400 hover:underline decoration-stone-300 underline-offset-4" href="#">Privacy</a>
+<a class="text-stone-500 dark:text-stone-400 hover:underline decoration-stone-300 underline-offset-4" href="#">Terms</a>
+</div>
+</div>
+<!-- Social Column -->
+<div class="col-span-1 flex justify-start md:justify-end items-start gap-4">
+<a class="text-[#632E3A] hover:opacity-70 transition-opacity" href="#"><span class="material-symbols-outlined">camera_alt</span></a>
+<a class="text-[#632E3A] hover:opacity-70 transition-opacity" href="#"><span class="material-symbols-outlined">mail</span></a>
+</div>
+</div>
+</footer>
+</body></html>

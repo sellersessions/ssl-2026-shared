@@ -1,0 +1,33 @@
+{
+  "voice_id": "pfeizhSY3j6DUhKGxyRz",
+  "model_id": "eleven_multilingual_v2",
+  "output_dir": "voice-box-generations/elevenlabs/ssl-2026-opener",
+  "default_voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "style": 0.0,
+    "use_speaker_boost": true
+  },
+  "scenes": [
+    {
+      "id": "intro-a",
+      "text": "Hey guys, welcome back to Seller Sessions. We are live in London for one of the biggest Amazon seller events of the year."
+    },
+    {
+      "id": "intro-b",
+      "text": "This is Seller Sessions Live 2026. Two stages, twenty speakers, one day.",
+      "voice_settings": {
+        "stability": 0.35,
+        "style": 0.2
+      }
+    },
+    {
+      "id": "cta",
+      "text": "Get your ticket now before they're gone. Seller Sessions dot com slash live.",
+      "voice_settings": {
+        "stability": 0.4,
+        "similarity_boost": 0.85
+      }
+    }
+  ]
+}

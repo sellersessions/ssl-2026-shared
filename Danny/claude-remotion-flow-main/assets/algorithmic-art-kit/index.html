@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Algorithmic Art Kit · Reference Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
+  --font-serif:'Source Serif Pro',Georgia,serif;
+  --bg-page:#06080F;
+  --bg-0:#030C1B; --bg-1:#0A1228;
+  --ink-0:#F2EEF8; --ink-1:#C8B6F0; --ink-2:#8B92A8; --ink-3:#5A627A;
+  --violet:#9D4EDD; --teal:#5DCAA5; --amber:#EF9F27; --pink:#FF6BB4;
+  --blue:#378ADD; --orange:#D85A30; --gold:#C99554;
+  --r-wrap:12px; --r-card:3px;
+  --stroke-hair:0.5px; --stroke-thin:1px; --stroke-bold:1.5px;
+  --border-soft:rgba(157,78,221,0.18);
+  --border-mid:rgba(157,78,221,0.35);
+  --border-strong:rgba(157,78,221,0.45);
+  --card-fill:rgba(255,255,255,0.02);
+  --card-stroke:rgba(255,255,255,0.08);
+  --divider:rgba(255,255,255,0.06);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg-page);color:var(--ink-0);font-family:var(--font-sans);min-height:100vh}
+body{padding:48px 32px 64px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+a{color:inherit;text-decoration:none}
+
+.gx-frame{max-width:1640px;margin:0 auto}
+
+.gx-wrap{
+  background:linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 100%);
+  border-radius:var(--r-wrap);
+  padding:36px 36px 30px;
+  position:relative;overflow:hidden;
+  border:var(--stroke-hair) solid var(--border-soft);
+}
+.gx-wrap::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 110%,rgba(157,78,221,0.10),transparent 60%);pointer-events:none}
+.gx-wrap::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(157,78,221,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(157,78,221,0.025) 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
+
+.gx-spec{display:flex;align-items:center;gap:18px;margin-bottom:28px;position:relative;z-index:1}
+.gx-spec-id{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;color:var(--ink-2);text-transform:uppercase;padding:3px 8px;border:var(--stroke-hair) solid var(--border-mid);border-radius:2px}
+.gx-spec-name{font-family:var(--font-sans);font-size:24px;font-weight:600;letter-spacing:-0.3px;color:var(--ink-0);margin:0}
+.gx-spec-pat{font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-left:auto;display:flex;align-items:center;gap:8px}
+.gx-spec-pat::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 6px var(--gold);animation:gxPulse 2s ease-in-out infinite}
+@keyframes gxPulse{0%,100%{box-shadow:0 0 6px var(--gold)}50%{box-shadow:0 0 12px var(--gold)}}
+
+.gx-intro{font-family:var(--font-sans);font-size:14px;line-height:1.6;color:var(--ink-1);max-width:680px;margin:0 0 32px;position:relative;z-index:1}
+.gx-intro b{color:var(--ink-0);font-weight:500}
+
+.gx-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  position:relative;z-index:1;
+}
+@media (max-width:1280px){.gx-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:760px){.gx-grid{grid-template-columns:1fr}}
+
+.gx-card{
+  background:var(--card-fill);
+  border:var(--stroke-hair) solid var(--card-stroke);
+  border-radius:var(--r-card);
+  padding:18px 20px 16px;
+  display:flex;flex-direction:column;
+  transition:border-color .2s ease, transform .2s ease;
+}
+.gx-card:hover{border-color:var(--border-mid);transform:translateY(-2px)}
+
+.gx-card-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:6px}
+.gx-card-id{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--ink-2);text-transform:uppercase;padding:2px 7px;border:var(--stroke-hair) solid var(--border-mid);border-radius:2px;flex:0 0 auto}
+.gx-card-link{margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;color:var(--ink-2);text-transform:uppercase;padding:2px 7px;border:var(--stroke-hair) solid var(--card-stroke);border-radius:2px;transition:color .2s,border-color .2s}
+.gx-card-link:hover{color:var(--gold);border-color:rgba(201,149,84,0.45)}
+.gx-card-name{font-family:var(--font-sans);font-size:16px;font-weight:600;letter-spacing:-0.2px;color:var(--ink-0);margin:0 0 4px}
+.gx-card-pat{font-family:var(--font-mono);font-size:11px;letter-spacing:0.3px;color:var(--gold);margin:0 0 14px}
+
+.gx-prev{
+  width:100%;
+  aspect-ratio:1080 / 800;
+  background:#06080F;
+  border-radius:2px;
+  border:var(--stroke-hair) solid var(--card-stroke);
+  overflow:hidden;
+  position:relative;
+}
+.gx-prev iframe{
+  position:absolute;top:0;left:0;
+  width:1080px;height:800px;
+  border:0;
+  transform-origin:0 0;
+  transform:scale(var(--prev-scale,0.42));
+}
+
+.gx-foot{margin-top:32px;padding-top:18px;border-top:var(--stroke-hair) solid var(--divider);display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-family:var(--font-mono);font-size:11px;color:var(--ink-2);letter-spacing:0.3px;position:relative;z-index:1}
+.gx-foot a{color:var(--gold);border-bottom:var(--stroke-hair) solid rgba(201,149,84,0.35);padding-bottom:1px}
+.gx-foot a:hover{color:#E0B070}
+.gx-foot-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-3);padding:2px 7px;border:var(--stroke-hair) solid var(--border-soft);border-radius:2px}
+</style>
+</head>
+<body>
+
+<main class="gx-frame">
+  <h2 class="sr-only">Algorithmic Art Kit reference gallery: 9 content shapes laid out in a 3x3 grid, each rendered live so we can pick which to take forward.</h2>
+
+  <section class="gx-wrap" aria-labelledby="gx-name">
+    <header class="gx-spec">
+      <span class="gx-spec-id">Template Kit</span>
+      <h1 id="gx-name" class="gx-spec-name">Algorithmic Art</h1>
+      <span class="gx-spec-pat">9 shapes, 1 system</span>
+    </header>
+
+    <p class="gx-intro">
+      Reference gallery for the locked Remotion Flow design system. Each card is a live preview of a content-shape template. <b>Click any card</b> to open the template standalone at full 1080px width. Source fragments live under <code style="font-family:var(--font-mono);color:var(--ink-2);font-size:12px">_captures/process-viz/</code>; standalone wrappers under <code style="font-family:var(--font-mono);color:var(--ink-2);font-size:12px">previews/</code>.
+    </p>
+
+    <div class="gx-grid">
+
+      <article class="gx-card">
+        <div class="gx-card-head">
+          <span class="gx-card-id">Template 01</span>
+          <a class="gx-card-link" href="previews/template-01.html" target="_blank" rel="noopener">Open ↗</a>
+        </div>
+        <h2 class="gx-card-name">Node graph</h2>
+        <p class="gx-card-pat">Join: orthogonal routing</p>
+        <a class="gx-prev" href="previews/template-01.html" target="_blank" rel="noopener" aria-label="Open Template 01 standalone">
+          <iframe src="previews/template-01.html" loading="lazy" title="Template 01 preview"></iframe>
+        </a>
+      </article>
+
+      <article class="gx-card">
+        <div class="gx-card-head">
+          <span class="gx-card-id">10-Step</span>
+          <a class="gx-card-link" href="previews/template-06-instance.html" target="_blank" rel="noopener">Open ↗</a>
+        </div>
+        <h2 class="gx-card-name">Production timeline</h2>
+        <p class="gx-card-pat">Gantt instance, 10-stage pipeline</p>
+        <a class="gx-prev" href="previews/template-06-instance.html" target="_blank" rel="noopener" aria-label="Open 10-step Production timeline standalone">
+          <iframe src="previews/template-06-instance.html" loading="lazy" title="10-step Production timeline preview"></iframe>
+        </a>
+      </article>
+
+      <article class="gx-card">
+        <div class="gx-card-head">
+          <span class="gx-card-id">Template 03</span>
+          <a class="gx-card-link" href="previews/template-03.html" target="_blank" rel="noopener">Open ↗</a>
+        </div>
+        <h2 class="gx-card-name">Subway map</h2>
+        <p class="gx-card-pat">Cap: 9 stations, closed loop</p>
+        <a class="gx-prev" href="previews/template-03.html" target="_blank" rel="noopener" aria-label="Open Template 03 standalone">
+          <iframe src="previews/template-03.html" loading="lazy" title="Template 03 preview"></iframe>
+        </a>
+      </article>
+
+      <article class="gx-card">
+        <div class="gx-card-head">
+          <span class="gx-card-id">Template 04</span>
+          <a class="gx-card-link" href="previews/template-04.html" target="_blank" rel="noopener">Open ↗</a>
+        </div>
+        <h2 class="gx-card-name">Dynamic wizard</h2>
+        <p class="gx-card-pat">Cap: 10 stages, bespoke per-stage animation</p>
+        <a class="gx-prev" href="previews/template-04.html" target="_blank" rel="noopener" aria-label="Open Template 04 standalone">
+          <iframe src="previews/template-04.html" loading="lazy" title="Template 04 preview"></iframe>
+        </a>
+      </article>
+
+      <article class="gx-card">
+        <div class="gx-card-head">
+          <span class="gx-card-id">Template 05</span>
+          <a class="gx-card-link" href="previews/template-05.html" target="_blank" rel="noopener">Open ↗</a>
+        </div>
+        <h2 class="gx-card-name">Circuit board</h2>
+        <p class="gx-card-pat">Cap: 9 components, orthogonal traces</p>
+        <a class="gx-prev" href="previews/template-05.html" target="_blank" rel="noopener" aria-label="Open Template 05 standalone">
+          <iframe src="previews/template-05.html" loading="lazy" title="Template 05 preview"></iframe>
+        </a>
+      </article>
+
+      <article class="gx-card">
+        <div class="gx-card-head">
+          <span class="gx-card-id">Template 06</span>
+          <a class="gx-card-link" href="previews/template-06.html" target="_blank" rel="noopener">Open ↗</a>
+        </div>
+        <h2 class="gx-card-name">Gantt timeline</h2>
+        <p class="gx-card-pat">Range: 4 to 10 tasks</p>
+        <a class="gx-prev" href="previews/template-06.html" target="_blank" rel="noopener" aria-label="Open Template 06 standalone">
+          <iframe src="previews/template-06.html" loading="lazy" title="Template 06 preview"></iframe>
+        </a>
+      </article>
+
+      <article class="gx-card">
+        <div class="gx-card-head">
+          <span class="gx-card-id">Template 07</span>
+          <a class="gx-card-link" href="previews/template-07.html" target="_blank" rel="noopener">Open ↗</a>
+        </div>
+        <h2 class="gx-card-name">Sankey ribbon</h2>
+        <p class="gx-card-pat">Cap: 6 gates max, weighted</p>
+        <a class="gx-prev" href="previews/template-07.html" target="_blank" rel="noopener" aria-label="Open Template 07 standalone">
+          <iframe src="previews/template-07.html" loading="lazy" title="Template 07 preview"></iframe>
+        </a>
+      </article>
+
+      <article class="gx-card">
+        <div class="gx-card-head">
+          <span class="gx-card-id">Template 08</span>
+          <a class="gx-card-link" href="previews/template-08.html" target="_blank" rel="noopener">Open ↗</a>
+        </div>
+        <h2 class="gx-card-name">Card stack</h2>
+        <p class="gx-card-pat">Cap: 6 cards max, sequenced reveal</p>
+        <a class="gx-prev" href="previews/template-08.html" target="_blank" rel="noopener" aria-label="Open Template 08 standalone">
+          <iframe src="previews/template-08.html" loading="lazy" title="Template 08 preview"></iframe>
+        </a>
+      </article>
+
+      <article class="gx-card">
+        <div class="gx-card-head">
+          <span class="gx-card-id">Template 10</span>
+          <a class="gx-card-link" href="previews/template-10.html" target="_blank" rel="noopener">Open ↗</a>
+        </div>
+        <h2 class="gx-card-name">Pinball path</h2>
+        <p class="gx-card-pat">Cap: 9 bumpers, energetic journey</p>
+        <a class="gx-prev" href="previews/template-10.html" target="_blank" rel="noopener" aria-label="Open Template 10 standalone">
+          <iframe src="previews/template-10.html" loading="lazy" title="Template 10 preview"></iframe>
+        </a>
+      </article>
+
+    </div>
+
+  </section>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+node_modules
+dist
+.DS_Store
+.env
+
+# Python virtualenvs
+**/.venv/
+**/__pycache__/
+**/*.pyc
+
+# Remotion render output
+out
+
+# ───────────────────────────────────────────────────────────────
+# Media assets — tracked via MANIFEST.json only; keep local
+# Scraper output + hand-picked SFX + generated VOs are all recoverable
+# (Pixabay scraper for SFX, ElevenLabs generate-vo.py for voiceover).
+# ───────────────────────────────────────────────────────────────
+
+public/assets/sfx/_inbox/
+public/assets/sfx/**/*.mp3
+public/assets/sfx/**/*.wav
+public/assets/music/
+public/assets/voice/cloning-sources/
+public/assets/voice/experiments/
+public/assets/voice/generated/
+
+# Voice cloning reference WAVs (local source-of-truth, large)
+scripts/voice/reference/*.wav
+scripts/voice/reference/*.mp3
+
+# Source-clip mp4s — large workshop footage. Symlinks were broken by
+# Remotion's webpack bundler in S16; switched to local real-file copies.
+# Recoverable from sibling repo workshop-intro-chapters/.
+public/assets/source-clips/
+
+# Loom-cut MP4 binaries — large, sourced from sibling repo
+# Claude-Video-Editing-Flow/assets/loom-cuts/<series>_mastered/.
+_loom-cuts/
+public/assets/loom-cuts/
+
+# Screenshots / browser-automation captures — per CLAUDE.md project rule.
+_captures/
+
+# Internal-only files: untracked for speaker handover
+MASTER-LOG.md
+README.personal.md
+
+
+# Large mastering pipeline media — distribute via gh release, not git
+public/assets/loom-batch/
+public/assets/loom-batch-mastered/
+
+# Pipeline-proof + retech-showcase demo source media — large mp4/wav, recoverable
+public/assets/pipeline-proof/
+public/assets/retech-showcase/
+
+# Local Netlify folder
+.netlify/

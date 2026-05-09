@@ -1,0 +1,48 @@
+{
+  "brand": "retechuk",
+  "version": "1",
+  "generated_at": "2026-04-26",
+  "source": "user-via-/lock",
+  "locks": [
+    {
+      "field": "theme.mode",
+      "value": "light",
+      "reason": "Just established post-screenshot — extractor flipped it to dark; do not let Stitch flip it back.",
+      "locked_at": "2026-04-26",
+      "source": "user-via-/lock",
+      "enforce": "html"
+    },
+    {
+      "field": "_schema_gaps_observed.decorative_palette",
+      "value": ["#b89bcc", "#f5cf6a", "#f4a98c", "#e8b4d4"],
+      "reason": "Pastel petal blurs are signature brand identity — keep them present in every iteration.",
+      "locked_at": "2026-04-26",
+      "source": "user-via-/lock",
+      "enforce": "prompt"
+    },
+    {
+      "field": "_schema_gaps_observed.background_texture",
+      "value": "paper-grain noise overlay on pale bg",
+      "reason": "Paper-grain BG is signature brand element — must not flatten to plain solid.",
+      "locked_at": "2026-04-26",
+      "source": "user-via-/lock",
+      "enforce": "prompt"
+    },
+    {
+      "field": "constraints.must_include",
+      "value": [
+        "Hero — brand promise + curated category visual",
+        "Featured collections (Knits / Polos / Cardigans / Tees)",
+        "Brand story strip — 'everyday clothing for women who work with no boundaries'",
+        "Trust strip — free UK delivery + free returns",
+        "New arrivals grid (anchors primary CTA)",
+        "Editorial / lookbook moment — styled photography, not packshots",
+        "Footer with secondary CTA — 'Read our story'"
+      ],
+      "reason": "Brand-homepage archetype non-negotiables — every iteration must carry these 7 sections (per finding #6).",
+      "locked_at": "2026-04-26",
+      "source": "user-via-/lock",
+      "enforce": "prompt"
+    }
+  ]
+}

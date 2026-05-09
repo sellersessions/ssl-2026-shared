@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>Claude UI Workflow — autonomous flow (stages 1-5)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ss-purple: #461499;
+  --ss-purple-light: #753EF7;
+  --ss-purple-glow: #9B6DFF;
+  --ss-deep: #0C0322;
+  --ss-deep-2: #130d2a;
+  --ss-card: #1a1a2e;
+  --ss-hover: #252040;
+  --ss-gold: #FBBF24;
+  --ss-orange: #F97316;
+  --ss-emerald: #10B981;
+  --ss-cyan: #22D3EE;
+  --ss-pink: #EC4899;
+  --line: #2a1f4d;
+  --line-soft: #1f1738;
+  --ink: #FAFAFC;
+  --ink-muted: #B8B0D8;
+  --ink-faint: #6e6588;
+  --copy: var(--ss-purple-light);
+  --copy-dim: rgba(117,62,247,0.16);
+  --success: var(--ss-emerald);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-xl: 14px;
+  --font-body: "Plus Jakarta Sans","Inter",sans-serif;
+  --font-mono: "JetBrains Mono",monospace;
+  --transition: 200ms cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-body); font-size: 14px;
+  color: var(--ink); background: var(--ss-deep);
+  background-image:
+    radial-gradient(900px 480px at 12% -10%, rgba(117,62,247,.14), transparent 60%),
+    radial-gradient(700px 420px at 92% -8%, rgba(70,20,153,.12), transparent 65%);
+  min-height: 100dvh; letter-spacing: -.005em;
+  display: flex; flex-direction: column;
+}
+
+/* Topbar ------------------------------------ */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 22px; border-bottom: 1px solid var(--line-soft);
+  background: linear-gradient(180deg, rgba(26,26,46,.85) 0%, rgba(12,3,34,.85) 100%);
+  backdrop-filter: blur(8px); gap: 12px;
+}
+.logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 17px; letter-spacing: -.5px; }
+.logo-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--ss-purple-light) 0%, var(--ss-purple) 100%);
+  color: #fff; box-shadow: 0 0 16px rgba(117,62,247,.45); font-size: 14px;
+}
+.logo-text {
+  background: linear-gradient(135deg, #FAFAFC 0%, var(--ss-purple-glow) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.topbar-meta {
+  display: flex; gap: 18px; align-items: center;
+  color: var(--ink-faint); font-size: 12px; font-family: var(--font-mono);
+}
+.topbar-meta b { color: var(--ink-muted); font-weight: 600; }
+.topbar-actions { display: flex; gap: 10px; align-items: center; }
+.btn-mini {
+  padding: 7px 12px; border-radius: var(--radius-md); font-size: 12px; font-weight: 600;
+  border: 1px solid var(--line); color: var(--ink-muted); background: rgba(26,26,46,.4);
+  cursor: pointer; transition: all var(--transition); font-family: inherit;
+  text-decoration: none; display: inline-block;
+}
+.btn-mini:hover { color: var(--ink); border-color: var(--copy); }
+
+/* Layout ------------------------------------ */
+.main {
+  flex: 1; max-width: 1080px; width: 100%;
+  margin: 0 auto; padding: 36px 22px 100px;
+  display: flex; flex-direction: column; gap: 32px;
+}
+
+/* Hero strip -------------------------------- */
+.hero {
+  display: flex; flex-direction: column; gap: 14px;
+}
+.hero-eyebrow {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  color: var(--ss-purple-glow); letter-spacing: 2px; text-transform: uppercase;
+}
+.hero-title {
+  font-size: 30px; font-weight: 700; letter-spacing: -.6px; line-height: 1.2;
+}
+.hero-title b { color: var(--ss-purple-glow); font-weight: 700; }
+.hero-meta {
+  display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+  font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-faint);
+}
+.hero-meta b { color: var(--ink-muted); font-weight: 600; }
+.hero-meta .sep { color: var(--line); }
+
+/* Stage strip ------------------------------- */
+.strip {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.stage-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 12px 7px 9px; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  background: rgba(26,26,46,.45); border: 1px solid var(--line-soft);
+  color: var(--ink-faint); transition: all var(--transition);
+}
+.stage-pill .num {
+  width: 18px; height: 18px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700;
+  background: var(--line); color: var(--ink-faint);
+}
+.stage-pill.done { color: var(--success); border-color: rgba(16,185,129,.30); background: rgba(16,185,129,.06); }
+.stage-pill.done .num { background: var(--success); color: #052; }
+.stage-pill.active {
+  color: #fff; border-color: var(--ss-purple-light); background: rgba(117,62,247,.18);
+  box-shadow: 0 0 0 3px rgba(117,62,247,.10);
+}
+.stage-pill.active .num { background: var(--ss-purple-light); color: #fff; }
+.strip-arrow { color: var(--line); font-family: var(--font-mono); font-size: 12px; }
+
+/* Review-mode banner ------------------------ */
+.review-banner {
+  position: sticky; top: 0; z-index: 30;
+  background: rgba(12,3,34,.92); border-bottom: 1px solid var(--line);
+  padding: 8px 22px; backdrop-filter: blur(10px);
+  display: flex; gap: 12px; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint);
+  flex-wrap: wrap;
+}
+.review-banner b { color: var(--ink-muted); font-weight: 700; }
+.review-banner a {
+  color: var(--ss-purple-glow); text-decoration: none;
+  border-bottom: 1px dashed rgba(155,109,255,.4); padding: 1px 2px;
+}
+.review-banner a.here { color: var(--ss-gold); border-bottom-color: rgba(251,191,36,.5); }
+
+/* Stage cards ------------------------------- */
+.stages { display: flex; flex-direction: column; gap: 14px; }
+.stage {
+  border: 1px solid var(--line-soft); border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, rgba(26,26,46,.55) 0%, rgba(19,13,42,.55) 100%);
+  overflow: hidden; transition: all var(--transition);
+}
+.stage.done { border-color: rgba(16,185,129,.20); }
+.stage.active {
+  border-color: rgba(117,62,247,.45);
+  box-shadow: 0 0 0 1px rgba(117,62,247,.20), 0 0 32px rgba(117,62,247,.12);
+}
+.stage.pending { opacity: .55; }
+
+.stage-head {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 20px; border-bottom: 1px solid var(--line-soft);
+  background: rgba(0,0,0,.16);
+}
+.stage-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  background: var(--line); color: var(--ink-faint); flex-shrink: 0;
+}
+.stage.done .stage-num { background: var(--success); color: #052; }
+.stage.active .stage-num { background: var(--ss-purple-light); color: #fff; }
+
+.stage-title { font-size: 14.5px; font-weight: 700; color: var(--ink); flex: 1; }
+.stage-title small {
+  display: block; font-size: 11px; font-weight: 500;
+  color: var(--ink-faint); font-family: var(--font-mono);
+  letter-spacing: .3px; margin-top: 2px;
+}
+
+.stage-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  border: 1px solid var(--line);
+}
+.stage-status.done {
+  color: var(--success); border-color: rgba(16,185,129,.40);
+  background: rgba(16,185,129,.08);
+}
+.stage-status.running {
+  color: var(--ss-purple-glow); border-color: rgba(117,62,247,.40);
+  background: rgba(117,62,247,.10);
+}
+.stage-status.pending {
+  color: var(--ink-faint); border-color: var(--line-soft);
+}
+.stage-status .pulse {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ss-purple-light);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .35; transform: scale(.7); }
+}
+.stage-elapsed {
+  font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint);
+  flex-shrink: 0; min-width: 48px; text-align: right;
+}
+
+.stage-body { padding: 18px 20px 20px; }
+.stage.pending .stage-body {
+  padding: 14px 20px;
+  font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint);
+}
+
+/* Stage 1 — source preview ------------------ */
+.source-row {
+  display: grid; grid-template-columns: 200px 1fr; gap: 22px; align-items: stretch;
+}
+@media (max-width: 720px) { .source-row { grid-template-columns: 1fr; } }
+.source-thumb {
+  aspect-ratio: 4 / 3; border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, #0c0a14 0%, #1a1530 100%),
+    radial-gradient(circle at 30% 20%, rgba(224,122,58,.4), transparent 60%);
+  background-blend-mode: screen;
+  position: relative; overflow: hidden;
+}
+.source-thumb::before {
+  content: ""; position: absolute; inset: 18% 14% 30% 14%;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border-radius: 4px;
+}
+.source-thumb::after {
+  content: ""; position: absolute; left: 14%; right: 14%; bottom: 18%; height: 14%;
+  background:
+    linear-gradient(90deg, rgba(124,107,189,.5), rgba(224,122,58,.5));
+  border-radius: 4px; opacity: .7;
+}
+.source-meta { display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+.source-url {
+  font-family: var(--font-mono); font-size: 13.5px; color: var(--ink);
+  background: rgba(0,0,0,.3); border: 1px solid var(--line);
+  border-radius: var(--radius-md); padding: 10px 14px;
+  word-break: break-all;
+}
+.source-stats {
+  display: flex; gap: 22px; flex-wrap: wrap;
+  font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-faint);
+}
+.source-stats b { color: var(--ink); font-weight: 700; font-size: 14px; display: block; }
+
+/* Stage 2 — brand tokens -------------------- */
+.brand-row {
+  display: flex; flex-direction: column; gap: 18px;
+}
+.brand-section-label {
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 700;
+  color: var(--ink-faint); letter-spacing: 1.4px; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.swatches {
+  display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px;
+}
+@media (max-width: 720px) { .swatches { grid-template-columns: repeat(4, 1fr); } }
+.swatch { display: flex; flex-direction: column; gap: 6px; }
+.swatch-chip {
+  aspect-ratio: 1; border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,.06);
+}
+.swatch-hex {
+  font-family: var(--font-mono); font-size: 10px; color: var(--ink-faint);
+  text-align: center; letter-spacing: .2px;
+}
+.font-specimen {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 14px 16px; border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md); background: rgba(0,0,0,.18);
+}
+.font-specimen .face-name {
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-faint);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.font-specimen .face-sample-1 {
+  font-size: 26px; font-weight: 700; letter-spacing: -.6px; color: var(--ink);
+}
+.font-specimen .face-sample-2 {
+  font-size: 13.5px; color: var(--ink-muted); line-height: 1.5;
+}
+.gradient-bar {
+  height: 36px; border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,.08);
+  background: linear-gradient(90deg, #0c0a14 0%, #461499 35%, #7c6bbd 60%, #e07a3a 100%);
+}
+
+/* Stage 3 — structure outline --------------- */
+.outline {
+  font-family: var(--font-mono); font-size: 12.5px; line-height: 1.85;
+  color: var(--ink-muted);
+}
+.outline .h1 { color: var(--ink); font-weight: 700; }
+.outline .h2 { color: var(--ink-muted); padding-left: 18px; }
+.outline .meta { color: var(--ink-faint); padding-left: 18px; font-size: 11.5px; }
+.outline .tag {
+  display: inline-block; padding: 1px 6px; border-radius: 4px;
+  background: rgba(117,62,247,.14); color: var(--ss-purple-glow);
+  font-size: 10px; margin-right: 6px;
+}
+
+/* Stage 4 — moodboard skeleton -------------- */
+.moodboard {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+}
+@media (max-width: 720px) { .moodboard { grid-template-columns: repeat(2, 1fr); } }
+.mood-thumb {
+  aspect-ratio: 4 / 5; border-radius: var(--radius-md);
+  border: 1px solid var(--line); position: relative; overflow: hidden;
+}
+.mood-thumb.skeleton {
+  background:
+    linear-gradient(110deg,
+      rgba(26,26,46,.7) 8%,
+      rgba(117,62,247,.18) 28%,
+      rgba(26,26,46,.7) 50%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.mood-progress {
+  font-family: var(--font-mono); font-size: 11.5px; color: var(--ss-purple-glow);
+  margin-top: 12px; display: flex; align-items: center; gap: 8px;
+}
+.mood-progress .pulse {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ss-purple-light);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+/* CTA card (bottom) ------------------------- */
+.cta {
+  margin-top: 8px; padding: 28px 28px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, rgba(117,62,247,.12) 0%, rgba(70,20,153,.06) 100%);
+  border: 1px solid rgba(117,62,247,.28);
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+}
+.cta.disabled { opacity: .55; pointer-events: none; }
+.cta-text { display: flex; flex-direction: column; gap: 6px; }
+.cta-title { font-size: 17px; font-weight: 700; }
+.cta-sub { color: var(--ink-muted); font-size: 13px; }
+.cta-btn {
+  font-family: inherit; font-size: 14px; font-weight: 700;
+  padding: 12px 22px; border-radius: var(--radius-md);
+  background: var(--ss-purple-light); border: 1px solid var(--ss-purple-light);
+  color: #fff; cursor: pointer; transition: all var(--transition);
+  text-decoration: none; display: inline-block; white-space: nowrap;
+}
+.cta-btn:hover {
+  background: var(--ss-purple-glow); border-color: var(--ss-purple-glow);
+  box-shadow: 0 0 18px rgba(117,62,247,.40);
+}
+
+</style>
+</head>
+<body>
+
+<div class="review-banner">
+  <span><b>review mode</b></span>
+  <a href="start.html">1 start</a>
+  <a class="here" href="autonomous.html">2 autonomous</a>
+  <a href="review.html">3 review</a>
+  <a href="index.html">4 stitch</a>
+  <a href="refine.html">5 refine</a>
+  <a href="retro.html">6 retro</a>
+</div>
+
+<header class="topbar">
+  <div class="logo">
+    <span class="logo-icon">C</span>
+    <span class="logo-text">Claude UI Workflow</span>
+  </div>
+  <div class="topbar-meta">
+    <span><b>run</b> 2026-05-03-1543</span>
+    <span><b>source</b> databrill.com</span>
+    <span><b>mode</b> redesign</span>
+  </div>
+  <div class="topbar-actions">
+    <a class="btn-mini" href="start.html">&larr; back to start</a>
+    <a class="btn-mini" href="review.html">review &rarr;</a>
+  </div>
+</header>
+
+<main class="main">
+
+  <section class="hero">
+    <span class="hero-eyebrow">autonomous · stages 1 to 5</span>
+    <h1 class="hero-title">Claude is reading <b>databrill.com</b> and shaping the brief.</h1>
+    <div class="hero-meta">
+      <span><b>est.</b> 60-90s end-to-end</span>
+      <span class="sep">·</span>
+      <span><b>elapsed</b> 12.4s</span>
+      <span class="sep">·</span>
+      <span><b>stage</b> 4 of 5 · moodboard</span>
+    </div>
+    <div class="strip">
+      <span class="stage-pill done"><span class="num">1</span> read source</span>
+      <span class="strip-arrow">→</span>
+      <span class="stage-pill done"><span class="num">2</span> brand tokens</span>
+      <span class="strip-arrow">→</span>
+      <span class="stage-pill done"><span class="num">3</span> structure</span>
+      <span class="strip-arrow">→</span>
+      <span class="stage-pill active"><span class="num">4</span> moodboard</span>
+      <span class="strip-arrow">→</span>
+      <span class="stage-pill"><span class="num">5</span> compile brief</span>
+    </div>
+  </section>
+
+  <section class="stages">
+
+    <!-- STAGE 1 — Read source ----------------------------- -->
+    <article class="stage done">
+      <header class="stage-head">
+        <span class="stage-num">1</span>
+        <span class="stage-title">Read source <small>fetched HTML, screenshots, sub-pages</small></span>
+        <span class="stage-status done">done</span>
+        <span class="stage-elapsed">3.8s</span>
+      </header>
+      <div class="stage-body">
+        <div class="source-row">
+          <div class="source-thumb" aria-hidden="true"></div>
+          <div class="source-meta">
+            <div class="source-url">https://databrill.com</div>
+            <div class="source-stats">
+              <span><b>12</b> sections</span>
+              <span><b>47</b> elements</span>
+              <span><b>4</b> sub-pages</span>
+              <span><b>1.2 MB</b> HTML</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- STAGE 2 — Brand tokens ---------------------------- -->
+    <article class="stage done">
+      <header class="stage-head">
+        <span class="stage-num">2</span>
+        <span class="stage-title">Extract brand tokens <small>colours, type, gradients</small></span>
+        <span class="stage-status done">done</span>
+        <span class="stage-elapsed">2.1s</span>
+      </header>
+      <div class="stage-body">
+        <div class="brand-row">
+          <div>
+            <div class="brand-section-label">colour palette · 8 tokens</div>
+            <div class="swatches">
+              <div class="swatch"><div class="swatch-chip" style="background:#0c0a14"></div><div class="swatch-hex">#0C0A14</div></div>
+              <div class="swatch"><div class="swatch-chip" style="background:#1a1530"></div><div class="swatch-hex">#1A1530</div></div>
+              <div class="swatch"><div class="swatch-chip" style="background:#7c6bbd"></div><div class="swatch-hex">#7C6BBD</div></div>
+              <div class="swatch"><div class="swatch-chip" style="background:#e07a3a"></div><div class="swatch-hex">#E07A3A</div></div>
+              <div class="swatch"><div class="swatch-chip" style="background:#fbbf24"></div><div class="swatch-hex">#FBBF24</div></div>
+              <div class="swatch"><div class="swatch-chip" style="background:#10b981"></div><div class="swatch-hex">#10B981</div></div>
+              <div class="swatch"><div class="swatch-chip" style="background:#fafafc"></div><div class="swatch-hex">#FAFAFC</div></div>
+              <div class="swatch"><div class="swatch-chip" style="background:#6e6588"></div><div class="swatch-hex">#6E6588</div></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="brand-section-label">type · Plus Jakarta Sans</div>
+            <div class="font-specimen">
+              <span class="face-name">heading + body</span>
+              <span class="face-sample-1">Own your Amazon data</span>
+              <span class="face-sample-2">Built for sellers who'd rather see the numbers themselves than wait for a slide deck.</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="brand-section-label">signature gradient · hero pattern</div>
+            <div class="gradient-bar"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- STAGE 3 — Structure ------------------------------- -->
+    <article class="stage done">
+      <header class="stage-head">
+        <span class="stage-num">3</span>
+        <span class="stage-title">Inventory copy and structure <small>headlines, sections, grid pattern</small></span>
+        <span class="stage-status done">done</span>
+        <span class="stage-elapsed">1.4s</span>
+      </header>
+      <div class="stage-body">
+        <div class="outline">
+          <div class="h1"><span class="tag">H1</span> Own your Amazon data.</div>
+          <div class="h2"><span class="tag">H2</span> Built for sellers who'd rather see the numbers themselves.</div>
+          <div class="meta">→ hero · split layout · CTA right</div>
+          <div class="h2"><span class="tag">H2</span> What you get</div>
+          <div class="meta">→ 4-card grid · icon + title + 1-line copy</div>
+          <div class="h2"><span class="tag">H2</span> How it works</div>
+          <div class="meta">→ 3-step horizontal · numbered</div>
+          <div class="h2"><span class="tag">H2</span> Pricing</div>
+          <div class="meta">→ 2-tier comparison table</div>
+          <div class="h2"><span class="tag">H2</span> FAQ + final CTA</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- STAGE 4 — Moodboard (running) --------------------- -->
+    <article class="stage active">
+      <header class="stage-head">
+        <span class="stage-num">4</span>
+        <span class="stage-title">Render moodboard references <small>Nano Banana Pro · 4 variations</small></span>
+        <span class="stage-status running"><span class="pulse"></span>running</span>
+        <span class="stage-elapsed">5.1s</span>
+      </header>
+      <div class="stage-body">
+        <div class="moodboard">
+          <div class="mood-thumb skeleton"></div>
+          <div class="mood-thumb skeleton"></div>
+          <div class="mood-thumb skeleton"></div>
+          <div class="mood-thumb skeleton"></div>
+        </div>
+        <div class="mood-progress">
+          <span class="pulse"></span>
+          rendering 4 mesh-gradient variations · est. 35s remaining
+        </div>
+      </div>
+    </article>
+
+    <!-- STAGE 5 — Compile brief (pending) ----------------- -->
+    <article class="stage pending">
+      <header class="stage-head">
+        <span class="stage-num">5</span>
+        <span class="stage-title">Compile brief <small>brand + structure + chosen moodboard → brief.md</small></span>
+        <span class="stage-status pending">pending</span>
+        <span class="stage-elapsed">—</span>
+      </header>
+      <div class="stage-body">
+        Waits for Stage 4. Produces a single brief.md and the exact prompt that will go to Stitch.
+      </div>
+    </article>
+
+  </section>
+
+  <section class="cta">
+    <div class="cta-text">
+      <div class="cta-title">Brief ready — review and approve</div>
+      <div class="cta-sub">You'll see brand, moodboard pick, and the literal Stitch prompt before it leaves.</div>
+    </div>
+    <a class="cta-btn" href="review.html">Review brief &rarr;</a>
+  </section>
+
+</main>
+
+</body>
+</html>

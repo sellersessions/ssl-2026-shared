@@ -1,0 +1,372 @@
+<h2 class="sr-only">Template 03 v3: Subway map loop with legend repositioned to bottom strip so all nine stations are visible.</h2>
+<style>
+:root{
+  --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
+  --bg-page:#06080F;
+  --bg-0:#030C1B;
+  --bg-1:#0A1228;
+  --ink-0:#F2EEF8;
+  --ink-1:#C8B6F0;
+  --ink-2:#8B92A8;
+  --ink-3:#5A627A;
+  --violet:#9D4EDD;
+  --teal:#5DCAA5;
+  --amber:#EF9F27;
+  --pink:#FF6BB4;
+  --gold:#C99554;
+  --r-wrap:12px;
+  --r-card:3px;
+  --stroke-hair:0.5px;
+  --stroke-bold:1.5px;
+  --border-soft:rgba(157,78,221,0.18);
+  --border-mid:rgba(157,78,221,0.35);
+  --card-fill:rgba(255,255,255,0.02);
+  --card-stroke:rgba(255,255,255,0.08);
+  --divider:rgba(255,255,255,0.06);
+}
+
+.sb-frame{width:100%;max-width:1080px;font-family:var(--font-sans);color:var(--ink-0)}
+.sb-wrap{
+  background:linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 100%);
+  border-radius:var(--r-wrap);
+  padding:28px 28px 18px;
+  position:relative;
+  overflow:hidden;
+  border:var(--stroke-hair) solid var(--border-soft);
+}
+.sb-wrap::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 110%, rgba(157,78,221,0.10), transparent 60%);
+  pointer-events:none;
+}
+.sb-wrap::after{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(157,78,221,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(157,78,221,0.025) 1px,transparent 1px);
+  background-size:24px 24px;
+  pointer-events:none;
+}
+
+.sb-spec{display:flex;align-items:center;gap:18px;margin-bottom:18px;position:relative;z-index:5}
+.sb-spec-id{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;color:var(--ink-2);text-transform:uppercase;padding:3px 8px;border:var(--stroke-hair) solid var(--border-mid);border-radius:2px}
+.sb-spec-name{font-size:20px;font-weight:600;letter-spacing:-0.2px;color:var(--ink-0);margin:0}
+.sb-spec-pat{font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-left:auto;display:flex;align-items:center;gap:8px}
+.sb-spec-pat::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 6px var(--gold);animation:sbPulse 2s ease-in-out infinite}
+@keyframes sbPulse{0%,100%{box-shadow:0 0 6px var(--gold)}50%{box-shadow:0 0 12px var(--gold)}}
+
+.sb-canvas{
+  position:relative;
+  background:var(--card-fill);
+  border-radius:var(--r-card);
+  border:var(--stroke-hair) solid var(--card-stroke);
+  z-index:1;
+  height:440px;
+  overflow:hidden;
+}
+
+.sb-svg{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+
+/* === LEGEND: horizontal strip below the canvas === */
+.sb-legend{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:24px;
+  padding:11px 18px;
+  margin-top:10px;
+  background:var(--card-fill);
+  border:var(--stroke-hair) solid var(--card-stroke);
+  border-radius:var(--r-card);
+  position:relative;
+  z-index:2;
+  flex-wrap:wrap;
+}
+.sb-legend-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:1.5px;
+  color:var(--ink-2);
+  text-transform:uppercase;
+}
+.sb-legend-swatch{
+  width:22px;
+  height:5px;
+  border-radius:2px;
+}
+
+/* Stations */
+.sb-station{
+  position:absolute;
+  width:14px;height:14px;
+  border-radius:50%;
+  background:var(--bg-0);
+  border:2.5px solid var(--ink-1);
+  transform:translate(-50%,-50%);
+  transition:all .35s;
+  z-index:3;
+}
+.sb-station.active{
+  border-color:var(--gold);
+  background:var(--gold);
+  box-shadow:0 0 0 3px rgba(201,149,84,0.25), 0 0 14px rgba(201,149,84,0.5);
+  transform:translate(-50%,-50%) scale(1.25);
+}
+.sb-station.done{border-color:var(--teal)}
+.sb-station.interchange{
+  width:18px;height:18px;
+  border-width:3px;
+  background:var(--bg-0);
+}
+
+.sb-station-label{
+  position:absolute;
+  font-family:var(--font-sans);
+  font-size:11px;
+  font-weight:500;
+  color:var(--ink-1);
+  letter-spacing:0.2px;
+  white-space:nowrap;
+  z-index:2;
+  line-height:1.15;
+}
+.sb-station-num{
+  font-family:var(--font-mono);
+  font-size:9px;
+  color:var(--ink-3);
+  letter-spacing:1px;
+  display:block;
+  margin-bottom:1px;
+  text-transform:uppercase;
+}
+
+/* Train */
+.sb-train{
+  position:absolute;
+  width:24px;height:14px;
+  background:var(--gold);
+  border-radius:2px;
+  transform:translate(-50%,-50%);
+  transition:all .9s cubic-bezier(0.5,0,0.5,1);
+  box-shadow:0 0 14px rgba(201,149,84,0.6);
+  z-index:5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+}
+.sb-train::before,.sb-train::after{
+  content:"";
+  width:4px;height:4px;
+  background:var(--bg-0);
+  border-radius:50%;
+}
+
+.sb-foot{
+  display:flex;gap:10px;align-items:center;
+  margin-top:14px;padding-top:14px;
+  border-top:var(--stroke-hair) solid var(--divider);
+  position:relative;z-index:5;
+}
+.sb-cap{font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;color:var(--ink-3);text-transform:uppercase;padding:3px 8px;border:var(--stroke-hair) solid var(--border-mid);border-radius:2px}
+.sb-btn{background:rgba(255,255,255,0.02);border:var(--stroke-hair) solid var(--border-mid);color:var(--ink-1);padding:7px 14px;border-radius:2px;cursor:pointer;font-size:11px;font-family:var(--font-mono);letter-spacing:1.5px;text-transform:uppercase;transition:border-color .2s, color .2s, background .2s}
+.sb-btn:hover{border-color:var(--violet);color:var(--ink-0);background:rgba(157,78,221,0.08)}
+.sb-stat{margin-left:auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-3);letter-spacing:1.2px;text-transform:uppercase}
+.sb-stat-v{color:var(--ink-1);margin-left:6px}
+
+@media (max-width:720px){
+  .sb-canvas{height:340px}
+  .sb-station-label{font-size:9px}
+  .sb-legend{gap:14px}
+}
+</style>
+
+<div class="sb-frame">
+<div class="sb-wrap">
+
+<header class="sb-spec">
+<span class="sb-spec-id">TEMPLATE 03</span>
+<h1 class="sb-spec-name">Subway map</h1>
+<span class="sb-spec-pat">Cap: 9 stations, closed loop</span>
+</header>
+
+<div class="sb-canvas" id="sb-canvas">
+<svg class="sb-svg" id="sb-svg"></svg>
+<div id="sb-stations"></div>
+<div class="sb-train" id="sb-train"></div>
+</div>
+
+<!-- LEGEND moved here, full-width strip below canvas -->
+<div class="sb-legend">
+<div class="sb-legend-row"><div class="sb-legend-swatch" style="background:#9D4EDD"></div>Setup line</div>
+<div class="sb-legend-row"><div class="sb-legend-swatch" style="background:#5DCAA5"></div>Capture line</div>
+<div class="sb-legend-row"><div class="sb-legend-swatch" style="background:#EF9F27"></div>Build line</div>
+<div class="sb-legend-row"><div class="sb-legend-swatch" style="background:#FF6BB4"></div>Quality line</div>
+</div>
+
+<div class="sb-foot">
+<span class="sb-cap">N = 9</span>
+<button class="sb-btn" onclick="sbPlay()">Run loop</button>
+<button class="sb-btn" onclick="sbStep()">Next station</button>
+<span class="sb-stat">Station<span class="sb-stat-v" id="sb-counter">01 / 09</span></span>
+</div>
+
+</div>
+</div>
+
+<script>
+(function(){
+const N=9;
+const phaseFor=[0,0,1,1,2,2,3,3,3];
+const phaseHex=['#9D4EDD','#5DCAA5','#EF9F27','#FF6BB4'];
+
+const labels=['{slot 1}','{slot 2}','{slot 3}','{slot 4}','{slot 5}','{slot 6}','{slot 7}','{slot 8}','{slot 9}'];
+
+const canvas=document.getElementById('sb-canvas');
+const svg=document.getElementById('sb-svg');
+const stationsContainer=document.getElementById('sb-stations');
+const train=document.getElementById('sb-train');
+const counter=document.getElementById('sb-counter');
+
+let stations=[];
+let positions=[];
+let cur=0,timer=null;
+
+function buildLayout(){
+  const rect=canvas.getBoundingClientRect();
+  const W=rect.width;
+  const H=rect.height;
+  
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  
+  // Now that legend is no longer in canvas, use even left/right padding
+  const padX=70;
+  const padY=70;
+  const x1=padX;
+  const x2=W-padX;
+  const y1=padY;
+  const y2=H-padY;
+  
+  positions=[
+    {x:x1,                y:y1},                   // 01 top-left
+    {x:x1+(x2-x1)*0.5,    y:y1},                   // 02 top-centre
+    {x:x2,                y:y1},                   // 03 top-right
+    {x:x2,                y:y1+(y2-y1)*0.5},       // 04 right-mid
+    {x:x2,                y:y2},                   // 05 bottom-right
+    {x:x1+(x2-x1)*0.66,   y:y2},                   // 06 bottom-centre-right
+    {x:x1+(x2-x1)*0.33,   y:y2},                   // 07 bottom-centre-left
+    {x:x1,                y:y2},                   // 08 bottom-left
+    {x:x1,                y:y1+(y2-y1)*0.5}        // 09 left-mid
+  ];
+  
+  svg.innerHTML='';
+  stationsContainer.innerHTML='';
+  stations=[];
+  
+  // Draw 9 segments forming the closed loop
+  for(let i=0;i<N;i++){
+    const a=positions[i];
+    const b=positions[(i+1)%N];
+    const colour=phaseHex[phaseFor[i]];
+    
+    const path=document.createElementNS('http://www.w3.org/2000/svg','line');
+    path.setAttribute('x1',a.x);
+    path.setAttribute('y1',a.y);
+    path.setAttribute('x2',b.x);
+    path.setAttribute('y2',b.y);
+    path.setAttribute('stroke',colour);
+    path.setAttribute('stroke-width','5');
+    path.setAttribute('stroke-linecap','round');
+    path.setAttribute('opacity','0.55');
+    path.setAttribute('id','sb-seg-'+i);
+    svg.appendChild(path);
+  }
+  
+  // Build station markers + labels
+  for(let i=0;i<N;i++){
+    const prevPhase=phaseFor[(i-1+N)%N];
+    const thisPhase=phaseFor[i];
+    const isInterchange=prevPhase!==thisPhase;
+    
+    const station=document.createElement('div');
+    station.className='sb-station'+(i===0?' active':'')+(isInterchange?' interchange':'');
+    station.setAttribute('data-step',i);
+    station.style.left=positions[i].x+'px';
+    station.style.top=positions[i].y+'px';
+    stationsContainer.appendChild(station);
+    stations.push(station);
+    
+    const label=document.createElement('div');
+    label.className='sb-station-label';
+    
+    // Top edge: label above
+    if(positions[i].y===y1){
+      label.style.left=positions[i].x+'px';
+      label.style.top=(positions[i].y-44)+'px';
+      label.style.transform='translateX(-50%)';
+      label.style.textAlign='center';
+    }
+    // Bottom edge: label below
+    else if(positions[i].y===y2){
+      label.style.left=positions[i].x+'px';
+      label.style.top=(positions[i].y+18)+'px';
+      label.style.transform='translateX(-50%)';
+      label.style.textAlign='center';
+    }
+    // Right edge: label to right
+    else if(positions[i].x===x2){
+      label.style.left=(positions[i].x+22)+'px';
+      label.style.top=positions[i].y+'px';
+      label.style.transform='translateY(-50%)';
+      label.style.textAlign='left';
+    }
+    // Left edge: label to left
+    else{
+      label.style.left=(positions[i].x-22)+'px';
+      label.style.top=positions[i].y+'px';
+      label.style.transform='translateY(-50%) translateX(-100%)';
+      label.style.textAlign='right';
+    }
+    
+    label.innerHTML=`<span class="sb-station-num">${String(i+1).padStart(2,'0')}</span>${labels[i]}`;
+    stationsContainer.appendChild(label);
+  }
+  
+  train.style.left=positions[0].x+'px';
+  train.style.top=positions[0].y+'px';
+  
+  applyState(cur);
+}
+
+function applyState(n){
+  cur=n;
+  stations.forEach((s,i)=>{
+    s.classList.remove('active','done');
+    if(i<n)s.classList.add('done');
+    else if(i===n)s.classList.add('active');
+  });
+  const segs=svg.querySelectorAll('line');
+  segs.forEach((seg,i)=>{
+    if(i<n)seg.setAttribute('opacity','0.95');
+    else seg.setAttribute('opacity','0.4');
+  });
+  train.style.left=positions[n].x+'px';
+  train.style.top=positions[n].y+'px';
+  counter.textContent=String(n+1).padStart(2,'0')+' / 0'+N;
+}
+
+function show(n){applyState(n)}
+
+window.sbStep=function(){show((cur+1)%N)};
+window.sbPlay=function(){clearInterval(timer);show(0);let i=0;timer=setInterval(()=>{i++;if(i>=N){clearInterval(timer);return}show(i)},1100)};
+
+function init(){buildLayout();setTimeout(sbPlay,400)}
+if(document.readyState==='complete')init();
+else window.addEventListener('load',init);
+window.addEventListener('resize',()=>{buildLayout()});
+})();
+</script>

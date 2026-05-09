@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>Claude UI Workflow — refine results (stage 8)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.zip-card {
+  display: flex; align-items: center; gap: 18px;
+  padding: 16px 20px; border-radius: var(--radius-xl);
+  border: 1px solid rgba(16,185,129,.30);
+  background: linear-gradient(135deg, rgba(16,185,129,.08) 0%, rgba(26,26,46,.4) 100%);
+}
+.zip-icon {
+  width: 44px; height: 44px; border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(16,185,129,.14); border: 1px solid rgba(16,185,129,.40);
+  color: var(--success); font-family: var(--font-mono); font-weight: 700; font-size: 11px;
+  flex-shrink: 0;
+}
+.zip-meta { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.zip-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+.zip-detail { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-faint); }
+.zip-detail b { color: var(--ink-muted); font-weight: 600; }
+
+/* Score card -------------------------------- */
+.score-card {
+  display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: center;
+  padding: 24px 28px; border-radius: var(--radius-xl);
+  border: 1px solid var(--line-soft);
+  background: linear-gradient(180deg, rgba(26,26,46,.55) 0%, rgba(19,13,42,.55) 100%);
+}
+@media (max-width: 720px) { .score-card { grid-template-columns: 1fr; } }
+.score-grade {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 18px; border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(251,191,36,.10) 0%, rgba(117,62,247,.06) 100%);
+  border: 1px solid rgba(251,191,36,.30);
+}
+.score-letter {
+  font-size: 48px; font-weight: 800; letter-spacing: -2px; line-height: 1;
+  background: linear-gradient(135deg, var(--ss-gold) 0%, var(--ss-orange) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.score-num { font-family: var(--font-mono); font-size: 13px; color: var(--ink-muted); }
+.score-label { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-faint); letter-spacing: 1.4px; text-transform: uppercase; }
+
+.score-summary { display: flex; flex-direction: column; gap: 12px; }
+.score-summary h2 { font-size: 18px; font-weight: 700; color: var(--ink); }
+.score-summary p { color: var(--ink-muted); font-size: 13.5px; line-height: 1.55; }
+.score-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.score-tag {
+  padding: 4px 10px; border-radius: 999px; font-family: var(--font-mono);
+  font-size: 10.5px; font-weight: 700; letter-spacing: .5px;
+  border: 1px solid var(--line);
+}
+.score-tag.good { color: var(--success); border-color: rgba(16,185,129,.40); background: rgba(16,185,129,.08); }
+.score-tag.warn { color: var(--warn);    border-color: rgba(251,191,36,.40); background: rgba(251,191,36,.08); }
+.score-tag.bad  { color: var(--danger);  border-color: rgba(244,63,94,.40);  background: rgba(244,63,94,.08); }
+
+/* Audit table ------------------------------- */
+.audit-section-title {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  color: var(--ink-faint); letter-spacing: 1.6px; text-transform: uppercase;
+  margin-top: 8px;
+}
+.audit-table { display: flex; flex-direction: column; gap: 10px; }
+.audit-row {
+  display: grid; grid-template-columns: 200px 90px 1fr 110px;
+  gap: 18px; align-items: center;
+  padding: 16px 20px; border-radius: var(--radius-md);
+  border: 1px solid var(--line-soft);
+  background: rgba(26,26,46,.4);
+  transition: all var(--transition);
+}
+.audit-row:hover { border-color: var(--line); background: rgba(26,26,46,.55); }
+@media (max-width: 720px) { .audit-row { grid-template-columns: 1fr; gap: 8px; } }
+
+.audit-name { font-size: 13.5px; font-weight: 700; color: var(--ink); }
+.audit-name small {
+  display: block; font-family: var(--font-mono); font-size: 10.5px;
+  color: var(--ink-faint); font-weight: 500; margin-top: 2px;
+}
+
+.audit-score {
+  font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; gap: 8px;
+}
+.audit-bar {
+  flex: 1; height: 4px; border-radius: 2px;
+  background: var(--line); position: relative; overflow: hidden;
+}
+.audit-bar::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+  width: var(--w, 50%);
+  background: linear-gradient(90deg, var(--ss-purple) 0%, var(--ss-purple-light) 100%);
+}
+.audit-row.good  .audit-bar::before { background: linear-gradient(90deg, var(--ss-emerald) 0%, var(--ss-cyan) 100%); }
+.audit-row.warn  .audit-bar::before { background: linear-gradient(90deg, var(--ss-orange) 0%, var(--ss-gold) 100%); }
+.audit-row.bad   .audit-bar::before { background: linear-gradient(90deg, var(--ss-rose) 0%, var(--ss-orange) 100%); }
+
+.audit-finding {
+  font-size: 12.5px; line-height: 1.55; color: var(--ink-muted);
+}
+.audit-finding b { color: var(--ink); font-weight: 600; }
+
+.audit-action {
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase; text-align: center;
+  padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line);
+}
+.audit-row.good .audit-action { color: var(--success); border-color: rgba(16,185,129,.30); background: rgba(16,185,129,.06); }
+.audit-row.warn .audit-action { color: var(--warn);    border-color: rgba(251,191,36,.30); background: rgba(251,191,36,.06); }
+.audit-row.bad  .audit-action { color: var(--danger);  border-color: rgba(244,63,94,.30);  background: rgba(244,63,94,.06); }
+
+/* Drift ------------------------------------ */
+.drift-list {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.drift-item {
+  display: grid; grid-template-columns: 24px 1fr auto; gap: 14px; align-items: center;
+  padding: 12px 16px; border-radius: var(--radius-md);
+  background: rgba(26,26,46,.4); border: 1px solid var(--line-soft);
+  font-size: 13px;
+}
+.drift-icon {
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+}
+.drift-icon.warn   { color: var(--warn);   background: rgba(251,191,36,.14); }
+.drift-icon.bad    { color: var(--danger); background: rgba(244,63,94,.14); }
+.drift-icon.info   { color: var(--ss-cyan); background: rgba(34,211,238,.14); }
+.drift-text { color: var(--ink-muted); line-height: 1.5; }
+.drift-text b { color: var(--ink); font-weight: 600; }
+.drift-fix {
+  font-family: var(--font-mono); font-size: 11px; color: var(--ss-purple-glow);
+  background: none; border: 1px solid rgba(117,62,247,.30); padding: 5px 10px;
+  border-radius: var(--radius-sm); cursor: pointer;
+}
+.drift-fix:hover { background: var(--copy-dim); }
+
+/* Action row ------------------------------- */
+.action-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  margin-top: 8px;
+}
+.btn-secondary {
+  font-family: inherit; font-size: 13px; font-weight: 600;
+  padding: 11px 18px; border-radius: var(--radius-md);
+  background: rgba(26,26,46,.6); border: 1px solid var(--line);
+  color: var(--ink-muted); cursor: pointer; transition: all var(--transition);
+  text-decoration: none; display: inline-block;
+}
+.btn-secondary:hover { color: var(--ink); border-color: var(--copy); }
+.btn-primary {
+  font-family: inherit; font-size: 14px; font-weight: 700;
+  padding: 12px 22px; border-radius: var(--radius-md);
+  background: var(--ss-purple-light); border: 1px solid var(--ss-purple-light);
+  color: #fff; cursor: pointer; transition: all var(--transition);
+  text-decoration: none; display: inline-block;
+}
+.btn-primary:hover {
+  background: var(--ss-purple-glow); border-color: var(--ss-purple-glow);
+  box-shadow: 0 0 18px rgba(117,62,247,.40);
+}
+.btn-group { display: flex; gap: 10px; }
+</style>
+</head>
+<body>
+
+<div class="review-banner">
+  <span><b>review mode</b></span>
+  <a href="start.html">1 start</a>
+  <a href="autonomous.html">2 autonomous</a>
+  <a href="review.html">3 review</a>
+  <a href="index.html">4 stitch</a>
+  <a class="here" href="refine.html">5 refine</a>
+  <a href="retro.html">6 retro</a>
+</div>
+
+<header class="topbar">
+  <div class="logo">
+    <span class="logo-icon">C</span>
+    <span class="logo-text">Claude UI Workflow</span>
+  </div>
+  <div class="topbar-meta">
+    <span><b>run</b> 2026-05-03-1543</span>
+    <span><b>source</b> databrill.com</span>
+    <span><b>mode</b> redesign</span>
+  </div>
+  <div class="topbar-actions">
+    <a class="btn-mini" href="index.html">&larr; stage 7</a>
+    <a class="btn-mini" href="retro.html">retro &rarr;</a>
+  </div>
+</header>
+
+<main class="main">
+
+  <section class="hero">
+    <span class="hero-eyebrow">stage 8 · post-stitch audit</span>
+    <h1 class="hero-title">Stitch output landed. <b>6 dimensions reviewed.</b></h1>
+    <div class="hero-meta">
+      <span><b>audit</b> 8.7s</span>
+      <span class="sep">·</span>
+      <span><b>files</b> 8 · 312 KB</span>
+      <span class="sep">·</span>
+      <span><b>drift</b> 3 items</span>
+    </div>
+  </section>
+
+  <section class="zip-card">
+    <div class="zip-icon">ZIP</div>
+    <div class="zip-meta">
+      <div class="zip-name">stitch-databrill-redesign-001.zip</div>
+      <div class="zip-detail"><b>8 files</b> · index.html · style.css · 4 components · 2 image refs · <b>312 KB</b> total</div>
+    </div>
+    <a class="btn-mini" href="#">view files</a>
+  </section>
+
+  <section class="score-card">
+    <div class="score-grade">
+      <span class="score-letter">B+</span>
+      <span class="score-num">84 / 100</span>
+      <span class="score-label">overall</span>
+    </div>
+    <div class="score-summary">
+      <h2>Solid output. Brand and structure on-spec, two minor copy drifts to fix before ship.</h2>
+      <p>Brief was followed faithfully on hero, brand tokens, and section order. Stitch took small liberties with body copy paraphrasing and dropped one icon variant. Worth a 90s pass before locking.</p>
+      <div class="score-tags">
+        <span class="score-tag good">brand · 96</span>
+        <span class="score-tag good">structure · 92</span>
+        <span class="score-tag warn">copy · 71</span>
+        <span class="score-tag good">hierarchy · 88</span>
+        <span class="score-tag warn">components · 78</span>
+        <span class="score-tag good">code · 82</span>
+      </div>
+    </div>
+  </section>
+
+  <h3 class="audit-section-title">6-dimension audit</h3>
+  <div class="audit-table">
+
+    <div class="audit-row good" style="--w:96%">
+      <div class="audit-name">Brand fidelity <small>colours, type, gradients</small></div>
+      <div class="audit-score">96<div class="audit-bar"></div></div>
+      <div class="audit-finding">All 8 brand tokens present. <b>Mesh-gradient hero matches moodboard 1</b>. Plus Jakarta Sans applied at all weights. No off-palette colours detected.</div>
+      <div class="audit-action">on spec</div>
+    </div>
+
+    <div class="audit-row good" style="--w:92%">
+      <div class="audit-name">Structure match <small>section order, hierarchy</small></div>
+      <div class="audit-score">92<div class="audit-bar"></div></div>
+      <div class="audit-finding">All 5 sections present in correct order. <b>Hero · 4-card grid · 3-step · pricing · FAQ.</b> One H3 added in pricing block (acceptable).</div>
+      <div class="audit-action">on spec</div>
+    </div>
+
+    <div class="audit-row warn" style="--w:71%">
+      <div class="audit-name">Copy accuracy <small>vs. source verbatim</small></div>
+      <div class="audit-score">71<div class="audit-bar"></div></div>
+      <div class="audit-finding"><b>Hero H1 paraphrased</b>: "Own your Amazon data" → "Take ownership of your Amazon data". <b>2 body lines reworded</b> in "What you get". Brief said retain copy verbatim.</div>
+      <div class="audit-action">fix</div>
+    </div>
+
+    <div class="audit-row good" style="--w:88%">
+      <div class="audit-name">Visual hierarchy <small>focus, scan path</small></div>
+      <div class="audit-score">88<div class="audit-bar"></div></div>
+      <div class="audit-finding">Hero CTA dominant on Z-pattern. Cards equal-weight. <b>One density issue</b>: pricing table headers slightly compete with body. Minor.</div>
+      <div class="audit-action">acceptable</div>
+    </div>
+
+    <div class="audit-row warn" style="--w:78%">
+      <div class="audit-name">Component reuse <small>icons, cards, buttons</small></div>
+      <div class="audit-score">78<div class="audit-bar"></div></div>
+      <div class="audit-finding"><b>4-card grid uses 3 icon styles instead of 1</b>. Card 4 has a different stroke weight. Buttons consistent across all sections.</div>
+      <div class="audit-action">fix</div>
+    </div>
+
+    <div class="audit-row good" style="--w:82%">
+      <div class="audit-name">Code quality <small>semantic HTML, classes, a11y</small></div>
+      <div class="audit-score">82<div class="audit-bar"></div></div>
+      <div class="audit-finding">Semantic landmarks present. <b>Alt-text missing on 2 decorative images</b> (acceptable, decorative). Button focus rings present. Class naming consistent (BEM-ish).</div>
+      <div class="audit-action">on spec</div>
+    </div>
+
+  </div>
+
+  <h3 class="audit-section-title">Drift from brief · 3 items</h3>
+  <div class="drift-list">
+    <div class="drift-item">
+      <span class="drift-icon warn">!</span>
+      <span class="drift-text"><b>Hero H1 paraphrased.</b> Brief said retain copy verbatim. Stitch rewrote "Own your Amazon data" → "Take ownership of your Amazon data".</span>
+      <button class="drift-fix">apply fix</button>
+    </div>
+    <div class="drift-item">
+      <span class="drift-icon warn">!</span>
+      <span class="drift-text"><b>Icon style inconsistent in 4-card grid.</b> Cards 1-3 use line icons; card 4 uses filled. Stitch likely fell back on a different generation.</span>
+      <button class="drift-fix">apply fix</button>
+    </div>
+    <div class="drift-item">
+      <span class="drift-icon info">i</span>
+      <span class="drift-text"><b>Pricing table got an extra H3.</b> Not in the brief but reads cleanly. Keep or remove?</span>
+      <button class="drift-fix">decide</button>
+    </div>
+  </div>
+
+  <div class="action-row">
+    <a class="btn-secondary" href="#">&larr; Re-audit</a>
+    <div class="btn-group">
+      <button class="btn-secondary">Apply all fixes</button>
+      <a class="btn-primary" href="retro.html">Lock and continue &rarr;</a>
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>

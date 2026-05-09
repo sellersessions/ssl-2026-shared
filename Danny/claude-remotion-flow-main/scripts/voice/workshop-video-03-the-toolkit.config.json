@@ -1,0 +1,27 @@
+{
+  "_comment": "Workshop Video 03 — The Toolkit (split-off from Video 02 scenes 4-6). Custom slash commands + MCPs + Context7. Single-stem rendering. Visual concerns live in src/WorkshopVideo03TheToolkit.tsx. House voice preset.",
+  "voice_id": "jQOgcOzmmipekvxJN09W",
+  "model_id": "eleven_multilingual_v2",
+  "output_dir": "public/assets/voice/generated/workshop-video-03-the-toolkit",
+  "default_voice_settings": {
+    "stability": 0.31,
+    "similarity_boost": 1.0,
+    "style": 0.0,
+    "use_speaker_boost": true,
+    "speed": 0.9
+  },
+  "scenes": [
+    {
+      "id": "scene-1-slash-custom",
+      "text": "The magic — you write your own. Slash-session-start kicks off your work. Slash-pre-compact captures everything before the context window drops. Slash-session-close wraps it all up. Three commands, one loop — and Claude knows exactly where you are at every stage."
+    },
+    {
+      "id": "scene-2-mcps",
+      "text": "MCPs are how Claude reaches outside the chat. Six worth knowing: Sequential Thinking for reasoning. Filesystem for files. Fetch for the web. Context7 for live docs. AppleScript for your Mac. Playwright for the browser. Run slash-mcp-status to see them wired up."
+    },
+    {
+      "id": "scene-3-context7",
+      "text": "Context7 is live API documentation — always current. When you're planning a build, ask Claude to use the Context7 MCP to review the docs first. Plan from real source, not a guess."
+    }
+  ]
+}

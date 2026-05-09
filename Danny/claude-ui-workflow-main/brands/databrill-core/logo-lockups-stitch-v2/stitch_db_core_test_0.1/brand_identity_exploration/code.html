@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Brand Identity Exploration | Databrill Core</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#201f1f",
+                    "surface-variant": "#262626",
+                    "tertiary-fixed-dim": "#f0f1f1",
+                    "on-error-container": "#ffa8a3",
+                    "error-container": "#9f0519",
+                    "error": "#ff716c",
+                    "secondary": "#af88ff",
+                    "background": "#0e0e0e",
+                    "outline": "#777575",
+                    "on-surface": "#ffffff",
+                    "surface-container-lowest": "#000000",
+                    "primary-fixed": "#ff7941",
+                    "on-primary-container": "#431200",
+                    "on-primary": "#571a00",
+                    "on-tertiary": "#5e5f60",
+                    "on-background": "#ffffff",
+                    "on-tertiary-container": "#555757",
+                    "on-tertiary-fixed-variant": "#6c6d6e",
+                    "surface-tint": "#ff9064",
+                    "secondary-container": "#6001d1",
+                    "inverse-on-surface": "#565554",
+                    "on-secondary": "#2b0065",
+                    "tertiary-container": "#ebebeb",
+                    "secondary-fixed": "#dcc9ff",
+                    "on-secondary-fixed-variant": "#6514d6",
+                    "surface": "#0e0e0e",
+                    "on-secondary-fixed": "#430097",
+                    "on-secondary-container": "#e1d0ff",
+                    "inverse-surface": "#fcf8f8",
+                    "outline-variant": "#494847",
+                    "primary-fixed-dim": "#ff5e07",
+                    "primary-container": "#ff7941",
+                    "error-dim": "#d7383b",
+                    "surface-bright": "#2c2c2c",
+                    "on-error": "#490006",
+                    "surface-dim": "#0e0e0e",
+                    "primary": "#ff9064",
+                    "secondary-fixed-dim": "#d0b8ff",
+                    "inverse-primary": "#a83a00",
+                    "surface-container-highest": "#262626",
+                    "tertiary-dim": "#ebebeb",
+                    "surface-container": "#1a1919",
+                    "on-primary-fixed": "#000000",
+                    "surface-container-low": "#131313",
+                    "secondary-dim": "#8a4cfc",
+                    "tertiary-fixed": "#ffffff",
+                    "on-surface-variant": "#adaaaa",
+                    "on-primary-fixed-variant": "#531900",
+                    "on-tertiary-fixed": "#4f5051",
+                    "primary-dim": "#ff7439",
+                    "tertiary": "#f9f9f9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .signature-gradient-text {
+            background: linear-gradient(90deg, #ff9064 0%, #af88ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .signature-gradient-bg {
+            background: linear-gradient(135deg, #ff9064 0%, #af88ff 100%);
+        }
+        .signature-gradient-border {
+            border: 1px solid transparent;
+            background-image: linear-gradient(#0e0e0e, #0e0e0e), linear-gradient(135deg, #ff9064, #af88ff);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+        .glass-card {
+            background: rgba(14, 14, 14, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(73, 72, 71, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 z-50 w-full bg-neutral-950/60 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.4)] bg-neutral-900">
+<div class="flex justify-between items-center w-full px-8 py-6 max-w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-orange-400 dark:text-orange-400 cursor-pointer active:scale-95" data-icon="grid_view">grid_view</span>
+<h1 class="text-xl font-bold tracking-tighter text-white font-headline">Databrill Core</h1>
+</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-manrope text-xs tracking-widest uppercase text-orange-400 border-b border-orange-400 hover:text-orange-300 transition-colors duration-300" href="#">Concepts</a>
+<a class="font-manrope text-xs tracking-widest uppercase text-neutral-500 hover:text-orange-300 transition-colors duration-300" href="#">Design System</a>
+<a class="font-manrope text-xs tracking-widest uppercase text-neutral-500 hover:text-orange-300 transition-colors duration-300" href="#">Archive</a>
+</nav>
+<div class="flex items-center">
+<span class="text-xs font-headline font-bold text-orange-400 uppercase tracking-widest px-4 py-2 border border-orange-400/20 rounded-full">Databrill Core</span>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-24 px-8 max-w-[1600px] mx-auto">
+<!-- Hero Header -->
+<section class="mb-20">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
+<div>
+<h2 class="text-6xl md:text-8xl font-headline font-bold tracking-tight text-white mb-6 leading-none">
+                        Brand Identity <br/>
+<span class="signature-gradient-text">Exploration</span>
+</h2>
+<p class="text-on-surface-variant text-lg max-w-lg leading-relaxed">
+                        A series of conceptual directions for Databrill Core, visualizing the synthesis of information and radiant energy. Using the four interlocking rings as a recurring semantic anchor.
+                    </p>
+</div>
+<div class="flex flex-col items-start md:items-end gap-4">
+<div class="flex gap-1">
+<div class="w-8 h-8 rounded-full signature-gradient-bg"></div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest"></div>
+<div class="w-8 h-8 rounded-full bg-outline-variant/20"></div>
+</div>
+<span class="font-headline text-xs tracking-widest text-on-surface-variant uppercase">Phase 01 / Visual Identity</span>
+</div>
+</div>
+</section>
+<!-- Concept Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+<!-- Card 1: Integrative O -->
+<div class="glass-card group p-8 flex flex-col aspect-square justify-between transition-all duration-500 hover:bg-surface-container-low cursor-pointer">
+<div class="flex-grow flex items-center justify-center">
+<div class="text-4xl font-headline font-bold flex items-center">
+                        C<div class="flex items-center -mx-1 scale-75 opacity-80">
+<div class="w-8 h-8 border-2 border-primary rounded-full -mr-3"></div>
+<div class="w-8 h-8 border-2 border-primary rounded-full -mr-3 opacity-80"></div>
+<div class="w-8 h-8 border-2 border-secondary rounded-full -mr-3 opacity-60"></div>
+<div class="w-8 h-8 border-2 border-secondary rounded-full opacity-40"></div>
+</div>re
+                    </div>
+</div>
+<div class="pt-8 flex justify-between items-end border-t border-outline-variant/10">
+<span class="font-headline font-medium text-sm tracking-wide text-white">01. Integrative O</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Typographic Mix</span>
+</div>
+</div>
+<!-- Card 2: Underline -->
+<div class="glass-card group p-8 flex flex-col aspect-square justify-between transition-all duration-500 hover:bg-surface-container-low cursor-pointer">
+<div class="flex-grow flex flex-col items-center justify-center gap-4">
+<div class="text-2xl font-headline font-bold">Databrill Core</div>
+<div class="flex scale-50">
+<div class="w-12 h-12 border-2 border-primary rounded-full -mr-4"></div>
+<div class="w-12 h-12 border-2 border-primary rounded-full -mr-4"></div>
+<div class="w-12 h-12 border-2 border-secondary rounded-full -mr-4"></div>
+<div class="w-12 h-12 border-2 border-secondary rounded-full"></div>
+</div>
+</div>
+<div class="pt-8 flex justify-between items-end border-t border-outline-variant/10">
+<span class="font-headline font-medium text-sm tracking-wide text-white">02. Underline</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Decorative Anchor</span>
+</div>
+</div>
+<!-- Card 3: Separator -->
+<div class="glass-card group p-8 flex flex-col aspect-square justify-between transition-all duration-500 hover:bg-surface-container-low cursor-pointer">
+<div class="flex-grow flex items-center justify-center gap-4">
+<span class="text-xl font-headline font-light tracking-widest">DATA</span>
+<div class="flex scale-25 opacity-60">
+<div class="w-6 h-6 border border-primary rounded-full -mr-2"></div>
+<div class="w-6 h-6 border border-primary rounded-full -mr-2"></div>
+<div class="w-6 h-6 border border-secondary rounded-full -mr-2"></div>
+<div class="w-6 h-6 border border-secondary rounded-full"></div>
+</div>
+<span class="text-xl font-headline font-bold">BRILL CORE</span>
+</div>
+<div class="pt-8 flex justify-between items-end border-t border-outline-variant/10">
+<span class="font-headline font-medium text-sm tracking-wide text-white">03. Separator</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Hierarchical Shift</span>
+</div>
+</div>
+<!-- Card 4: Dot the I -->
+<div class="glass-card group p-8 flex flex-col aspect-square justify-between transition-all duration-500 hover:bg-surface-container-low cursor-pointer">
+<div class="flex-grow flex items-center justify-center">
+<div class="relative text-5xl font-headline font-bold">
+                        Databr<span class="relative">l<div class="absolute -top-4 left-1/2 -translate-x-1/2 w-4 h-4 border-2 border-primary rounded-full animate-pulse shadow-[0_0_15px_rgba(255,144,100,0.4)]"></div></span>l
+                    </div>
+</div>
+<div class="pt-8 flex justify-between items-end border-t border-outline-variant/10">
+<span class="font-headline font-medium text-sm tracking-wide text-white">04. Dot the I</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Focal Precision</span>
+</div>
+</div>
+<!-- Card 5: Crown -->
+<div class="glass-card group p-8 flex flex-col aspect-square justify-between transition-all duration-500 hover:bg-surface-container-low cursor-pointer">
+<div class="flex-grow flex flex-col items-center justify-center">
+<div class="flex -mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
+<div class="w-10 h-10 border border-primary rounded-full -mx-1 translate-y-2"></div>
+<div class="w-10 h-10 border border-primary rounded-full -mx-1"></div>
+<div class="w-10 h-10 border border-secondary rounded-full -mx-1"></div>
+<div class="w-10 h-10 border border-secondary rounded-full -mx-1 translate-y-2"></div>
+</div>
+<div class="text-2xl font-headline font-bold tracking-widest">CORE</div>
+</div>
+<div class="pt-8 flex justify-between items-end border-t border-outline-variant/10">
+<span class="font-headline font-medium text-sm tracking-wide text-white">05. Crown</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Symbolic Protection</span>
+</div>
+</div>
+<!-- Card 6: Ligature -->
+<div class="glass-card group p-8 flex flex-col aspect-square justify-between transition-all duration-500 hover:bg-surface-container-low cursor-pointer">
+<div class="flex-grow flex items-center justify-center gap-1">
+<span class="text-lg font-headline font-medium">Databrill</span>
+<div class="flex items-center h-4 mx-2">
+<div class="w-3 h-3 border border-primary rounded-full -mr-1"></div>
+<div class="w-3 h-3 border border-primary rounded-full -mr-1"></div>
+<div class="w-3 h-3 border border-secondary rounded-full -mr-1"></div>
+<div class="w-3 h-3 border border-secondary rounded-full"></div>
+</div>
+<span class="text-lg font-headline font-bold">Core</span>
+</div>
+<div class="pt-8 flex justify-between items-end border-t border-outline-variant/10">
+<span class="font-headline font-medium text-sm tracking-wide text-white">06. Ligature</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Connected Flow</span>
+</div>
+</div>
+<!-- Card 7: D-Form -->
+<div class="glass-card group p-8 flex flex-col aspect-square justify-between transition-all duration-500 hover:bg-surface-container-low cursor-pointer">
+<div class="flex-grow flex items-center justify-center">
+<div class="relative flex items-center justify-center w-32 h-32">
+<div class="absolute left-4 w-20 h-20 border-4 border-primary rounded-full opacity-60"></div>
+<div class="absolute left-10 w-20 h-20 border-4 border-secondary rounded-full"></div>
+<div class="absolute z-10 text-6xl font-headline font-bold text-white tracking-tighter">D</div>
+</div>
+</div>
+<div class="pt-8 flex justify-between items-end border-t border-outline-variant/10">
+<span class="font-headline font-medium text-sm tracking-wide text-white">07. D-Form</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Monogram Abstract</span>
+</div>
+</div>
+<!-- Card 8: Vertical Stack -->
+<div class="glass-card group p-8 flex flex-col aspect-square justify-between transition-all duration-500 hover:bg-surface-container-low cursor-pointer">
+<div class="flex-grow flex items-center justify-center gap-8">
+<div class="flex flex-col gap-1">
+<div class="w-6 h-6 border-2 border-primary rounded-full"></div>
+<div class="w-6 h-6 border-2 border-primary rounded-full"></div>
+<div class="w-6 h-6 border-2 border-secondary rounded-full"></div>
+<div class="w-6 h-6 border-2 border-secondary rounded-full"></div>
+</div>
+<div class="flex flex-col font-headline font-bold text-xl leading-none">
+<span>DATABRILL</span>
+<span class="signature-gradient-text">CORE</span>
+</div>
+</div>
+<div class="pt-8 flex justify-between items-end border-t border-outline-variant/10">
+<span class="font-headline font-medium text-sm tracking-wide text-white">08. Vertical Stack</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Architectural Grid</span>
+</div>
+</div>
+<!-- Card 9: Baseline Weave -->
+<div class="glass-card group p-8 flex flex-col aspect-square justify-between transition-all duration-500 hover:bg-surface-container-low cursor-pointer overflow-hidden">
+<div class="flex-grow flex items-center justify-center relative">
+<div class="text-3xl font-headline font-bold z-10">Databrill Core</div>
+<div class="absolute bottom-1/3 flex opacity-40 group-hover:translate-y-2 transition-transform duration-700">
+<div class="w-20 h-20 border border-primary rounded-full -mr-10"></div>
+<div class="w-20 h-20 border border-primary rounded-full -mr-10"></div>
+<div class="w-20 h-20 border border-secondary rounded-full -mr-10"></div>
+<div class="w-20 h-20 border border-secondary rounded-full"></div>
+</div>
+</div>
+<div class="pt-8 flex justify-between items-end border-t border-outline-variant/10">
+<span class="font-headline font-medium text-sm tracking-wide text-white">09. Baseline Weave</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Interwoven Logic</span>
+</div>
+</div>
+<!-- Card 10: Monogram -->
+<div class="glass-card group p-8 flex flex-col aspect-square justify-between transition-all duration-500 hover:bg-surface-container-low cursor-pointer">
+<div class="flex-grow flex items-center justify-center">
+<div class="relative text-7xl font-headline font-bold flex items-center">
+                        D
+                        <div class="flex -mx-4 opacity-50">
+<div class="w-12 h-12 border-2 border-primary rounded-full -mr-6"></div>
+<div class="w-12 h-12 border-2 border-secondary rounded-full"></div>
+</div>
+                        B
+                    </div>
+</div>
+<div class="pt-8 flex justify-between items-end border-t border-outline-variant/10">
+<span class="font-headline font-medium text-sm tracking-wide text-white">10. Monogram</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Compact Identity</span>
+</div>
+</div>
+<!-- Card 11: Orbital -->
+<div class="glass-card group p-8 flex flex-col aspect-square justify-between transition-all duration-500 hover:bg-surface-container-low cursor-pointer overflow-hidden">
+<div class="flex-grow flex items-center justify-center relative">
+<div class="absolute w-48 h-48 border border-outline-variant/20 rounded-full group-hover:scale-110 transition-transform duration-700"></div>
+<div class="text-xl font-headline font-bold">CORE</div>
+<div class="absolute top-10 right-10 w-4 h-4 signature-gradient-bg rounded-full"></div>
+<div class="absolute bottom-12 left-8 w-2 h-2 bg-secondary rounded-full"></div>
+</div>
+<div class="pt-8 flex justify-between items-end border-t border-outline-variant/10">
+<span class="font-headline font-medium text-sm tracking-wide text-white">11. Orbital</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Celestial Motion</span>
+</div>
+</div>
+<!-- Card 12: Negative Space -->
+<div class="glass-card group p-8 flex flex-col aspect-square justify-between transition-all duration-500 hover:bg-surface-container-low cursor-pointer">
+<div class="flex-grow flex items-center justify-center">
+<div class="w-48 h-24 signature-gradient-bg flex items-center justify-center gap-2 rounded-lg">
+<div class="w-10 h-10 bg-background rounded-full"></div>
+<div class="w-10 h-10 bg-background rounded-full"></div>
+<div class="w-10 h-10 bg-background rounded-full"></div>
+<div class="w-10 h-10 bg-background rounded-full"></div>
+</div>
+</div>
+<div class="pt-8 flex justify-between items-end border-t border-outline-variant/10">
+<span class="font-headline font-medium text-sm tracking-wide text-white">12. Negative Space</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Subtractive Form</span>
+</div>
+</div>
+</section>
+<!-- Brand Showcase Imagery Section -->
+<section class="mt-32">
+<h3 class="font-headline text-3xl font-bold mb-12 flex items-center gap-4">
+<span class="signature-gradient-text">Contextual</span> Visualization
+            </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="relative group overflow-hidden aspect-[16/9] rounded-xl glass-card">
+<img class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-1000" data-alt="Futuristic high-tech server room with glowing orange and purple neon lights reflecting on polished black metallic surfaces" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9MkRTpe14ZDAyuotN9szovfq6uPxEXKwzVboIm5LlCTybodH2o-Fsz8W-tIvDBlQsFcck3cGr4LTaEbpN91E67zzgu-8LRtZ-TNrpy0wGzXQRlHU0CSqvLIplHdjbgHH8Z1ie0fQ49qLdmCHYsugrpfW9EVpkxZ826l-KfA9nWCZs4js-UWJjMVmzeWnNkgZYc7feEpSsicSbV2kZQrDqqUcw5OlM5Bnz62tVVUixR7H89LTdbe4GsSOCh_MBH5Dd8sQPeHrJ3HI"/>
+<div class="absolute inset-0 p-12 flex flex-col justify-end bg-gradient-to-t from-background via-transparent to-transparent">
+<span class="font-headline text-xs tracking-widest uppercase text-primary mb-2">Environment Study</span>
+<h4 class="text-2xl font-headline font-bold text-white">The Technical Core</h4>
+</div>
+</div>
+<div class="relative group overflow-hidden aspect-[16/9] rounded-xl glass-card">
+<img class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-1000" data-alt="Minimalist abstract render of glass spheres floating in a dark void with soft prismatic light refractions and deep shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6_fVj4MPK0oCMJb1iiUgksNNs_zboyKXOLhGixXoJLA4TZI4tGOMsRVFfwc28VYHcD3U0SdhPoIa9Kq0snw_iCyMNM4JyzTXWSs_rt0OugpDY6wwL_r7AYYIP1Dl97vpKpFQ12_i2XfRrQrJRBaqF3ICNGYR2Mic37XqIjZGRvxx1zBcxlkdF6wohjo0icluhB0ojy0J-Oa30CL7CYF-vVGuGgpZMX75oxG1mifUimbsHkRkjICfTt5wqgVXx2Dskyz5eW3fKGr0"/>
+<div class="absolute inset-0 p-12 flex flex-col justify-end bg-gradient-to-t from-background via-transparent to-transparent">
+<span class="font-headline text-xs tracking-widest uppercase text-secondary mb-2">Atmospheric Study</span>
+<h4 class="text-2xl font-headline font-bold text-white">Refractive Information</h4>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-neutral-950 border-t border-neutral-800/20 py-12">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 w-full">
+<div class="mb-8 md:mb-0">
+<span class="font-headline font-bold text-neutral-200 text-xl tracking-tighter">Databrill <span class="signature-gradient-text">Core</span></span>
+<p class="font-manrope text-[10px] tracking-widest uppercase text-neutral-600 mt-2">Information as Light.</p>
+</div>
+<div class="flex gap-12 mb-8 md:mb-0">
+<a class="font-manrope text-xs tracking-widest uppercase text-neutral-600 hover:text-neutral-200 transition-all opacity-80 hover:opacity-100" href="#">Design System</a>
+<a class="font-manrope text-xs tracking-widest uppercase text-neutral-600 hover:text-neutral-200 transition-all opacity-80 hover:opacity-100" href="#">Concept Index</a>
+<a class="font-manrope text-xs tracking-widest uppercase text-neutral-600 hover:text-neutral-200 transition-all opacity-80 hover:opacity-100" href="#">Archive</a>
+</div>
+<div>
+<p class="font-manrope text-xs tracking-widest uppercase text-neutral-600">© 2024 Databrill Core. Information as Light.</p>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Algorithmic Art Template Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#06080F;color:#F2EEF8;font-family:Inter,system-ui,sans-serif;min-height:100vh}
+body{display:flex;align-items:center;justify-content:center;padding:32px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+</style>
+</head>
+<body>
+<h2 class="sr-only">Template 07: Sankey flow ribbon. Six gates spanning the canvas diagonal, gradient ribbons flow from top-left to bottom-right with rich saturation.</h2>
+<style>
+:root{
+  --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
+  --bg-page:#06080F;
+  --bg-0:#030C1B;
+  --bg-1:#0A1228;
+  --ink-0:#F2EEF8;
+  --ink-1:#C8B6F0;
+  --ink-2:#8B92A8;
+  --ink-3:#5A627A;
+  --violet:#9D4EDD;
+  --teal:#5DCAA5;
+  --amber:#EF9F27;
+  --pink:#FF6BB4;
+  --gold:#C99554;
+  --r-wrap:12px;
+  --r-card:3px;
+  --stroke-hair:0.5px;
+  --stroke-bold:1.5px;
+  --border-soft:rgba(157,78,221,0.18);
+  --border-mid:rgba(157,78,221,0.35);
+  --card-fill:rgba(255,255,255,0.02);
+  --card-stroke:rgba(255,255,255,0.08);
+  --divider:rgba(255,255,255,0.06);
+}
+
+.sk-frame{width:100%;max-width:1080px;font-family:var(--font-sans);color:var(--ink-0)}
+.sk-wrap{
+  background:linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 100%);
+  border-radius:var(--r-wrap);
+  padding:28px 28px 18px;
+  position:relative;
+  overflow:hidden;
+  border:var(--stroke-hair) solid var(--border-soft);
+}
+.sk-wrap::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 110%, rgba(157,78,221,0.10), transparent 60%);
+  pointer-events:none;
+}
+.sk-wrap::after{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(157,78,221,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(157,78,221,0.025) 1px,transparent 1px);
+  background-size:24px 24px;
+  pointer-events:none;
+}
+
+.sk-spec{display:flex;align-items:center;gap:18px;margin-bottom:18px;position:relative;z-index:1}
+.sk-spec-id{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:2px;
+  color:var(--ink-2);text-transform:uppercase;
+  padding:3px 8px;border:var(--stroke-hair) solid var(--border-mid);border-radius:2px;
+}
+.sk-spec-name{font-size:20px;font-weight:600;letter-spacing:-0.2px;color:var(--ink-0);margin:0}
+.sk-spec-pat{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;
+  color:var(--gold);text-transform:uppercase;margin-left:auto;
+  display:flex;align-items:center;gap:8px;
+}
+.sk-spec-pat::before{
+  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 6px var(--gold);
+  animation:skPulse 2s ease-in-out infinite;
+}
+@keyframes skPulse{0%,100%{box-shadow:0 0 6px var(--gold)}50%{box-shadow:0 0 12px var(--gold)}}
+
+.sk-canvas{
+  position:relative;
+  background:var(--card-fill);
+  border-radius:var(--r-card);
+  border:var(--stroke-hair) solid var(--card-stroke);
+  z-index:1;
+  height:420px;
+  overflow:hidden;
+}
+
+.sk-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
+.sk-ribbon{
+  transition:opacity .6s ease-out, filter .3s;
+  opacity:0.35;
+}
+.sk-ribbon.active{opacity:0.95;filter:drop-shadow(0 0 16px rgba(157,78,221,0.4))}
+.sk-ribbon.done{opacity:0.75}
+
+.sk-flow-anim{
+  stroke-dasharray:8 14;
+  animation:skFlow 1.4s linear infinite;
+  opacity:0;
+  transition:opacity .3s;
+}
+.sk-flow-anim.flowing{opacity:0.9}
+@keyframes skFlow{to{stroke-dashoffset:-44}}
+
+.sk-gate{
+  position:absolute;
+  background:rgba(10,18,40,0.85);
+  border:var(--stroke-hair) solid var(--card-stroke);
+  border-top:var(--stroke-bold) solid var(--accent,var(--violet));
+  border-radius:var(--r-card);
+  padding:8px 14px 10px;
+  text-align:center;
+  min-width:84px;
+  transform:translate(-50%,-50%);
+  transition:border-color .3s, box-shadow .3s, opacity .3s, transform .3s;
+  z-index:3;
+  backdrop-filter:blur(8px);
+}
+.sk-gate.active{
+  border-color:rgba(157,78,221,0.65);
+  box-shadow:0 0 0 2px rgba(157,78,221,0.25), 0 6px 20px rgba(0,0,0,0.5);
+}
+.sk-gate.done{border-top-color:var(--teal);opacity:0.9}
+.sk-gate-id{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;
+  color:var(--ink-3);display:block;margin-bottom:3px;
+}
+.sk-gate-name{
+  color:var(--ink-0);font-size:13px;font-weight:600;
+  letter-spacing:-0.1px;
+}
+
+.sk-foot{
+  display:flex;gap:10px;align-items:center;
+  margin-top:14px;padding-top:14px;
+  border-top:var(--stroke-hair) solid var(--divider);
+  position:relative;z-index:1;
+}
+.sk-btn{
+  background:rgba(255,255,255,0.02);
+  border:var(--stroke-hair) solid var(--border-mid);
+  color:var(--ink-1);
+  padding:7px 14px;
+  border-radius:2px;
+  cursor:pointer;
+  font-size:11px;
+  font-family:var(--font-mono);
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  transition:border-color .2s, color .2s, background .2s;
+}
+.sk-btn:hover{border-color:var(--violet);color:var(--ink-0);background:rgba(157,78,221,0.08)}
+.sk-stat{margin-left:auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-3);letter-spacing:1.2px;text-transform:uppercase}
+.sk-stat-v{color:var(--ink-1);margin-left:6px}
+
+.sk-cap{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;
+  color:var(--ink-3);text-transform:uppercase;
+  margin-right:8px;padding:3px 8px;
+  border:var(--stroke-hair) solid var(--border-mid);
+  border-radius:2px;
+}
+
+@media (max-width:720px){
+  .sk-canvas{height:auto;display:flex;flex-direction:column;gap:8px;padding:14px}
+  .sk-svg{display:none}
+  .sk-gate{position:relative !important;left:auto !important;top:auto !important;transform:none;width:100%;text-align:left}
+}
+</style>
+
+<div class="sk-frame">
+<div class="sk-wrap">
+
+<header class="sk-spec">
+<span class="sk-spec-id">TEMPLATE 07</span>
+<h1 class="sk-spec-name">Sankey ribbon</h1>
+<span class="sk-spec-pat">Cap: 6 gates max, weighted</span>
+</header>
+
+<div class="sk-canvas" id="sk-canvas">
+<svg class="sk-svg" id="sk-svg" preserveAspectRatio="none"></svg>
+<div id="sk-gates"></div>
+</div>
+
+<div class="sk-foot">
+<span class="sk-cap">N = 6</span>
+<button class="sk-btn" onclick="skPlay()">Start</button>
+<button class="sk-btn" onclick="skStep()">Next</button>
+<span class="sk-stat">Gate<span class="sk-stat-v" id="sk-counter">01 of 06</span></span>
+</div>
+
+</div>
+</div>
+
+<script>
+(function(){
+// === HARD CONSTRAINT ===
+const N=6;
+// =======================
+
+// 6 gates, mapped across 4 phases of the design system
+// Phases: 0=setup, 1=capture, 2=build, 3=quality
+const phaseFor=[0,0,1,2,2,3];
+const phaseAccent=['var(--violet)','var(--teal)','var(--amber)','var(--pink)'];
+const phaseHex=['#9D4EDD','#5DCAA5','#EF9F27','#FF6BB4'];
+
+// SLOT SLOTS for 6 gates
+const labels=['{slot 1}','{slot 2}','{slot 3}','{slot 4}','{slot 5}','{slot 6}'];
+
+const canvas=document.getElementById('sk-canvas');
+const svg=document.getElementById('sk-svg');
+const gatesContainer=document.getElementById('sk-gates');
+const counter=document.getElementById('sk-counter');
+
+let cur=0,timer=null;
+let gates=[],ribbons=[],flows=[];
+
+function buildLayout(){
+  const rect=canvas.getBoundingClientRect();
+  const W=rect.width;
+  const H=rect.height;
+  
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  
+  // Use full canvas diagonal: top-left start, bottom-right end
+  const padX=70;
+  const padTop=50;
+  const padBot=50;
+  const usableW=W-padX*2;
+  const usableH=H-padTop-padBot;
+  
+  // Gate positions: span the diagonal with a gentle wave
+  const gateXs=[];
+  const gateYs=[];
+  for(let i=0;i<N;i++){
+    const t=i/(N-1);  // 0 to 1
+    gateXs.push(padX+t*usableW);
+    
+    // Diagonal descent with one wave: starts at top, ends at bottom, slight rise in middle
+    const baseY=padTop+t*usableH;
+    const wave=Math.sin(t*Math.PI)*usableH*0.18;  // single hump
+    gateYs.push(baseY-wave);
+  }
+  
+  svg.innerHTML='';
+  gatesContainer.innerHTML='';
+  ribbons=[];flows=[];gates=[];
+  
+  // Defs: gradients between consecutive phases
+  const defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
+  for(let i=0;i<N-1;i++){
+    const grad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+    grad.setAttribute('id','sk-grad-'+i);
+    grad.setAttribute('x1','0');grad.setAttribute('x2','1');grad.setAttribute('y1','0');grad.setAttribute('y2','0');
+    const fromColor=phaseHex[phaseFor[i]];
+    const toColor=phaseHex[phaseFor[i+1]];
+    const s1=document.createElementNS('http://www.w3.org/2000/svg','stop');
+    s1.setAttribute('offset','0');s1.setAttribute('stop-color',fromColor);s1.setAttribute('stop-opacity','0.8');
+    const s2=document.createElementNS('http://www.w3.org/2000/svg','stop');
+    s2.setAttribute('offset','1');s2.setAttribute('stop-color',toColor);s2.setAttribute('stop-opacity','0.8');
+    grad.appendChild(s1);grad.appendChild(s2);
+    defs.appendChild(grad);
+  }
+  // Glow filter for active ribbons
+  const filter=document.createElementNS('http://www.w3.org/2000/svg','filter');
+  filter.setAttribute('id','sk-glow');
+  filter.setAttribute('x','-20%');filter.setAttribute('y','-20%');filter.setAttribute('width','140%');filter.setAttribute('height','140%');
+  const blur=document.createElementNS('http://www.w3.org/2000/svg','feGaussianBlur');
+  blur.setAttribute('stdDeviation','3');
+  filter.appendChild(blur);
+  defs.appendChild(filter);
+  svg.appendChild(defs);
+  
+  // Ribbon thicknesses: starts fat, gentle taper (since only 6 gates, can stay fuller)
+  const thicknesses=[];
+  for(let i=0;i<N;i++){
+    const t=1-(i/(N-1))*0.45;
+    thicknesses.push(72*t);
+  }
+  
+  // Draw ribbons
+  for(let i=0;i<N-1;i++){
+    const x1=gateXs[i], y1=gateYs[i];
+    const x2=gateXs[i+1], y2=gateYs[i+1];
+    const t1=thicknesses[i], t2=thicknesses[i+1];
+    
+    const cx1=x1+(x2-x1)*0.55;
+    const cx2=x2-(x2-x1)*0.55;
+    
+    const topPath=`M ${x1} ${y1-t1/2} C ${cx1} ${y1-t1/2}, ${cx2} ${y2-t2/2}, ${x2} ${y2-t2/2}`;
+    const botPath=`L ${x2} ${y2+t2/2} C ${cx2} ${y2+t2/2}, ${cx1} ${y1+t1/2}, ${x1} ${y1+t1/2} Z`;
+    
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',topPath+' '+botPath);
+    path.setAttribute('class','sk-ribbon');
+    path.setAttribute('fill','url(#sk-grad-'+i+')');
+    path.setAttribute('id','sk-ribbon-'+i);
+    svg.appendChild(path);
+    ribbons.push(path);
+    
+    const flowPath=`M ${x1} ${y1} C ${cx1} ${y1}, ${cx2} ${y2}, ${x2} ${y2}`;
+    const flow=document.createElementNS('http://www.w3.org/2000/svg','path');
+    flow.setAttribute('d',flowPath);
+    flow.setAttribute('class','sk-flow-anim');
+    flow.setAttribute('stroke',phaseHex[phaseFor[i]]);
+    flow.setAttribute('stroke-width','2.5');
+    flow.setAttribute('fill','none');
+    flow.setAttribute('id','sk-flow-'+i);
+    svg.appendChild(flow);
+    flows.push(flow);
+  }
+  
+  // GATE SLOTS
+  for(let i=0;i<N;i++){
+    const gate=document.createElement('div');
+    gate.className='sk-gate'+(i===0?' active':'');
+    gate.setAttribute('data-step',i);
+    gate.style.setProperty('--accent',phaseAccent[phaseFor[i]]);
+    gate.style.left=gateXs[i]+'px';
+    gate.style.top=gateYs[i]+'px';
+    gate.innerHTML=`<span class="sk-gate-id">${String(i+1).padStart(2,'0')}</span><span class="sk-gate-name">${labels[i]}</span>`;
+    gatesContainer.appendChild(gate);
+    gates.push(gate);
+  }
+  
+  applyState(cur);
+}
+
+function applyState(n){
+  cur=n;
+  gates.forEach((g,i)=>{
+    g.classList.remove('active','done');
+    if(i<n)g.classList.add('done');
+    else if(i===n)g.classList.add('active');
+  });
+  ribbons.forEach((r,i)=>{
+    r.classList.remove('active','done');
+    if(i<n-1)r.classList.add('done');
+    else if(i===n-1)r.classList.add('active');
+  });
+  flows.forEach((f,i)=>f.classList.toggle('flowing',i===n-1));
+  counter.textContent=String(n+1).padStart(2,'0')+' of 0'+N;
+}
+
+function show(n){applyState(n)}
+function reset(){applyState(0)}
+
+window.skStep=function(){const n=(cur+1)%N;if(n===0)reset();else show(n)};
+window.skPlay=function(){clearInterval(timer);reset();let i=0;timer=setInterval(()=>{i++;if(i>=N){clearInterval(timer);return}show(i)},1300)};
+
+function init(){buildLayout();setTimeout(skPlay,400)}
+if(document.readyState==='complete')init();
+else window.addEventListener('load',init);
+window.addEventListener('resize',()=>{buildLayout()});
+})();
+</script>
+</body>
+</html>

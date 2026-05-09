@@ -1,0 +1,1313 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>Claude Video Editing Flow — UI mockup</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ss-purple: #461499;
+  --ss-purple-light: #753EF7;
+  --ss-purple-glow: #9B6DFF;
+  --ss-deep: #0C0322;
+  --ss-deep-2: #130d2a;
+  --ss-card: #1a1a2e;
+  --ss-hover: #252040;
+  --ss-gold: #FBBF24;
+  --ss-orange: #F97316;
+  --ss-emerald: #10B981;
+  --ss-cyan: #22D3EE;
+  --ss-pink: #EC4899;
+  --bg: var(--ss-deep);
+  --panel: var(--ss-deep-2);
+  --panel-2: var(--ss-card);
+  --panel-3: var(--ss-hover);
+  --line: #2a1f4d;
+  --line-soft: #1f1738;
+  --ink: #FAFAFC;
+  --ink-muted: #B8B0D8;
+  --ink-faint: #6e6588;
+  --copy: var(--ss-purple-light);
+  --copy-dim: rgba(117,62,247,0.16);
+  --success: var(--ss-emerald);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-xl: 14px;
+  --font-body: "Plus Jakarta Sans","Inter",sans-serif;
+  --font-mono: "JetBrains Mono",monospace;
+  --shadow-card: 0 1px 2px rgba(0,0,0,.07), 0 4px 8px rgba(0,0,0,.18), 0 16px 40px rgba(0,0,0,.30);
+  --shadow-glow: 0 0 24px rgba(117,62,247,.30);
+  --transition: 200ms cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-body); font-size: 14px;
+  color: var(--ink); background: var(--bg);
+  background-image:
+    radial-gradient(900px 480px at 12% -10%, rgba(117,62,247,.18), transparent 60%),
+    radial-gradient(700px 420px at 92% -8%, rgba(70,20,153,.16), transparent 65%);
+  min-height: 100dvh; letter-spacing: -.005em; padding-bottom: 120px;
+}
+
+/* Topbar ------------------------------------ */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 22px; border-bottom: 1px solid var(--line-soft);
+  background: linear-gradient(180deg, rgba(26,26,46,.85) 0%, rgba(12,3,34,.85) 100%);
+  backdrop-filter: blur(8px); gap: 12px;
+}
+.logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 17px; letter-spacing: -.5px; }
+.logo-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--ss-purple-light) 0%, var(--ss-purple) 100%);
+  color: #fff; box-shadow: 0 0 16px rgba(117,62,247,.45); font-size: 16px;
+}
+.logo-text {
+  background: linear-gradient(135deg, #FAFAFC 0%, var(--ss-purple-glow) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.topbar-meta { color: var(--ink-faint); font-size: 12px; font-family: var(--font-mono); }
+.topbar-actions { display: flex; gap: 10px; align-items: center; }
+.btn-mini {
+  padding: 7px 12px; border-radius: var(--radius-md); font-size: 12px; font-weight: 600;
+  border: 1px solid var(--line); color: var(--ink-muted); background: rgba(26,26,46,.4);
+  cursor: pointer; transition: all var(--transition);
+}
+.btn-mini:hover { color: var(--ink); border-color: var(--copy); }
+
+/* Layout ------------------------------------ */
+.main { max-width: 1140px; margin: 0 auto; padding: 22px; display: flex; flex-direction: column; gap: 16px; }
+
+/* Step progress ----------------------------- */
+.step-progress {
+  display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
+  list-style: none; padding: 10px 14px;
+  background: rgba(12,3,34,.18); border: 1px solid var(--line); border-radius: var(--radius-xl);
+}
+.step-progress .step {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 14px; border-radius: 999px;
+  font-size: 11px; font-weight: 600; letter-spacing: .3px;
+  border: 1px solid var(--line); background: rgba(26,26,46,.55);
+  color: var(--ink-muted);
+}
+.step-progress .step .num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; border-radius: 999px;
+  background: rgba(255,255,255,.06); font-size: 10px; font-weight: 700;
+}
+.step-progress .step.done { border-color: rgba(16,185,129,.45); background: rgba(16,185,129,.10); color: var(--success); }
+.step-progress .step.done .num { background: var(--success); color: var(--ss-deep); }
+.step-progress .step.current { border-color: var(--copy); color: var(--ink); background: var(--copy-dim); }
+.step-progress .step.current .num { background: var(--copy); color: #fff; }
+.step-progress .arrow { color: var(--ink-faint); font-size: 11px; }
+
+/* Card primitive ---------------------------- */
+.gcard {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius-xl); overflow: hidden;
+}
+.gcard-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px 10px; border-bottom: 1px solid var(--line-soft);
+}
+.gcard-head h3 {
+  font-size: 11px; font-weight: 700; color: var(--ink-muted);
+  text-transform: uppercase; letter-spacing: 1.2px;
+  display: flex; align-items: center; gap: 8px;
+}
+.gcard-head h3::before {
+  content: ''; width: 4px; height: 12px; border-radius: 2px;
+  background: linear-gradient(180deg, var(--ss-purple-light), var(--ss-purple));
+}
+.gcard-meta { font-size: 11px; color: var(--ink-faint); font-family: var(--font-mono); }
+.gcard-body { padding: 16px 18px; }
+
+/* Drop zone --------------------------------- */
+.drop-zone {
+  border: 2px dashed var(--line); border-radius: var(--radius-xl);
+  padding: 44px 22px; text-align: center; cursor: pointer;
+  transition: all var(--transition); background: rgba(26,26,46,.55);
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.drop-zone:hover { border-color: var(--copy); background: var(--copy-dim); box-shadow: var(--shadow-glow); }
+.drop-zone .drop-icon { color: var(--copy); opacity: .85; font-size: 32px; }
+.drop-zone h4 { font-size: 17px; font-weight: 700; }
+.drop-zone p { color: var(--ink-muted); font-size: 13px; }
+.drop-actions {
+  display: flex; flex-direction: column; gap: 10px; margin-top: 10px;
+  width: 100%; max-width: 320px;
+}
+.drop-sample {
+  font-size: 13px; padding: 10px 16px; border-radius: 999px;
+  background: rgba(117,62,247,.14); border: 1px solid rgba(117,62,247,.45);
+  color: var(--copy); font-weight: 600; cursor: pointer;
+  transition: all var(--transition); font-family: inherit;
+}
+.drop-sample:hover { background: rgba(117,62,247,.24); color: #fff; }
+.drop-paste input {
+  width: 100%; font-size: 12px; padding: 8px 12px; border-radius: 8px;
+  background: rgba(0,0,0,.30); border: 1px solid var(--line-soft);
+  color: var(--ink); font-family: var(--font-mono); text-align: center;
+  box-sizing: border-box;
+}
+.drop-paste input::placeholder { color: var(--ink-faint); }
+.drop-paste input:focus { outline: none; border-color: var(--copy); }
+
+/* Preset rows ------------------------------- */
+.preset-row {
+  display: grid; grid-template-columns: 92px 1fr; align-items: center;
+  gap: 4px 16px; padding: 10px 0; border-bottom: 1px solid var(--line-soft);
+}
+.preset-row:last-child { border-bottom: none; }
+.preset-row .label {
+  font-size: 11px; color: var(--ink-muted); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px;
+  grid-row: 1 / span 2; align-self: center;
+}
+.preset-row .seg { grid-column: 2; grid-row: 1; }
+.preset-row .legend { grid-column: 2; grid-row: 2; }
+
+/* Legend primitive ------------------------- */
+.legend {
+  font-size: 10px; color: var(--ink-faint);
+  letter-spacing: .3px; line-height: 1.5;
+}
+.gcard-legend {
+  padding: 8px 18px 10px; font-size: 10px;
+  color: var(--ink-faint); letter-spacing: .3px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.budget-legend {
+  padding: 0 18px 12px; font-size: 10px;
+  color: var(--ink-faint); letter-spacing: .3px;
+}
+.seg {
+  display: inline-flex; padding: 3px; gap: 2px;
+  background: rgba(12,3,34,.55); border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+.seg button {
+  font-size: 10px; font-weight: 600; padding: 6px 8px; border-radius: 6px;
+  color: var(--ink-muted); letter-spacing: .3px; text-transform: uppercase;
+  transition: all var(--transition); border: none; background: none; cursor: pointer;
+  white-space: nowrap;
+}
+.seg button:hover { color: var(--ink); background: rgba(117,62,247,.10); }
+.seg button.active { color: var(--ss-deep); background: var(--ss-gold); }
+
+/* Candidates table -------------------------- */
+.cand-table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  font-size: 13px;
+}
+.cand-table thead th {
+  font-size: 10px; font-weight: 700; color: var(--ink-faint);
+  text-transform: uppercase; letter-spacing: 1px;
+  padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line);
+  background: rgba(12,3,34,.35);
+}
+.cand-table tbody tr {
+  border-bottom: 1px solid var(--line-soft); transition: all var(--transition);
+  cursor: pointer;
+}
+.cand-table tbody tr:hover { background: rgba(117,62,247,.06); }
+.cand-table tbody tr.picked { background: rgba(251,191,36,.08); }
+.cand-table tbody tr.picked:hover { background: rgba(251,191,36,.14); }
+.cand-table tbody td {
+  padding: 11px 12px; vertical-align: middle;
+  border-bottom: 1px solid var(--line-soft);
+}
+.cand-table .col-num { width: 36px; color: var(--ink-faint); font-family: var(--font-mono); font-size: 12px; }
+.cand-table .col-pick { width: 38px; text-align: center; }
+.cand-table .col-tier { width: 64px; }
+.cand-table .col-beat { width: 110px; }
+.cand-table .col-dur { width: 64px; font-family: var(--font-mono); color: var(--ink-muted); }
+.cand-table .col-quote { color: var(--ink); font-weight: 500; }
+.tier {
+  display: inline-flex; gap: 1px; font-size: 12px;
+  letter-spacing: .5px;
+}
+.tier.t3 { color: var(--ss-gold); }
+.tier.t2 { color: var(--ss-purple-glow); }
+.tier.t1 { color: var(--ink-faint); }
+.beat-pill {
+  display: inline-flex; align-items: center; padding: 3px 9px;
+  border-radius: 999px; font-size: 10px; font-weight: 700; letter-spacing: .8px;
+  border: 1px solid var(--line); background: rgba(26,26,46,.55); color: var(--ink-muted);
+}
+.beat-pill[data-beat="HOOK"]     { color: var(--ss-cyan); border-color: rgba(34,211,238,.35); background: rgba(34,211,238,.08); }
+.beat-pill[data-beat="INSIGHT"]  { color: var(--ss-purple-glow); border-color: rgba(117,62,247,.35); background: rgba(117,62,247,.10); }
+.beat-pill[data-beat="DECISION"] { color: var(--ss-pink); border-color: rgba(236,72,153,.35); background: rgba(236,72,153,.08); }
+.beat-pill[data-beat="CLOSE"]    { color: var(--ss-emerald); border-color: rgba(16,185,129,.35); background: rgba(16,185,129,.08); }
+.beat-pill[data-beat="BRIDGE"]   { color: #94A3B8; border-color: rgba(148,163,184,.35); background: rgba(148,163,184,.08); }
+.beat-pill[data-beat="CONTEXT"]  { color: var(--ss-orange); border-color: rgba(249,115,22,.35); background: rgba(249,115,22,.08); }
+.checkbox {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 6px;
+  border: 1.5px solid var(--line); background: rgba(12,3,34,.45);
+  font-size: 13px; color: var(--ss-deep); transition: all var(--transition);
+}
+tr.picked .checkbox { background: var(--ss-gold); border-color: var(--ss-gold); }
+tr.picked .checkbox::after { content: '✓'; font-weight: 800; }
+
+/* Reply input ------------------------------- */
+.reply-bar {
+  display: flex; gap: 10px; align-items: center;
+  padding: 14px 18px; border-top: 1px solid var(--line);
+  background: rgba(12,3,34,.35);
+}
+.reply-bar .label { font-size: 11px; color: var(--ink-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.reply-input {
+  flex: 1; font-family: var(--font-mono); font-size: 14px;
+  background: var(--panel-3); border: 1px solid var(--line);
+  border-radius: var(--radius-md); padding: 10px 14px; color: var(--ink);
+  transition: all var(--transition);
+}
+.reply-input:focus { outline: none; border-color: var(--copy); box-shadow: 0 0 0 3px var(--copy-dim); }
+.reply-hint { font-size: 11px; color: var(--ink-faint); padding: 8px 18px 12px; }
+.reply-hint kbd {
+  display: inline-block; font-family: var(--font-mono); font-size: 10px;
+  background: rgba(117,62,247,.10); border: 1px solid rgba(117,62,247,.28);
+  border-radius: 4px; padding: 1px 6px; color: var(--copy); font-weight: 600; margin: 0 2px;
+}
+
+/* Budget meter ------------------------------ */
+.budget {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 18px; border-top: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(70,20,153,.10) 0%, rgba(12,3,34,.30) 100%);
+}
+.budget-meter {
+  flex: 1; height: 6px; border-radius: 999px;
+  background: var(--panel-3); position: relative; overflow: hidden;
+}
+.budget-meter .fill {
+  position: absolute; top: 0; left: 0; bottom: 0;
+  background: linear-gradient(90deg, var(--ss-purple-light), var(--ss-gold));
+  border-radius: 999px;
+}
+.budget-meter .window {
+  position: absolute; top: -3px; bottom: -3px;
+  border-left: 2px dashed var(--ink-faint); border-right: 2px dashed var(--ink-faint);
+}
+.budget-stat {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+}
+.budget-stat .ok { color: var(--success); }
+.budget-stat .warn { color: var(--ss-gold); }
+
+/* Gates ------------------------------------- */
+.gate-row {
+  display: grid; grid-template-columns: 28px 1fr auto;
+  gap: 14px; align-items: center;
+  padding: 14px 0; border-bottom: 1px solid var(--line-soft);
+}
+.gate-row:last-child { border-bottom: none; }
+.gate-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 999px;
+  font-size: 13px; font-weight: 800;
+}
+.gate-row.pass .gate-icon { background: rgba(16,185,129,.16); color: var(--success); border: 1px solid rgba(16,185,129,.40); }
+.gate-row.warn .gate-icon { background: rgba(251,191,36,.14); color: var(--ss-gold); border: 1px solid rgba(251,191,36,.40); }
+.gate-row.fail .gate-icon { background: rgba(249,115,22,.14); color: var(--ss-orange); border: 1px solid rgba(249,115,22,.40); }
+.gate-name { font-weight: 700; font-size: 13px; color: var(--ink); }
+.gate-detail { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+.gate-side { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); }
+
+/* Render --------------------------------- */
+.render-progress {
+  height: 8px; border-radius: 999px; background: var(--panel-3);
+  position: relative; overflow: hidden; margin: 14px 0;
+}
+.render-progress .fill {
+  position: absolute; top: 0; left: 0; bottom: 0; width: 72%;
+  background: linear-gradient(90deg, var(--ss-purple-light), var(--ss-purple-glow));
+  border-radius: 999px;
+  box-shadow: 0 0 12px rgba(155,109,255,.45);
+}
+.render-stages {
+  display: flex; gap: 18px; font-size: 11px; color: var(--ink-faint);
+  font-family: var(--font-mono);
+}
+.render-stages .stage.done { color: var(--success); }
+.render-stages .stage.current { color: var(--copy); font-weight: 700; }
+.render-output {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px; margin-top: 18px;
+  padding: 14px 16px; border-radius: var(--radius-md);
+  background: rgba(117,62,247,.08); border: 1px solid rgba(117,62,247,.30);
+}
+.render-output .file {
+  display: flex; align-items: center; gap: 12px;
+}
+.render-output .file-thumb {
+  width: 48px; height: 48px; border-radius: 8px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--ss-purple) 0%, var(--ss-deep) 100%);
+  border: 1px solid var(--line); display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ss-purple-glow); font-size: 18px;
+}
+.render-output .file-meta { display: flex; flex-direction: column; gap: 3px; }
+.render-output .file-name { font-weight: 700; font-size: 14px; color: var(--ink); }
+.render-output .file-stats { font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); }
+
+/* Verdict lanes ----------------------------- */
+.verdict-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px; padding-top: 16px;
+}
+.verdict-btn {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+  padding: 12px 14px; border-radius: var(--radius-md); cursor: pointer;
+  border: 1px solid var(--line); background: rgba(26,26,46,.55);
+  transition: all var(--transition); text-align: left;
+}
+.verdict-btn:hover { transform: translateY(-1px); }
+.verdict-btn .key {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 6px;
+  background: var(--panel-3); color: var(--ink); font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+}
+.verdict-btn .name { font-size: 13px; font-weight: 700; }
+.verdict-btn .desc { font-size: 11px; color: var(--ink-muted); }
+.verdict-btn[data-lane="a"] { border-color: rgba(16,185,129,.40); }
+.verdict-btn[data-lane="a"]:hover { background: rgba(16,185,129,.10); }
+.verdict-btn[data-lane="a"] .name { color: var(--success); }
+.verdict-btn[data-lane="b"] { border-color: rgba(34,211,238,.40); }
+.verdict-btn[data-lane="b"]:hover { background: rgba(34,211,238,.10); }
+.verdict-btn[data-lane="b"] .name { color: var(--ss-cyan); }
+.verdict-btn[data-lane="c"] { border-color: rgba(251,191,36,.40); }
+.verdict-btn[data-lane="c"]:hover { background: rgba(251,191,36,.10); }
+.verdict-btn[data-lane="c"] .name { color: var(--ss-gold); }
+.verdict-btn[data-lane="d"] { border-color: rgba(249,115,22,.40); }
+.verdict-btn[data-lane="d"]:hover { background: rgba(249,115,22,.10); }
+.verdict-btn[data-lane="d"] .name { color: var(--ss-orange); }
+.verdict-btn[disabled],
+.btn-mini[disabled] {
+  opacity: .4; cursor: not-allowed; transform: none !important;
+}
+.verdict-btn[disabled]:hover,
+.btn-mini[disabled]:hover { background: inherit; }
+
+/* Handoff overlay --------------------------- */
+.handoff-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+}
+.handoff-overlay[hidden] { display: none; }
+.handoff-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(12,3,34,.78);
+  backdrop-filter: blur(6px);
+}
+.handoff-card {
+  position: relative; max-width: 420px; width: calc(100% - 48px);
+  padding: 32px 36px 24px;
+  background: linear-gradient(180deg, var(--ss-deep-2) 0%, var(--ss-deep) 100%);
+  border: 1px solid var(--copy); border-radius: var(--radius-xl);
+  box-shadow: 0 0 60px rgba(117,62,247,.40), var(--shadow-card);
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  animation: handoffEnter 240ms cubic-bezier(.16,1,.3,1);
+}
+@keyframes handoffEnter {
+  from { transform: translateY(8px) scale(.96); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+.handoff-state {
+  font-size: 18px; font-weight: 700; color: var(--ink);
+  letter-spacing: -.01em;
+}
+.handoff-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px; border-radius: var(--radius-md);
+  background: var(--ss-purple-light); color: #fff;
+  font-family: inherit; font-size: 13px; font-weight: 700;
+  border: none; cursor: pointer;
+  box-shadow: 0 0 24px rgba(117,62,247,.45);
+  transition: all var(--transition);
+}
+.handoff-cta:hover { background: var(--ss-purple-glow); }
+.handoff-cta:focus { outline: none; box-shadow: 0 0 0 3px rgba(117,62,247,.40); }
+.handoff-progress {
+  width: 100%; height: 3px; border-radius: 999px;
+  background: var(--panel-3); overflow: hidden; margin-top: 4px;
+}
+.handoff-progress .bar {
+  display: block; height: 100%;
+  background: linear-gradient(90deg, var(--ss-purple-light), var(--ss-purple-glow));
+  border-radius: 999px;
+}
+.handoff-progress.indeterminate .bar {
+  width: 35%;
+  animation: handoffShimmer 1.4s ease-in-out infinite;
+}
+.handoff-progress.determinate .bar {
+  width: 0; transition: width 240ms ease;
+}
+@keyframes handoffShimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(380%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .handoff-card { animation: none; }
+  .handoff-progress.indeterminate .bar { animation: none; width: 100%; }
+  .handoff-progress.determinate .bar { transition: none; }
+}
+.handoff-hint { font-size: 11px; color: var(--ink-faint); margin-top: 4px; }
+.handoff-hint kbd {
+  display: inline-block; font-family: var(--font-mono); font-size: 10px;
+  background: rgba(117,62,247,.10); border: 1px solid rgba(117,62,247,.28);
+  border-radius: 4px; padding: 1px 6px; color: var(--copy); font-weight: 600;
+}
+
+/* Footer hint ------------------------------ */
+.footer-hint {
+  text-align: center; padding: 24px 16px; color: var(--ink-faint); font-size: 12px;
+}
+.footer-hint code {
+  font-family: var(--font-mono); font-size: 11px;
+  background: rgba(117,62,247,.10); padding: 2px 6px; border-radius: 4px;
+  border: 1px solid rgba(117,62,247,.20); color: var(--copy);
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">
+    <span class="logo-icon">▶</span>
+    <span class="logo-text">Claude Video Editing Flow</span>
+  </div>
+  <div class="topbar-meta">v1.3  ·  selection-led  ·  ~2 min per cut</div>
+  <div class="topbar-actions">
+    <button class="btn-mini">⌘ K</button>
+    <button class="btn-mini">Theme</button>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Step progress -->
+  <ol class="step-progress" id="steps">
+    <li class="step done"><span class="num">✓</span> Drop</li>
+    <li class="step done"><span class="num">✓</span> Transcribe</li>
+    <li class="step done"><span class="num">✓</span> Score</li>
+    <li class="step current"><span class="num">4</span> Pick</li>
+    <li class="arrow">→</li>
+    <li class="step"><span class="num">5</span> Gates</li>
+    <li class="arrow">→</li>
+    <li class="step"><span class="num">6</span> Render</li>
+    <li class="arrow">→</li>
+    <li class="step"><span class="num">7</span> Verdict</li>
+  </ol>
+
+  <!-- Two-column row: Drop + Presets -->
+  <div style="display:grid; grid-template-columns: 1.1fr .9fr; gap: 16px;">
+    <section class="gcard">
+      <div class="gcard-head">
+        <h3>1 · Drop</h3>
+        <span class="gcard-meta">.mp4 · .mov · drag or paste</span>
+      </div>
+      <div class="gcard-body">
+        <div class="drop-zone">
+          <div class="drop-icon">⬇</div>
+          <h4>Drop a video here</h4>
+          <p>or click below to try a sample, or paste a clip-folder path.</p>
+          <div class="drop-actions">
+            <button class="drop-sample" data-sample="dorian">▶ Try the Dorian sample</button>
+            <div class="drop-paste">
+              <input type="text" placeholder="or paste a clip-folder path">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gcard">
+      <div class="gcard-head">
+        <h3>2 · Presets</h3>
+        <span class="gcard-meta">SELECTION-RULES.md</span>
+      </div>
+      <div class="gcard-body">
+        <div class="preset-row">
+          <span class="label">Format</span>
+          <div class="seg">
+            <button class="active">16:9</button>
+            <button>9:16</button>
+            <button>Screen</button>
+          </div>
+          <span class="legend">16:9 YouTube · 9:16 Reels · Screen Loom capture</span>
+        </div>
+        <div class="preset-row">
+          <span class="label">Target</span>
+          <div class="seg">
+            <button>30s</button>
+            <button class="active">60s</button>
+            <button>90s</button>
+            <button>Custom</button>
+          </div>
+          <span class="legend">60s standard · Custom for shorts (&lt;30s) or long-form</span>
+        </div>
+        <div class="preset-row">
+          <span class="label">Grade</span>
+          <div class="seg">
+            <button class="active">neutral_punch</button>
+            <button>screen_punch</button>
+            <button>warm_cinematic</button>
+          </div>
+          <span class="legend">3 standard color grades to make your video look pro</span>
+        </div>
+        <div class="preset-row">
+          <span class="label">Mode</span>
+          <div class="seg">
+            <button class="active">Single clip</button>
+            <button>Batch (folder)</button>
+          </div>
+          <span class="legend">Single = one clip · Batch = 10-15 clips, prep your video</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Candidates -->
+  <section class="gcard">
+    <div class="gcard-head">
+      <h3>3 · Candidates</h3>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="gcard-meta">17 scored · top 6 surfaced · pod-test-claude.mp4</span>
+        <button class="btn-mini btn-clear-picks" type="button">Clear picks</button>
+      </div>
+    </div>
+    <div class="gcard-legend">Sections found for you to use. Tick the ones that flow.</div>
+    <table class="cand-table">
+      <thead>
+        <tr>
+          <th class="col-num">#</th>
+          <th class="col-pick">Pick</th>
+          <th class="col-tier">Tier</th>
+          <th class="col-beat">Beat</th>
+          <th class="col-dur">Dur</th>
+          <th class="col-quote">Quote</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="picked" data-id="1">
+          <td class="col-num">1</td>
+          <td class="col-pick"><span class="checkbox"></span></td>
+          <td><span class="tier t3">★★★</span></td>
+          <td><span class="beat-pill" data-beat="HOOK">HOOK</span></td>
+          <td class="col-dur">7.1s</td>
+          <td class="col-quote">"If you're cloning someone else's voice, it doesn't really matter as long as it sounds good, right?"</td>
+        </tr>
+        <tr class="picked" data-id="2">
+          <td class="col-num">2</td>
+          <td class="col-pick"><span class="checkbox"></span></td>
+          <td><span class="tier t3">★★★</span></td>
+          <td><span class="beat-pill" data-beat="INSIGHT">INSIGHT</span></td>
+          <td class="col-dur">12.4s</td>
+          <td class="col-quote">"Claude can write the listings, score the candidates, and render the cut. You read text, you don't scrub."</td>
+        </tr>
+        <tr data-id="3">
+          <td class="col-num">3</td>
+          <td class="col-pick"><span class="checkbox"></span></td>
+          <td><span class="tier t2">★★</span></td>
+          <td><span class="beat-pill" data-beat="BRIDGE">BRIDGE</span></td>
+          <td class="col-dur">5.7s</td>
+          <td class="col-quote">"And here's why that matters when you do this in volume."</td>
+        </tr>
+        <tr class="picked" data-id="4">
+          <td class="col-num">4</td>
+          <td class="col-pick"><span class="checkbox"></span></td>
+          <td><span class="tier t3">★★★</span></td>
+          <td><span class="beat-pill" data-beat="DECISION">DECISION</span></td>
+          <td class="col-dur">8.2s</td>
+          <td class="col-quote">"So we run it through Scribe, score against the SOP, and Claude knows what to surface."</td>
+        </tr>
+        <tr data-id="5">
+          <td class="col-num">5</td>
+          <td class="col-pick"><span class="checkbox"></span></td>
+          <td><span class="tier t2">★★</span></td>
+          <td><span class="beat-pill" data-beat="CONTEXT">CONTEXT</span></td>
+          <td class="col-dur">9.3s</td>
+          <td class="col-quote">"Most podcast tools can't do this. They auto-cut the whole clip and you lose editorial control."</td>
+        </tr>
+        <tr class="picked" data-id="6">
+          <td class="col-num">6</td>
+          <td class="col-pick"><span class="checkbox"></span></td>
+          <td><span class="tier t3">★★★</span></td>
+          <td><span class="beat-pill" data-beat="CLOSE">CLOSE</span></td>
+          <td class="col-dur">11.1s</td>
+          <td class="col-quote">"Claude can do the work. It can write them."</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="reply-bar">
+      <span class="label">Reply</span>
+      <input class="reply-input" value="1 2 4 6" />
+      <button class="btn-mini" style="background: var(--ss-gold); color: var(--ss-deep); border-color: var(--ss-gold); font-weight: 700;">Lock in →</button>
+    </div>
+    <div class="reply-hint">
+      Try: <kbd>1 2 4 6</kbd> · <kbd>A</kbd> for combo A · <kbd>skip 3, add 5</kbd> · <kbd>cut the gibberish</kbd>
+    </div>
+    <div class="budget">
+      <span class="budget-stat">38.8s</span>
+      <div class="budget-meter">
+        <div class="fill" style="width: 65%;"></div>
+        <div class="window" style="left: 90%; right: 10%;"></div>
+      </div>
+      <span class="budget-stat"><span class="warn">UNDER</span> · target 54-66s · suggest add #2</span>
+    </div>
+    <div class="budget-legend">Picked total vs target window (54-66s for a 60s cut).</div>
+  </section>
+
+  <!-- Two-column row: Gates + Render -->
+  <div style="display:grid; grid-template-columns: .9fr 1.1fr; gap: 16px;">
+
+    <section class="gcard">
+      <div class="gcard-head">
+        <h3>4 · Pre-render gates</h3>
+        <span class="gcard-meta">auto-run after lock-in</span>
+      </div>
+      <div class="gcard-body" style="padding-top: 4px;">
+
+        <div class="gate-row pass">
+          <span class="gate-icon">✓</span>
+          <div>
+            <div class="gate-name">Gate 1 · Boundary review</div>
+            <div class="gate-detail">All 4 picks clean. No mid-word starts, no tail-word bleed-ins. Pick 1 start auto-shifted 13.58 → 14.16.</div>
+          </div>
+          <span class="gate-side">±1.5s window</span>
+        </div>
+
+        <div class="gate-row pass">
+          <span class="gate-icon">✓</span>
+          <div>
+            <div class="gate-name">Gate 2 · Close check</div>
+            <div class="gate-detail">Lands on payoff: <em>"It can write them."</em></div>
+          </div>
+          <span class="gate-side">trail 1.4s</span>
+        </div>
+
+        <div class="gate-row warn">
+          <span class="gate-icon">!</span>
+          <div>
+            <div class="gate-name">Budget</div>
+            <div class="gate-detail">38.8s of 54-66s window. Suggest add #2 INSIGHT (12.4s) → 51.2s.</div>
+          </div>
+          <span class="gate-side">add → ✓</span>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="gcard">
+      <div class="gcard-head">
+        <h3>5 · Render</h3>
+        <span class="gcard-meta">CRF 20 · 1920x1080 · neutral_punch</span>
+      </div>
+      <div class="gcard-body">
+
+        <div class="render-stages">
+          <span class="stage done">extract 3/4</span>
+          <span>·</span>
+          <span class="stage current">grade</span>
+          <span>·</span>
+          <span class="stage">concat</span>
+          <span>·</span>
+          <span class="stage">srt</span>
+          <span style="margin-left:auto; color: var(--ink); font-weight: 700;">72%</span>
+        </div>
+
+        <div class="render-progress"><div class="fill"></div></div>
+
+        <div class="render-output">
+          <div class="file">
+            <span class="file-thumb">▶</span>
+            <div class="file-meta">
+              <span class="file-name">preview.mp4</span>
+              <span class="file-stats">51.2s · 18.4 MB · opens in QuickTime</span>
+            </div>
+          </div>
+          <button class="btn-mini btn-open-output" type="button" style="background: var(--ss-purple-light); color: #fff; border-color: var(--ss-purple-light); font-weight: 700;">Open</button>
+        </div>
+
+        <div class="verdict-row">
+          <button class="verdict-btn" data-lane="a">
+            <span class="key">A</span>
+            <span class="name">Accept</span>
+            <span class="desc">Lock it in, log session, ship.</span>
+          </button>
+          <button class="verdict-btn" data-lane="b">
+            <span class="key">B</span>
+            <span class="name">Re-frame</span>
+            <span class="desc">Same EDL, tighter crops.</span>
+          </button>
+          <button class="verdict-btn" data-lane="c">
+            <span class="key">C</span>
+            <span class="name">Re-flow</span>
+            <span class="desc">Revise EDL, re-run gates.</span>
+          </button>
+          <button class="verdict-btn" data-lane="d">
+            <span class="key">D</span>
+            <span class="name">Re-pick</span>
+            <span class="desc">Back to candidates. Same source.</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <p class="footer-hint">
+    Live mode: <code>python -m vef.serve &lt;clip-folder&gt;</code> drives this surface from <code>state.json</code>. Standalone mode: this page renders its built-in pod-test-claude example.
+  </p>
+
+</main>
+
+<div class="handoff-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="handoff-state">
+  <div class="handoff-backdrop" aria-hidden="true"></div>
+  <div class="handoff-card" tabindex="-1">
+    <div class="handoff-state" id="handoff-state">Sending to Claude...</div>
+    <button class="handoff-cta" type="button">Back to Claude Code →</button>
+    <div class="handoff-progress indeterminate"><span class="bar"></span></div>
+    <div class="handoff-hint">Press <kbd>Esc</kbd> to dismiss</div>
+  </div>
+</div>
+
+<script>
+/* ------------------------------------------------------------------
+   vef bridge — polls /state, renders into existing markup, POSTs clicks
+   ------------------------------------------------------------------ */
+(function () {
+  const POLL_MS = 500;
+  const STAGES = ['SETUP','RUN','PICK','GATES','RENDER','VERDICT','DONE'];
+  let lastSerialized = '';
+  let serverUp = true;
+  // Budget config — picks up state.budget.{target_s,lower,upper} when live;
+  // defaults match the 60s mockup (54-66s window = 10% tolerance).
+  let budgetCfg = { target: 60, lower: 54, upper: 66 };
+  // Last auto-filled reply value. If the input still equals this, we may
+  // refresh it; if the user has typed something different, leave it alone.
+  let lastAutoReply = (document.querySelector('.reply-input') || {}).value || '';
+  // Handoff overlay state machine.
+  let handoffOpen = false;
+  let handoffTriggerStage = null;
+  let handoffLastFocus = null;
+  let lastPollStage = null;
+
+  async function poll() {
+    try {
+      const res = await fetch('/state', { cache: 'no-store' });
+      if (!res.ok) return;
+      const text = await res.text();
+      if (!serverUp) { serverUp = true; }
+      if (text === lastSerialized) return;
+      lastSerialized = text;
+      const s = JSON.parse(text || '{}');
+      render(s);
+    } catch (e) {
+      // standalone mode (no server) — leave hardcoded demo content alone
+      if (serverUp && lastSerialized) { /* server went away mid-session */ }
+      serverUp = false;
+    }
+  }
+
+  async function post(action, payload) {
+    if (!serverUp) return;
+    try {
+      await fetch('/event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action, payload: payload || {} }),
+      });
+      poll();
+    } catch (e) { /* silent */ }
+  }
+  window.__vef = { post, poll };
+
+  /* render -------------------------------------------------------- */
+  function render(s) {
+    if (!s || Object.keys(s).length === 0) return;
+    renderSteps(s);
+    renderDrop(s);
+    renderPresets(s);
+    renderCandidates(s);
+    renderBudget(s);
+    renderGates(s);
+    renderRender(s);
+    renderVerdict(s);
+    // After candidates+budget paint, re-derive reply + budget total from
+    // the picked rows in the DOM so demo and live mode stay coherent.
+    syncDerivedFromPicks();
+    maintainHandoff(s);
+  }
+
+  // Logical stages collapse into 7 visual pills:
+  //   0 Drop · 1 Transcribe · 2 Score · 3 Pick · 4 Gates · 5 Render · 6 Verdict
+  const STAGE_PILLS = {
+    SETUP:   { done: 0, current: 0 },
+    RUN:     { done: 1, current: 1 },  // RUN spans Transcribe+Score
+    PICK:    { done: 3, current: 3 },
+    GATES:   { done: 4, current: 4 },
+    RENDER:  { done: 5, current: 5 },
+    VERDICT: { done: 6, current: 6 },
+    DONE:    { done: 7, current: -1 },
+  };
+  function renderSteps(s) {
+    const stage = s.stage || 'SETUP';
+    const map = STAGE_PILLS[stage] || STAGE_PILLS.SETUP;
+    const stepEls = document.querySelectorAll('.step-progress .step');
+    stepEls.forEach((el, i) => {
+      el.classList.remove('done', 'current');
+      if (i < map.done) el.classList.add('done');
+      else if (i === map.current) el.classList.add('current');
+    });
+  }
+
+  function renderDrop(s) {
+    const h4 = document.querySelector('.drop-zone h4');
+    const p = document.querySelector('.drop-zone p');
+    const actions = document.querySelector('.drop-actions');
+    const loaded = s.source && s.source.name;
+    if (loaded) {
+      if (h4) h4.textContent = s.source.name;
+      if (p) p.textContent = (s.source.duration_s
+        ? `loaded · ${fmtTime(s.source.duration_s)}`
+        : 'loaded');
+      if (actions) actions.style.display = 'none';
+    } else {
+      if (h4) h4.textContent = 'Drop a video here';
+      if (p) p.textContent = 'or click below to try a sample, or paste a clip-folder path.';
+      if (actions) actions.style.display = '';
+    }
+  }
+
+  function renderPresets(s) {
+    if (!s.presets) return;
+    setSegActive('Format', s.presets.format);
+    setSegActive('Target', s.presets.target != null ? s.presets.target + 's' : null);
+    setSegActive('Grade', s.presets.grade);
+    setSegActive('Mode',
+      s.presets.mode === 'batch' ? 'Batch (folder)' :
+      s.presets.mode === 'single' ? 'Single clip' : s.presets.mode);
+  }
+
+  function setSegActive(labelText, value) {
+    if (value == null) return;
+    const rows = document.querySelectorAll('.preset-row');
+    for (const row of rows) {
+      const lbl = row.querySelector('.label');
+      if (!lbl || lbl.textContent.trim() !== labelText) continue;
+      const buttons = row.querySelectorAll('.seg button');
+      buttons.forEach(b => {
+        const match = b.textContent.trim() === String(value).trim();
+        b.classList.toggle('active', match);
+      });
+      return;
+    }
+  }
+
+  function fmtTime(sec) {
+    const m = Math.floor(sec / 60), s = Math.floor(sec % 60);
+    return `${m}:${String(s).padStart(2, '0')}`;
+  }
+  function escapeHtml(t) {
+    return String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  /* candidates ---------------------------------------------------- */
+  function renderCandidates(s) {
+    const tbody = document.querySelector('.cand-table tbody');
+    const meta = document.querySelector('.gcard:has(.cand-table) .gcard-meta');
+    if (!Array.isArray(s.candidates)) {
+      // Server-driven pre-score state (fresh reset, RUN in progress, etc.):
+      // wipe the hardcoded demo baseline so the table reflects truth.
+      if (serverUp) {
+        if (tbody) tbody.innerHTML = '';
+        if (meta) {
+          const src = (s.source && s.source.name) || '—';
+          meta.textContent = `0 scored · awaiting · ${src}`;
+        }
+      }
+      return;
+    }
+    if (!tbody) return;
+    tbody.innerHTML = s.candidates.map(c => {
+      const tier = Math.max(1, Math.min(3, c.tier || 1));
+      const stars = '★'.repeat(tier);
+      const dur = (c.duration_s != null) ? c.duration_s.toFixed(1) + 's' : '';
+      const beat = c.beat || '';
+      const quote = escapeHtml(c.quote || '');
+      const picked = c.picked ? 'picked' : '';
+      return `
+        <tr class="${picked}" data-id="${c.id}">
+          <td class="col-num">${c.id}</td>
+          <td class="col-pick"><span class="checkbox"></span></td>
+          <td><span class="tier t${tier}">${stars}</span></td>
+          <td><span class="beat-pill" data-beat="${escapeHtml(beat)}">${escapeHtml(beat)}</span></td>
+          <td class="col-dur">${dur}</td>
+          <td class="col-quote">"${quote}"</td>
+        </tr>`;
+    }).join('');
+    if (meta) {
+      const total = s.candidates.length;
+      const surfaced = Math.min(total, 6);
+      const src = (s.source && s.source.name) || '—';
+      meta.textContent = `${total} scored · top ${surfaced} surfaced · ${src}`;
+    }
+  }
+
+  /* budget meter -------------------------------------------------- */
+  function renderBudget(s) {
+    if (!s.budget) return;
+    const b = s.budget;
+    if (b.target_s != null) budgetCfg.target = b.target_s;
+    if (b.lower != null) budgetCfg.lower = b.lower;
+    if (b.upper != null) budgetCfg.upper = b.upper;
+    const win = document.querySelector('.budget-meter .window');
+    if (win && b.lower != null && b.upper != null) {
+      const span = b.upper * 1.2;
+      win.style.left = ((b.lower / span) * 100) + '%';
+      win.style.right = (100 - (b.upper / span) * 100) + '%';
+    }
+    // Numeric/label/fill paint comes from syncBudgetFromPicks (DOM-derived,
+    // single source of truth so demo + live behave identically).
+  }
+
+  /* picks-derived UI sync ----------------------------------------- */
+  function pickedRows() {
+    return Array.from(document.querySelectorAll('.cand-table tbody tr.picked'));
+  }
+  function syncReplyFromPicks() {
+    const input = document.querySelector('.reply-input');
+    if (!input) return;
+    const ids = pickedRows()
+      .map(r => parseInt(r.getAttribute('data-id'), 10))
+      .filter(n => !isNaN(n))
+      .sort((a, b) => a - b)
+      .join(' ');
+    const focused = document.activeElement === input;
+    const diverged = input.value.trim() !== lastAutoReply.trim();
+    if (!focused && !diverged) input.value = ids;
+    lastAutoReply = ids;
+  }
+  function syncBudgetFromPicks() {
+    let total = 0;
+    pickedRows().forEach(r => {
+      const cell = r.querySelector('.col-dur');
+      if (!cell) return;
+      const m = cell.textContent.match(/[\d.]+/);
+      if (m) total += parseFloat(m[0]);
+    });
+    const stats = document.querySelectorAll('.budget .budget-stat');
+    if (stats[0]) stats[0].textContent = total.toFixed(1) + 's';
+    const { lower, upper } = budgetCfg;
+    const fill = document.querySelector('.budget-meter .fill');
+    if (fill) fill.style.width = Math.min(120, (total / upper) * 100) + '%';
+    if (stats[1]) {
+      let word, klass, tip;
+      if (total === 0) {
+        word = 'EMPTY'; klass = 'warn';
+        tip = ` · target ${lower}-${upper}s`;
+      } else if (total >= lower && total <= upper) {
+        word = 'OK'; klass = 'ok';
+        tip = ` · target ${lower}-${upper}s`;
+      } else if (total < lower) {
+        word = 'UNDER'; klass = 'warn';
+        tip = ` · target ${lower}-${upper}s · add ${(lower - total).toFixed(1)}s`;
+      } else {
+        word = 'OVER'; klass = 'warn';
+        tip = ` · target ${lower}-${upper}s · drop ${(total - upper).toFixed(1)}s`;
+      }
+      stats[1].innerHTML = `<span class="${klass}">${word}</span>${tip}`;
+    }
+  }
+  function syncDerivedFromPicks() {
+    syncReplyFromPicks();
+    syncBudgetFromPicks();
+  }
+
+  /* handoff overlay ---------------------------------------------- */
+  function showHandoff(opts) {
+    const overlay = document.querySelector('.handoff-overlay');
+    if (!overlay || handoffOpen) return;
+    overlay.querySelector('.handoff-state').textContent = opts.state;
+    overlay.querySelector('.handoff-cta').textContent = opts.cta;
+    const progress = overlay.querySelector('.handoff-progress');
+    progress.classList.add('indeterminate');
+    progress.classList.remove('determinate');
+    progress.querySelector('.bar').style.width = '';
+    overlay.removeAttribute('hidden');
+    handoffOpen = true;
+    handoffTriggerStage = opts.fromStage || null;
+    handoffLastFocus = document.activeElement;
+    setTimeout(() => overlay.querySelector('.handoff-cta').focus(), 30);
+  }
+  function hideHandoff() {
+    const overlay = document.querySelector('.handoff-overlay');
+    if (!overlay || !handoffOpen) return;
+    overlay.setAttribute('hidden', '');
+    handoffOpen = false;
+    handoffTriggerStage = null;
+    if (handoffLastFocus && handoffLastFocus.focus) {
+      try { handoffLastFocus.focus(); } catch (e) { /* removed from DOM */ }
+    }
+  }
+  function maintainHandoff(s) {
+    const stage = s.stage || 'SETUP';
+    if (handoffOpen && handoffTriggerStage && stage !== handoffTriggerStage) {
+      hideHandoff();
+    }
+    if (!handoffOpen
+        && stage === 'RENDER'
+        && lastPollStage !== null
+        && lastPollStage !== 'RENDER') {
+      showHandoff({
+        state: 'Rendering...',
+        cta: 'Watch in Claude Code →',
+        fromStage: 'RENDER',
+      });
+    }
+    lastPollStage = stage;
+    if (handoffOpen && s.render && typeof s.render.progress === 'number') {
+      const progress = document.querySelector('.handoff-progress');
+      if (progress) {
+        progress.classList.remove('indeterminate');
+        progress.classList.add('determinate');
+        progress.querySelector('.bar').style.width =
+          (s.render.progress * 100).toFixed(0) + '%';
+      }
+    }
+  }
+  document.addEventListener('keydown', (e) => {
+    if (!handoffOpen) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      return hideHandoff();
+    }
+    if (e.key !== 'Tab') return;
+    const overlay = document.querySelector('.handoff-overlay');
+    const focusables = overlay.querySelectorAll(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault(); first.focus();
+    }
+  }, true);
+  document.querySelector('.handoff-cta')
+    .addEventListener('click', () => hideHandoff());
+
+  /* gates --------------------------------------------------------- */
+  function renderGates(s) {
+    if (!s.gates) {
+      // Server-driven pre-gates state: wipe hardcoded gate baseline
+      // so the panel doesn't lie about checks that haven't run.
+      if (serverUp) {
+        document.querySelectorAll('.gate-row').forEach(row => {
+          row.classList.remove('pass', 'warn', 'fail');
+          const icon = row.querySelector('.gate-icon');
+          if (icon) icon.textContent = '·';
+          const detail = row.querySelector('.gate-detail');
+          if (detail) detail.textContent = 'awaiting lock-in';
+          const side = row.querySelector('.gate-side');
+          if (side) side.textContent = '—';
+        });
+      }
+      return;
+    }
+    const order = ['boundary', 'close', 'budget'];
+    const rows = document.querySelectorAll('.gate-row');
+    order.forEach((key, i) => {
+      const row = rows[i];
+      const g = s.gates[key];
+      if (!row || !g) return;
+      row.classList.remove('pass', 'warn', 'fail');
+      row.classList.add(g.status || 'pass');
+      const icon = row.querySelector('.gate-icon');
+      if (icon) icon.textContent = (g.status === 'pass') ? '✓'
+                                : (g.status === 'warn') ? '!'
+                                : '✗';
+      const name = row.querySelector('.gate-name');
+      if (name && g.name) name.textContent = g.name;
+      const detail = row.querySelector('.gate-detail');
+      if (detail) detail.innerHTML = escapeHtml(g.detail || '');
+      const side = row.querySelector('.gate-side');
+      if (side && g.side) side.textContent = g.side;
+    });
+  }
+
+  /* render progress + output ------------------------------------- */
+  function renderRender(s) {
+    if (!s.render) {
+      // Server-driven pre-render state: wipe hardcoded preview baseline
+      // so the surface doesn't lie about a render that hasn't happened.
+      if (serverUp) {
+        const fname = document.querySelector('.render-output .file-name');
+        if (fname) fname.textContent = '—';
+        const stats = document.querySelector('.render-output .file-stats');
+        if (stats) stats.textContent = 'awaiting render';
+        const fill = document.querySelector('.render-progress .fill');
+        if (fill) fill.style.width = '0%';
+        const stages = document.querySelector('.render-stages');
+        if (stages) {
+          const last = stages.children[stages.children.length - 1];
+          if (last) last.textContent = '0%';
+          stages.querySelectorAll('.stage').forEach(el => el.classList.remove('done','current'));
+        }
+      }
+      return;
+    }
+    const r = s.render;
+    if (r.progress != null) {
+      const fill = document.querySelector('.render-progress .fill');
+      if (fill) fill.style.width = (r.progress * 100).toFixed(0) + '%';
+      const stages = document.querySelector('.render-stages');
+      if (stages) {
+        const last = stages.children[stages.children.length - 1];
+        if (last) last.textContent = (r.progress * 100).toFixed(0) + '%';
+      }
+    }
+    if (Array.isArray(r.stages_done) || r.current_stage) {
+      const stageEls = document.querySelectorAll('.render-stages .stage');
+      stageEls.forEach(el => {
+        el.classList.remove('done', 'current');
+        const name = el.textContent.trim().split(' ')[0].toLowerCase();
+        if (Array.isArray(r.stages_done) && r.stages_done.includes(name)) {
+          el.classList.add('done');
+        }
+        if (r.current_stage && name === r.current_stage.toLowerCase()) {
+          el.classList.add('current');
+        }
+      });
+    }
+    if (r.output) {
+      const fname = document.querySelector('.render-output .file-name');
+      if (fname && r.output.name) fname.textContent = r.output.name;
+      const stats = document.querySelector('.render-output .file-stats');
+      if (stats) {
+        const dur = r.output.duration_s != null ? r.output.duration_s.toFixed(1) + 's' : '';
+        const size = r.output.size_mb != null ? r.output.size_mb.toFixed(1) + ' MB' : '';
+        stats.textContent = [dur, size, 'opens in QuickTime'].filter(Boolean).join(' · ');
+      }
+    }
+  }
+
+  /* verdict ------------------------------------------------------- */
+  function renderVerdict(s) {
+    const hasOutput = !!(s.render && s.render.output && s.render.output.path);
+    const lanes = document.querySelectorAll('.verdict-btn');
+    lanes.forEach(b => {
+      b.classList.toggle('selected', s.verdict === b.getAttribute('data-lane'));
+      b.disabled = !hasOutput;
+      b.setAttribute('aria-disabled', String(!hasOutput));
+    });
+    const openBtn = document.querySelector('.btn-open-output');
+    if (openBtn) {
+      openBtn.disabled = !hasOutput;
+      openBtn.setAttribute('aria-disabled', String(!hasOutput));
+    }
+  }
+
+  /* click delegation ---------------------------------------------- */
+  document.addEventListener('click', (e) => {
+    if (!serverUp) return;  // standalone: clicks are no-ops
+
+    // sample button → set_source (canonical demo path)
+    const sample = e.target.closest('.drop-sample');
+    if (sample) {
+      if (sample.getAttribute('data-sample') === 'dorian') {
+        return post('set_source', {
+          path: '/Users/dannymcmillan/Claude-Code-Projects-Restored/dorian-listings-tips/dorian-listings-tips.mp4'
+        });
+      }
+    }
+    // preset segment button
+    const segBtn = e.target.closest('.seg button');
+    if (segBtn) {
+      const row = segBtn.closest('.preset-row');
+      const label = row && row.querySelector('.label');
+      if (!label) return;
+      const key = label.textContent.trim().toLowerCase();
+      let value = segBtn.textContent.trim();
+      // normalise
+      if (key === 'target') value = value.replace(/s$/, '');
+      if (key === 'mode') value = value.toLowerCase().includes('batch') ? 'batch' : 'single';
+      return post('set_preset', { key, value });
+    }
+    // clear picks button
+    const clearBtn = e.target.closest('.btn-clear-picks');
+    if (clearBtn) {
+      document.querySelectorAll('.cand-table tbody tr.picked')
+        .forEach(r => r.classList.remove('picked'));
+      syncDerivedFromPicks();
+      return post('clear_picks', {});
+    }
+    // candidate row click → toggle_pick
+    const row = e.target.closest('.cand-table tbody tr');
+    if (row) {
+      row.classList.toggle('picked');
+      syncDerivedFromPicks();
+      const id = parseInt(row.getAttribute('data-id'), 10);
+      if (!isNaN(id)) return post('toggle_pick', { id });
+      return;
+    }
+    // verdict lane click
+    const lane = e.target.closest('.verdict-btn');
+    if (lane) {
+      const v = lane.getAttribute('data-lane');
+      if (v) {
+        showHandoff({
+          state: 'Filing decision...',
+          cta: 'Back to Claude Code →',
+          fromStage: lastPollStage,
+        });
+        return post('verdict', { lane: v });
+      }
+    }
+    // lock-in button (gold) inside .reply-bar
+    if (e.target.closest('.reply-bar button')) {
+      const input = document.querySelector('.reply-input');
+      const reply = input ? input.value : '';
+      showHandoff({
+        state: 'Sending to Claude...',
+        cta: 'Back to Claude Code →',
+        fromStage: lastPollStage,
+      });
+      return post('lockin', { reply });
+    }
+  });
+
+  /* paste-path input → Enter to set_source --------------------- */
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' || !serverUp) return;
+    const inp = e.target.closest('.drop-paste input');
+    if (inp && inp.value.trim()) {
+      post('set_source', { path: inp.value.trim() });
+      inp.value = '';
+    }
+  });
+
+  /* boot ---------------------------------------------------------- */
+  // Run a first-paint sync so the static demo (1 2 4 6 / 38.8s) is an
+  // honest derivation rather than baked text.
+  syncDerivedFromPicks();
+  setInterval(poll, POLL_MS);
+  poll();
+})();
+</script>
+
+</body>
+</html>

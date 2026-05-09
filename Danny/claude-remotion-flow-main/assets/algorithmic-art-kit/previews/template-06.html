@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Algorithmic Art Template Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#06080F;color:#F2EEF8;font-family:Inter,system-ui,sans-serif;min-height:100vh}
+body{display:flex;align-items:center;justify-content:center;padding:32px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+</style>
+</head>
+<body>
+<h2 class="sr-only">Template 06: Gantt timeline. Variable task count rendered as horizontal bars on a time axis with phase colours and a moving playhead.</h2>
+<style>
+:root{
+  --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
+  --bg-page:#06080F;
+  --bg-0:#030C1B;
+  --bg-1:#0A1228;
+  --ink-0:#F2EEF8;
+  --ink-1:#C8B6F0;
+  --ink-2:#8B92A8;
+  --ink-3:#5A627A;
+  --violet:#9D4EDD;
+  --teal:#5DCAA5;
+  --amber:#EF9F27;
+  --pink:#FF6BB4;
+  --gold:#C99554;
+  --r-wrap:12px;
+  --r-card:3px;
+  --stroke-hair:0.5px;
+  --stroke-bold:1.5px;
+  --border-soft:rgba(157,78,221,0.18);
+  --border-mid:rgba(157,78,221,0.35);
+  --card-fill:rgba(255,255,255,0.02);
+  --card-stroke:rgba(255,255,255,0.08);
+  --divider:rgba(255,255,255,0.06);
+}
+
+.gt-frame{width:100%;max-width:1080px;font-family:var(--font-sans);color:var(--ink-0)}
+.gt-wrap{
+  background:linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 100%);
+  border-radius:var(--r-wrap);
+  padding:28px 28px 18px;
+  position:relative;
+  overflow:hidden;
+  border:var(--stroke-hair) solid var(--border-soft);
+}
+.gt-wrap::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 110%, rgba(157,78,221,0.10), transparent 60%);
+  pointer-events:none;
+}
+.gt-wrap::after{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(157,78,221,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(157,78,221,0.025) 1px,transparent 1px);
+  background-size:24px 24px;
+  pointer-events:none;
+}
+
+.gt-spec{display:flex;align-items:center;gap:18px;margin-bottom:18px;position:relative;z-index:1}
+.gt-spec-id{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:2px;
+  color:var(--ink-2);text-transform:uppercase;
+  padding:3px 8px;border:var(--stroke-hair) solid var(--border-mid);border-radius:2px;
+}
+.gt-spec-name{font-size:20px;font-weight:600;letter-spacing:-0.2px;color:var(--ink-0);margin:0}
+.gt-spec-pat{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;
+  color:var(--gold);text-transform:uppercase;margin-left:auto;
+  display:flex;align-items:center;gap:8px;
+}
+.gt-spec-pat::before{
+  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 6px var(--gold);
+  animation:gtPulse 2s ease-in-out infinite;
+}
+@keyframes gtPulse{0%,100%{box-shadow:0 0 6px var(--gold)}50%{box-shadow:0 0 12px var(--gold)}}
+
+.gt-canvas{
+  position:relative;
+  background:var(--card-fill);
+  border-radius:var(--r-card);
+  border:var(--stroke-hair) solid var(--card-stroke);
+  z-index:1;
+  overflow:hidden;
+}
+
+.gt-axis{
+  display:grid;
+  background:rgba(255,255,255,0.02);
+  border-bottom:var(--stroke-hair) solid var(--card-stroke);
+  padding:10px 0;
+}
+.gt-axis-cell{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;
+  color:var(--ink-3);text-align:center;text-transform:uppercase;
+  padding:0 4px;
+}
+.gt-axis-cell.label{
+  text-align:left;padding-left:18px;font-weight:600;color:var(--ink-1);
+}
+
+.gt-rows{position:relative}
+.gt-row{
+  display:grid;
+  border-bottom:var(--stroke-hair) solid var(--divider);
+  height:38px;
+  align-items:center;
+  position:relative;
+}
+.gt-row:last-child{border-bottom:none}
+
+.gt-row-label{
+  padding:0 18px;
+  font-size:12px;color:var(--ink-1);font-weight:500;
+  display:flex;align-items:center;gap:8px;
+  overflow:hidden;
+}
+.gt-row-num{
+  font-family:var(--font-mono);font-size:9px;
+  color:var(--ink-3);letter-spacing:1px;flex-shrink:0;
+  background:rgba(255,255,255,0.04);
+  padding:2px 5px;border-radius:2px;
+}
+
+.gt-track{position:relative;height:100%}
+
+.gt-bar{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  height:20px;
+  border-radius:2px;
+  border-top:var(--stroke-bold) solid var(--accent,var(--violet));
+  background:rgba(255,255,255,0.04);
+  display:flex;
+  align-items:center;
+  padding:0 10px;
+  font-family:var(--font-mono);
+  font-size:9px;
+  color:var(--ink-1);
+  letter-spacing:1px;
+  text-transform:uppercase;
+  opacity:0;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  transition:opacity .5s, box-shadow .3s, border-color .3s;
+}
+.gt-bar.shown{opacity:1}
+.gt-bar.active{
+  border-color:rgba(157,78,221,0.65);
+  box-shadow:0 0 0 1px rgba(157,78,221,0.25);
+}
+.gt-bar.done{opacity:0.85}
+
+.gt-playhead{
+  position:absolute;
+  top:0;bottom:0;
+  width:1.5px;
+  background:var(--gold);
+  box-shadow:0 0 8px rgba(201,149,84,0.5);
+  transition:left .9s linear;
+  z-index:5;
+  pointer-events:none;
+  opacity:0;
+}
+.gt-playhead.shown{opacity:1}
+.gt-playhead::before{
+  content:"";
+  position:absolute;
+  top:-3px;left:-4px;
+  width:10px;height:7px;
+  background:var(--gold);
+  clip-path:polygon(50% 100%, 0 0, 100% 0);
+}
+
+.gt-foot{
+  display:flex;gap:10px;align-items:center;
+  margin-top:14px;padding-top:14px;
+  border-top:var(--stroke-hair) solid var(--divider);
+  position:relative;z-index:1;
+}
+.gt-cap{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;
+  color:var(--ink-3);text-transform:uppercase;
+  padding:3px 8px;border:var(--stroke-hair) solid var(--border-mid);border-radius:2px;
+}
+.gt-btn{
+  background:rgba(255,255,255,0.02);
+  border:var(--stroke-hair) solid var(--border-mid);
+  color:var(--ink-1);
+  padding:7px 14px;
+  border-radius:2px;
+  cursor:pointer;
+  font-size:11px;
+  font-family:var(--font-mono);
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  transition:border-color .2s, color .2s, background .2s;
+}
+.gt-btn:hover{border-color:var(--violet);color:var(--ink-0);background:rgba(157,78,221,0.08)}
+.gt-stat{margin-left:auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-3);letter-spacing:1.2px;text-transform:uppercase}
+.gt-stat-v{color:var(--ink-1);margin-left:6px}
+</style>
+
+<div class="gt-frame">
+<div class="gt-wrap">
+
+<header class="gt-spec">
+<span class="gt-spec-id">TEMPLATE 06</span>
+<h1 class="gt-spec-name">Gantt timeline</h1>
+<span class="gt-spec-pat">Range: 4 to 10 tasks</span>
+</header>
+
+<div class="gt-canvas">
+<div class="gt-axis" id="gt-axis"></div>
+<div class="gt-rows" id="gt-rows"></div>
+</div>
+
+<div class="gt-foot">
+<span class="gt-cap" id="gt-n-badge">N = 6</span>
+<button class="gt-btn" onclick="gtPlay()">Run schedule</button>
+<button class="gt-btn" onclick="gtStep()">Skip</button>
+<span class="gt-stat">Time<span class="gt-stat-v" id="gt-counter">T+1 / T+6</span></span>
+</div>
+
+</div>
+</div>
+
+<script>
+(function(){
+// === TEMPLATE CONFIG ===
+const N=6;  // task count: 4 to 10
+const phaseFor=[0,0,1,2,2,3];  // phase per task: 0=setup 1=capture 2=build 3=quality
+const labels=['{slot 1}','{slot 2}','{slot 3}','{slot 4}','{slot 5}','{slot 6}'];
+const tags=['{phase}','{phase}','{phase}','{phase}','{phase}','{phase}'];
+// =======================
+
+const phaseAccent=['var(--violet)','var(--teal)','var(--amber)','var(--pink)'];
+
+// Compute bar positions: each task takes a chunk, with optional overlap for visual rhythm
+// Total time T+1..T+N. Each task has [startPct, endPct] in the lane (0..100).
+function computePositions(){
+  const positions=[];
+  for(let i=0;i<N;i++){
+    // Start: each task starts at i/(N+1) of the way, ends at (i+2)/(N+1)
+    const startPct=(i/(N+0.5))*100;
+    const endPct=((i+1.5)/(N+0.5))*100;
+    // Clamp end so bar always fits inside the lane (leave 1% margin)
+    const clampedEnd=Math.min(endPct,99);
+    positions.push({start:startPct,width:Math.max(8,clampedEnd-startPct)});
+  }
+  return positions;
+}
+
+const positions=computePositions();
+
+// Build axis: label column + N time columns
+const axis=document.getElementById('gt-axis');
+const labelColW=160;  // px
+axis.style.gridTemplateColumns=`${labelColW}px repeat(${N}, 1fr)`;
+axis.innerHTML=`<div class="gt-axis-cell label">Task</div>`+
+  Array.from({length:N},(_,i)=>`<div class="gt-axis-cell">T+${i+1}</div>`).join('');
+
+// Build rows
+const rowsEl=document.getElementById('gt-rows');
+rowsEl.innerHTML='';
+for(let i=0;i<N;i++){
+  const row=document.createElement('div');
+  row.className='gt-row';
+  row.style.gridTemplateColumns=`${labelColW}px 1fr`;
+  
+  const labelDiv=document.createElement('div');
+  labelDiv.className='gt-row-label';
+  labelDiv.innerHTML=`<span class="gt-row-num">${String(i+1).padStart(2,'0')}</span>${labels[i]}`;
+  row.appendChild(labelDiv);
+  
+  const track=document.createElement('div');
+  track.className='gt-track';
+  
+  const bar=document.createElement('div');
+  bar.className='gt-bar';
+  bar.dataset.step=i;
+  bar.style.setProperty('--accent',phaseAccent[phaseFor[i]]);
+  bar.style.left=positions[i].start+'%';
+  bar.style.width=positions[i].width+'%';
+  bar.textContent=tags[i];
+  track.appendChild(bar);
+  
+  row.appendChild(track);
+  rowsEl.appendChild(row);
+}
+
+// Add playhead inside rows container
+const playhead=document.createElement('div');
+playhead.className='gt-playhead';
+playhead.id='gt-playhead';
+playhead.style.left=labelColW+'px';
+rowsEl.appendChild(playhead);
+
+document.getElementById('gt-n-badge').textContent='N = '+N;
+
+const counter=document.getElementById('gt-counter');
+const bars=document.querySelectorAll('.gt-bar');
+let cur=0,timer=null;
+
+function show(n){
+  cur=n;
+  bars.forEach((b,i)=>{
+    b.classList.remove('active');
+    if(i<=n){b.classList.add('shown');b.classList.add('done')}else{b.classList.remove('shown','done')}
+    if(i===n){b.classList.remove('done');b.classList.add('active')}
+  });
+  // Move playhead to centre of current bar
+  const trackW=rowsEl.querySelector('.gt-track').offsetWidth;
+  const barCentrePct=positions[n].start+positions[n].width/2;
+  const px=labelColW+(barCentrePct/100)*trackW;
+  playhead.classList.add('shown');
+  playhead.style.left=px+'px';
+  counter.textContent='T+'+(n+1)+' / T+'+N;
+}
+
+window.gtStep=function(){const n=(cur+1)%N;if(n===0){playhead.classList.remove('shown');setTimeout(()=>show(0),100)}else show(n)};
+window.gtPlay=function(){clearInterval(timer);playhead.classList.remove('shown');setTimeout(()=>show(0),200);let i=0;timer=setInterval(()=>{i++;if(i>=N){clearInterval(timer);return}show(i)},1100)};
+
+setTimeout(gtPlay,400);
+})();
+</script>
+</body>
+</html>

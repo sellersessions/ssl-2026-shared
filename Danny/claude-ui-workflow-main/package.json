@@ -1,0 +1,23 @@
+{
+  "name": "claude-ui-workflow",
+  "version": "0.1.0",
+  "description": "Workflow turning user intent + brand inputs into premium design output, with invisible UI/UX guardrails.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "extract-brand": "node scripts/extract-brand.mjs",
+    "ingest-url": "python3 scripts/ingest-url.py",
+    "ingest-doc": "python3 scripts/ingest-doc.py",
+    "refine-from-screenshot": ".venv/bin/python3 scripts/refine-from-screenshot.py",
+    "compare-tokens": "python3 scripts/compare-tokens.py",
+    "emit-tokens": "python3 scripts/emit-tokens.py",
+    "postinstall": "playwright install chromium"
+  },
+  "dependencies": {
+    "playwright": "^1.50.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED"
+}

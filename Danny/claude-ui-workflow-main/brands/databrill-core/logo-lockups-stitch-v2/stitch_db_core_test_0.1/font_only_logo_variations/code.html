@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#571a00",
+                    "surface-bright": "#2c2c2c",
+                    "tertiary-fixed": "#ffffff",
+                    "inverse-primary": "#a83a00",
+                    "primary-container": "#ff7941",
+                    "on-error-container": "#ffa8a3",
+                    "error-dim": "#d7383b",
+                    "surface-container-lowest": "#000000",
+                    "primary-fixed": "#ff7941",
+                    "on-primary-fixed-variant": "#531900",
+                    "primary-fixed-dim": "#ff5e07",
+                    "surface-variant": "#262626",
+                    "on-tertiary-container": "#555757",
+                    "tertiary": "#f9f9f9",
+                    "on-secondary": "#2b0065",
+                    "on-secondary-fixed": "#430097",
+                    "on-background": "#ffffff",
+                    "surface-container-high": "#201f1f",
+                    "surface-tint": "#ff9064",
+                    "surface-container-highest": "#262626",
+                    "error": "#ff716c",
+                    "background": "#0e0e0e",
+                    "surface-dim": "#0e0e0e",
+                    "secondary-container": "#6001d1",
+                    "tertiary-dim": "#ebebeb",
+                    "outline-variant": "#494847",
+                    "error-container": "#9f0519",
+                    "surface": "#0e0e0e",
+                    "outline": "#777575",
+                    "on-surface": "#ffffff",
+                    "secondary-dim": "#8a4cfc",
+                    "on-tertiary-fixed-variant": "#6c6d6e",
+                    "on-tertiary-fixed": "#4f5051",
+                    "inverse-surface": "#fcf8f8",
+                    "on-error": "#490006",
+                    "secondary": "#af88ff",
+                    "primary": "#ff9064",
+                    "secondary-fixed": "#dcc9ff",
+                    "primary-dim": "#ff7439",
+                    "secondary-fixed-dim": "#d0b8ff",
+                    "on-primary-fixed": "#000000",
+                    "tertiary-container": "#ebebeb",
+                    "inverse-on-surface": "#565554",
+                    "on-primary-container": "#431200",
+                    "tertiary-fixed-dim": "#f0f1f1",
+                    "on-secondary-fixed-variant": "#6514d6",
+                    "surface-container-low": "#131313",
+                    "surface-container": "#1a1919",
+                    "on-secondary-container": "#e1d0ff",
+                    "on-surface-variant": "#adaaaa",
+                    "on-tertiary": "#5e5f60"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .signature-gradient-text {
+            background: linear-gradient(to right, #ff9064, #af88ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .signature-gradient-bg {
+            background: linear-gradient(to bottom right, #ff9064, #af88ff);
+        }
+        .ghost-border {
+            border: 1px solid rgba(73, 72, 71, 0.18);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary-container">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-50 bg-[#0e0e0e]/60 backdrop-blur-xl border-b border-[#494847]/20 shadow-[0_20px_40px_rgba(0,0,0,0.4)] flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#ff9064]">menu</span>
+<h1 class="text-xl font-bold bg-gradient-to-r from-[#ff9064] to-[#af88ff] bg-clip-text text-transparent font-['Space_Grotesk'] tracking-tighter uppercase">LUMINESCENT VOID</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8 font-label text-[12px] tracking-[0.2em] uppercase">
+<a class="text-[#ff9064] transition-colors duration-300" href="#">EXPLORATION</a>
+<a class="text-[#af88ff]/60 hover:text-[#ff9064] transition-colors duration-300" href="#">SYSTEM</a>
+<a class="text-[#af88ff]/60 hover:text-[#ff9064] transition-colors duration-300" href="#">MANIFESTO</a>
+</nav>
+<span class="material-symbols-outlined text-[#ff9064]">search</span>
+</div>
+</header>
+<main class="pt-32 pb-40 px-6 max-w-4xl mx-auto space-y-24">
+<!-- Hero Header -->
+<section class="space-y-6">
+<div class="inline-block px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant/20 text-[10px] tracking-[0.3em] font-label uppercase text-primary">
+                Brand Lab Vol. 01
+            </div>
+<h2 class="text-6xl md:text-8xl font-headline font-bold tracking-tighter leading-none">
+                Databrill <span class="signature-gradient-text">Core</span>
+</h2>
+<p class="max-w-xl text-on-surface-variant text-lg leading-relaxed font-light">
+                A typographic deep-dive into the architectural foundations of our visual identity. We treat the wordmark not as a label, but as a structural component of the void.
+            </p>
+</section>
+<!-- Identity Exploration Stack -->
+<div class="space-y-12">
+<!-- 01. Weight Contrast -->
+<div class="group relative bg-[#0e0e0e]/60 backdrop-blur-2xl rounded-2xl ghost-border p-12 md:p-24 flex flex-col items-center justify-center min-h-[400px] shadow-[0_40px_60px_rgba(0,0,0,0.5)] overflow-hidden">
+<div class="absolute top-6 left-8 flex items-center gap-3">
+<span class="text-[10px] font-label tracking-widest text-on-surface-variant uppercase">01. Weight Contrast</span>
+<div class="h-px w-8 bg-outline-variant/30"></div>
+</div>
+<div class="font-headline text-5xl md:text-7xl flex flex-wrap justify-center items-baseline gap-1">
+<span class="font-bold tracking-tighter text-on-surface">Databrill</span>
+<span class="font-extralight tracking-tighter text-on-surface-variant">Core</span>
+</div>
+</div>
+<!-- 02. Tracking & Spacing -->
+<div class="group relative bg-[#0e0e0e]/60 backdrop-blur-2xl rounded-2xl ghost-border p-12 md:p-24 flex flex-col items-center justify-center min-h-[400px] shadow-[0_40px_60px_rgba(0,0,0,0.5)] overflow-hidden">
+<div class="absolute top-6 left-8 flex items-center gap-3">
+<span class="text-[10px] font-label tracking-widest text-on-surface-variant uppercase">02. Tracking &amp; Spacing</span>
+<div class="h-px w-8 bg-outline-variant/30"></div>
+</div>
+<div class="font-headline text-6xl md:text-9xl font-bold tracking-[0.5em] signature-gradient-text translate-x-[0.25em]">
+                    DBC
+                </div>
+</div>
+<!-- 03. Stacked & Justified -->
+<div class="group relative bg-[#0e0e0e]/60 backdrop-blur-2xl rounded-2xl ghost-border p-12 md:p-24 flex flex-col items-center justify-center min-h-[400px] shadow-[0_40px_60px_rgba(0,0,0,0.5)] overflow-hidden">
+<div class="absolute top-6 left-8 flex items-center gap-3">
+<span class="text-[10px] font-label tracking-widest text-on-surface-variant uppercase">03. Stacked &amp; Justified</span>
+<div class="h-px w-8 bg-outline-variant/30"></div>
+</div>
+<div class="flex flex-col font-headline w-full max-w-md">
+<div class="text-4xl md:text-7xl font-black tracking-tighter text-on-surface text-justify after:content-[''] after:inline-block after:w-full">
+                        DATABRILL
+                    </div>
+<div class="text-4xl md:text-7xl font-bold tracking-[0.22em] text-on-surface/10 text-justify after:content-[''] after:inline-block after:w-full leading-none -mt-2">
+                        CORE
+                    </div>
+</div>
+</div>
+<!-- 04. The Monogram -->
+<div class="group relative bg-[#0e0e0e]/60 backdrop-blur-2xl rounded-2xl ghost-border p-12 md:p-24 flex flex-col items-center justify-center min-h-[400px] shadow-[0_40px_60px_rgba(0,0,0,0.5)] overflow-hidden">
+<div class="absolute top-6 left-8 flex items-center gap-3">
+<span class="text-[10px] font-label tracking-widest text-on-surface-variant uppercase">04. The Monogram</span>
+<div class="h-px w-8 bg-outline-variant/30"></div>
+</div>
+<div class="relative font-headline text-9xl md:text-[12rem] font-bold tracking-tighter flex items-center justify-center">
+<span class="text-on-surface z-10">D</span>
+<span class="signature-gradient-text -ml-12 md:-ml-16 opacity-90 drop-shadow-[0_0_30px_rgba(255,144,100,0.2)]">B</span>
+</div>
+</div>
+<!-- 05. Lowercase Technical -->
+<div class="group relative bg-[#0e0e0e]/60 backdrop-blur-2xl rounded-2xl ghost-border p-12 md:p-24 flex flex-col items-center justify-center min-h-[400px] shadow-[0_40px_60px_rgba(0,0,0,0.5)] overflow-hidden">
+<div class="absolute top-6 left-8 flex items-center gap-3">
+<span class="text-[10px] font-label tracking-widest text-on-surface-variant uppercase">05. Lowercase Technical</span>
+<div class="h-px w-8 bg-outline-variant/30"></div>
+</div>
+<div class="font-headline text-3xl md:text-5xl font-medium tracking-tight text-on-surface flex items-center">
+                    databrill<span class="signature-gradient-text px-1">_</span>core
+                </div>
+</div>
+</div>
+<!-- Designer Note -->
+<footer class="pt-24 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between gap-12">
+<div class="max-w-xs space-y-4">
+<h4 class="font-headline font-bold text-lg uppercase tracking-tight text-on-surface">Design Intent</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                    These variations explore the intersection of data precision and organic luminance. The final selection will define our visual vocabulary across all digital touchpoints.
+                </p>
+</div>
+<div class="flex gap-12">
+<div class="space-y-4">
+<h4 class="font-label text-[10px] uppercase tracking-widest text-primary">Status</h4>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full signature-gradient-bg"></div>
+<span class="text-sm font-medium">In Review</span>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="font-label text-[10px] uppercase tracking-widest text-primary">Revised</h4>
+<p class="text-sm font-medium">Oct 24, 2024</p>
+</div>
+</div>
+</footer>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-6 left-0 right-0 z-50 flex justify-center items-center pointer-events-none">
+<div class="bg-[#131313]/80 backdrop-blur-2xl w-[90%] max-w-md rounded-2xl border border-[#494847]/15 flex justify-around items-center px-4 h-16 pointer-events-auto shadow-[0_40px_60px_rgba(0,0,0,0.5)]">
+<button class="bg-gradient-to-br from-[#ff9064] to-[#af88ff] text-white rounded-xl p-3 shadow-[0_0_15px_rgba(255,144,100,0.3)] active:scale-90 duration-300">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="text-[#af88ff]/40 p-3 hover:text-[#ff9064] hover:bg-[#262626] rounded-xl transition-all active:scale-90 duration-300">
+<span class="material-symbols-outlined">layers</span>
+</button>
+<button class="text-[#af88ff]/40 p-3 hover:text-[#ff9064] hover:bg-[#262626] rounded-xl transition-all active:scale-90 duration-300">
+<span class="material-symbols-outlined">auto_awesome</span>
+</button>
+<button class="text-[#af88ff]/40 p-3 hover:text-[#ff9064] hover:bg-[#262626] rounded-xl transition-all active:scale-90 duration-300">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</nav>
+</body></html>

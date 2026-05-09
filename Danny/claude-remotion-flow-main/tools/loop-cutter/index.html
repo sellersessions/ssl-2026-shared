@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loop Cutter — Audio Loop Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<link rel="stylesheet" href="styles.css?v=5">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">
+    <span class="logo-icon" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 2v6"/>
+        <path d="M7 4l3 4"/>
+        <circle cx="6" cy="14" r="3"/>
+        <circle cx="18" cy="16" r="3"/>
+        <path d="M9 14V5l12-2v13"/>
+      </svg>
+    </span>
+    <span class="logo-text">Loop Cutter</span>
+  </div>
+  <div class="topbar-actions">
+    <button class="btn btn-primary btn-sm" id="btnCopyClaudeCmd" data-tip="Copy loop_bed.py command for Claude" data-tip-pos="below"><i data-lucide="terminal"></i> Copy Claude command</button>
+    <button class="theme-btn" id="btnHelp" data-tip="Space play/pause · Shift+Space restart from anchor · I/O set in/out · [/] nudge in · {/} nudge out · L loop · Esc stop" data-tip-pos="below" data-tip-align="right" aria-label="Keyboard shortcuts">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="0.5" fill="currentColor"/></svg>
+    </button>
+    <button class="theme-btn" id="themeToggle" data-tip="Toggle dark / light" data-tip-pos="below" aria-label="Toggle theme">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Shortlist (library handoff) — hidden until the auditioner manifest loads. -->
+  <div id="shortlistDock" class="shortlist-dock hidden" aria-label="Library shortlist">
+    <button id="shortlistToggle" class="shortlist-toggle" aria-expanded="false" aria-controls="shortlistPanel">
+      <span class="star">★</span> Shortlist <span class="count" id="shortlistCount">0</span>
+    </button>
+    <div id="shortlistPanel" class="shortlist-panel" role="region">
+      <div class="shortlist-header">
+        <strong>Library shortlist</strong>
+        <span class="shortlist-meta" id="shortlistMeta">—</span>
+      </div>
+      <ul id="shortlistList" class="shortlist-list"></ul>
+      <div class="shortlist-empty" id="shortlistEmpty">
+        Star tracks in the auditioner to see them here.
+        <a href="/" target="_blank" rel="noopener">Open auditioner →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drop Zone -->
+  <div class="drop-zone" id="dropZone" tabindex="0" role="button" aria-label="Load audio file">
+    <div class="drop-icon"><i data-lucide="music-2" style="width:40px;height:40px;"></i></div>
+    <h3>Drop an audio file here</h3>
+    <p>or click to browse — MP3, WAV, OGG, FLAC, M4A</p>
+    <input type="file" id="fileInput" accept="audio/*" style="display:none">
+  </div>
+
+  <!-- Waveform Section -->
+  <div class="waveform-section gcard hidden" id="waveformSection">
+    <div class="waveform-header">
+      <span class="file-name" id="fileName">—</span>
+      <span class="duration-badge" id="durationBadge">0:00.000</span>
+      <span class="hint" style="margin-left:auto;">
+        <span style="color:var(--marker-in); font-weight:600;">●</span> IN
+        &nbsp;·&nbsp;<span style="color:var(--marker-out); font-weight:600;">●</span> OUT
+        &nbsp;·&nbsp;Drag markers · <kbd>Shift</kbd>+drag = zoom · <kbd>Shift</kbd>+scroll = zoom at cursor
+      </span>
+    </div>
+    <ol class="step-progress" id="stepProgress" aria-label="Workflow progress">
+      <li class="step current" id="step1"><span class="num">1</span> Set anchor <span class="check" aria-hidden="true">✓</span></li>
+      <li class="step" id="step2"><span class="num">2</span> Set BPM <span class="check" aria-hidden="true">✓</span></li>
+      <li class="step" id="step3"><span class="num">3</span> Choose loop length <span class="check" aria-hidden="true">✓</span></li>
+    </ol>
+    <div class="beat-bar">
+      <label for="bpmInput">BPM</label>
+      <input class="mini-input" type="number" id="bpmInput" min="20" max="300" step="0.1" value="120">
+      <button class="btn btn-ghost btn-sm" id="btnTapTempo" data-tip="Tap 4× in time to set BPM">Tap</button>
+      <label for="beatsPerBar">Beats/bar</label>
+      <input class="mini-input" type="number" id="beatsPerBar" min="1" max="12" step="1" value="4">
+      <span class="anchor-group locked" id="anchorGroup" data-tip="Lock first beat (Traktor-style anchor). When locked, BPM changes reflow grid around this point.">
+        <button class="btn-anchor-lock locked" id="btnAnchorLock" aria-label="Lock anchor" data-tip="Toggle anchor lock"><i data-lucide="lock"></i></button>
+        <span class="anchor-label">Anchor</span>
+        <input class="anchor-time" type="text" id="barOffset" value="0:00.000" disabled>
+        <button class="btn-anchor-set" id="btnAnchorSet" disabled data-tip="Set anchor to current playhead position">Set @ playhead</button>
+        <span class="anchor-nudge" data-tip="Nudge anchor (ms)">
+          <button data-nudge="-10" disabled aria-label="Nudge -10ms">«</button>
+          <button data-nudge="-1" disabled aria-label="Nudge -1ms">‹</button>
+          <button data-nudge="1" disabled aria-label="Nudge +1ms">›</button>
+          <button data-nudge="10" disabled aria-label="Nudge +10ms">»</button>
+        </span>
+      </span>
+      <button class="btn-add-lock" id="btnAddBeatLock" data-tip="Scrub to a beat you can clearly hear (e.g. snare/rim shot), then click to lock it. BPM is derived from the gap.">+ Beat lock</button>
+      <span class="beat-lock-chip hidden" id="beatLockChip">
+        <span id="beatLockText">b? @ 0:00.000</span>
+        <button id="btnClearBeatLock" aria-label="Clear beat lock" data-tip="Remove beat lock — BPM becomes editable again">✕</button>
+      </span>
+      <span class="beat-pill locked" id="barInfo">Locked · 1 bar = 2.000s</span>
+      <span style="margin-left:auto; display:inline-flex; align-items:center; gap:8px;">
+        <label style="font-size:11px; color:var(--ink-muted);">Snap</label>
+        <span class="seg" id="snapSeg" data-tip="Magnetic snap on marker drop">
+          <button data-snap="off" class="active">Off</button>
+          <button data-snap="beat">Beat</button>
+          <button data-snap="bar">Bar</button>
+        </span>
+      </span>
+    </div>
+    <span class="hint-pill hidden" id="beatHintPill">
+      <span>Tip: scrub to the 2nd downbeat, then click <strong>+ Beat lock</strong> to derive BPM.</span>
+      <button id="btnDismissBeatHint" aria-label="Dismiss tip">✕</button>
+    </span>
+    <div class="ruler-wrap"><canvas id="rulerCanvas"></canvas></div>
+    <div class="waveform-wrap" id="waveformWrap">
+      <canvas id="waveformCanvas"></canvas>
+      <canvas id="overlayCanvas"></canvas>
+    </div>
+    <div class="overview-wrap" id="overviewWrap" data-tip="Click to scroll the zoomed view to this position">
+      <canvas id="overviewCanvas"></canvas>
+    </div>
+    <div class="zoom-bar">
+      <label for="zoomSlider">Zoom</label>
+      <input type="range" id="zoomSlider" min="1" max="20" step="0.5" value="1">
+      <span class="zoom-val" id="zoomVal">1×</span>
+      <button class="btn btn-ghost btn-sm" id="zoomFit" style="margin-left:4px;">Fit</button>
+    </div>
+    <div class="loop-bar">
+      <span class="loop-bar-label">
+        <i data-lucide="repeat" style="width:14px;height:14px;"></i> Loop length
+      </span>
+      <div class="loop-chips" id="loopChips" data-tip="Click → snap IN to nearest bar, set OUT to N bars after IN, start looping">
+        <button class="chip" data-bars="1">1 bar</button>
+        <button class="chip" data-bars="2">2 bars</button>
+        <button class="chip" data-bars="4">4 bars</button>
+        <button class="chip" data-bars="8">8 bars</button>
+        <button class="chip" data-bars="16">16 bars</button>
+        <button class="chip" data-bars="32">32 bars</button>
+        <button class="chip" data-bars="64">64 bars</button>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="btnSnapInToBar" data-tip="Snap IN to the nearest bar grid line"><i data-lucide="magnet" style="width:13px;height:13px;"></i> Snap IN to bar</button>
+    </div>
+  </div>
+
+  <!-- Controls Row -->
+  <div class="controls-row hidden" id="controlsRow">
+
+    <!-- Transport -->
+    <div class="transport-card gcard">
+      <h4 class="card-h4">Transport</h4>
+      <div class="playhead-time" id="playheadTime">0:00.000</div>
+      <div class="btn-row">
+        <button class="btn-icon" id="btnStop" data-tip="Stop · Esc" aria-label="Stop"><i data-lucide="square"></i></button>
+        <button class="btn btn-primary" id="btnPlay" data-tip="Play / Pause · Space · Shift+Space restart from anchor" style="flex:1;"><i data-lucide="play"></i> Play</button>
+        <button class="btn-icon" id="btnLoop" data-tip="Toggle Loop · L" aria-label="Toggle loop">
+          <i data-lucide="repeat"></i>
+        </button>
+      </div>
+      <div class="vol-row">
+        <label for="volSlider" data-tip="Volume" aria-label="Volume"><i data-lucide="volume-2" style="width:14px;height:14px;"></i></label>
+        <input type="range" id="volSlider" min="0" max="1" step="0.01" value="1">
+        <span class="vol-val" id="volVal">100%</span>
+      </div>
+    </div>
+
+    <!-- Markers -->
+    <div class="markers-card gcard">
+      <h4 class="card-h4">Loop Points</h4>
+      <div class="marker-row">
+        <span class="marker-label in-label"><span class="dot dot-in"></span> IN</span>
+        <input class="marker-time" type="text" id="inTime" value="0:00.000" data-tip="Edit IN time directly">
+        <button class="btn btn-ghost btn-sm" id="btnSetIn" data-tip="Set IN to playhead · I">Set</button>
+        <button class="btn-audition" id="btnAuditionIn" data-tip="Audition −250ms / +500ms around IN" aria-label="Audition around IN">
+          <i data-lucide="ear"></i>
+        </button>
+        <button class="btn btn-ghost btn-sm" id="btnGotoIn" data-tip="Jump to IN" aria-label="Go to IN">←</button>
+        <button class="btn btn-ghost btn-sm" id="btnClearIn" data-tip="Reset IN to 0:00" aria-label="Clear IN">×</button>
+      </div>
+      <div class="marker-row">
+        <span class="marker-label out-label"><span class="dot dot-out"></span> OUT</span>
+        <input class="marker-time" type="text" id="outTime" value="—" data-tip="Edit OUT time directly">
+        <button class="btn btn-ghost btn-sm" id="btnSetOut" data-tip="Set OUT to playhead · O">Set</button>
+        <span style="width:30px;"></span>
+        <button class="btn btn-ghost btn-sm" id="btnGotoOut" data-tip="Jump to OUT" aria-label="Go to OUT">←</button>
+        <button class="btn btn-ghost btn-sm" id="btnClearOut" data-tip="Reset OUT to end" aria-label="Clear OUT">×</button>
+      </div>
+      <div class="loop-duration" id="loopDuration">Loop duration: —</div>
+    </div>
+
+    <!-- Render (feeds the Claude command in topbar) -->
+    <div class="export-card gcard">
+      <h4 class="card-h4">Render settings</h4>
+      <div class="export-options">
+        <div class="export-row" style="align-items:center; justify-content:space-between;">
+          <label class="hint" for="crossfadeMs" data-tip="Crossfade ms — passed to loop_bed.py --crossfade-ms">Crossfade <span style="color:var(--ink-muted);">ms</span></label>
+          <input class="marker-time" type="number" id="crossfadeMs" min="0" max="500" step="1" value="50" style="max-width:80px;">
+        </div>
+        <div class="export-row" style="align-items:center; justify-content:space-between;">
+          <label class="hint" for="repeatCount" data-tip="Repeat count — passed to loop_bed.py --repeat">Repeat <span style="color:var(--ink-muted);">×</span></label>
+          <input class="marker-time" type="number" id="repeatCount" min="1" max="128" step="1" value="4" style="max-width:80px;">
+        </div>
+        <button class="btn btn-primary btn-sm" id="btnSaveToLibrary" data-tip="Save IN→OUT region back to the library (auditioner manifest, auto-shortlisted)"><i data-lucide="save"></i> Save to library</button>
+        <button class="btn btn-ghost btn-sm" id="btnExportLoop" data-tip="Optional: download the IN→OUT region as a sanity-check WAV"><i data-lucide="download"></i> Save loop (sanity)</button>
+        <button class="btn btn-ghost btn-sm" id="btnLoadNew" data-tip="Load a different audio file"><i data-lucide="folder-open"></i> Load new file</button>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="status-bar">
+  <div class="status-dot" id="statusDot"></div>
+  <span id="statusText">Ready — load an audio file to start</span>
+  <span style="margin-left:auto;color:var(--ink-faint);">Loop Cutter v1.0 · Web Audio API</span>
+</footer>
+
+<script src="cutter.js?v=5" defer></script>
+</body>
+</html>

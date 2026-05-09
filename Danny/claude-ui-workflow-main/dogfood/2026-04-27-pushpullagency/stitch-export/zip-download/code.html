@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Push-Pull Immersive Canvas</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#c7c7c1",
+                        "primary-fixed": "#dce1ff",
+                        "surface-dim": "#11131c",
+                        "on-primary": "#002681",
+                        "on-primary-container": "#eeeeff",
+                        "background": "#11131c",
+                        "surface-container-low": "#191b24",
+                        "on-tertiary": "#5d1900",
+                        "on-secondary-fixed": "#1b1c19",
+                        "on-secondary": "#30312d",
+                        "surface-container-lowest": "#0c0e17",
+                        "on-secondary-fixed-variant": "#464743",
+                        "inverse-on-surface": "#2e303a",
+                        "error-container": "#93000a",
+                        "primary": "#b7c4ff",
+                        "on-primary-fixed-variant": "#0039b4",
+                        "on-error": "#690005",
+                        "outline-variant": "#434656",
+                        "tertiary-fixed": "#ffdbd0",
+                        "surface-tint": "#b7c4ff",
+                        "surface-bright": "#373943",
+                        "on-primary-fixed": "#001551",
+                        "on-tertiary-fixed": "#390c00",
+                        "on-secondary-container": "#b9b9b3",
+                        "on-surface": "#e1e1ef",
+                        "inverse-primary": "#004deb",
+                        "surface-variant": "#32343e",
+                        "secondary-container": "#484945",
+                        "tertiary-container": "#c43e00",
+                        "surface-container-high": "#282933",
+                        "primary-container": "#1f5cff",
+                        "on-tertiary-fixed-variant": "#832700",
+                        "surface": "#11131c",
+                        "secondary": "#c7c7c1",
+                        "error": "#ffb4ab",
+                        "on-tertiary-container": "#ffece6",
+                        "on-surface-variant": "#c3c5d9",
+                        "surface-container-highest": "#32343e",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "tertiary": "#ffb59d",
+                        "on-background": "#e1e1ef",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "secondary-fixed": "#e3e3dd",
+                        "outline": "#8d90a2",
+                        "surface-container": "#1d1f29",
+                        "inverse-surface": "#e1e1ef"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "grid-columns": "12",
+                        "gutter": "24px",
+                        "section-padding": "120px",
+                        "margin": "48px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "display-stat": ["Manrope"],
+                        "body-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h2": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "h3": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "h1": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "display-stat": ["80px", { "lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        body { background-color: #0e0e10; color: #e1e1ef; }
+        .clip-diagonal { clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
+        .clip-diagonal-reverse { clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%); }
+        .clip-sharp { clip-path: polygon(0 0, 100% 10%, 100% 90%, 0 100%); }
+        .hero-text-massive { font-size: 15vw; line-height: 0.8; letter-spacing: -0.05em; font-weight: 800; white-space: nowrap; }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="bg-[#0e0e10] dark:bg-[#0e0e10] fixed top-0 w-full z-50 border-b border-white/10 flex justify-between items-center px-8 h-20 w-full">
+<div class="text-2xl font-black tracking-widest text-white dark:text-white">PUSH-PULL</div>
+<div class="flex items-center gap-6">
+<button class="font-['Manrope'] font-bold tracking-tighter uppercase text-[#1f5cff] hover:text-white transition-colors duration-300 scale-95 active:scale-100 transition-transform">
+                INITIATE GROWTH
+            </button>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="bg-[#16161b] dark:bg-[#16161b] fixed left-0 top-0 h-full w-24 border-r border-white/5 hidden lg:flex flex-col items-center py-12 gap-8 z-40 mt-20 bg-[#0e0e10]" style="z-index: 60;">
+<div class="text-center mb-8 hidden">
+<div class="text-lg font-black text-white">PUSH-PULL</div>
+<div class="font-['Manrope'] font-semibold text-[11px] uppercase tracking-[0.2em] text-[#1f5cff]">AMAZON SCALE</div>
+</div>
+<div class="flex flex-col w-full gap-2">
+<a class="flex flex-col items-center justify-center text-white/30 py-6 hover:bg-white/5 hover:text-white transition-all duration-300 ease-in-out font-['Manrope'] font-semibold text-[11px] uppercase tracking-[0.2em]" href="#">
+<span class="material-symbols-outlined mb-2 text-[24px]">settings_input_component</span>
+<span class="hidden">Engine</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#1f5cff] bg-[#1f5cff]/5 border-r-2 border-[#1f5cff] py-6 hover:bg-white/5 hover:text-white transition-all duration-300 ease-in-out font-['Manrope'] font-semibold text-[11px] uppercase tracking-[0.2em]" href="#">
+<span class="material-symbols-outlined mb-2 text-[24px]" style="font-variation-settings: 'FILL' 1;">polyline</span>
+<span class="hidden">Creative</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/30 py-6 hover:bg-white/5 hover:text-white transition-all duration-300 ease-in-out font-['Manrope'] font-semibold text-[11px] uppercase tracking-[0.2em]" href="#">
+<span class="material-symbols-outlined mb-2 text-[24px]">package_2</span>
+<span class="hidden">Inventory</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/30 py-6 hover:bg-white/5 hover:text-white transition-all duration-300 ease-in-out font-['Manrope'] font-semibold text-[11px] uppercase tracking-[0.2em]" href="#">
+<span class="material-symbols-outlined mb-2 text-[24px]">query_stats</span>
+<span class="hidden">Intelligence</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/30 py-6 hover:bg-white/5 hover:text-white transition-all duration-300 ease-in-out font-['Manrope'] font-semibold text-[11px] uppercase tracking-[0.2em]" href="#">
+<span class="material-symbols-outlined mb-2 text-[24px]">hub</span>
+<span class="hidden">Network</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-0 lg:ml-24 pt-20 min-h-screen flex flex-col relative">
+<!-- Hero Section - Radical Cutoff -->
+<section class="relative min-h-[921px] w-full bg-surface-container-lowest clip-diagonal flex items-center overflow-hidden border-b border-white/5">
+<div class="absolute inset-0 z-0">
+<img alt="Abstract geometric dark architecture with stark shadows and neon blue reflections" class="w-full h-full object-cover opacity-20 grayscale mix-blend-luminosity" data-alt="Abstract geometric dark architecture with stark shadows and neon blue reflections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmITr12xN94V5nexvmRoXZSmy3p2trSqIeIW6cXtCIYsTI4C61ItRM0rvpfMdbF7uquXMnog6I0iTPviapOlWzy4qkiKmGtW0WTVnvN1l1UCrn2Ov714OwE_ZOYkMM_eoLf-QoDPPldAVhVok3S2mDTmE_L_u9DqOtPUcNabUkJc8-2LM_xBMyFoAEBJFLdJm3Onu2UHNNV5icfMawjQ-N4wQJy6pa6md5K0173ve_GkQqF-QytHpVftiF0piT4ARIR1reP3Wi8bhr"/>
+<div class="absolute inset-0 bg-gradient-to-b from-[#0e0e10]/80 to-[#0e0e10]"></div>
+</div>
+<div class="relative z-10 w-full px-12 md:px-24">
+<h1 class="font-['Manrope'] hero-text-massive text-white/90">
+                    VELOCITY<br/>
+<span class="text-primary-container">UNBOUND</span>
+</h1>
+<p class="font-body-lg text-body-lg text-secondary-fixed-dim max-w-2xl mt-12 border-l-2 border-primary-container pl-6">
+                    Harness the raw mechanical advantage of algorithmic dominance. We manipulate the architecture of scale to forcefully inject brand presence into high-conversion vectors.
+                </p>
+</div>
+<!-- Floating Angled Shape -->
+<div class="absolute right-0 bottom-[-10%] w-[40vw] h-[614px] bg-primary-container/10 clip-sharp backdrop-blur-sm z-20 border border-primary-container/20 flex items-center justify-center">
+<div class="font-display-stat text-display-stat text-primary-container/30">99.9%</div>
+</div>
+</section>
+<!-- Dynamic Content Overlap -->
+<section class="relative z-20 w-full px-8 md:px-24 py-section-padding -mt-32">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter relative">
+<!-- Bento Style Radical Card -->
+<div class="md:col-span-8 bg-surface-container-low p-12 border border-white/5 rounded clip-diagonal-reverse relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-container/5 rounded-full blur-3xl group-hover:bg-primary-container/10 transition-colors duration-700"></div>
+<div class="relative z-10">
+<span class="material-symbols-outlined text-primary-container text-4xl mb-6">dynamic_feed</span>
+<h2 class="font-h2 text-h2 text-on-surface mb-4 uppercase">Algorithmic Saturation</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">
+                            Deploying concurrent multi-variant structures to choke out competitive visibility. Total canopy dominance across category indices.
+                        </p>
+<div class="mt-12 grid grid-cols-2 gap-8 border-t border-white/5 pt-8">
+<div>
+<div class="font-label-caps text-label-caps text-primary-container mb-2 uppercase">Share of Voice</div>
+<div class="font-display-stat text-[48px] font-bold text-white leading-none">64%</div>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-primary-container mb-2 uppercase">Vector Yield</div>
+<div class="font-display-stat text-[48px] font-bold text-white leading-none">3.2x</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Accent Block -->
+<div class="md:col-span-4 bg-primary-container p-12 clip-sharp flex flex-col justify-between text-on-primary-container relative mt-16 md:mt-0">
+<div>
+<span class="material-symbols-outlined text-4xl mb-6 text-on-primary">crisis_alert</span>
+<h3 class="font-h3 text-h3 text-white uppercase tracking-tight">Tactical Execute</h3>
+<p class="font-body-md text-body-md text-on-primary-container/80 mt-4">
+                            Initiate forced compliance protocols within the marketplace ecosystem.
+                        </p>
+</div>
+<button class="mt-12 inline-flex items-center gap-2 font-label-caps text-label-caps uppercase tracking-widest text-white border-b border-white pb-1 w-max hover:pr-4 transition-all duration-300">
+                        Deploy Protocol <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0e0e10] dark:bg-[#0e0e10] w-full border-t border-white/10 ml-0 lg:ml-24 relative z-50">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 px-12 py-24 max-w-[1440px] mx-auto">
+<div>
+<div class="text-4xl font-black text-white opacity-10 mb-8">PUSH-PULL</div>
+<div class="font-['Manrope'] font-medium text-[10px] tracking-widest uppercase text-white/40">
+                    ©2024 PUSH-PULL AGNOSTIC COMMERCE. ALL RIGHTS RESERVED.
+                </div>
+</div>
+<div class="flex flex-col gap-4 items-start md:items-end font-['Manrope'] font-medium text-[10px] tracking-widest uppercase">
+<a class="text-white/40 hover:text-[#1f5cff] opacity-80 hover:opacity-100 transition-colors" href="#">Strategic Methodology</a>
+<a class="text-white/40 hover:text-[#1f5cff] opacity-80 hover:opacity-100 transition-colors" href="#">Client Portal</a>
+<a class="text-white/40 hover:text-[#1f5cff] opacity-80 hover:opacity-100 transition-colors" href="#">Tactical Reporting</a>
+<a class="text-white/40 hover:text-[#1f5cff] opacity-80 hover:opacity-100 transition-colors" href="#">Privacy Protocol</a>
+</div>
+</div>
+</footer>
+</body></html>

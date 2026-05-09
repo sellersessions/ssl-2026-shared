@@ -1,0 +1,273 @@
+{
+  "identity": {
+    "title": "DataBrill - Own Your Amazon Data",
+    "og_site_name": null,
+    "og_title": null,
+    "description": "Automated data extraction from Amazon Selling Partner & Ads APIs into your own database. Own your data, power your analytics, and make data-driven decisions with complete transparency.",
+    "theme_color": null,
+    "hostname": "core.databrill.com"
+  },
+  "body_bg": "rgb(248, 247, 252)",
+  "theme_mode": "light",
+  "theme_mode_source": "area-weighted majority",
+  "theme_mode_evidence": {
+    "light_area": 15279840,
+    "dark_area": 0,
+    "body_bg_luminance": 0.9720352941176472,
+    "html_bg_luminance": null,
+    "samples_taken": 8
+  },
+  "nav": {
+    "bg": "rgb(255, 255, 255)",
+    "bg_source": "nav.bg-surface",
+    "bg_is_image": false,
+    "text_color": "rgb(26, 23, 38)",
+    "font_family": "\"Ubuntu Sans\", ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+    "height": 65,
+    "tag": "nav",
+    "bg_hex": "#ffffff",
+    "text_color_hex": "#1a1726"
+  },
+  "hero": {
+    "bg": "rgb(255, 255, 255)",
+    "bg_source": "div.min-h-screen",
+    "bg_is_image": false,
+    "text_color": "rgb(26, 23, 38)",
+    "height": 3785,
+    "bg_hex": "#ffffff",
+    "text_color_hex": "#1a1726"
+  },
+  "primary_button": {
+    "bg": "rgb(224, 122, 58)",
+    "fg": "rgb(255, 255, 255)",
+    "font": "\"Ubuntu Sans\", ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+    "weight": "500",
+    "text": "Log in",
+    "area": 2765,
+    "above_fold": true,
+    "doc_top": 13,
+    "bg_hex": "#e07a3a",
+    "fg_hex": "#ffffff",
+    "bg_hsl": {
+      "h": 23,
+      "s": 73,
+      "l": 55
+    }
+  },
+  "button_bg_distribution": [
+    {
+      "bg": "rgb(224, 122, 58)",
+      "count": 2,
+      "avg_area": 5338,
+      "above_fold": 2,
+      "fold_ratio": 1,
+      "score": 26
+    },
+    {
+      "bg": "rgb(255, 255, 255)",
+      "count": 2,
+      "avg_area": 10272,
+      "above_fold": 1,
+      "fold_ratio": 0.5,
+      "score": 23
+    }
+  ],
+  "button_scoring_method": "count \u00d7 log(avg_area+1) \u00d7 (1 + 0.5 \u00d7 above_fold_ratio)",
+  "heading_fonts": [
+    {
+      "font": "Ubuntu Sans",
+      "count": 19
+    }
+  ],
+  "body_fonts": [
+    {
+      "font": "Ubuntu Sans",
+      "count": 33
+    }
+  ],
+  "body_text_colors": [
+    {
+      "color": "rgb(61, 56, 82)",
+      "count": 26
+    },
+    {
+      "color": "oklch(0.707 0.022 261.325)",
+      "count": 5
+    },
+    {
+      "color": "rgb(26, 23, 38)",
+      "count": 1
+    },
+    {
+      "color": "oklch(0.932 0.032 255.585)",
+      "count": 1
+    }
+  ],
+  "footer": {
+    "bg": "oklch(0.21 0.034 264.665)",
+    "text_color": "rgb(255, 255, 255)",
+    "bg_hex": null,
+    "text_color_hex": "#ffffff"
+  },
+  "all_container_bgs": [
+    {
+      "bg": "rgb(255, 255, 255)",
+      "count": 11
+    },
+    {
+      "bg": "rgb(244, 242, 249)",
+      "count": 2
+    },
+    {
+      "bg": "rgb(224, 122, 58)",
+      "count": 1
+    }
+  ],
+  "border_colors": [
+    {
+      "color": "rgb(219, 215, 229)",
+      "count": 7
+    },
+    {
+      "color": "rgb(113, 107, 133)",
+      "count": 3
+    }
+  ],
+  "card_bgs": [],
+  "section_bgs": [
+    {
+      "bg": "linear-gradient(in oklab, rgb(254, 246, 240) 0%, rgb(255, 255, 255) 100%)",
+      "source": "section (image)",
+      "is_image": true,
+      "height": 370
+    },
+    {
+      "bg": "rgb(255, 255, 255)",
+      "source": "section.py-20",
+      "is_image": false,
+      "height": 548
+    },
+    {
+      "bg": "rgb(244, 242, 249)",
+      "source": "section.py-20",
+      "is_image": false,
+      "height": 600
+    },
+    {
+      "bg": "rgb(224, 122, 58)",
+      "source": "section.py-20",
+      "is_image": false,
+      "height": 334
+    }
+  ],
+  "svg_decorative_colors": [],
+  "bg_image_signal": {
+    "total": 1,
+    "data_uri": 0,
+    "likely_texture": false
+  },
+  "google_fonts_links": [],
+  "body_bg_hex": "#f8f7fc",
+  "section_bgs_hex": [
+    {
+      "bg": "linear-gradient(in oklab, rgb(254, 246, 240) 0%, rgb(255, 255, 255) 100%)",
+      "source": "section (image)",
+      "is_image": true,
+      "height": 370,
+      "bg_hex": null
+    },
+    {
+      "bg": "rgb(255, 255, 255)",
+      "source": "section.py-20",
+      "is_image": false,
+      "height": 548,
+      "bg_hex": "#ffffff"
+    },
+    {
+      "bg": "rgb(244, 242, 249)",
+      "source": "section.py-20",
+      "is_image": false,
+      "height": 600,
+      "bg_hex": "#f4f2f9"
+    },
+    {
+      "bg": "rgb(224, 122, 58)",
+      "source": "section.py-20",
+      "is_image": false,
+      "height": 334,
+      "bg_hex": "#e07a3a"
+    }
+  ],
+  "body_text_colors_hex": [
+    {
+      "color": "rgb(61, 56, 82)",
+      "count": 26,
+      "hex": "#3d3852"
+    },
+    {
+      "color": "oklch(0.707 0.022 261.325)",
+      "count": 5,
+      "hex": null
+    },
+    {
+      "color": "rgb(26, 23, 38)",
+      "count": 1,
+      "hex": "#1a1726"
+    },
+    {
+      "color": "oklch(0.932 0.032 255.585)",
+      "count": 1,
+      "hex": null
+    }
+  ],
+  "button_bg_distribution_hex": [
+    {
+      "bg": "rgb(224, 122, 58)",
+      "count": 2,
+      "avg_area": 5338,
+      "above_fold": 2,
+      "fold_ratio": 1,
+      "score": 26,
+      "hex": "#e07a3a"
+    },
+    {
+      "bg": "rgb(255, 255, 255)",
+      "count": 2,
+      "avg_area": 10272,
+      "above_fold": 1,
+      "fold_ratio": 0.5,
+      "score": 23,
+      "hex": "#ffffff"
+    }
+  ],
+  "card_bgs_hex": [],
+  "all_container_bgs_hex": [
+    {
+      "bg": "rgb(255, 255, 255)",
+      "count": 11,
+      "hex": "#ffffff"
+    },
+    {
+      "bg": "rgb(244, 242, 249)",
+      "count": 2,
+      "hex": "#f4f2f9"
+    },
+    {
+      "bg": "rgb(224, 122, 58)",
+      "count": 1,
+      "hex": "#e07a3a"
+    }
+  ],
+  "border_colors_hex": [
+    {
+      "color": "rgb(219, 215, 229)",
+      "count": 7,
+      "hex": "#dbd7e5"
+    },
+    {
+      "color": "rgb(113, 107, 133)",
+      "count": 3,
+      "hex": "#716b85"
+    }
+  ]
+}

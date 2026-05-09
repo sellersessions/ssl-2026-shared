@@ -1,0 +1,19 @@
+{
+  "_comment": "Scene 1 smoke test — voice-quality check before regenerating the full chapter. Restored 'Claude' (was 'Clawd' over-correction), em-dash flow, fewer hard stops, 'read me file' for README phonetic.",
+  "voice_id": "jQOgcOzmmipekvxJN09W",
+  "model_id": "eleven_multilingual_v2",
+  "output_dir": "public/assets/voice/generated/workshop-overview/_smoke",
+  "default_voice_settings": {
+    "stability": 0.31,
+    "similarity_boost": 1.0,
+    "style": 0.0,
+    "use_speaker_boost": true,
+    "speed": 0.9
+  },
+  "scenes": [
+    {
+      "id": "scene-1-welcome",
+      "text": "This is a self-drive course — you digest the read me file, then you give Claude the setup file, and Claude does the work. It asks you questions, you ask it back. Simple."
+    }
+  ]
+}

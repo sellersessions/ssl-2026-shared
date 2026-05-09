@@ -1,0 +1,67 @@
+{
+  "_meta": {
+    "brand": "Re Tech UK",
+    "url": "https://retechuk.com",
+    "extracted": "2026-04-27",
+    "method": "WebFetch + extract-flow audit",
+    "purpose": "Stage 8 audit reference — every line below MUST appear verbatim in rendered DOM"
+  },
+  "brand": {
+    "name": "Re Tech UK",
+    "wordmark_capitalization": "RE TECH UK",
+    "tagline": "Everyday clothing for women",
+    "meta_description": "Shop quality everyday women's clothing at Re Tech UK. Cosy knitwear, polo neck jumpers, cardigans, and comfortable essentials. Sizes 8-26, fast UK delivery."
+  },
+  "value_prop_bar": [
+    "FREE UK DELIVERY & RETURNS"
+  ],
+  "story": {
+    "headline": "Our Story",
+    "body": "Re Tech UK represents and inspires those who work with no boundaries."
+  },
+  "newsletter": {
+    "headline": "Sign up & get 10% OFF your first purchase today",
+    "body": "Be the first to receive latest collection drops & offers."
+  },
+  "products": [
+    { "name": "Ribbed Cotton Polo Neck Tops", "category": "polo" },
+    { "name": "Long Sleeve Maxi Cardigan", "category": "cardigan" },
+    { "name": "V-Neck Longline Knit Jumper", "category": "knits", "label": "Light Knits" },
+    { "name": "Kids Clothing", "category": "kids" },
+    { "name": "Spring collection t-shirts", "category": "tees" }
+  ],
+  "trust": [
+    "Check Out Our Reviews On Trustpilot"
+  ],
+  "social": [
+    { "platform": "Facebook", "url": "https://www.facebook.com/retechuk" },
+    { "platform": "Instagram", "url": "https://www.instagram.com/re_tech_uk/?hl=en" }
+  ],
+  "nav": [
+    "Home",
+    "Ribbed Cotton Polo Neck Tops",
+    "Long Sleeve Maxi Cardigan",
+    "Kids Clothing",
+    "About Us",
+    "Rewards",
+    "Refer A Friend",
+    "Contact",
+    "Register / Login"
+  ],
+  "footer_legal": [
+    "Terms of Service",
+    "Refund policy",
+    "Shipping Policy",
+    "Returns Policy",
+    "Privacy Policy",
+    "Contact"
+  ],
+  "payment_methods": [
+    "American Express", "Apple Pay", "Diners Club", "Discover", "Google Pay",
+    "Maestro", "Mastercard", "PayPal", "Shop Pay", "Union Pay", "Visa"
+  ],
+  "ctas": {
+    "primary": "See more",
+    "newsletter": "Sign up"
+  }
+}

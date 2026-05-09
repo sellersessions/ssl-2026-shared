@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TrustLayer | The Architecture of Trust</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-container": "#c2e7e6",
+                        "secondary": "#436464",
+                        "error-container": "#ffdad6",
+                        "on-background": "#191c1e",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d9dadc",
+                        "primary-container": "#008080",
+                        "surface-container": "#edeef0",
+                        "on-tertiary-container": "#fff9f7",
+                        "inverse-on-surface": "#f0f1f3",
+                        "on-secondary": "#ffffff",
+                        "background": "#f8f9fb",
+                        "primary-fixed-dim": "#76d6d5",
+                        "surface-bright": "#f8f9fb",
+                        "surface-container-low": "#f3f4f6",
+                        "primary": "#006565",
+                        "surface-variant": "#e1e2e4",
+                        "tertiary-fixed-dim": "#ffb692",
+                        "on-secondary-fixed-variant": "#2b4c4c",
+                        "primary-fixed": "#93f2f2",
+                        "outline-variant": "#bdc9c8",
+                        "on-primary-container": "#e3fffe",
+                        "on-primary-fixed-variant": "#004f4f",
+                        "on-tertiary-fixed-variant": "#733512",
+                        "on-surface-variant": "#3e4949",
+                        "tertiary": "#8b4823",
+                        "on-secondary-container": "#476868",
+                        "surface-tint": "#006a6a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#341100",
+                        "tertiary-container": "#a96039",
+                        "on-secondary-fixed": "#002020",
+                        "outline": "#6e7979",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e7e8ea",
+                        "surface": "#f8f9fb",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed": "#c5e9e9",
+                        "inverse-primary": "#76d6d5",
+                        "inverse-surface": "#2e3132",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-primary-fixed": "#002020",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#aacdcc"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .tonal-shift {
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-slate-900 dark:text-slate-50 font-headline">TrustLayer</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-['Plus_Jakarta_Sans'] font-medium text-sm tracking-tight text-teal-700 dark:text-teal-400 font-semibold hover:text-teal-600 transition-colors" href="#">Products</a>
+<a class="font-['Plus_Jakarta_Sans'] font-medium text-sm tracking-tight text-slate-600 dark:text-slate-400 hover:text-teal-600 transition-colors" href="#">Pricing</a>
+<a class="font-['Plus_Jakarta_Sans'] font-medium text-sm tracking-tight text-slate-600 dark:text-slate-400 hover:text-teal-600 transition-colors" href="#">Company</a>
+<a class="font-['Plus_Jakarta_Sans'] font-medium text-sm tracking-tight text-slate-600 dark:text-slate-400 hover:text-teal-600 transition-colors" href="#">Resources</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="font-['Plus_Jakarta_Sans'] font-medium text-sm tracking-tight text-slate-600 dark:text-slate-400 hover:text-teal-600 transition-colors px-4 py-2">Log In</button>
+<button class="bg-primary-container text-on-primary px-5 py-2.5 rounded-md font-headline font-bold text-sm transition-all active:opacity-80">Open Account</button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="pt-32 pb-24 px-6 bg-surface min-h-[921px] flex items-center">
+<div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-5 space-y-8">
+<span class="inline-block py-1 px-3 bg-secondary-container text-secondary text-[0.6875rem] font-bold tracking-widest uppercase rounded">Institutional Grade</span>
+<h1 class="text-display-lg font-headline font-extrabold text-on-background leading-[1.1] -tracking-[0.03em] text-5xl md:text-6xl lg:text-7xl">
+                    Secure Capital <br/><span class="text-primary">Without Friction.</span>
+</h1>
+<p class="text-on-surface-variant text-lg leading-relaxed max-w-md">
+                    Automated treasury management and institutional-grade security for growing fintech ecosystems. Precision-engineered for stability.
+                </p>
+<div class="flex gap-4">
+<button class="bg-primary-container text-on-primary px-8 py-4 rounded-md font-headline font-bold transition-all hover:shadow-lg">Get Started</button>
+<button class="bg-surface-container-high text-primary px-8 py-4 rounded-md font-headline font-bold transition-all hover:bg-surface-variant">View Demo</button>
+</div>
+</div>
+<div class="lg:col-span-7 relative">
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-2xl overflow-hidden border border-outline-variant/15">
+<img alt="Dashboard Preview" class="w-full h-auto rounded-lg" data-alt="Modern financial dashboard showing analytics and graphs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf-IUxDNSz6q9wrsiNeKSQJvVjUUD2MVnB9RKz1KPJ8kiDd2U4ZYymt-438bBsx7dbGq4iiy9kQn6d2LTgUA-bH0W9bMqc34Vd2Rm1F09TyzFVCmzGJiphGce33VPAwMhOmm2mQbJy47UixkY80PPagp7uyTEh9kAzDkVvzHQZZLIefnapRbn8LRuE0mo7iiWyB7sPfgmMeDtwqOSULvg1BL4Ogkry1yzoGbt6qpIfMRWIJ7wRCfYEP9cWaupOamgB-t1A8w-kTWU"/>
+</div>
+<div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl border border-outline-variant/10 hidden md:block">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-primary/10 rounded-full">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Security Status</p>
+<p class="text-lg font-headline font-bold text-on-surface">100% Encrypted</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Demo Section -->
+<section class="py-24 px-6 bg-surface-container-low">
+<div class="max-w-7xl mx-auto text-center space-y-16">
+<div class="max-w-3xl mx-auto space-y-4">
+<h2 class="text-headline-md font-headline font-bold text-on-background text-3xl md:text-4xl">Built for Scale, Optimized for Trust</h2>
+<p class="text-on-surface-variant">Every pixel and protocol is designed to eliminate risk and maximize operational efficiency in your financial stack.</p>
+</div>
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+<div class="relative bg-white rounded-2xl shadow-xl border border-outline-variant/15 overflow-hidden">
+<img alt="Interface Showcase" class="w-full" data-alt="High resolution screenshot of the TrustLayer web application interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAhbDGCQfFIXLNns1wUKrY_VHVuZYuxxSNwMFTp_jhGM35Zc3WuAtixq0FHwSIy5IMCXkm0YuRIk0oYjtFiccoukdgbwWZy6nncXZt-e88r50RKrMXxgHaa64tsKGOrbkhfyXfrh_te6kf7_K41IuXc3dYYLWjRusfGBNY3OQ59Ne84RHiW1hammrkxdfeClLIBAjPBpaoncay4PflgoPm_PoFYge87OwTsJVGOJocn87dwrOzROAg18RSlcOAWzhqrkoAat9koR8"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Section (3x2 Grid) -->
+<section class="py-24 px-6 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Feature 1 -->
+<div class="p-8 bg-surface-container-lowest rounded-xl border border-outline-variant/10 hover:shadow-sm transition-all">
+<span class="material-symbols-outlined text-primary text-3xl mb-4" data-icon="account_balance">account_balance</span>
+<h3 class="text-title-md font-headline font-bold mb-3">Treasury Management</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Centralize your capital across multiple jurisdictions with automated liquidity balancing and real-time reporting.</p>
+</div>
+<!-- Feature 2 -->
+<div class="p-8 bg-surface-container-lowest rounded-xl border border-outline-variant/10 hover:shadow-sm transition-all">
+<span class="material-symbols-outlined text-primary text-3xl mb-4" data-icon="shield">shield</span>
+<h3 class="text-title-md font-headline font-bold mb-3">Multi-Sig Protocols</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Enhanced security with customizable approval workflows for high-value transactions and sensitive data access.</p>
+</div>
+<!-- Feature 3 -->
+<div class="p-8 bg-surface-container-lowest rounded-xl border border-outline-variant/10 hover:shadow-sm transition-all">
+<span class="material-symbols-outlined text-primary text-3xl mb-4" data-icon="api">api</span>
+<h3 class="text-title-md font-headline font-bold mb-3">Direct Ledger API</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Integrate directly with banking cores through our low-latency API designed for high-frequency reconciliation.</p>
+</div>
+<!-- Feature 4 -->
+<div class="p-8 bg-surface-container-lowest rounded-xl border border-outline-variant/10 hover:shadow-sm transition-all">
+<span class="material-symbols-outlined text-primary text-3xl mb-4" data-icon="analytics">analytics</span>
+<h3 class="text-title-md font-headline font-bold mb-3">Predictive Analytics</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Leverage machine learning to forecast cash flow needs and identify potential liquidity gaps before they happen.</p>
+</div>
+<!-- Feature 5 -->
+<div class="p-8 bg-surface-container-lowest rounded-xl border border-outline-variant/10 hover:shadow-sm transition-all">
+<span class="material-symbols-outlined text-primary text-3xl mb-4" data-icon="gavel">gavel</span>
+<h3 class="text-title-md font-headline font-bold mb-3">Automated Compliance</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Built-in KYC/AML screening and real-time monitoring to ensure global regulatory standards are met 24/7.</p>
+</div>
+<!-- Feature 6 -->
+<div class="p-8 bg-surface-container-lowest rounded-xl border border-outline-variant/10 hover:shadow-sm transition-all">
+<span class="material-symbols-outlined text-primary text-3xl mb-4" data-icon="monitoring">monitoring</span>
+<h3 class="text-title-md font-headline font-bold mb-3">Real-time Audits</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Immutable logs and instant snapshot reporting to streamline your quarterly and annual financial audits.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Section -->
+<section class="py-24 px-6 bg-surface-container-high">
+<div class="max-w-7xl mx-auto">
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-12">
+<h2 class="text-headline-md font-headline font-extrabold text-on-background text-4xl">Trusted by the next generation of finance.</h2>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<p class="text-5xl font-headline font-extrabold text-primary mb-2">$42B+</p>
+<p class="text-label-sm uppercase tracking-widest text-on-surface-variant font-bold">Processed Annually</p>
+</div>
+<div>
+<p class="text-5xl font-headline font-extrabold text-primary mb-2">99.99%</p>
+<p class="text-label-sm uppercase tracking-widest text-on-surface-variant font-bold">Uptime Reliability</p>
+</div>
+<div>
+<p class="text-5xl font-headline font-extrabold text-primary mb-2">1.2M</p>
+<p class="text-label-sm uppercase tracking-widest text-on-surface-variant font-bold">Active Wallets</p>
+</div>
+<div>
+<p class="text-5xl font-headline font-extrabold text-primary mb-2">500+</p>
+<p class="text-label-sm uppercase tracking-widest text-on-surface-variant font-bold">Partner Institutions</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-12 rounded-2xl shadow-sm border border-outline-variant/15">
+<p class="text-label-sm uppercase tracking-widest font-bold text-center mb-12 text-on-surface-variant">Global Partners &amp; Integrations</p>
+<div class="grid grid-cols-3 gap-12 items-center grayscale opacity-60">
+<div class="flex justify-center"><span class="text-xl font-bold font-headline">STRIPE</span></div>
+<div class="flex justify-center"><span class="text-xl font-bold font-headline">VISA</span></div>
+<div class="flex justify-center"><span class="text-xl font-bold font-headline">PLAID</span></div>
+<div class="flex justify-center"><span class="text-xl font-bold font-headline">CITI</span></div>
+<div class="flex justify-center"><span class="text-xl font-bold font-headline">GOLDMAN</span></div>
+<div class="flex justify-center"><span class="text-xl font-bold font-headline">AWS</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="py-32 px-6 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="text-center max-w-2xl mx-auto mb-20 space-y-4">
+<h2 class="text-headline-md font-headline font-bold text-on-background text-4xl">Simple, Transparent Pricing</h2>
+<p class="text-on-surface-variant">No hidden fees. Scale your infrastructure as you grow.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Tier 1 -->
+<div class="bg-surface-container-low p-8 rounded-xl flex flex-col justify-between border border-outline-variant/10">
+<div>
+<h3 class="text-xl font-headline font-bold mb-2">Startup</h3>
+<p class="text-on-surface-variant text-sm mb-6">For early stage teams building their first product.</p>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-4xl font-headline font-bold text-on-background">$499</span>
+<span class="text-on-surface-variant">/mo</span>
+</div>
+<ul class="space-y-4 mb-8">
+<li class="flex items-center gap-3 text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Up to $1M volume</li>
+<li class="flex items-center gap-3 text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Standard Security</li>
+<li class="flex items-center gap-3 text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Email Support</li>
+</ul>
+</div>
+<button class="w-full py-3 px-4 rounded-md border-2 border-primary text-primary font-headline font-bold hover:bg-primary/5 transition-colors">Start Free Trial</button>
+</div>
+<!-- Tier 2 (Recommended) -->
+<div class="bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between border-2 border-primary-container shadow-2xl relative scale-105 z-10">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary-container text-on-primary text-[10px] font-bold uppercase tracking-widest py-1 px-4 rounded-full">Recommended</div>
+<div>
+<h3 class="text-xl font-headline font-bold mb-2">Professional</h3>
+<p class="text-on-surface-variant text-sm mb-6">For scaling companies with complex needs.</p>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-4xl font-headline font-bold text-on-background">$1,999</span>
+<span class="text-on-surface-variant">/mo</span>
+</div>
+<ul class="space-y-4 mb-8">
+<li class="flex items-center gap-3 text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Up to $50M volume</li>
+<li class="flex items-center gap-3 text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Institutional Security</li>
+<li class="flex items-center gap-3 text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> 24/7 Priority Support</li>
+<li class="flex items-center gap-3 text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> API Access</li>
+</ul>
+</div>
+<button class="w-full py-3 px-4 rounded-md bg-primary-container text-on-primary font-headline font-bold hover:opacity-90 transition-opacity">Get Started</button>
+</div>
+<!-- Tier 3 -->
+<div class="bg-surface-container-low p-8 rounded-xl flex flex-col justify-between border border-outline-variant/10">
+<div>
+<h3 class="text-xl font-headline font-bold mb-2">Enterprise</h3>
+<p class="text-on-surface-variant text-sm mb-6">Custom infrastructure for massive scale.</p>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-4xl font-headline font-bold text-on-background">Custom</span>
+</div>
+<ul class="space-y-4 mb-8">
+<li class="flex items-center gap-3 text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Unlimited Volume</li>
+<li class="flex items-center gap-3 text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> White-label Options</li>
+<li class="flex items-center gap-3 text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Dedicated Account Manager</li>
+</ul>
+</div>
+<button class="w-full py-3 px-4 rounded-md border-2 border-on-background text-on-background font-headline font-bold hover:bg-on-background hover:text-white transition-all">Contact Sales</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-24 px-6 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="p-6 bg-surface-container-lowest rounded-xl shadow-sm space-y-4 border border-outline-variant/5">
+<div class="flex text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface text-sm italic leading-relaxed">"TrustLayer transformed our treasury operations. The audit logs alone saved us weeks of work."</p>
+<div>
+<p class="font-bold text-sm">Sarah Chen</p>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">CTO, Velocity Fin</p>
+</div>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-xl shadow-sm space-y-4 border border-outline-variant/5">
+<div class="flex text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface text-sm italic leading-relaxed">"The most stable platform we've integrated. Their compliance engine is second to none."</p>
+<div>
+<p class="font-bold text-sm">Marcus Thorne</p>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">VP Engineering, NeoBank</p>
+</div>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-xl shadow-sm space-y-4 border border-outline-variant/5">
+<div class="flex text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface text-sm italic leading-relaxed">"Security is our top priority, and TrustLayer exceeds institutional standards."</p>
+<div>
+<p class="font-bold text-sm">David Miller</p>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">CISO, SecureVault</p>
+</div>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-xl shadow-sm space-y-4 border border-outline-variant/5">
+<div class="flex text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface text-sm italic leading-relaxed">"Finally, a fintech layer that actually understands institutional scale."</p>
+<div>
+<p class="font-bold text-sm">Elena Rodriguez</p>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">Director, Alpha Assets</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA & FAQ -->
+<section class="py-32 px-6 bg-surface">
+<div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-24 items-start">
+<div class="space-y-8">
+<h2 class="text-headline-md font-headline font-extrabold text-on-background text-5xl leading-tight">Ready to build on a <span class="text-primary">rock-solid</span> foundation?</h2>
+<p class="text-on-surface-variant text-lg">Join 500+ institutions leveraging TrustLayer for their financial infrastructure. Integration takes minutes, security lasts a lifetime.</p>
+<div class="flex gap-4">
+<button class="bg-primary-container text-on-primary px-10 py-5 rounded-md font-headline font-bold text-lg hover:shadow-xl transition-all">Open Account Now</button>
+</div>
+</div>
+<div class="space-y-4">
+<p class="text-label-sm uppercase tracking-widest font-bold text-on-surface-variant mb-4">Frequently Asked Questions</p>
+<div class="border-b border-outline-variant/30 py-4 group">
+<div class="flex justify-between items-center cursor-pointer">
+<span class="font-headline font-bold text-on-surface">Is my capital insured?</span>
+<span class="material-symbols-outlined text-primary group-hover:rotate-180 transition-transform">expand_more</span>
+</div>
+<p class="hidden group-hover:block mt-4 text-on-surface-variant text-sm">Yes, all deposits are held at Member FDIC institutions and are insured up to the standard legal limits per depositor.</p>
+</div>
+<div class="border-b border-outline-variant/30 py-4 group">
+<div class="flex justify-between items-center cursor-pointer">
+<span class="font-headline font-bold text-on-surface">What jurisdictions do you support?</span>
+<span class="material-symbols-outlined text-primary group-hover:rotate-180 transition-transform">expand_more</span>
+</div>
+<p class="hidden group-hover:block mt-4 text-on-surface-variant text-sm">We currently support the US, EU, UK, and Singapore, with more regions being added quarterly.</p>
+</div>
+<div class="border-b border-outline-variant/30 py-4 group">
+<div class="flex justify-between items-center cursor-pointer">
+<span class="font-headline font-bold text-on-surface">How long does integration take?</span>
+<span class="material-symbols-outlined text-primary group-hover:rotate-180 transition-transform">expand_more</span>
+</div>
+<p class="hidden group-hover:block mt-4 text-on-surface-variant text-sm">Most teams go live with our Sandbox environment within 2 hours, and Production within 48-72 hours after KYC approval.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 w-full border-t border-slate-200 dark:border-slate-800 tonal-shift spacing-24">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 px-6 py-16 max-w-7xl mx-auto">
+<div class="col-span-2 space-y-6">
+<span class="text-lg font-bold text-slate-900 dark:text-slate-100 font-headline">TrustLayer</span>
+<p class="font-['Plus_Jakarta_Sans'] text-xs leading-relaxed text-slate-500 dark:text-slate-400 max-w-xs">
+                    Building the world's most trusted financial operating system. Precision, security, and stability at every layer of the stack.
+                </p>
+<div class="flex gap-4">
+<div class="w-24 h-8 bg-slate-200 dark:bg-slate-800 rounded flex items-center justify-center text-[8px] font-bold text-slate-400 tracking-tighter border border-slate-300/30">MEMBER FDIC</div>
+<div class="w-24 h-8 bg-slate-200 dark:bg-slate-800 rounded flex items-center justify-center text-[8px] font-bold text-slate-400 tracking-tighter border border-slate-300/30">SOC2 TYPE II</div>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="text-slate-900 dark:text-slate-100 text-sm font-bold">Product</h4>
+<ul class="space-y-3 font-['Plus_Jakarta_Sans'] text-xs text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-teal-600 underline-offset-4 hover:underline" href="#">Treasury</a></li>
+<li><a class="hover:text-teal-600 underline-offset-4 hover:underline" href="#">Compliance</a></li>
+<li><a class="hover:text-teal-600 underline-offset-4 hover:underline" href="#">Wallets</a></li>
+<li><a class="hover:text-teal-600 underline-offset-4 hover:underline" href="#">API Docs</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="text-slate-900 dark:text-slate-100 text-sm font-bold">Company</h4>
+<ul class="space-y-3 font-['Plus_Jakarta_Sans'] text-xs text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-teal-600 underline-offset-4 hover:underline" href="#">About Us</a></li>
+<li><a class="hover:text-teal-600 underline-offset-4 hover:underline" href="#">Careers</a></li>
+<li><a class="hover:text-teal-600 underline-offset-4 hover:underline" href="#">Press</a></li>
+<li><a class="hover:text-teal-600 underline-offset-4 hover:underline" href="#">Contact</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="text-slate-900 dark:text-slate-100 text-sm font-bold">Legal</h4>
+<ul class="space-y-3 font-['Plus_Jakarta_Sans'] text-xs text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-teal-600 underline-offset-4 hover:underline" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-teal-600 underline-offset-4 hover:underline" href="#">Terms of Service</a></li>
+<li><a class="hover:text-teal-600 underline-offset-4 hover:underline" href="#">Security</a></li>
+<li><a class="hover:text-teal-600 underline-offset-4 hover:underline" href="#">Regulatory</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="text-slate-900 dark:text-slate-100 text-sm font-bold">Resources</h4>
+<ul class="space-y-3 font-['Plus_Jakarta_Sans'] text-xs text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-teal-600 underline-offset-4 hover:underline" href="#">Status</a></li>
+<li><a class="hover:text-teal-600 underline-offset-4 hover:underline" href="#">Security Blog</a></li>
+<li><a class="hover:text-teal-600 underline-offset-4 hover:underline" href="#">Help Center</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-6 pb-12">
+<div class="pt-8 border-t border-slate-200/50 dark:border-slate-800/50 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-['Plus_Jakarta_Sans'] text-xs leading-relaxed text-slate-500 dark:text-slate-400">© 2024 TrustLayer Financial Inc. All rights reserved. Member FDIC. Licensed as a Money Transmitter by the NYDFS.</p>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-slate-400 text-sm" data-icon="language">language</span>
+<span class="material-symbols-outlined text-slate-400 text-sm" data-icon="public">public</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

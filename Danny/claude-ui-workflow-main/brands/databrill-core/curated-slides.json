@@ -1,0 +1,485 @@
+{
+  "brand": "databrill-core",
+  "curated_count": 52,
+  "categories": {
+    "colors": [
+      {
+        "creator": "ak.visualss",
+        "post_folder": "7607476182300249366",
+        "slide_file": "7607476182300249366_slide-03.jpg",
+        "reason": "Deep Purple #5A189A paired with Bright Yellow #FFD60A -- dark purple base close to Databrill secondary, high-contrast accent",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/ak.visualss/colors--best-color-combos-part-3/colors--best-color-combos-part-3_slide-03.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7610178376736771350",
+        "slide_file": "7610178376736771350_slide-02.jpg",
+        "reason": "Dark palette #161616 bg with #5F5F5F and #D8D7D1 -- minimal dark SaaS aesthetic matching Databrill dark mode",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/colors--brand-intelligence-vol-02-color-psychology/colors--brand-intelligence-vol-02-color-psychology_slide-02.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7610178376736771350",
+        "slide_file": "7610178376736771350_slide-03.jpg",
+        "reason": "Dark bg #161616 with #818181 mids and #FF4A01 orange accent -- almost identical to Databrill orange on dark",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/colors--brand-intelligence-vol-02-color-psychology/colors--brand-intelligence-vol-02-color-psychology_slide-03.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7610178376736771350",
+        "slide_file": "7610178376736771350_slide-04.jpg",
+        "reason": "Dark bg #17181D with #506872 teal and #FFFFF3 light -- Web3 finance platform, dark tech aesthetic",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/colors--brand-intelligence-vol-02-color-psychology/colors--brand-intelligence-vol-02-color-psychology_slide-04.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7610879946021473558",
+        "slide_file": "7610879946021473558_slide-01.jpg",
+        "reason": "Dark navy #0A2540 with mint #9FE0C3 -- Stripe-inspired dark palette, premium tech feel",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/colors--color-combos/colors--color-combos_slide-01.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7610879946021473558",
+        "slide_file": "7610879946021473558_slide-02.jpg",
+        "reason": "Ink #0B132B with Cloud #F4F7F8 -- near-black bg with clean white, minimal dark combo",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/colors--color-combos/colors--color-combos_slide-02.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7610916522331999490",
+        "slide_file": "7610916522331999490_slide-05.jpg",
+        "reason": "Graphite #1F2933 with Neon Lime #B7F000 -- dark base with vibrant accent, tech-forward",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/colors--color-combos-1-edition-steal-these-for-your/colors--color-combos-1-edition-steal-these-for-your_slide-05.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7616044107013590294",
+        "slide_file": "7616044107013590294_slide-02.jpg",
+        "reason": "Burgundy #93032E with Night #151515 -- rich accent on deep dark, premium sophistication",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--beautif-fonts-2/fonts--beautif-fonts-2_slide-02.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7616044107013590294",
+        "slide_file": "7616044107013590294_slide-05.jpg",
+        "reason": "Electric Purple #C200FB with Night #00120B -- purple on near-black, directly relevant to Databrill purple secondary",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--beautif-fonts-2/fonts--beautif-fonts-2_slide-05.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7616451956323781910",
+        "slide_file": "7616451956323781910_slide-02.jpg",
+        "reason": "4-color palette: #00002B deep navy, #1E1E59 purple, #FF1377 hot pink, #F2F2F2 white -- dark base with vivid accents",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--beautif-fonts-you-must-see/fonts--beautif-fonts-you-must-see_slide-02.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7616451956323781910",
+        "slide_file": "7616451956323781910_slide-05.jpg",
+        "reason": "#101A36 dark navy with #FF8601 orange and #AEB8FE/#758BFD purples -- near-perfect Databrill palette match",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--beautif-fonts-you-must-see/fonts--beautif-fonts-you-must-see_slide-05.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7616451956323781910",
+        "slide_file": "7616451956323781910_slide-06.jpg",
+        "reason": "#161A1E dark bg with #9645F6 purple and #FCD731 gold -- dark + purple accent SaaS palette",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--beautif-fonts-you-must-see/fonts--beautif-fonts-you-must-see_slide-06.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7616819293799550210",
+        "slide_file": "7616819293799550210_slide-02.jpg",
+        "reason": "Dark Violet #1A0A3D with gold accent #C9A84C -- deep purple-black with warm metallic, premium dark",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--master-design-principles-01/fonts--master-design-principles-01_slide-02.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7616819293799550210",
+        "slide_file": "7616819293799550210_slide-05.jpg",
+        "reason": "Obsidian #1C1C1E with Copper #B87333 -- near-black with warm metallic accent, luxury tech feel",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--master-design-principles-01/fonts--master-design-principles-01_slide-05.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7620050659542404374",
+        "slide_file": "7620050659542404374_slide-02.jpg",
+        "reason": "Carbon Black #010101 with Papaya Orange #FF8000 -- F1 branding, pure black with bold orange like Databrill",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/gradients--brand-intelligence-vol-02-your-gradients/gradients--brand-intelligence-vol-02-your-gradients_slide-02.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7620050659542404374",
+        "slide_file": "7620050659542404374_slide-03.jpg",
+        "reason": "Teal #00D2BE with Stealth Black #0A0A0A -- dark base with cool accent, Mercedes F1 palette",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/gradients--brand-intelligence-vol-02-your-gradients/gradients--brand-intelligence-vol-02-your-gradients_slide-03.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7624947304205667606",
+        "slide_file": "7624947304205667606_slide-02.jpg",
+        "reason": "Midnight #0D1117 with Ember #FF6B35 -- GitHub-dark bg with orange accent, near-identical Databrill vibe",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--res-abstrt-design-01-06/fonts--res-abstrt-design-01-06_slide-02.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7624947304205667606",
+        "slide_file": "7624947304205667606_slide-04.jpg",
+        "reason": "Vault #111111 with Gold #C8A96E -- premium dark with warm gold, luxury data platform feel",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--res-abstrt-design-01-06/fonts--res-abstrt-design-01-06_slide-04.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7627171733123927318",
+        "slide_file": "7627171733123927318_slide-05.jpg",
+        "reason": "Charcoal #2B2B2B with Mustard #D4A13A and Ivory #F8F4EE -- dark bg with warm accent, trustworthy palette",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/gradients--stunning-gradients/gradients--stunning-gradients_slide-05.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7624135281582574870",
+        "slide_file": "7624135281582574870_slide-05.jpg",
+        "reason": "Dusk #2E2A4A with Lavender #C8C0E8 -- purple-tinted dark with soft purple accent, Databrill secondary zone",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--premium-fonts-that-make-your-brand-stand-out/fonts--premium-fonts-that-make-your-brand-stand-out_slide-05.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7615200245307264278",
+        "slide_file": "7615200245307264278_slide-03.jpg",
+        "reason": "Dark Navy #1B1B2F with Crimson #E94560 -- very dark purple-navy base, premium tech palette",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/colors--steal-these-color-combos-01/colors--steal-these-color-combos-01_slide-03.jpg"
+      }
+    ],
+    "fonts": [
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7488065181956820246",
+        "slide_file": "7488065181956820246_slide-03.jpg",
+        "reason": "Satoshi + Gilroy pairing -- Satoshi is a geometric grotesk in the same family as Space Grotesk",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/branding--laws-design-01/branding--laws-design-01_slide-03.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7488065181956820246",
+        "slide_file": "7488065181956820246_slide-04.jpg",
+        "reason": "Outfit + Fira Mono pairing -- geometric sans with monospace, ideal data platform combination",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/branding--laws-design-01/branding--laws-design-01_slide-04.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7488065181956820246",
+        "slide_file": "7488065181956820246_slide-05.jpg",
+        "reason": "Unbounded + Inter pairing -- Inter is Databrill heading font, pairing reference",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/branding--laws-design-01/branding--laws-design-01_slide-05.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7489385984300240150",
+        "slide_file": "7489385984300240150_slide-02.jpg",
+        "reason": "Switzer font showcase -- clean geometric grotesk, sibling to Space Grotesk aesthetic",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/branding--what-your-favorite-button-type-official/branding--what-your-favorite-button-type-official_slide-02.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7610531718340054294",
+        "slide_file": "7610531718340054294_slide-03.jpg",
+        "reason": "Satoshi + Inter pairing -- both are Databrill-adjacent fonts, validates the combination",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/colors--color-combos-not-just-trending-tually/colors--color-combos-not-just-trending-tually_slide-03.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7613114995873795350",
+        "slide_file": "7613114995873795350_slide-06.jpg",
+        "reason": "DM Sans showcase -- Databrill body font, described as low-contrast geometric sans for small text",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/colors--color-combos-that-tually-stop-the-scroll/colors--color-combos-that-tually-stop-the-scroll_slide-06.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7619406126693485846",
+        "slide_file": "7619406126693485846_slide-03.jpg",
+        "reason": "BEBAS NEUE + DM Sans pairing -- display + body combo using Databrill body font",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--stunning-fonts-that-elevate-your-designs/fonts--stunning-fonts-that-elevate-your-designs_slide-03.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7619406126693485846",
+        "slide_file": "7619406126693485846_slide-04.jpg",
+        "reason": "Geist Mono + Outfit pairing -- monospace + geometric sans, perfect data/code platform combo",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--stunning-fonts-that-elevate-your-designs/fonts--stunning-fonts-that-elevate-your-designs_slide-04.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7625243978803334422",
+        "slide_file": "7625243978803334422_slide-03.jpg",
+        "reason": "Space Grotesk showcase -- exact Databrill display/logo font",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--res-clean-design-01/fonts--res-clean-design-01_slide-03.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7625243978803334422",
+        "slide_file": "7625243978803334422_slide-05.jpg",
+        "reason": "Geist font showcase -- Vercel system font, tech/developer aesthetic matching Databrill",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--res-clean-design-01/fonts--res-clean-design-01_slide-05.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7614840642019085590",
+        "slide_file": "7614840642019085590_slide-05.jpg",
+        "reason": "Neue Haas Grotesk -- grotesk family reference, premium technical typography",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--font-combinations-you-must-see-01/fonts--font-combinations-you-must-see-01_slide-05.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7616472290154384662",
+        "slide_file": "7616472290154384662_slide-01.jpg",
+        "reason": "Switzer font with full type scale system -- grotesk font with weight hierarchy for UI design",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--how-design-text-design-switzer/fonts--how-design-text-design-switzer_slide-01.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7623116014766525718",
+        "slide_file": "7623116014766525718_slide-04.jpg",
+        "reason": "Switzer premium font showcase -- geometric grotesk that pairs with Databrill font stack",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--official-font-pairings-2/fonts--official-font-pairings-2_slide-04.jpg"
+      }
+    ],
+    "gradients": [
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7483992040305462550",
+        "slide_file": "7483992040305462550_slide-03.jpg",
+        "reason": "Purple #6A11CB to blue #2575FC gradient -- purple-to-cool transition on dark, matches Databrill secondary",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/branding--color-meaning-for-designers-01/branding--color-meaning-for-designers-01_slide-03.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7614177070352010518",
+        "slide_file": "7614177070352010518_slide-03.jpg",
+        "reason": "Dark gradient #292E49 to #546976 -- muted dark-to-slate, subtle dark UI gradient",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/fonts--beautif-fonts/fonts--beautif-fonts_slide-03.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7621240900122840342",
+        "slide_file": "7621240900122840342_slide-03.jpg",
+        "reason": "Dark teal gradient #2C3E50 to #4CA1AF -- moody dark gradient for backgrounds",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/gradients--official-graphic-design-trends-2026/gradients--official-graphic-design-trends-2026_slide-03.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7621240900122840342",
+        "slide_file": "7621240900122840342_slide-04.jpg",
+        "reason": "Deep red #95122C to near-black #100C08 gradient -- dark dramatic gradient",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/gradients--official-graphic-design-trends-2026/gradients--official-graphic-design-trends-2026_slide-04.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7623453080742350102",
+        "slide_file": "7623453080742350102_slide-02.jpg",
+        "reason": "Dark #1A0500 to orange #FF4500 gradient -- dark-to-warm-accent, Databrill orange glow territory",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/gradients--use-these-gradients-01/gradients--use-these-gradients-01_slide-02.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7623453080742350102",
+        "slide_file": "7623453080742350102_slide-03.jpg",
+        "reason": "Purple #4A0080 to near-black #0D0D0D gradient -- dark purple gradient, Databrill secondary glow",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/gradients--use-these-gradients-01/gradients--use-these-gradients-01_slide-03.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7626021531352567063",
+        "slide_file": "7626021531352567063_slide-02.jpg",
+        "reason": "Aurora gradient: cyan #00D4FF to purple #5B0FBE -- cool-to-purple transition on dark",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/gradients--inspiration-2026-post-inspiration-9-41-150/gradients--inspiration-2026-post-inspiration-9-41-150_slide-02.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7626021531352567063",
+        "slide_file": "7626021531352567063_slide-04.jpg",
+        "reason": "Inferno gradient: orange #FF6B35 to near-black #1A0508 -- orange CTA glow fading to dark bg",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/gradients--inspiration-2026-post-inspiration-9-41-150/gradients--inspiration-2026-post-inspiration-9-41-150_slide-04.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7626021531352567063",
+        "slide_file": "7626021531352567063_slide-05.jpg",
+        "reason": "Twilight gradient: salmon #FF9A8B to deep purple #1E1040 -- warm-to-purple, meshes with Databrill palette",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/gradients--inspiration-2026-post-inspiration-9-41-150/gradients--inspiration-2026-post-inspiration-9-41-150_slide-05.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7615352592712961302",
+        "slide_file": "7615352592712961302_slide-06.jpg",
+        "reason": "Purple #8A2EFF to cyan #CCE0FF gradient -- purple accent gradient suitable for dark UIs",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/gradients--stunning-color-gradients-01/gradients--stunning-color-gradients-01_slide-06.jpg"
+      },
+      {
+        "creator": "sharon_olaitan",
+        "post_folder": "7617854054940544276",
+        "slide_file": "7617854054940544276_slide-03.jpg",
+        "reason": "Purple #9333EA to pink #FB7185 gradient -- vibrant purple gradient for accent elements",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/sharon_olaitan/gradients--save-for-later-zehra-syed63-graphics/gradients--save-for-later-zehra-syed63-graphics_slide-03.jpg"
+      }
+    ],
+    "layouts": [
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7607590520394616086",
+        "slide_file": "7607590520394616086_slide-02.jpg",
+        "reason": "Banking dashboard with purple #9E77ED/#7F56D9/#6941C6 accent -- SaaS dashboard layout with sidebar, cards, charts on dark",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/colors--color-combos-01-official/colors--color-combos-01-official_slide-02.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7607590520394616086",
+        "slide_file": "7607590520394616086_slide-03.jpg",
+        "reason": "Same dashboard with indigo #6366F1/#4F46E5/#4338CA -- shows how palette swap affects dashboard feel",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/colors--color-combos-01-official/colors--color-combos-01-official_slide-03.jpg"
+      },
+      {
+        "creator": "ayathedesigner",
+        "post_folder": "7592582396348763400",
+        "slide_file": "7592582396348763400_slide-02.jpg",
+        "reason": "Analytics dashboard with sidebar nav, charts, sentiment filters, and participant data cards",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/ayathedesigner/layouts--modern-applications-inspo/layouts--modern-applications-inspo_slide-02.jpg"
+      },
+      {
+        "creator": "ayathedesigner",
+        "post_folder": "7593451506330848530",
+        "slide_file": "7593451506330848530_slide-02.jpg",
+        "reason": "Nexio SaaS financial platform -- dark card UI with cashflow data, trusted-by logos, workflow section",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/ayathedesigner/layouts--car-website-design/layouts--car-website-design_slide-02.jpg"
+      },
+      {
+        "creator": "ayathedesigner",
+        "post_folder": "7580315547796081927",
+        "slide_file": "7580315547796081927_slide-04.jpg",
+        "reason": "AI-driven SaaS hero -- dark bg, features/solutions nav, system-that-learns messaging, tech copy",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/ayathedesigner/branding--car-applications-inspos/branding--car-applications-inspos_slide-04.jpg"
+      },
+      {
+        "creator": "ayathedesigner",
+        "post_folder": "7580315547796081927",
+        "slide_file": "7580315547796081927_slide-08.jpg",
+        "reason": "Nexora AI platform hero -- dark bg, Solutions/Technology nav, search bar CTA, modern SaaS layout",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/ayathedesigner/branding--car-applications-inspos/branding--car-applications-inspos_slide-08.jpg"
+      },
+      {
+        "creator": "ayathedesigner",
+        "post_folder": "7580315547796081927",
+        "slide_file": "7580315547796081927_slide-09.jpg",
+        "reason": "Lumenet dark SaaS hero -- AI + system architecture messaging, minimal dark design, tech platform",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/ayathedesigner/branding--car-applications-inspos/branding--car-applications-inspos_slide-09.jpg"
+      },
+      {
+        "creator": "ayathedesigner",
+        "post_folder": "7608483530980461831",
+        "slide_file": "7608483530980461831_slide-02.jpg",
+        "reason": "Ripple tech hero section -- dark bg, secure data sharing, Google/AWS/Microsoft logos, data compliance",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/ayathedesigner/layouts--most-creative-website-caps-lock-design/layouts--most-creative-website-caps-lock-design_slide-02.jpg"
+      },
+      {
+        "creator": "ayathedesigner",
+        "post_folder": "7608483530980461831",
+        "slide_file": "7608483530980461831_slide-04.jpg",
+        "reason": "Fintech hero section -- dark bg, Empower Your Financial Future, credit card UI, reviews badge",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/ayathedesigner/layouts--most-creative-website-caps-lock-design/layouts--most-creative-website-caps-lock-design_slide-04.jpg"
+      },
+      {
+        "creator": "https.gregormondragon",
+        "post_folder": "7626294998681603336",
+        "slide_file": "7626294998681603336_slide-02.jpg",
+        "reason": "Floating glassmorphism navbar -- frosted glass nav on dark bg, matches Databrill glassmorphism vibe",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/https.gregormondragon/layouts--navigation-bar-designs-that-feel-like-luxury/layouts--navigation-bar-designs-that-feel-like-luxury_slide-02.jpg"
+      },
+      {
+        "creator": "https.gregormondragon",
+        "post_folder": "7626294998681603336",
+        "slide_file": "7626294998681603336_slide-04.jpg",
+        "reason": "Modern SaaS Cybernetic Edge navbar -- dark tech nav with Product/Features/Pricing/Enterprise/Request Demo",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/https.gregormondragon/layouts--navigation-bar-designs-that-feel-like-luxury/layouts--navigation-bar-designs-that-feel-like-luxury_slide-04.jpg"
+      }
+    ],
+    "branding": [
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7485020951424404758",
+        "slide_file": "7485020951424404758_slide-03.jpg",
+        "reason": "60:30:10 color method explained -- primary/secondary/accent ratio, directly applicable to Databrill dark/purple/orange",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/branding--out-logo-ideas-let-help-you-out-save-for/branding--out-logo-ideas-let-help-you-out-save-for_slide-03.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7611973551083752706",
+        "slide_file": "7611973551083752706_slide-02.jpg",
+        "reason": "Blue = Trust, Reliability, Professionalism, Calming -- color psychology backing Databrill trust positioning",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/colors--color-combos-that-elevate-your-design/colors--color-combos-that-elevate-your-design_slide-02.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7623840652870143235",
+        "slide_file": "7623840652870143235_slide-03.jpg",
+        "reason": "Dark Purple = Power, Mystique, Exclusivity, Non-aggressive -- validates Databrill purple secondary choice",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/inspiration--perfect-shadows-01/inspiration--perfect-shadows-01_slide-03.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7623840652870143235",
+        "slide_file": "7623840652870143235_slide-04.jpg",
+        "reason": "Slate Navy = Trust, Legacy, Stability, Command -- reinforces dark bg psychology for data platform",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/inspiration--perfect-shadows-01/inspiration--perfect-shadows-01_slide-04.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7626423952419802390",
+        "slide_file": "7626423952419802390_slide-03.jpg",
+        "reason": "Graphite = Premium without price tag, Neutral but never boring, Restraint and depth, Favoured by luxury and tech",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/gradients--official-stunning-gradients-for-design/gradients--official-stunning-gradients-for-design_slide-03.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7626423952419802390",
+        "slide_file": "7626423952419802390_slide-06.jpg",
+        "reason": "Amber #E8890C = Triggers optimism and action, Energizes without aggression -- validates Databrill orange accent choice",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/gradients--official-stunning-gradients-for-design/gradients--official-stunning-gradients-for-design_slide-06.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7614634460264369430",
+        "slide_file": "7614634460264369430_slide-02.jpg",
+        "reason": "Navy = worn by banks and leaders, brain reads it as serious, signals trust -- authority color psychology for data",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/branding--why-these-colors-make-you-trust-brand/branding--why-these-colors-make-you-trust-brand_slide-02.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7616756987103120662",
+        "slide_file": "7616756987103120662_slide-03.jpg",
+        "reason": "Sharp edges in logos = Precision, Strength, Confidence -- relevant to Databrill interlocking rings logo concept",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/layouts--why-you-scroll-past-most-brands-01-official/layouts--why-you-scroll-past-most-brands-01-official_slide-03.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7615662871262809366",
+        "slide_file": "7615662871262809366_slide-04.jpg",
+        "reason": "Night #111111 as black alternative -- stop using #000000, use near-black instead, matches Databrill #0c0a14",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/colors--stop-using-your-design-01-usevisuals/colors--stop-using-your-design-01-usevisuals_slide-04.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7615662871262809366",
+        "slide_file": "7615662871262809366_slide-05.jpg",
+        "reason": "Rich Black #010B13 -- deep near-black with blue undertone, validates Databrill #0c0a14 dark bg choice",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/colors--stop-using-your-design-01-usevisuals/colors--stop-using-your-design-01-usevisuals_slide-05.jpg"
+      },
+      {
+        "creator": "brandlet_official",
+        "post_folder": "7618332245799030038",
+        "slide_file": "7618332245799030038_slide-07.jpg",
+        "reason": "Create a color palette with fewer colors -- minimal palette principle, validates Databrill 3-color restraint",
+        "actual_path": "design-brand-reels-inspiration-extract/slides/brandlet_official/gradients--stunning-gradients-you-need-start-using-01/gradients--stunning-gradients-you-need-start-using-01_slide-07.jpg"
+      }
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "_comment": "Workshop Intro Chapter 05 — Screenshots & Typora Markdown Workflow. Single-stem rendering: scenes joined with break tags, one ElevenLabs call. Visual concerns (sourceStart, clipDurationSeconds, label, title) live in src/WorkshopIntroCh05.tsx. Source: workshop-intro-chapters.mp4 chapter 05 (495.1-681.0s). House voice preset.",
+  "voice_id": "jQOgcOzmmipekvxJN09W",
+  "model_id": "eleven_multilingual_v2",
+  "output_dir": "public/assets/voice/generated/workshop-intro-ch05",
+  "default_voice_settings": {
+    "stability": 0.31,
+    "similarity_boost": 1.0,
+    "style": 0.0,
+    "use_speaker_boost": true,
+    "speed": 0.9
+  },
+  "scenes": [
+    {
+      "id": "scene-1-screenshots",
+      "text": "Screenshots into Claude — take one with your usual shortcut, then hold shift while you drag it in. That pastes it inline as part of the conversation."
+    },
+    {
+      "id": "scene-2-typora-install",
+      "text": "For reading the markdown Claude generates, install Typora. Fourteen bucks, seven-day trial. The cleanest markdown reader for this workflow."
+    },
+    {
+      "id": "scene-3-typora-render",
+      "text": "Raw markdown is dense — Typora renders it as a clean document. Headings, lists, tables, all properly typeset. Your CLAUDE-dot-md becomes something you'd actually read."
+    },
+    {
+      "id": "scene-4-themes",
+      "text": "Typora ships with themes — light, dark, GitHub, Night. Pick the one that matches your screen and stick with it."
+    },
+    {
+      "id": "scene-5-mermaid",
+      "text": "Where Typora really earns its keep — rendering Mermaid diagrams inline. When you're mapping automations in Claude, ask it to write the diagram in Mermaid. Typora turns it into a real visual you can scan."
+    }
+  ]
+}

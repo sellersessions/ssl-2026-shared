@@ -1,0 +1,71 @@
+{
+  "source": "public/assets/music/ssl-live-beds/penguinmusic-emotions-cinematic-ambient-176078.mp3",
+  "duration_s": 64.836,
+  "fps": 30,
+  "comp_seconds": 61.0,
+  "total_onsets_detected": 150,
+  "returned": 12,
+  "min_gap_s": 1.5,
+  "markers": [
+    {
+      "time_s": 16.834,
+      "frame": 505,
+      "strength": 1.144
+    },
+    {
+      "time_s": 19.226,
+      "frame": 577,
+      "strength": 0.744
+    },
+    {
+      "time_s": 37.21,
+      "frame": 1116,
+      "strength": 0.671
+    },
+    {
+      "time_s": 39.927,
+      "frame": 1198,
+      "strength": 0.996
+    },
+    {
+      "time_s": 42.91,
+      "frame": 1287,
+      "strength": 0.697
+    },
+    {
+      "time_s": 45.523,
+      "frame": 1366,
+      "strength": 0.761
+    },
+    {
+      "time_s": 47.125,
+      "frame": 1414,
+      "strength": 0.891
+    },
+    {
+      "time_s": 49.11,
+      "frame": 1473,
+      "strength": 0.68
+    },
+    {
+      "time_s": 50.712,
+      "frame": 1521,
+      "strength": 0.849
+    },
+    {
+      "time_s": 53.116,
+      "frame": 1593,
+      "strength": 0.739
+    },
+    {
+      "time_s": 54.927,
+      "frame": 1648,
+      "strength": 0.874
+    },
+    {
+      "time_s": 57.516,
+      "frame": 1725,
+      "strength": 0.831
+    }
+  ]
+}

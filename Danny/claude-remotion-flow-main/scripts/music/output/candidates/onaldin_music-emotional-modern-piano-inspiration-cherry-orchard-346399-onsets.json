@@ -1,0 +1,71 @@
+{
+  "source": "public/assets/music/ssl-live-beds/onaldin_music-emotional-modern-piano-inspiration-cherry-orchard-346399.mp3",
+  "duration_s": 89.976,
+  "fps": 30,
+  "comp_seconds": 61.0,
+  "total_onsets_detected": 356,
+  "returned": 12,
+  "min_gap_s": 1.5,
+  "markers": [
+    {
+      "time_s": 14.208,
+      "frame": 426,
+      "strength": 1.1
+    },
+    {
+      "time_s": 17.76,
+      "frame": 533,
+      "strength": 0.975
+    },
+    {
+      "time_s": 19.477,
+      "frame": 584,
+      "strength": 0.816
+    },
+    {
+      "time_s": 21.835,
+      "frame": 655,
+      "strength": 0.807
+    },
+    {
+      "time_s": 25.387,
+      "frame": 762,
+      "strength": 0.798
+    },
+    {
+      "time_s": 30.571,
+      "frame": 917,
+      "strength": 0.812
+    },
+    {
+      "time_s": 32.384,
+      "frame": 972,
+      "strength": 0.939
+    },
+    {
+      "time_s": 36.565,
+      "frame": 1097,
+      "strength": 0.816
+    },
+    {
+      "time_s": 38.475,
+      "frame": 1154,
+      "strength": 0.84
+    },
+    {
+      "time_s": 45.653,
+      "frame": 1370,
+      "strength": 0.819
+    },
+    {
+      "time_s": 52.789,
+      "frame": 1584,
+      "strength": 0.912
+    },
+    {
+      "time_s": 57.845,
+      "frame": 1735,
+      "strength": 0.834
+    }
+  ]
+}

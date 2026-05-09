@@ -1,0 +1,87 @@
+palette_name,industry,theme,primary,secondary,cta,background,text,border,mood,source
+ss-dark-purple,events/podcast,dark,#461499,#753EF7,#FBBF24,#0C0322,#FAFAFC,#1F1F1F,premium authority,sellersessions-design-system
+ss-dark-orange,events/podcast,dark,#461499,#F97316,#FBBF24,#0C0322,#FAFAFC,#1F1F1F,energetic urgency,sellersessions-design-system
+databrill-blue,saas/data,light,#2563EB,#3B82F6,#2563EB,#FFFFFF,#1E1E2F,#E5E7EB,clean trust,databrill-design-system
+databrill-stitch-dark,saas/data,dark,#ff7d3b,#8b5cf6,#ff7d3b,#0A0C10,#FFFFFF,rgba(255 255 255 / 0.12),premium modern,databrill-stitch-build
+fintech-trust,fintech,light,#0F766E,#14B8A6,#0F766E,#FFFFFF,#1E293B,#E2E8F0,stability trust,generic
+ecommerce-bold,ecommerce,light,#DC2626,#F97316,#DC2626,#FFFFFF,#111827,#E5E7EB,urgency conversion,generic
+saas-indigo,saas/b2b,light,#4F46E5,#818CF8,#4F46E5,#FFFFFF,#1E1E2F,#E5E7EB,modern professional,generic
+saas-dark,saas/b2b,dark,#6366F1,#818CF8,#22C55E,#0F172A,#F8FAFC,#1E293B,developer premium,generic
+health-green,health/wellness,light,#16A34A,#4ADE80,#16A34A,#FFFFFF,#1E293B,#E5E7EB,calm vitality,generic
+creative-gradient,creative/agency,dark,#EC4899,#8B5CF6,#F59E0B,#0F0F23,#FAFAFC,#2D2D3F,bold expressive,generic
+education-warm,education,light,#2563EB,#F59E0B,#2563EB,#FFFBEB,#1E293B,#E5E7EB,approachable warm,generic
+podcast-dark,media/podcast,dark,#9333EA,#EC4899,#FBBF24,#0A0A0A,#FAFAFC,#1F1F1F,entertainment energy,generic
+tiktok-ak-visualss-9366-combo1,inspiration,dark,#111111,#F4EDE4,,#111111,#F4EDE4,,color combo,tiktok/ak.visualss
+tiktok-ak-visualss-9366-combo2,inspiration,light,#5A189A,#FFD60A,,,,,color combo,tiktok/ak.visualss
+tiktok-ak-visualss-9366-combo3,inspiration,dark,#023020,#D4A373,,#023020,#D4A373,,color combo,tiktok/ak.visualss
+tiktok-ak-visualss-9366-combo4,inspiration,light,#D62828,#FFF3E0,,,,,color combo,tiktok/ak.visualss
+tiktok-ayathedesigner-8312,inspiration,light,#E2A7B6,#3F5A83,#C9C5BB,#111312,#434346,#FBF5A5,inspiration,tiktok/ayathedesigner
+tiktok-ayathedesigner-4791,design/branding,light,#FF1F,#E9B3FB,#6F00FF,#3B0270,#FF0004,#0083FF,inspiration,tiktok/ayathedesigner
+tiktok-brandlet-official-2550-combo1,design/branding,light,#FF6B6B,#FFD93D,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-2550-combo2,design/branding,light,#6A11CB,#2575FC,,#2575FC,#6A11CB,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-2550-combo3,design/branding,light,#696EFF,#F8ACFF,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-2550-combo4,design/branding,dark,#00C9A7,#92FE9D,,#00C9A7,#92FE9D,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4758,saas/tech,mixed,#FFF,#000,#E71F51,#0071E3,,,inspiration,tiktok/brandlet_official
+tiktok-brandlet-official-5526,design/branding,light,#F4C4F3,#FC67FA,#DE6161,#2657EB,#EF32D9,#98FFFD,gradient,tiktok/brandlet_official
+tiktok-brandlet-official-4358-combo1,design/branding,light,#4FACFE,#00F2FE,,#00F2FE,#4FACFE,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4358-combo2,design/branding,light,#FF0844,#FFB199,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4358-combo3,design/branding,dark,#1488CC,#2B32B2,,#1488CC,#2B32B2,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4358-combo4,design/branding,dark,#1D976C,#93F9B9,,#1D976C,#93F9B9,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4358-combo5,design/branding,light,#FFE259,#FFA751,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4262,design/branding,light,#4C7766,#EBE,#91736B,#FBF0F4,#ED8F45,#FFEFBC,inspiration,tiktok/brandlet_official
+tiktok-brandlet-official-6086,saas/tech,mixed,#9E77ED,#7F56D9,#6941C6,#6366F1,#4F46E5,#4338CA,inspiration,tiktok/brandlet_official
+tiktok-brandlet-official-1350,design/branding,light,#161616,#5F5F5F,#D8D7D1,#818181,#FF4A01,#17181D,inspiration,tiktok/brandlet_official
+tiktok-brandlet-official-6166,saas/tech,dark,#4561DB,#58536E,#149E53,,,,inspiration,tiktok/brandlet_official
+tiktok-brandlet-official-4806-combo1,inspiration,dark,#064734,#064734,,#064734,#064734,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4806-combo2,inspiration,dark,#004643,#F0EDE5,,#004643,#F0EDE5,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4806-combo3,inspiration,light,#381932,#FFF3E6,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4806-combo4,inspiration,light,#3E2723,#FFEDAC,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-3558-combo1,inspiration,dark,#0A2540,#9FE0C3,,#0A2540,#9FE0C3,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-3558-combo2,inspiration,light,#F4F7F8,#0B132B,,#0B132B,#F4F7F8,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-3558-combo3,inspiration,dark,#0F172A,#FFD6C9,,#0F172A,#FFD6C9,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-3558-combo4,inspiration,dark,#004643,#2F3E46,,#004643,#2F3E46,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-9490-combo1,inspiration,light,#FFF1C1,#4A2C2A,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-9490-combo2,inspiration,dark,#1E3A8A,#E5E7EB,,#1E3A8A,#E5E7EB,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-9490-combo3,inspiration,light,#F2E8D5,#0B3C2D,,#0B3C2D,#F2E8D5,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-9490-combo4,inspiration,dark,#1F2933,#B7F000,,#1F2933,#B7F000,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-7318-combo1,design/branding,dark,#184E50,#184E50,,#184E50,#184E50,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-7318-combo2,design/branding,dark,#2E0D14,#EFE,,#2E0D14,#EFE,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-7318-combo3,design/branding,dark,#060D0C,#F0EDE5,,#060D0C,#F0EDE5,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-7318-combo4,design/branding,light,#BAD797,#670626,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-3334-combo1,inspiration,light,#EEA74F,#00539C,,#00539C,#EEA74F,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-3334-combo3,inspiration,light,#D62829,#FFF3E0,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-3334-combo4,inspiration,light,#50222D,#C4C3D0,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-0518,design/branding,mixed,#155EEF,#84ADFF,#546976,#292E49,#F857A6,#FF5858,gradient,tiktok/brandlet_official
+tiktok-brandlet-official-4278-combo1,design/branding,light,#3D2B1F,#D4A574,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4278-combo2,design/branding,dark,#1B1B2F,#E94560,,#1B1B2F,#E94560,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4278-combo3,design/branding,light,#EFF,#C9452E,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4278-combo4,design/branding,light,#E8D5C4,#6B4C3B,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-1302-combo1,design/branding,light,#B5F0F0,#A0BEF8,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-1302-combo2,design/branding,light,#EB4174,#FFE3E3,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-1302-combo3,design/branding,light,#F9E7FE,#DAFCFC,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-1302-combo4,design/branding,dark,#1AA37A,#9DFFB3,,#1AA37A,#9DFFB3,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-1302-combo5,design/branding,light,#8A2EFF,#CCE0FF,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-9366,design/branding,dark,#000000,#282828,#111111,,,,inspiration,tiktok/brandlet_official
+tiktok-brandlet-official-0294,design/branding,dark,#93032E,#151515,#CBDFEE,#F4C97A,#8F00FF,#C200FB,inspiration,tiktok/brandlet_official
+tiktok-brandlet-official-1910,design/branding,mixed,#006D77,#83C5BE,#AEB8FE,#758BFD,#00002B,#1E1E59,modern,tiktok/brandlet_official
+tiktok-brandlet-official-0210,inspiration,mixed,#1A0A3D,#C9A84C,#C0C0C0,#FF3EA5,#0066FF,#B87333,inspiration,tiktok/brandlet_official
+tiktok-brandlet-official-8790,design/branding,mixed,#709BEA,#4F79E2,#3457D5,,,,inspiration,tiktok/brandlet_official
+tiktok-brandlet-official-4530-combo1,inspiration,light,#940002,#E6DDD4,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4530-combo2,inspiration,dark,#23194F,#DDFEF8,,#23194F,#DDFEF8,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4530-combo3,inspiration,light,#FEEF4C,#2A323F,,#2A323F,#FEEF4C,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4530-combo4,inspiration,light,#FFFBDF,#17271D,,#17271D,#FFFBDF,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-4374,design/branding,dark,#FF8000,#00D2BE,#0A0A0A,#DC0000,#FFF200,#0600EF,inspiration,tiktok/brandlet_official
+tiktok-brandlet-official-9526,design/branding,dark,#0000,#00FF89,#BB0A30,#C0C0C0,#006F62,#0090FF,inspiration,tiktok/brandlet_official
+tiktok-brandlet-official-0342,design/branding,mixed,#F2E6EE,#977DDF,#2C3E50,#4CA1AF,#95122C,#100C08,gradient,tiktok/brandlet_official
+tiktok-brandlet-official-5766,design/branding,light,#4A1528,#E8E0D8,#FF006E,#1A1F3A,#F0C8C0,#F0E6C8,inspiration,tiktok/brandlet_official
+tiktok-brandlet-official-0102,design/branding,dark,#1A0500,#FF4500,#4A0080,#0D0D0D,#0D3B5E,#E8F4F8,gradient,tiktok/brandlet_official
+tiktok-brandlet-official-4870,inspiration,light,#00FFFF,#8000FF,#F5E6A3,#C8C0E8,#FF36AB,#0D1B2A,inspiration,tiktok/brandlet_official
+tiktok-brandlet-official-7606-combo1,inspiration,dark,#0D1117,#FF6B35,,#0D1117,#FF6B35,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-7606-combo2,inspiration,dark,#1A0A0A,#E8729A,,#1A0A0A,#E8729A,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-7606-combo3,inspiration,dark,#111111,#C8A96E,,#111111,#C8A96E,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-7606-combo4,inspiration,dark,#0A0F,#E4F0F6,,#0A0F,#E4F0F6,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-7606-combo5,inspiration,light,#DC143C,#F2EFE7,,,,,color combo,tiktok/brandlet_official
+tiktok-brandlet-official-7063,inspiration,dark,#00D4FF,#5B0FBE,#B5E853,#0A1200,#FF6B35,#1A0508,gradient,tiktok/brandlet_official
+tiktok-brandlet-official-2390,design/branding,mixed,#0047AB,#4A5568,#7DAA92,#D4848E,#E8890C,,premium,tiktok/brandlet_official
+tiktok-brandlet-official-7318,design/branding,light,#C0C0C0,#0A0A0A,#C41E3A,#4A5568,#2B7A78,#E8744F,inspiration,tiktok/brandlet_official
+tiktok-sharon-olaitan-4276,design/branding,light,#DB2777,#DC2626,#9333EA,#FB7185,#FACC15,#F97316,gradient,tiktok/sharon_olaitan

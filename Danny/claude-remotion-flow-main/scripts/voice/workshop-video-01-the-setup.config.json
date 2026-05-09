@@ -1,0 +1,35 @@
+{
+  "_comment": "Workshop Video 01 — The Setup. Distilled from Intro chapters 1-4 + Module 1. Single-stem rendering: scenes joined with break tags, one ElevenLabs call. Visual concerns (clipDurationSeconds, label, title) live in src/WorkshopVideo01TheSetup.tsx. House voice preset.",
+  "voice_id": "jQOgcOzmmipekvxJN09W",
+  "model_id": "eleven_multilingual_v2",
+  "output_dir": "public/assets/voice/generated/workshop-video-01-the-setup",
+  "default_voice_settings": {
+    "stability": 0.31,
+    "similarity_boost": 1.0,
+    "style": 0.0,
+    "use_speaker_boost": true,
+    "speed": 0.9
+  },
+  "scenes": [
+    {
+      "id": "scene-1-install",
+      "text": "Start in VS Code. Open the marketplace, search for Claude Code, install the extension from Anthropic, then reload the window. That's the whole install."
+    },
+    {
+      "id": "scene-2-loop",
+      "text": "Now the loop. You prompt Claude. Claude acts on the code. You check what changed. You prompt again. Every workflow you build lives inside that one loop."
+    },
+    {
+      "id": "scene-3-themes",
+      "text": "Pick a theme once and it stays. Dracula, GitHub Light, Night Owl — whatever you like. VS Code remembers it across every project."
+    },
+    {
+      "id": "scene-4-settings",
+      "text": "Command-Shift-P opens the command palette — your shortcut to everything. Don't want to learn the settings file? Ask Claude to write your config for you."
+    },
+    {
+      "id": "scene-5-claude-md",
+      "text": "One file at the project root: CLAUDE-dot-M-D. Claude reads it every turn. It's where your project's brain lives — rules, paths, intent. Build this file slowly, and Claude gets sharper every session."
+    }
+  ]
+}

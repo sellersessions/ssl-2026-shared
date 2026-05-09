@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Databrill Core | Own Your Amazon Data</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Inter:wght@400;600;700;800;900&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-deep': '#0c0a14',
+                        'bg-surface': '#100e1a',
+                        'accent-orange': '#e07a3a',
+                        'accent-orange-light': '#f09050',
+                        'secondary-purple': '#7c6bbd',
+                        'section-hero': '#020408',
+                        'section-services': '#050a14',
+                        'section-features': '#0a101f',
+                        'section-pricing': '#0d1525'
+                    },
+                    fontFamily: {
+                        headline: ["Inter", "sans-serif"],
+                        display: ["Inter", "sans-serif"],
+                        body: ["DM Sans", "sans-serif"],
+                        label: ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        lg: "1rem",
+                        xl: "1.5rem",
+                        "2xl": "1.5rem",
+                        full: "9999px"
+                    },
+                    backgroundImage: {
+                        'glass-gradient': 'linear-gradient(135deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.01) 100%)',
+                        'btn-gradient': 'linear-gradient(135deg, #e07a3a, #ff4d00)',
+                        'border-gradient': 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02))'
+                    },
+                    boxShadow: {
+                        'glass': '0 25px 50px -12px rgba(0,0,0,0.7)',
+                        'glow': '0 0 20px rgba(224,122,58,0.3)',
+                        'glow-hover': '0 0 40px rgba(224,122,58,0.5)'
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0c0a14;
+            color: white;
+            font-family: 'DM Sans', sans-serif;
+            position: relative;
+        }
+        
+        .bg-grid-pattern {
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.3;
+        }
+
+        .bg-mesh-gradient {
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at top right, rgba(224, 122, 58, 0.12), transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(124, 107, 189, 0.08), transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-premium {
+            border-radius: 9999px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #e07a3a, #ff4d00);
+            box-shadow: 0 0 20px rgba(224,122,58,0.3);
+            transition: all 500ms cubic-bezier(0.4,0,0.2,1);
+            color: white;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: -0.02em;
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 40px rgba(224,122,58,0.5);
+        }
+
+        .btn-ghost {
+            border-radius: 9999px;
+            padding: 16px 32px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            color: white;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: -0.02em;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .btn-ghost::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: -1;
+            margin: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #e07a3a, #7c6bbd, #e07a3a);
+        }
+
+        .btn-ghost:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .ticker-mask {
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+
+        .eyebrow-chip {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            background: rgba(224, 122, 58, 0.1);
+            color: #e07a3a;
+            border: 1px solid rgba(224, 122, 58, 0.2);
+            display: inline-block;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+        }
+        
+        .blur-blob {
+            position: absolute;
+            width: 256px;
+            height: 256px;
+            filter: blur(100px);
+            z-index: -10;
+            border-radius: 50%;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden selection:bg-accent-orange/30 selection:text-white">
+<!-- Global Background Elements -->
+<div class="bg-grid-pattern"></div>
+<div class="bg-mesh-gradient"></div>
+<!-- TopNavBar -->
+<nav class="docked full-width top-0 sticky z-50 bg-[#0c0a14]/60 backdrop-blur-2xl border-b border-white/10 shadow-2xl shadow-black/50">
+<div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-8">
+<a class="font-['Space_Grotesk'] text-2xl font-bold text-white tracking-tighter" href="#">
+                    Data<span class="text-orange-500">brill</span> Core
+                </a>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-white/70 font-medium font-['Inter'] hover:text-orange-400 hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg" href="#features">Features</a>
+<a class="text-white/70 font-medium font-['Inter'] hover:text-orange-400 hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg" href="#pricing">Pricing</a>
+<a class="text-white/70 font-medium font-['Inter'] hover:text-orange-400 hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg" href="#faq">FAQ</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<a class="hidden md:block text-white/70 font-medium font-['Inter'] hover:text-white transition-colors" href="#">Sign In</a>
+<a class="btn-premium py-2.5 px-6 text-sm" href="#">Get Started</a>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative pt-32 pb-32 flex flex-col items-center justify-center min-h-[921px] px-6 text-center overflow-hidden bg-[#020408]">
+<div class="blur-blob bg-accent-orange/10 top-1/4 left-1/4"></div>
+<div class="blur-blob bg-secondary-purple/10 bottom-1/4 right-1/4"></div>
+<div class="max-w-4xl mx-auto relative z-10 space-y-8 flex flex-col items-center">
+<span class="eyebrow-chip">Now in beta</span>
+<h1 class="text-[clamp(2.75rem,7vw,5rem)] font-black text-white max-w-4xl mx-auto">
+                    Own Your Amazon Data. <br/>
+<span class="bg-gradient-to-r from-accent-orange to-accent-orange-light bg-clip-text text-transparent">Finally.</span>
+</h1>
+<p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed font-body">
+                    Stop renting access to your own performance metrics. We extract, normalize, and sync your Amazon Seller &amp; Vendor data directly into your own PostgreSQL database.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<a class="btn-premium" href="#">
+                        Start Free Trial
+                        <span class="material-symbols-outlined ml-2 text-[20px]">arrow_forward</span>
+</a>
+<a class="btn-ghost" href="#">
+                        See How It Works
+                    </a>
+</div>
+<div class="pt-12 flex items-center justify-center gap-2 text-white/40 text-sm font-medium">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>Secure API connection. No credit card required.</span>
+</div>
+</div>
+</section>
+<!-- Trust Ticker Section -->
+<section class="py-12 border-y border-white/5 bg-[#050a14] overflow-hidden">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex items-center gap-8 ticker-mask">
+<div class="flex gap-6 animate-[scroll_30s_linear_infinite] whitespace-nowrap">
+<!-- Ticker Items -->
+<div class="glass-card px-6 py-3 flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+<span class="text-sm font-medium text-white/80">API Quota: 98% Available</span>
+</div>
+<div class="glass-card px-6 py-3 flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+<span class="text-sm font-medium text-white/80">Sync Lag: &lt; 5ms</span>
+</div>
+<div class="glass-card px-6 py-3 flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+<span class="text-sm font-medium text-white/80">Active Syncs: 1,402</span>
+</div>
+<div class="glass-card px-6 py-3 flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-amber-500"></div>
+<span class="text-sm font-medium text-white/80">Rate Limit: Optimal</span>
+</div>
+<!-- Duplicate for infinite scroll effect -->
+<div class="glass-card px-6 py-3 flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+<span class="text-sm font-medium text-white/80">API Quota: 98% Available</span>
+</div>
+<div class="glass-card px-6 py-3 flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+<span class="text-sm font-medium text-white/80">Sync Lag: &lt; 5ms</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#100e1a] border-t border-white/5 full-width bottom-0">
+<div class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col items-center md:items-start gap-4">
+<span class="font-['Space_Grotesk'] text-xl font-bold text-white">
+                    Data<span class="text-orange-500">brill</span> Core
+                </span>
+<p class="font-['DM_Sans'] text-sm text-white/40 leading-relaxed">
+                    © 2024 Databrill Core. All rights reserved.
+                </p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-['DM_Sans'] text-sm text-white/40 hover:text-orange-400 transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="font-['DM_Sans'] text-sm text-white/40 hover:text-orange-400 transition-colors duration-200" href="#">Terms of Service</a>
+<a class="font-['DM_Sans'] text-sm text-white/40 hover:text-orange-400 transition-colors duration-200" href="#">Security</a>
+<a class="font-['DM_Sans'] text-sm text-white/40 hover:text-orange-400 transition-colors duration-200" href="#">Status</a>
+</div>
+</div>
+</footer>
+</body></html>

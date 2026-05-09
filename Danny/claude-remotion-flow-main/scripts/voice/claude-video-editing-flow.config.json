@@ -1,0 +1,67 @@
+{
+  "_comment": "Claude Video Editing Flow explainer — SSL 2026 conference handover. Per-LINE generation: each sentence is its own TTS call, chained via request-id. Files: {scene}__{line}.mp3 → stitched per-scene → final listen-through. Finder colour-tag review (blue=keep, red=regen, green=mid) drives selective regen. Em-dashes used as TTS breath markers ONLY (never read by humans, never copied to mailers/READMEs/UI).",
+  "voice_id": "jQOgcOzmmipekvxJN09W",
+  "model_id": "eleven_multilingual_v2",
+  "output_dir": "public/assets/voice/generated/claude-video-editing-flow",
+  "default_voice_settings": {
+    "stability": 0.45,
+    "similarity_boost": 1.0,
+    "style": 0.0,
+    "use_speaker_boost": true,
+    "speed": 0.9
+  },
+  "scenes": [
+    {
+      "id": "scene-1-hook",
+      "lines": [
+        { "id": "L1", "text": "Editing long-form video by hand — used to mean scrubbing a four-minute take to find the sixty seconds worth keeping." }
+      ]
+    },
+    {
+      "id": "scene-2-turn",
+      "lines": [
+        { "id": "L1", "text": "What if you could read the cuts as a list — and just tick the ones that work." }
+      ]
+    },
+    {
+      "id": "scene-3-intake",
+      "lines": [
+        { "id": "L1", "text": "To get started — drop in any video file." },
+        { "id": "L2", "text": "Claude transcribes it word-by-word — ranks every quotable segment — and prints a coloured terminal table." }
+      ]
+    },
+    {
+      "id": "scene-4a-score",
+      "lines": [
+        { "id": "L1", "text": "Next stage — Claude scores every segment against your selection rules." },
+        { "id": "L2", "text": "Five pipeline stages — two pre-render gates — every cut audited before render." }
+      ]
+    },
+    {
+      "id": "scene-4b-render",
+      "lines": [
+        { "id": "L1", "text": "Then you reply with a combo letter — or a number list." },
+        { "id": "L2", "text": "Claude renders. Single grade — thirty-millisecond fades — clean concat." }
+      ]
+    },
+    {
+      "id": "scene-5-proof",
+      "lines": [
+        { "id": "L1", "text": "Tested on podcast cuts — Loom walkthroughs — vertical reels — and keynote footage." }
+      ]
+    },
+    {
+      "id": "scene-6-time",
+      "lines": [
+        { "id": "L1", "text": "End-to-end — outside revisions — takes around five minutes." },
+        { "id": "L2", "text": "Two minutes reading. Three minutes Claude renders." }
+      ]
+    },
+    {
+      "id": "scene-7-cta",
+      "lines": [
+        { "id": "L1", "text": "Pull the repo — and put Claude to work." }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,307 @@
+<h2 class="sr-only">Template 06 instance: Production timeline showing the ten-stage pipeline as Gantt bars with phase colours and a moving playhead.</h2>
+<style>
+:root{
+  --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
+  --bg-page:#06080F;
+  --bg-0:#030C1B;
+  --bg-1:#0A1228;
+  --ink-0:#F2EEF8;
+  --ink-1:#C8B6F0;
+  --ink-2:#8B92A8;
+  --ink-3:#5A627A;
+  --violet:#9D4EDD;
+  --teal:#5DCAA5;
+  --amber:#EF9F27;
+  --pink:#FF6BB4;
+  --gold:#C99554;
+  --r-wrap:12px;
+  --r-card:3px;
+  --stroke-hair:0.5px;
+  --stroke-bold:1.5px;
+  --border-soft:rgba(157,78,221,0.18);
+  --border-mid:rgba(157,78,221,0.35);
+  --card-fill:rgba(255,255,255,0.02);
+  --card-stroke:rgba(255,255,255,0.08);
+  --divider:rgba(255,255,255,0.06);
+}
+
+.gx-frame{width:100%;max-width:1080px;font-family:var(--font-sans);color:var(--ink-0)}
+.gx-wrap{
+  background:linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 100%);
+  border-radius:var(--r-wrap);
+  padding:28px 28px 18px;
+  position:relative;
+  overflow:hidden;
+  border:var(--stroke-hair) solid var(--border-soft);
+}
+.gx-wrap::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 110%, rgba(157,78,221,0.10), transparent 60%);
+  pointer-events:none;
+}
+.gx-wrap::after{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(157,78,221,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(157,78,221,0.025) 1px,transparent 1px);
+  background-size:24px 24px;
+  pointer-events:none;
+}
+
+.gx-spec{display:flex;align-items:center;gap:18px;margin-bottom:18px;position:relative;z-index:1}
+.gx-spec-id{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:2px;
+  color:var(--ink-2);text-transform:uppercase;
+  padding:3px 8px;border:var(--stroke-hair) solid var(--border-mid);border-radius:2px;
+}
+.gx-spec-name{font-size:20px;font-weight:600;letter-spacing:-0.2px;color:var(--ink-0);margin:0}
+.gx-spec-pat{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;
+  color:var(--gold);text-transform:uppercase;margin-left:auto;
+  display:flex;align-items:center;gap:8px;
+}
+.gx-spec-pat::before{
+  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 6px var(--gold);
+  animation:gxPulse 2s ease-in-out infinite;
+}
+@keyframes gxPulse{0%,100%{box-shadow:0 0 6px var(--gold)}50%{box-shadow:0 0 12px var(--gold)}}
+
+.gx-canvas{
+  position:relative;
+  background:var(--card-fill);
+  border-radius:var(--r-card);
+  border:var(--stroke-hair) solid var(--card-stroke);
+  z-index:1;
+  overflow:hidden;
+}
+
+.gx-axis{
+  display:grid;
+  background:rgba(255,255,255,0.02);
+  border-bottom:var(--stroke-hair) solid var(--card-stroke);
+  padding:10px 0;
+}
+.gx-axis-cell{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;
+  color:var(--ink-3);text-align:center;text-transform:uppercase;
+  padding:0 4px;
+}
+.gx-axis-cell.label{
+  text-align:left;padding-left:18px;font-weight:600;color:var(--ink-1);
+}
+
+.gx-rows{position:relative}
+.gx-row{
+  display:grid;
+  border-bottom:var(--stroke-hair) solid var(--divider);
+  height:34px;
+  align-items:center;
+  position:relative;
+}
+.gx-row:last-child{border-bottom:none}
+
+.gx-row-label{
+  padding:0 18px;
+  font-size:12px;color:var(--ink-1);font-weight:500;
+  display:flex;align-items:center;gap:8px;
+  overflow:hidden;
+}
+.gx-row-num{
+  font-family:var(--font-mono);font-size:9px;
+  color:var(--ink-3);letter-spacing:1px;flex-shrink:0;
+  background:rgba(255,255,255,0.04);
+  padding:2px 5px;border-radius:2px;
+}
+
+.gx-track{position:relative;height:100%}
+
+.gx-bar{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  height:18px;
+  border-radius:2px;
+  border-top:var(--stroke-bold) solid var(--accent,var(--violet));
+  background:rgba(255,255,255,0.04);
+  display:flex;
+  align-items:center;
+  padding:0 8px;
+  font-family:var(--font-mono);
+  font-size:9px;
+  color:var(--ink-1);
+  letter-spacing:1px;
+  text-transform:uppercase;
+  opacity:0;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  transition:opacity .5s, box-shadow .3s, border-color .3s;
+}
+.gx-bar.shown{opacity:1}
+.gx-bar.active{
+  border-color:rgba(157,78,221,0.65);
+  box-shadow:0 0 0 1px rgba(157,78,221,0.25);
+}
+.gx-bar.done{opacity:0.85}
+
+.gx-playhead{
+  position:absolute;
+  top:0;bottom:0;
+  width:1.5px;
+  background:var(--gold);
+  box-shadow:0 0 8px rgba(201,149,84,0.5);
+  transition:left .9s linear;
+  z-index:5;
+  pointer-events:none;
+  opacity:0;
+}
+.gx-playhead.shown{opacity:1}
+.gx-playhead::before{
+  content:"";
+  position:absolute;
+  top:-3px;left:-4px;
+  width:10px;height:7px;
+  background:var(--gold);
+  clip-path:polygon(50% 100%, 0 0, 100% 0);
+}
+
+.gx-foot{
+  display:flex;gap:10px;align-items:center;
+  margin-top:14px;padding-top:14px;
+  border-top:var(--stroke-hair) solid var(--divider);
+  position:relative;z-index:1;
+}
+.gx-cap{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;
+  color:var(--ink-3);text-transform:uppercase;
+  padding:3px 8px;border:var(--stroke-hair) solid var(--border-mid);border-radius:2px;
+}
+.gx-btn{
+  background:rgba(255,255,255,0.02);
+  border:var(--stroke-hair) solid var(--border-mid);
+  color:var(--ink-1);
+  padding:7px 14px;
+  border-radius:2px;
+  cursor:pointer;
+  font-size:11px;
+  font-family:var(--font-mono);
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  transition:border-color .2s, color .2s, background .2s;
+}
+.gx-btn:hover{border-color:var(--violet);color:var(--ink-0);background:rgba(157,78,221,0.08)}
+.gx-stat{margin-left:auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-3);letter-spacing:1.2px;text-transform:uppercase}
+.gx-stat-v{color:var(--ink-1);margin-left:6px}
+</style>
+
+<div class="gx-frame">
+<div class="gx-wrap">
+
+<header class="gx-spec">
+<span class="gx-spec-id">PROD-V1</span>
+<h1 class="gx-spec-name">Production timeline</h1>
+<span class="gx-spec-pat">10-stage pipeline</span>
+</header>
+
+<div class="gx-canvas">
+<div class="gx-axis" id="gx-axis"></div>
+<div class="gx-rows" id="gx-rows"></div>
+</div>
+
+<div class="gx-foot">
+<span class="gx-cap">10 stages</span>
+<button class="gx-btn" onclick="gxPlay()">Run schedule</button>
+<button class="gx-btn" onclick="gxStep()">Skip</button>
+<span class="gx-stat">Stage<span class="gx-stat-v" id="gx-counter">T+1 / T+10</span></span>
+</div>
+
+</div>
+</div>
+
+<script>
+(function(){
+const N=10;
+const phaseFor=[0,0,1,1,1,2,2,3,3,3];
+const phaseAccent=['var(--violet)','var(--teal)','var(--amber)','var(--pink)'];
+const labels=['Intake','URL extract','Screenshot','Tokens','Lock','Brief','Stitch','Refine','Retro','Reset'];
+const tags=['Setup','Setup','Capture','Capture','Capture','Build','Build','Quality','Quality','Quality'];
+
+function computePositions(){
+  const positions=[];
+  for(let i=0;i<N;i++){
+    const startPct=(i/(N+0.5))*100;
+    const endPct=((i+1.5)/(N+0.5))*100;
+    const clampedEnd=Math.min(endPct,99);
+    positions.push({start:startPct,width:Math.max(8,clampedEnd-startPct)});
+  }
+  return positions;
+}
+
+const positions=computePositions();
+
+const axis=document.getElementById('gx-axis');
+const labelColW=160;
+axis.style.gridTemplateColumns=`${labelColW}px repeat(${N}, 1fr)`;
+axis.innerHTML=`<div class="gx-axis-cell label">Stage</div>`+
+  Array.from({length:N},(_,i)=>`<div class="gx-axis-cell">T+${i+1}</div>`).join('');
+
+const rowsEl=document.getElementById('gx-rows');
+rowsEl.innerHTML='';
+for(let i=0;i<N;i++){
+  const row=document.createElement('div');
+  row.className='gx-row';
+  row.style.gridTemplateColumns=`${labelColW}px 1fr`;
+  
+  const labelDiv=document.createElement('div');
+  labelDiv.className='gx-row-label';
+  labelDiv.innerHTML=`<span class="gx-row-num">${String(i+1).padStart(2,'0')}</span>${labels[i]}`;
+  row.appendChild(labelDiv);
+  
+  const track=document.createElement('div');
+  track.className='gx-track';
+  
+  const bar=document.createElement('div');
+  bar.className='gx-bar';
+  bar.dataset.step=i;
+  bar.style.setProperty('--accent',phaseAccent[phaseFor[i]]);
+  bar.style.left=positions[i].start+'%';
+  bar.style.width=positions[i].width+'%';
+  bar.textContent=tags[i];
+  track.appendChild(bar);
+  
+  row.appendChild(track);
+  rowsEl.appendChild(row);
+}
+
+const playhead=document.createElement('div');
+playhead.className='gx-playhead';
+playhead.style.left=labelColW+'px';
+rowsEl.appendChild(playhead);
+
+const counter=document.getElementById('gx-counter');
+const bars=document.querySelectorAll('.gx-bar');
+let cur=0,timer=null;
+
+function show(n){
+  cur=n;
+  bars.forEach((b,i)=>{
+    b.classList.remove('active');
+    if(i<=n){b.classList.add('shown');b.classList.add('done')}else{b.classList.remove('shown','done')}
+    if(i===n){b.classList.remove('done');b.classList.add('active')}
+  });
+  const trackW=rowsEl.querySelector('.gx-track').offsetWidth;
+  const barCentrePct=positions[n].start+positions[n].width/2;
+  const px=labelColW+(barCentrePct/100)*trackW;
+  playhead.classList.add('shown');
+  playhead.style.left=px+'px';
+  counter.textContent='T+'+(n+1)+' / T+'+N;
+}
+
+window.gxStep=function(){const n=(cur+1)%N;if(n===0){playhead.classList.remove('shown');setTimeout(()=>show(0),100)}else show(n)};
+window.gxPlay=function(){clearInterval(timer);playhead.classList.remove('shown');setTimeout(()=>show(0),200);let i=0;timer=setInterval(()=>{i++;if(i>=N){clearInterval(timer);return}show(i)},900)};
+
+setTimeout(gxPlay,400);
+})();
+</script>

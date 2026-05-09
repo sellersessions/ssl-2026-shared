@@ -1,0 +1,35 @@
+{
+  "brand": "databrill-core",
+  "cycle": 2,
+  "locked_at": "2026-04-26",
+  "source_tokens": "Claude-UI-Workflow/brands/databrill-core/tokens.json",
+  "source_profile": "Claude-UI-Workflow/brands/databrill-core/profile.md",
+  "reconciliation": "dogfood/2026-04-26-databrill-core/stage-4-reconciliation.md",
+  "locked_primitives": {
+    "theme_mode": "dark",
+    "background_deep": "#0c0a14",
+    "background_surface": "#100e1a",
+    "accent_primary": "#e07a3a",
+    "accent_secondary": "#7c6bbd",
+    "text_primary": "#f5f5fa",
+    "text_muted": "rgba(245, 245, 250, 0.55)",
+    "headline_font": "Inter",
+    "body_font": "DM Sans",
+    "display_font": "Space Grotesk",
+    "roundness": "ROUND_TWELVE",
+    "color_variant": "EXPRESSIVE"
+  },
+  "stitch_design_system_inputs": {
+    "displayName": "Databrill Core (cycle-2)",
+    "colorMode": "DARK",
+    "headlineFont": "INTER",
+    "bodyFont": "DM_SANS",
+    "labelFont": "SPACE_GROTESK",
+    "customColor": "#e07a3a",
+    "overridePrimaryColor": "#e07a3a",
+    "overrideSecondaryColor": "#7c6bbd",
+    "overrideNeutralColor": "#0c0a14",
+    "roundness": "ROUND_TWELVE",
+    "colorVariant": "EXPRESSIVE"
+  }
+}

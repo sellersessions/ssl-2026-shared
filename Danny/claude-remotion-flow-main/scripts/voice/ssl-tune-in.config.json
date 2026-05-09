@@ -1,0 +1,30 @@
+{
+  "voice_id": "jQOgcOzmmipekvxJN09W",
+  "model_id": "eleven_multilingual_v2",
+  "output_dir": "voice-box-generations/elevenlabs/ssl-2026-opener",
+  "default_voice_settings": {
+    "stability": 0.31,
+    "similarity_boost": 1.0,
+    "style": 0.0,
+    "use_speaker_boost": true,
+    "speed": 0.8
+  },
+  "scenes": [
+    {
+      "id": "variant-a",
+      "text": "Hey guys, welcome back to Seller Sessions. In today's episode, we are going to be talking about Claude Code and particularly the work around Claude Code using Remotion."
+    },
+    {
+      "id": "variant-b",
+      "text": "Hey guys — welcome back to Seller Sessions. In today's episode, we are going to be talking about Claude Code — and particularly, the work around Claude Code using Remotion."
+    },
+    {
+      "id": "variant-c",
+      "text": "Hey guys, welcome back to Seller Sessions. In today's episode, we are going to be talking about Claude Code and particularly the work around Claude Code using Remotion.",
+      "voice_settings": {
+        "stability": 0.2,
+        "speed": 0.85
+      }
+    }
+  ]
+}

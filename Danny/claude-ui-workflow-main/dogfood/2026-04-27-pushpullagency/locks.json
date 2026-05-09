@@ -1,0 +1,120 @@
+{
+  "_meta": {
+    "brand": "Push-Pull Agency",
+    "cycle": 4,
+    "locked_at": "2026-04-27",
+    "purpose": "Stage 5 lock + Stage 7 model gate + Stage 8 audit-copy.py target. must_preserve_copy → 3.1 Pro. Every verbatim string MUST appear in final HTML; every anti_drift_string MUST be absent.",
+    "schema_version": 2,
+    "schema_notes": "anti_drift_strings introduced as explicit array per cycle-3 finding #40. audit-copy.py prefers it over regex-extracted anti_drift_rules."
+  },
+  "must_preserve_copy": true,
+  "wordmark": {
+    "text": "Push-Pull",
+    "capitalization": "title-case-hyphenated",
+    "rationale": "Brand wordmark always written as 'Push-Pull' with the hyphen. Never 'Push Pull' (no hyphen) or 'PUSHPULL' or 'PushPull'."
+  },
+  "tagline_verbatim": "Scale Your Amazon Revenue Faster with Our Dedicated Growth Team.",
+  "subhead_verbatim": "We help ambitious brands dominate their Amazon categories through strategy, advertising, SEO, and operations – all managed by a specialist team.",
+  "story_verbatim": "We're specialists – not generalists. Born from real marketplace experience and deep Amazon expertise, we combine commercial strategy, SEO, advertising, creative, and catalogue operations into one seamless growth system.",
+  "story_headline_verbatim": "Built for brands who take Amazon seriously.",
+  "service_names_verbatim": [
+    "Account Management",
+    "Advertising Management",
+    "Copywriting & SEO",
+    "Creative Services",
+    "Catalogue Management",
+    "Strategy & Consulting"
+  ],
+  "service_descriptions_verbatim": [
+    "Your dedicated Amazon department across UK, EU, and US. Four-person brand teams handle everything, from daily operations to strategic growth.",
+    "AI-powered optimisation meets expert strategy. Reduce ACoS, maximise ROAS, and scale profitably across all ad formats.",
+    "Keyword-rich copy that ranks page one and converts. A9 algorithm mastery meets persuasive writing.",
+    "High-converting creative built for performance. Optimised Images, A+ Content, and Brand Stores.",
+    "Proactive operations protecting revenue 24/7. Continuous monitoring, rapid suppression resolution, flawless catalogue health.",
+    "Data-driven strategy transforming tactics into growth. Audits, intelligence, and roadmaps for profitable scaling."
+  ],
+  "nav_order_locked": [
+    "Services",
+    "Case Studies",
+    "Blog",
+    "About Us",
+    "Contact us"
+  ],
+  "stats_verbatim": [
+    "17x revenue growth in just two years",
+    "£430k to £7.2M",
+    "100+ non-compliant listings",
+    "70% market share",
+    "70+ optimised SKUs",
+    "+900% Year 1 growth",
+    "Six years of sustained excellence"
+  ],
+  "client_logos_verbatim": [
+    "Scrub Daddy",
+    "Molton Brown",
+    "JLab Audio",
+    "Scalextric",
+    "Peaty's",
+    "Kinetik Wellbeing",
+    "Hornby",
+    "EXG Pro",
+    "Enmo",
+    "Cloetta",
+    "Beams International",
+    "Anda Seat",
+    "Airfix"
+  ],
+  "ctas_verbatim": [
+    "Start your growth journey now",
+    "Learn About Our Approach",
+    "Learn More",
+    "Read full case study"
+  ],
+  "footer_legal_verbatim": [
+    "Privacy Policy",
+    "Sitemap"
+  ],
+  "company_registration_verbatim": "Push-Pull Associates Ltd, Registered in England & Wales: Company No. 11880052",
+  "address_verbatim": "Suite 113 Smartbase Target Road, Aviation Park West, Christchurch, England, BH23 6NW",
+  "anti_drift_strings": [
+    "PUSH PULL",
+    "Push Pull",
+    "PushPull",
+    "PUSHPULL",
+    "Push & Pull",
+    "Amazon Marketing Agency",
+    "We are an Amazon agency",
+    "world-class agency",
+    "best Amazon agency",
+    "leading Amazon agency",
+    "Lorem ipsum",
+    "Trusted by 100+ brands",
+    "Trusted by hundreds",
+    "Voted #1",
+    "Award-winning"
+  ],
+  "anti_drift_rules": [
+    "Do NOT use 'PUSH PULL', 'Push Pull', 'PushPull', 'PUSHPULL', or 'Push & Pull' — wordmark is 'Push-Pull' with the hyphen, title case.",
+    "Do NOT add fake awards, fake review counts, or invented brand-count claims like 'Trusted by 100+ brands' or 'Voted #1' or 'Award-winning' unless explicitly in source-truth.json.",
+    "Do NOT add fake testimonial attribution names (e.g. 'John Smith, CEO'). Real attributions are anonymised by role only — preserve that anonymity.",
+    "Do NOT change the brand story wording — must include 'specialists – not generalists' and 'one seamless growth system'.",
+    "Do NOT invent stats. Only the seven stats in stats_verbatim may appear; do not paraphrase '17x revenue growth in just two years' to '17x in 2 years' — verbatim only.",
+    "Use Stitch DESIGN.md for COLOR/TYPOGRAPHY/LAYOUT only — text content comes exclusively from source-truth.json."
+  ],
+  "design_intent": {
+    "theme_mode": "dark",
+    "background_deep": "#0e0e10",
+    "background_surface": "#16161b",
+    "text_primary": "#f5f4ee",
+    "text_muted": "rgba(245, 244, 238, 0.6)",
+    "accent_primary": "#1f5cff",
+    "accent_inverse_block_bg": "#1f5cff",
+    "accent_inverse_block_text": "#f5f4ee",
+    "personality": "professional, premium, B2B-confident, data-led — NOT playful, NOT creative-agency-quirky, NOT tech-bro startup",
+    "color_direction": "Dark theme — carbon charcoal background with warm off-white text. ONE bold saturated accent (cobalt blue #1f5cff) used decisively, not sprinkled. TWO sections (Stats strip + Final CTA block) flip the canvas to full cobalt-blue background for juxtaposition.",
+    "typography_direction": "clean sans-serif throughout, very bold weights for hero + stats (treat stats as display-scale numerals), mid-weight body",
+    "layout_direction": "grid-led, structured sections, card-based services on dark surface, centered hero with generous whitespace, horizontal client-logo strip with logos in white/grayscale on dark, alternating dark + cobalt-block sections",
+    "roundness_direction": "minimal — sharp corners or subtle 4-6px radius (NOT pill buttons, NOT rounded-2xl glass)",
+    "imagery_direction": "real client logos rendered in white/grayscale on dark, product photography deeply contrasted, team workplace shots if any — NOT illustrations, NOT abstract gradients, NOT glass blur effects"
+  }
+}

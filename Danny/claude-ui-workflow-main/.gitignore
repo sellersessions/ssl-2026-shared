@@ -1,0 +1,18 @@
+# Browser-automation screenshots
+_captures/
+
+# Node
+node_modules/
+package-lock.json
+
+# Python venv
+.venv/
+__pycache__/
+*.pyc
+
+# Local Netlify folder
+.netlify
+
+# Env
+.env
+.env.local

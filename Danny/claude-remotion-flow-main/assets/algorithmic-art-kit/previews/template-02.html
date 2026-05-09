@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Template 02 — Three Lanes Converge</title>
+<style>
+:root{
+  --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
+  --font-serif:'Source Serif Pro',Georgia,serif;
+  --bg-0:#030C1B; --bg-1:#0A1228;
+  --ink-0:#F2EEF8; --ink-1:#C8B6F0; --ink-2:#8B92A8; --ink-3:#5A627A;
+  --violet:#9D4EDD; --teal:#5DCAA5; --amber:#EF9F27; --pink:#FF6BB4;
+  --blue:#378ADD; --orange:#D85A30; --gold:#C99554;
+  --laneA:var(--amber); --laneB:var(--blue); --laneC:var(--violet);
+  --r-wrap:12px; --r-card:3px;
+}
+html,body{margin:0;padding:0;background:#06080F;color:var(--ink-0);font-family:var(--font-sans);min-height:100vh}
+body{display:flex;align-items:center;justify-content:center;padding:32px}
+.tl-frame{width:100%;max-width:1080px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+.tl-wrap{
+  background:linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 100%);
+  border-radius:var(--r-wrap);
+  padding:28px 28px 18px;
+  position:relative;
+  overflow:hidden;
+  border:0.5px solid rgba(157,78,221,0.18);
+}
+.tl-wrap::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 110%, rgba(157,78,221,0.10), transparent 60%);pointer-events:none}
+.tl-wrap::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(157,78,221,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(157,78,221,0.025) 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
+
+.tl-spec{display:flex;align-items:center;gap:18px;margin-bottom:18px;position:relative;z-index:1}
+.tl-spec-id{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;color:var(--ink-2);text-transform:uppercase;padding:3px 8px;border:0.5px solid rgba(157,78,221,0.35);border-radius:2px}
+.tl-spec-name{font-family:var(--font-sans);font-size:20px;font-weight:600;letter-spacing:-0.2px;color:var(--ink-0);margin:0}
+.tl-spec-pat{font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-left:auto;display:flex;align-items:center;gap:8px}
+.tl-spec-pat::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 6px var(--gold)}
+
+.tl-stage{position:relative;display:grid;grid-template-columns:1fr 1fr;column-gap:28px;margin-top:8px}
+.tl-lane{
+  position:relative;
+  background:rgba(255,255,255,0.02);
+  border:0.5px solid rgba(255,255,255,0.08);
+  border-radius:var(--r-card);
+  padding:16px 18px 14px;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .55s ease-out,transform .55s ease-out;
+  min-height:170px;
+}
+.tl-lane.in{opacity:1;transform:translateY(0)}
+.tl-lane[data-id="A"]{border-top:1.5px solid var(--laneA)}
+.tl-lane[data-id="B"]{border-top:1.5px solid var(--laneB)}
+.tl-lane[data-id="C"]{border-top:1.5px solid var(--laneC);grid-column:1 / span 2;margin-top:18px;background:rgba(157,78,221,0.05);min-height:auto}
+
+.tl-lane-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;display:inline-block;padding:2px 8px;border-radius:2px;margin-bottom:10px}
+.tl-lane[data-id="A"] .tl-lane-tag{color:var(--laneA);background:rgba(239,159,39,0.10);border:0.5px solid rgba(239,159,39,0.35)}
+.tl-lane[data-id="B"] .tl-lane-tag{color:var(--laneB);background:rgba(55,138,221,0.10);border:0.5px solid rgba(55,138,221,0.35)}
+.tl-lane[data-id="C"] .tl-lane-tag{color:var(--laneC);background:rgba(157,78,221,0.12);border:0.5px solid rgba(157,78,221,0.45)}
+
+.tl-lane-name{font-family:var(--font-sans);font-size:15px;font-weight:600;color:var(--ink-0);margin:0 0 4px}
+.tl-lane-sub{font-family:var(--font-mono);font-size:11px;color:var(--ink-2);margin:0 0 12px;letter-spacing:0.3px}
+.tl-lane-body{font-family:var(--font-sans);font-size:13px;line-height:1.55;color:var(--ink-1);margin:0 0 12px}
+
+.tl-stats{display:grid;grid-template-columns:auto 1fr;column-gap:14px;row-gap:5px;font-family:var(--font-mono);font-size:11px}
+.tl-stat-k{color:var(--ink-3);letter-spacing:1.2px;text-transform:uppercase}
+.tl-stat-v{color:var(--ink-1)}
+
+.tl-conv{position:relative;height:48px;margin:10px 0 4px}
+.tl-conv svg{width:100%;height:100%;display:block;overflow:visible}
+.tl-arrow{stroke-dasharray:120;stroke-dashoffset:120;transition:stroke-dashoffset .6s ease-out;fill:none}
+.tl-arrow.in{stroke-dashoffset:0}
+.tl-conv-cap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--ink-2);text-transform:uppercase;background:linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 100%);padding:0 10px;opacity:0;transition:opacity .4s}
+.tl-conv-cap.in{opacity:1}
+
+.tl-foot{display:flex;align-items:center;gap:12px;margin-top:18px;padding-top:14px;border-top:0.5px solid rgba(255,255,255,0.06)}
+.tl-btn{background:rgba(157,78,221,0.12);border:0.5px solid rgba(157,78,221,0.42);color:var(--ink-1);padding:7px 14px;border-radius:6px;cursor:pointer;font-family:var(--font-mono);font-size:11px;letter-spacing:1px;transition:background .2s}
+.tl-btn:hover{background:rgba(157,78,221,0.22)}
+.tl-cap{font-family:var(--font-mono);font-size:11px;color:var(--ink-1);letter-spacing:1.5px;text-transform:uppercase;margin-left:auto}
+
+@media (max-width:720px){
+  .tl-stage{grid-template-columns:1fr;row-gap:14px}
+  .tl-lane[data-id="C"]{grid-column:1}
+  .tl-conv{display:none}
+}
+</style>
+</head>
+<body>
+
+<main class="tl-frame">
+  <h2 class="sr-only">Template 02: Three lanes converge. Two parallel options resolve into a single answer.</h2>
+
+  <section class="tl-wrap" aria-labelledby="tl-name">
+    <header class="tl-spec">
+      <span class="tl-spec-id">Template 02</span>
+      <h1 id="tl-name" class="tl-spec-name">Three Lanes Converge</h1>
+      <span class="tl-spec-pat">Join: 2 &rarr; 1</span>
+    </header>
+
+    <div class="tl-stage">
+
+      <!-- LANE A SLOT -->
+      <article class="tl-lane" data-id="A">
+        <span class="tl-lane-tag">Lane A</span>
+        <h2 class="tl-lane-name">{Option A name}</h2>
+        <p class="tl-lane-sub">{vendor · detail · detail}</p>
+        <p class="tl-lane-body">{Body copy slot. Two or three lines describing what this lane is and why it caps out.}</p>
+        <dl class="tl-stats">
+          <dt class="tl-stat-k">Floor</dt>   <dd class="tl-stat-v">{value}</dd>
+          <dt class="tl-stat-k">Ceiling</dt> <dd class="tl-stat-v">{value}</dd>
+          <dt class="tl-stat-k">Lever</dt>   <dd class="tl-stat-v">{value}</dd>
+          <dt class="tl-stat-k">Cost</dt>    <dd class="tl-stat-v">{value}</dd>
+        </dl>
+      </article>
+
+      <!-- LANE B SLOT -->
+      <article class="tl-lane" data-id="B">
+        <span class="tl-lane-tag">Lane B</span>
+        <h2 class="tl-lane-name">{Option B name}</h2>
+        <p class="tl-lane-sub">{vendor · detail · detail}</p>
+        <p class="tl-lane-body">{Body copy slot. Two or three lines describing what this lane is and why it has a different shape.}</p>
+        <dl class="tl-stats">
+          <dt class="tl-stat-k">Floor</dt>   <dd class="tl-stat-v">{value}</dd>
+          <dt class="tl-stat-k">Ceiling</dt> <dd class="tl-stat-v">{value}</dd>
+          <dt class="tl-stat-k">Lever</dt>   <dd class="tl-stat-v">{value}</dd>
+          <dt class="tl-stat-k">Cost</dt>    <dd class="tl-stat-v">{value}</dd>
+        </dl>
+      </article>
+
+      <!-- JOIN: A and B converge into C -->
+      <div class="tl-conv" aria-hidden="true">
+        <svg viewBox="0 0 1024 48" preserveAspectRatio="none">
+          <path class="tl-arrow" id="tl-arrA" d="M 256 4 Q 384 26 512 44" stroke="var(--laneA)" stroke-width="1"/>
+          <path class="tl-arrow" id="tl-arrB" d="M 768 4 Q 640 26 512 44" stroke="var(--laneB)" stroke-width="1"/>
+        </svg>
+        <span class="tl-conv-cap" id="tl-convCap">converge</span>
+      </div>
+
+      <!-- LANE C SLOT (resolution) -->
+      <article class="tl-lane" data-id="C">
+        <span class="tl-lane-tag">Lane C · resolution</span>
+        <h2 class="tl-lane-name">{Option C name · the answer}</h2>
+        <p class="tl-lane-sub">{differentiator · differentiator · differentiator}</p>
+        <p class="tl-lane-body">{Body copy slot. The resolution line. What lever moved, why this lane is a different category, not just a better version of A or B.}</p>
+        <dl class="tl-stats">
+          <dt class="tl-stat-k">Floor</dt>   <dd class="tl-stat-v">{value}</dd>
+          <dt class="tl-stat-k">Ceiling</dt> <dd class="tl-stat-v">{value}</dd>
+          <dt class="tl-stat-k">Lever</dt>   <dd class="tl-stat-v">{value}</dd>
+          <dt class="tl-stat-k">Cost</dt>    <dd class="tl-stat-v">{value}</dd>
+        </dl>
+      </article>
+
+    </div>
+
+    <footer class="tl-foot">
+      <button class="tl-btn" type="button" id="tl-replay">&#9654; replay</button>
+      <button class="tl-btn" type="button" id="tl-step">step</button>
+      <span class="tl-cap" id="tl-cap">Lane A enters</span>
+    </footer>
+  </section>
+</main>
+
+<script>
+(function(){
+  const lanes=document.querySelectorAll('.tl-lane');
+  const arrA=document.getElementById('tl-arrA');
+  const arrB=document.getElementById('tl-arrB');
+  const convCap=document.getElementById('tl-convCap');
+  const cap=document.getElementById('tl-cap');
+  const captions=['Lane A enters','Lane B enters','Lanes converge','Lane C resolves'];
+  let cur=0,timer=null;
+
+  function reset(){
+    lanes.forEach(l=>l.classList.remove('in'));
+    arrA.classList.remove('in'); arrB.classList.remove('in');
+    convCap.classList.remove('in');
+    cap.textContent=captions[0];
+    cur=0;
+  }
+  function show(n){
+    cur=n;
+    lanes[0].classList.toggle('in', n>=0);
+    lanes[1].classList.toggle('in', n>=1);
+    arrA.classList.toggle('in', n>=2);
+    arrB.classList.toggle('in', n>=2);
+    convCap.classList.toggle('in', n>=2);
+    lanes[2].classList.toggle('in', n>=3);
+    cap.textContent=captions[Math.min(n,captions.length-1)];
+  }
+  function play(){
+    clearInterval(timer); reset();
+    let i=0; show(0);
+    timer=setInterval(()=>{ i++; if(i>3){clearInterval(timer);return} show(i); }, 700);
+  }
+  document.getElementById('tl-replay').addEventListener('click',play);
+  document.getElementById('tl-step').addEventListener('click',()=>{
+    const n=(cur+1)%4; if(n===0) reset(); else show(n);
+  });
+  setTimeout(play,250);
+})();
+</script>
+
+</body>
+</html>

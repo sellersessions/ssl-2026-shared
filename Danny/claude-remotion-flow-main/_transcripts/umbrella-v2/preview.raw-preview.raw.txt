@@ -1,0 +1,90 @@
+In this video, I'm going to give you coverage
+on the concept of how this works.
+It's very straightforward.
+You read a file, you give Claude a file,
+Claude does the work, Claude asks you questions.
+You answer those questions, Claude does the work
+and that loop refines over and over.
+These are the different modules.
+You would have done the installation, as I said,
+and then here you've got co-pilot.
+I'm going to skip this module just for now.
+So if we go to module number one,
+what we have here is two files.
+Read me file, the file that you read.
+So it explains the concept of the Claude MD.
+Click the other file, which is, as you can see here,
+Claude MD self-drive.
+You click on it, you copy the path,
+come here, you paste it, okay,
+and then you give that to Claude.
+Claude will walk you through all the steps.
+You understand the concepts of here
+of what the MDs for, in your case,
+you're doing business automation.
+Most of these guys in the audience won't be,
+created two other files here, the question helper,
+and then the problem solver.
+These are the two files, between them,
+again, you would read them.
+If you're getting stuck somewhere,
+you can give it to Claude.
+And then Claude can walk you through the steps.
+You can ask Claude, can you interview me
+to walk through issues as well?
+Try and see this as you're having a conversation
+with Claude and Claude does all the heavy lifting.
+There's no such thing as a wrong question to ask, okay?
+And over time, within a matter of days,
+it's all about the time investment,
+you start to fly and it will click
+like it does with everyone else who uses Claude.
+Number two, this is the master log.
+You got the read me file.
+So it's got mermaid diagrams here.
+Kept it quite simple for you
+to not get overwhelmed reading this.
+And then you take the self drive, you right click it,
+you copy the path and you paste to Claude.
+And then you just hit return.
+Now, again, you're gonna walk through the steps.
+Then you'll complete that module, you go to number three.
+Now, we'll get on to module number four, which is MCPs.
+Each of these stages is walking you
+from the very easiest to the most advanced.
+So once you start hitting this stage,
+this is where it starts to get a little bit more tricky
+and you'll slow down moving through the modules.
+So again, read about what are MPCs and why they matter,
+what you will learn, how the self drive process works.
+So again, it's here.
+And then you take the file, you right click it,
+copy path, paste to Claude.
+You complete that.
+You might have, again, some additional files.
+You don't have to look at those files
+at any point other two files.
+You go through the read me file.
+And then you give that to Claude,
+which is the agent self drive file.
+And that's pretty much it.
+Now, if you want to, at the end of the workshop feedback,
+what this does is I wrote a logic or Claude did
+so that it can do two things.
+One, it will give you a feedback
+based on your session files
+on where you're doing well
+and where you would need to improve.
+That means you haven't got to keep going back
+through the modules.
+Secondly, the other is you can run a diagnostics
+and then you can give that to me.
+Now, because this is not only self drive itself improving,
+what does that mean?
+It means that when I get the diagnostics file,
+I can feed that back into Claude, into the course.
+And then we can look at any other gaps
+where people got stuck.
+So this is asking questions.
+Hopefully that helps come back to me with any questions
+or even better, ask Claude.

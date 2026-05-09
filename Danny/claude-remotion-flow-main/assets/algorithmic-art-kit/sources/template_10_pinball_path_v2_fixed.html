@@ -1,0 +1,298 @@
+<h2 class="sr-only">Template 10 v2: Pinball path tracer with bumpers now opaque so trail lines never mask the slot labels.</h2>
+<style>
+:root{
+  --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
+  --bg-page:#06080F;
+  --bg-0:#030C1B;
+  --bg-1:#0A1228;
+  --ink-0:#F2EEF8;
+  --ink-1:#C8B6F0;
+  --ink-2:#8B92A8;
+  --ink-3:#5A627A;
+  --violet:#9D4EDD;
+  --teal:#5DCAA5;
+  --amber:#EF9F27;
+  --pink:#FF6BB4;
+  --gold:#C99554;
+  --r-wrap:12px;
+  --r-card:3px;
+  --stroke-hair:0.5px;
+  --stroke-bold:1.5px;
+  --border-soft:rgba(157,78,221,0.18);
+  --border-mid:rgba(157,78,221,0.35);
+  --card-fill:rgba(255,255,255,0.02);
+  --card-stroke:rgba(255,255,255,0.08);
+  --divider:rgba(255,255,255,0.06);
+}
+
+.pb-frame{width:100%;max-width:1080px;font-family:var(--font-sans);color:var(--ink-0)}
+.pb-wrap{
+  background:linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 100%);
+  border-radius:var(--r-wrap);
+  padding:28px 28px 18px;
+  position:relative;
+  overflow:hidden;
+  border:var(--stroke-hair) solid var(--border-soft);
+}
+.pb-wrap::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 110%, rgba(157,78,221,0.10), transparent 60%);
+  pointer-events:none;
+}
+.pb-wrap::after{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(157,78,221,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(157,78,221,0.025) 1px,transparent 1px);
+  background-size:24px 24px;
+  pointer-events:none;
+}
+
+.pb-spec{display:flex;align-items:center;gap:18px;margin-bottom:18px;position:relative;z-index:5}
+.pb-spec-id{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;color:var(--ink-2);text-transform:uppercase;padding:3px 8px;border:var(--stroke-hair) solid var(--border-mid);border-radius:2px}
+.pb-spec-name{font-size:20px;font-weight:600;letter-spacing:-0.2px;color:var(--ink-0);margin:0}
+.pb-spec-pat{font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-left:auto;display:flex;align-items:center;gap:8px}
+.pb-spec-pat::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 6px var(--gold);animation:pbPulse 2s ease-in-out infinite}
+@keyframes pbPulse{0%,100%{box-shadow:0 0 6px var(--gold)}50%{box-shadow:0 0 12px var(--gold)}}
+
+.pb-canvas{
+  position:relative;
+  background:var(--card-fill);
+  border-radius:var(--r-card);
+  border:var(--stroke-hair) solid var(--card-stroke);
+  z-index:1;
+  height:480px;
+  overflow:hidden;
+}
+
+/* FIX 1: SVG explicitly below bumpers, trail layer */
+.pb-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:1;
+}
+
+/* FIX 2: Bumper now has a solid background-color fill behind the gradient,
+   so the trail line is fully occluded inside the circle */
+.pb-bumper{
+  position:absolute;
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  background-color:var(--bg-0);  /* solid base fill */
+  background-image:radial-gradient(circle at 35% 35%, rgba(255,255,255,0.06), rgba(0,0,0,0.4));
+  border:var(--stroke-bold) solid var(--accent,var(--violet));
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transform:translate(-50%,-50%);
+  transition:all .35s;
+  z-index:3;
+}
+.pb-bumper.hit{
+  background-color:var(--gold);
+  background-image:radial-gradient(circle at 35% 35%, rgba(255,255,255,0.4), rgba(0,0,0,0.2));
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(201,149,84,0.25), 0 0 24px rgba(201,149,84,0.5);
+  animation:pbHit .5s ease-out;
+}
+.pb-bumper.done{opacity:0.85}
+@keyframes pbHit{
+  0%{transform:translate(-50%,-50%) scale(1)}
+  50%{transform:translate(-50%,-50%) scale(1.2)}
+  100%{transform:translate(-50%,-50%) scale(1)}
+}
+.pb-bumper-num{
+  font-family:var(--font-mono);
+  font-size:9px;
+  letter-spacing:1px;
+  color:var(--ink-2);
+  font-weight:600;
+  margin-bottom:1px;
+}
+.pb-bumper.hit .pb-bumper-num{color:var(--bg-0)}
+.pb-bumper.done .pb-bumper-num{color:var(--ink-3)}
+.pb-bumper-name{
+  font-family:var(--font-sans);
+  font-size:9.5px;
+  font-weight:500;
+  color:var(--ink-1);
+  letter-spacing:0.2px;
+}
+.pb-bumper.hit .pb-bumper-name{color:var(--bg-0)}
+.pb-bumper.done .pb-bumper-name{color:var(--ink-2)}
+
+.pb-ball{
+  position:absolute;
+  width:14px;height:14px;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, var(--ink-0), #A8B5D0);
+  box-shadow:0 0 12px rgba(242,238,248,0.6), 0 2px 4px rgba(0,0,0,0.5);
+  transform:translate(-50%,-50%);
+  transition:all .85s cubic-bezier(0.5,0,0.5,1);
+  z-index:5;
+}
+
+.pb-trail-segment{
+  stroke:var(--gold);
+  stroke-width:2;
+  fill:none;
+  stroke-linecap:round;
+  stroke-dasharray:300;
+  stroke-dashoffset:300;
+  transition:stroke-dashoffset .85s linear, opacity .8s;
+  filter:drop-shadow(0 0 4px rgba(201,149,84,0.5));
+  opacity:0;
+}
+.pb-trail-segment.drawn{stroke-dashoffset:0;opacity:0.7}
+
+.pb-foot{
+  display:flex;gap:10px;align-items:center;
+  margin-top:14px;padding-top:14px;
+  border-top:var(--stroke-hair) solid var(--divider);
+  position:relative;z-index:5;
+}
+.pb-cap{font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;color:var(--ink-3);text-transform:uppercase;padding:3px 8px;border:var(--stroke-hair) solid var(--border-mid);border-radius:2px}
+.pb-btn{background:rgba(255,255,255,0.02);border:var(--stroke-hair) solid var(--border-mid);color:var(--ink-1);padding:7px 14px;border-radius:2px;cursor:pointer;font-size:11px;font-family:var(--font-mono);letter-spacing:1.5px;text-transform:uppercase;transition:border-color .2s, color .2s, background .2s}
+.pb-btn:hover{border-color:var(--violet);color:var(--ink-0);background:rgba(157,78,221,0.08)}
+.pb-score{font-family:var(--font-mono);font-size:14px;color:var(--gold);letter-spacing:2px;font-weight:600;text-shadow:0 0 6px rgba(201,149,84,0.4);margin-left:auto}
+.pb-stat{font-family:var(--font-mono);font-size:10px;color:var(--ink-3);letter-spacing:1.2px;text-transform:uppercase;margin-left:14px}
+.pb-stat-v{color:var(--ink-1);margin-left:6px}
+</style>
+
+<div class="pb-frame">
+<div class="pb-wrap">
+
+<header class="pb-spec">
+<span class="pb-spec-id">TEMPLATE 10</span>
+<h1 class="pb-spec-name">Pinball path</h1>
+<span class="pb-spec-pat">Cap: 9 bumpers, energetic journey</span>
+</header>
+
+<div class="pb-canvas" id="pb-canvas">
+<svg class="pb-svg" id="pb-svg"></svg>
+<div id="pb-bumpers"></div>
+<div class="pb-ball" id="pb-ball"></div>
+</div>
+
+<div class="pb-foot">
+<span class="pb-cap">N = 9</span>
+<button class="pb-btn" onclick="pbPlay()">Launch</button>
+<button class="pb-btn" onclick="pbStep()">Next bumper</button>
+<span class="pb-score" id="pb-score">000010</span>
+<span class="pb-stat">Bumper<span class="pb-stat-v" id="pb-counter">01 / 09</span></span>
+</div>
+
+</div>
+</div>
+
+<script>
+(function(){
+const N=9;
+const phaseFor=[0,0,1,1,2,2,3,3,3];
+const phaseAccent=['var(--violet)','var(--teal)','var(--amber)','var(--pink)'];
+
+const labels=['{slot 1}','{slot 2}','{slot 3}','{slot 4}','{slot 5}','{slot 6}','{slot 7}','{slot 8}','{slot 9}'];
+
+const canvas=document.getElementById('pb-canvas');
+const svg=document.getElementById('pb-svg');
+const bumpersContainer=document.getElementById('pb-bumpers');
+const ball=document.getElementById('pb-ball');
+const score=document.getElementById('pb-score');
+const counter=document.getElementById('pb-counter');
+
+let bumpers=[],segments=[];
+let positions=[];
+let cur=0,timer=null;
+
+function buildLayout(){
+  const rect=canvas.getBoundingClientRect();
+  const W=rect.width;
+  const H=rect.height;
+  
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  
+  const padX=70;
+  const padY=80;
+  const usableW=W-padX*2;
+  const usableH=H-padY*2;
+  
+  positions=[
+    {x:padX+usableW*0.1,  y:padY+usableH*0.1},
+    {x:padX+usableW*0.4,  y:padY+usableH*0.25},
+    {x:padX+usableW*0.75, y:padY+usableH*0.1},
+    {x:padX+usableW*0.95, y:padY+usableH*0.45},
+    {x:padX+usableW*0.6,  y:padY+usableH*0.55},
+    {x:padX+usableW*0.25, y:padY+usableH*0.5},
+    {x:padX+usableW*0.05, y:padY+usableH*0.78},
+    {x:padX+usableW*0.45, y:padY+usableH*0.85},
+    {x:padX+usableW*0.85, y:padY+usableH*0.9}
+  ];
+  
+  svg.innerHTML='';
+  bumpersContainer.innerHTML='';
+  bumpers=[];segments=[];
+  
+  for(let i=0;i<N-1;i++){
+    const a=positions[i];
+    const b=positions[i+1];
+    const seg=document.createElementNS('http://www.w3.org/2000/svg','line');
+    seg.setAttribute('x1',a.x);seg.setAttribute('y1',a.y);
+    seg.setAttribute('x2',b.x);seg.setAttribute('y2',b.y);
+    seg.setAttribute('class','pb-trail-segment');
+    seg.id='pb-seg-'+i;
+    svg.appendChild(seg);
+    segments.push(seg);
+  }
+  
+  for(let i=0;i<N;i++){
+    const bumper=document.createElement('div');
+    bumper.className='pb-bumper'+(i===0?' hit':'');
+    bumper.setAttribute('data-step',i);
+    bumper.style.left=positions[i].x+'px';
+    bumper.style.top=positions[i].y+'px';
+    bumper.style.setProperty('--accent',phaseAccent[phaseFor[i]]);
+    bumper.innerHTML=`<span class="pb-bumper-num">${String(i+1).padStart(2,'0')}</span><span class="pb-bumper-name">${labels[i]}</span>`;
+    bumpersContainer.appendChild(bumper);
+    bumpers.push(bumper);
+  }
+  
+  ball.style.left=positions[0].x+'px';
+  ball.style.top=positions[0].y+'px';
+  
+  applyState(cur);
+}
+
+function applyState(n){
+  cur=n;
+  bumpers.forEach((b,i)=>{
+    b.classList.remove('hit','done');
+    if(i<n)b.classList.add('done');
+    else if(i===n)b.classList.add('hit');
+  });
+  segments.forEach((s,i)=>{
+    if(i<n)s.classList.add('drawn');
+    else s.classList.remove('drawn');
+  });
+  ball.style.left=positions[n].x+'px';
+  ball.style.top=positions[n].y+'px';
+  score.textContent=String((n+1)*10).padStart(6,'0');
+  counter.textContent=String(n+1).padStart(2,'0')+' / 0'+N;
+}
+
+function show(n){applyState(n)}
+
+window.pbStep=function(){show((cur+1)%N)};
+window.pbPlay=function(){clearInterval(timer);show(0);let i=0;timer=setInterval(()=>{i++;if(i>=N){clearInterval(timer);return}show(i)},1100)};
+
+function init(){buildLayout();setTimeout(pbPlay,400)}
+if(document.readyState==='complete')init();
+else window.addEventListener('load',init);
+window.addEventListener('resize',()=>{buildLayout()});
+})();
+</script>

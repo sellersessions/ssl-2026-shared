@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DataBrill — Own Your Amazon Data. Finally.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        bg: '#0c0a14',
+        surface: '#100e1a',
+        accent: '#e07a3a',
+        accent2: '#7c6bbd',
+      },
+      fontFamily: {
+        head: ['Inter', 'sans-serif'],
+        body: ['DM Sans', 'sans-serif'],
+        display: ['Space Grotesk', 'sans-serif'],
+      },
+    }
+  }
+}
+</script>
+<style>
+  :root{
+    --bg:#0c0a14;
+    --surface:#100e1a;
+    --accent:#e07a3a;
+    --accent-bright:#ff4d00;
+    --accent2:#7c6bbd;
+    --text:#f5f5fa;
+    --text-muted:rgba(245,245,250,0.55);
+    --glass-bg:rgba(255,255,255,0.025);
+    --glass-border:rgba(255,255,255,0.07);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  body{background:var(--bg);position:relative;overflow-x:hidden;}
+  body::before{content:"";position:fixed;inset:0;background-image:radial-gradient(rgba(255,255,255,0.05) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+  h1,h2,h3,h4{font-family:'Inter',sans-serif;color:var(--text);}
+  .mesh-orange{position:absolute;top:-200px;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(224,122,58,0.20),transparent 60%);filter:blur(60px);pointer-events:none;z-index:0;}
+  .mesh-purple{position:absolute;bottom:-200px;left:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(124,107,189,0.20),transparent 60%);filter:blur(60px);pointer-events:none;z-index:0;}
+  .glass{background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:0 25px 50px -12px rgba(0,0,0,0.7);}
+  .container-x{max-width:1280px;margin-left:auto;margin-right:auto;padding-left:1.5rem;padding-right:1.5rem;}
+  .gradient-text{background:linear-gradient(135deg,#e07a3a 0%,#ffb380 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
+  .cta-primary{background:linear-gradient(135deg,#e07a3a,#ff4d00);color:#fff;border-radius:9999px;padding:0.875rem 1.75rem;font-weight:600;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:0.5rem;box-shadow:0 0 24px rgba(224,122,58,0.30);transition:transform 0.2s ease,box-shadow 0.2s ease;border:none;cursor:pointer;}
+  .cta-primary:hover{transform:translateY(-1px);box-shadow:0 0 40px rgba(224,122,58,0.50);}
+  .cta-ghost{background:rgba(255,255,255,0.05);color:#fff;border:1px solid rgba(255,255,255,0.12);border-radius:9999px;padding:0.875rem 1.75rem;font-weight:500;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.2s ease;cursor:pointer;}
+  .cta-ghost:hover{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.20);}
+  .eyebrow-chip{display:inline-flex;align-items:center;gap:0.5rem;padding:0.375rem 1rem;border-radius:9999px;background:rgba(224,122,58,0.10);border:1px solid rgba(224,122,58,0.30);color:#e07a3a;font-family:'Space Grotesk',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;box-shadow:0 0 16px rgba(224,122,58,0.20);}
+  .nav-link{color:rgba(245,245,250,0.75);font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:500;transition:color 0.2s ease;}
+  .nav-link:hover{color:#fff;}
+  .step-num{width:2.5rem;height:2.5rem;border-radius:9999px;background:linear-gradient(135deg,#e07a3a,#ff4d00);color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.125rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 20px rgba(224,122,58,0.35);}
+  .icon-tile{width:3rem;height:3rem;border-radius:0.75rem;display:flex;align-items:center;justify-content:center;background:rgba(224,122,58,0.10);border:1px solid rgba(224,122,58,0.20);color:#e07a3a;}
+  .icon-tile.purple{background:rgba(124,107,189,0.10);border-color:rgba(124,107,189,0.20);color:#a394d6;}
+  .compare-th{font-family:'Inter',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(245,245,250,0.55);text-align:left;padding:1rem 1.25rem;border-bottom:1px solid var(--glass-border);}
+  .compare-td{font-family:'DM Sans',sans-serif;font-size:0.9375rem;color:rgba(245,245,250,0.85);padding:1rem 1.25rem;border-bottom:1px solid rgba(255,255,255,0.04);}
+  .compare-row:nth-child(odd) .compare-td{background:rgba(255,255,255,0.025);}
+  .compare-td.feature{font-weight:600;color:#fff;}
+  .compare-td.databrill{color:#fff;font-weight:500;}
+  main{position:relative;z-index:1;}
+</style>
+</head>
+<body class="font-body">
+<main>
+  <!-- 1. NAV -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl" style="background:rgba(12,10,20,0.85);border-bottom:1px solid var(--glass-border);">
+    <nav class="container-x flex items-center justify-between py-4">
+      <a href="#" class="font-head font-extrabold text-xl tracking-tight">Data<span style="color:#e07a3a">Brill</span></a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </div>
+      <a href="#login" class="cta-ghost text-sm">Log in</a>
+    </nav>
+  </header>
+
+  <!-- 2. HERO -->
+  <section class="relative overflow-hidden" style="padding:8rem 0 6rem;">
+    <div class="mesh-orange"></div>
+    <div class="mesh-purple"></div>
+    <div class="container-x relative text-center" style="z-index:1;">
+      <span class="eyebrow-chip">Now in Beta</span>
+      <h1 class="font-head font-black mt-8 leading-[1.05]" style="font-size:clamp(2.5rem,6vw,5rem);">
+        Own Your Amazon Data.<br>
+        <span class="gradient-text">Finally.</span>
+      </h1>
+      <p class="mt-8 mx-auto text-lg leading-relaxed" style="max-width:720px;color:var(--text-muted);">
+        Automated extraction from Amazon APIs into your database. No vendor lock-in. No data hostages. Just transparent, reliable data ownership for your Amazon business.
+      </p>
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a href="#trial" class="cta-primary">
+          Start Free Trial
+          <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </a>
+        <a href="#how" class="cta-ghost">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. PROBLEM -->
+  <section class="relative" style="padding:6rem 0;">
+    <div class="container-x relative" style="z-index:1;">
+      <h2 class="font-head font-bold text-center" style="font-size:clamp(2rem,4vw,3rem);">Tired of Being a Data Hostage?</h2>
+      <div class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto">
+        <div class="glass rounded-2xl p-7">
+          <h3 class="font-head font-semibold text-base tracking-wider uppercase" style="color:#e07a3a;">Access</h3>
+          <p class="mt-3 leading-relaxed" style="color:rgba(245,245,250,0.85);">You can't get a complete picture of your Amazon business without juggling 5 different platforms</p>
+        </div>
+        <div class="glass rounded-2xl p-7">
+          <h3 class="font-head font-semibold text-base tracking-wider uppercase" style="color:#e07a3a;">Cost</h3>
+          <p class="mt-3 leading-relaxed" style="color:rgba(245,245,250,0.85);">Third-party tools charge you monthly fees to access YOUR data, then charge again for exports</p>
+        </div>
+        <div class="glass rounded-2xl p-7">
+          <h3 class="font-head font-semibold text-base tracking-wider uppercase" style="color:#e07a3a;">Time</h3>
+          <p class="mt-3 leading-relaxed" style="color:rgba(245,245,250,0.85);">Finance asks for last quarter's numbers and you spend 3 hours copying from dashboards</p>
+        </div>
+        <div class="glass rounded-2xl p-7">
+          <h3 class="font-head font-semibold text-base tracking-wider uppercase" style="color:#e07a3a;">Build</h3>
+          <p class="mt-3 leading-relaxed" style="color:rgba(245,245,250,0.85);">Your BI team can't build the custom reports you need because data is locked in proprietary systems</p>
+        </div>
+      </div>
+      <p class="mt-12 text-center text-lg font-head font-medium" style="color:#fff;">Every dollar locked in Amazon is YOUR money. Why isn't your data?</p>
+    </div>
+  </section>
+
+  <!-- 4. SOLUTION -->
+  <section id="features" class="relative" style="padding:6rem 0;background:linear-gradient(180deg,transparent 0%,rgba(124,107,189,0.04) 50%,transparent 100%);">
+    <div class="container-x relative" style="z-index:1;">
+      <h2 class="font-head font-bold text-center" style="font-size:clamp(2rem,4vw,3rem);">Your Data, Your Database, Your Rules</h2>
+      <div class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
+        <div class="glass rounded-2xl p-7">
+          <div class="icon-tile"><span class="material-symbols-outlined">download</span></div>
+          <h3 class="mt-5 font-head font-bold text-lg tracking-wider" style="color:#fff;">EXTRACT</h3>
+          <ul class="mt-4 space-y-3" style="color:rgba(245,245,250,0.75);">
+            <li class="flex gap-2"><span style="color:#e07a3a;">·</span>Automated pulls from Selling Partner API and Advertising API</li>
+            <li class="flex gap-2"><span style="color:#e07a3a;">·</span>Orders, inventory, ads, settlements, performance metrics</li>
+            <li class="flex gap-2"><span style="color:#e07a3a;">·</span>Historical backfill + continuous incremental syncs</li>
+            <li class="flex gap-2"><span style="color:#e07a3a;">·</span>Secure OAuth integration</li>
+          </ul>
+        </div>
+        <div class="glass rounded-2xl p-7">
+          <div class="icon-tile purple"><span class="material-symbols-outlined">lock</span></div>
+          <h3 class="mt-5 font-head font-bold text-lg tracking-wider" style="color:#fff;">OWN</h3>
+          <ul class="mt-4 space-y-3" style="color:rgba(245,245,250,0.75);">
+            <li class="flex gap-2"><span style="color:#a394d6;">·</span>Data lands in YOUR PostgreSQL database</li>
+            <li class="flex gap-2"><span style="color:#a394d6;">·</span>Managed hosting or bring your own</li>
+            <li class="flex gap-2"><span style="color:#a394d6;">·</span>No vendor lock-in, ever</li>
+            <li class="flex gap-2"><span style="color:#a394d6;">·</span>Complete access and control</li>
+          </ul>
+        </div>
+        <div class="glass rounded-2xl p-7">
+          <div class="icon-tile"><span class="material-symbols-outlined">analytics</span></div>
+          <h3 class="mt-5 font-head font-bold text-lg tracking-wider" style="color:#fff;">ANALYZE</h3>
+          <ul class="mt-4 space-y-3" style="color:rgba(245,245,250,0.75);">
+            <li class="flex gap-2"><span style="color:#e07a3a;">·</span>Direct SQL access for custom queries</li>
+            <li class="flex gap-2"><span style="color:#e07a3a;">·</span>Connect any BI tool instantly</li>
+            <li class="flex gap-2"><span style="color:#e07a3a;">·</span>Export to CSV anytime</li>
+            <li class="flex gap-2"><span style="color:#e07a3a;">·</span>Feed your existing systems</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. HOW IT WORKS -->
+  <section id="how" class="relative" style="padding:6rem 0;">
+    <div class="container-x relative" style="z-index:1;">
+      <h2 class="font-head font-bold text-center" style="font-size:clamp(2rem,4vw,3rem);">How It Works</h2>
+      <div class="mt-14 max-w-3xl mx-auto space-y-8">
+        <div class="flex gap-6 items-start">
+          <div class="step-num">1</div>
+          <div>
+            <h3 class="font-head font-semibold text-xl" style="color:#fff;">Connect Your Amazon Account</h3>
+            <p class="mt-2 leading-relaxed" style="color:rgba(245,245,250,0.70);">Secure OAuth flow connects to Selling Partner and Advertising APIs. Takes 3 minutes. We handle token management and renewals automatically.</p>
+          </div>
+        </div>
+        <div class="flex gap-6 items-start">
+          <div class="step-num">2</div>
+          <div>
+            <h3 class="font-head font-semibold text-xl" style="color:#fff;">Choose Your Database</h3>
+            <p class="mt-2 leading-relaxed" style="color:rgba(245,245,250,0.70);">Use our managed PostgreSQL (live in 60 seconds) or bring your own database credentials. Your data lands where YOU decide.</p>
+          </div>
+        </div>
+        <div class="flex gap-6 items-start">
+          <div class="step-num">3</div>
+          <div>
+            <h3 class="font-head font-semibold text-xl" style="color:#fff;">Data Flows Automatically</h3>
+            <p class="mt-2 leading-relaxed" style="color:rgba(245,245,250,0.70);">Scheduled syncs run on your timeline. Historical backfill loads your past data. Watch real-time status and get alerts if anything needs attention.</p>
+          </div>
+        </div>
+        <div class="flex gap-6 items-start">
+          <div class="step-num">4</div>
+          <div>
+            <h3 class="font-head font-semibold text-xl" style="color:#fff;">Query, Analyze, Export</h3>
+            <p class="mt-2 leading-relaxed" style="color:rgba(245,245,250,0.70);">Your data, your way. Write SQL queries, connect Tableau or Looker, export to CSV, feed your accounting system. No limits, no fees, no permission needed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. WHO IT'S FOR -->
+  <section class="relative" style="padding:6rem 0;background:linear-gradient(180deg,transparent 0%,rgba(124,107,189,0.04) 50%,transparent 100%);">
+    <div class="container-x relative" style="z-index:1;">
+      <h2 class="font-head font-bold text-center" style="font-size:clamp(2rem,4vw,3rem);">Who It's For</h2>
+      <div class="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="glass rounded-2xl p-6">
+          <h3 class="font-head font-semibold text-base" style="color:#fff;">Amazon-Native Brands</h3>
+          <p class="mt-3 text-sm leading-relaxed" style="color:rgba(245,245,250,0.70);">You've built a real business on Amazon, not a side hustle. You need data infrastructure that matches your sophistication. Make decisions based on YOUR data in YOUR systems.</p>
+        </div>
+        <div class="glass rounded-2xl p-6">
+          <h3 class="font-head font-semibold text-base" style="color:#fff;">Agencies &amp; Aggregators</h3>
+          <p class="mt-3 text-sm leading-relaxed" style="color:rgba(245,245,250,0.70);">Managing 10, 50, or 100+ seller accounts? Stop logging into separate dashboards. Unified multi-tenant platform with clean data separation and central oversight.</p>
+        </div>
+        <div class="glass rounded-2xl p-6">
+          <h3 class="font-head font-semibold text-base" style="color:#fff;">Finance &amp; Operations Teams</h3>
+          <p class="mt-3 text-sm leading-relaxed" style="color:rgba(245,245,250,0.70);">Tired of reconciling numbers from three different sources? Get a single source of truth that feeds directly into your financial systems and operational dashboards.</p>
+        </div>
+        <div class="glass rounded-2xl p-6">
+          <h3 class="font-head font-semibold text-base" style="color:#fff;">Data-Driven Leaders</h3>
+          <p class="mt-3 text-sm leading-relaxed" style="color:rgba(245,245,250,0.70);">You want to train ML models, build predictive analytics, or create custom automation. You need raw data access, not another pretty dashboard you can't query.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. COMPARISON TABLE -->
+  <section class="relative" style="padding:6rem 0;">
+    <div class="container-x relative" style="z-index:1;">
+      <h2 class="font-head font-bold text-center" style="font-size:clamp(2rem,4vw,3rem);">Why DataBrill vs. Account Management Services?</h2>
+      <p class="mt-4 text-center text-base" style="color:var(--text-muted);">Account management services do tasks FOR you. DataBrill gives you the DATA to do anything.</p>
+      <div class="mt-12 max-w-5xl mx-auto glass rounded-2xl overflow-hidden">
+        <table class="w-full">
+          <thead>
+            <tr>
+              <th class="compare-th">Feature</th>
+              <th class="compare-th">Traditional Account Mgmt</th>
+              <th class="compare-th" style="color:#e07a3a;">DataBrill</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="compare-row"><td class="compare-td feature">Service Model</td><td class="compare-td">Manual operations team</td><td class="compare-td databrill">Automated data infrastructure</td></tr>
+            <tr class="compare-row"><td class="compare-td feature">Data Ownership</td><td class="compare-td">Lives in their platform</td><td class="compare-td databrill">Lives in YOUR database</td></tr>
+            <tr class="compare-row"><td class="compare-td feature">Access to Raw Data</td><td class="compare-td">Limited exports, fees</td><td class="compare-td databrill">Full SQL access, unlimited</td></tr>
+            <tr class="compare-row"><td class="compare-td feature">BI Tool Integration</td><td class="compare-td">Screenshots &amp; CSVs</td><td class="compare-td databrill">Direct SQL connection</td></tr>
+            <tr class="compare-row"><td class="compare-td feature">Custom Analytics</td><td class="compare-td">Request reports, wait days</td><td class="compare-td databrill">Query yourself, instant</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. CLOSING CTA BAND -->
+  <section id="trial" class="relative" style="padding:5rem 0;background:radial-gradient(ellipse at center, #f09050 0%, #e07a3a 70%);">
+    <div class="container-x text-center">
+      <h2 class="font-head font-black" style="font-size:clamp(2rem,4vw,3rem);color:#fff;">Stop Paying to Access Your Own Data</h2>
+      <p class="mt-4 text-lg max-w-2xl mx-auto" style="color:rgba(255,255,255,0.92);">Get 14 days free. See your complete Amazon data in one database. No credit card required.</p>
+      <div class="mt-8">
+        <a href="#start" style="background:#fff;color:#e07a3a;border-radius:9999px;padding:1rem 2.25rem;font-weight:700;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:0.5rem;box-shadow:0 10px 30px rgba(0,0,0,0.25);text-decoration:none;">
+          Start Free Trial
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. FOOTER -->
+  <footer style="background:var(--surface);border-top:1px solid rgba(255,255,255,0.05);padding:4rem 0 2rem;">
+    <div class="container-x">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
+        <div>
+          <div class="font-head font-extrabold text-xl">Data<span style="color:#e07a3a;">Brill</span></div>
+          <p class="mt-3 text-sm" style="color:var(--text-muted);">Your data. Your database. Your business.</p>
+        </div>
+        <div>
+          <h4 class="font-head font-semibold text-xs uppercase tracking-wider" style="color:rgba(245,245,250,0.55);">Product</h4>
+          <ul class="mt-4 space-y-2">
+            <li><a href="#" class="nav-link text-sm">Features</a></li>
+            <li><a href="#" class="nav-link text-sm">Pricing</a></li>
+            <li><a href="#" class="nav-link text-sm">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-head font-semibold text-xs uppercase tracking-wider" style="color:rgba(245,245,250,0.55);">Company</h4>
+          <ul class="mt-4 space-y-2">
+            <li><a href="#" class="nav-link text-sm">About</a></li>
+            <li><a href="#" class="nav-link text-sm">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-head font-semibold text-xs uppercase tracking-wider" style="color:rgba(245,245,250,0.55);">Legal</h4>
+          <ul class="mt-4 space-y-2">
+            <li><a href="#" class="nav-link text-sm">Privacy Policy</a></li>
+            <li><a href="#" class="nav-link text-sm">Terms of Service</a></li>
+            <li><a href="#" class="nav-link text-sm">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-12 pt-6 border-t text-center text-sm" style="border-color:rgba(255,255,255,0.05);color:var(--text-muted);">
+        © 2025 DataBrill. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</main>
+<noscript></noscript>
+</body>
+</html>

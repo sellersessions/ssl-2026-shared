@@ -1,0 +1,123 @@
+{
+  "stage": "PICK",
+  "source": {
+    "path": "/Users/dannymcmillan/pod-test-claude/pod-test-claude.mp4",
+    "name": "pod-test-claude.mp4",
+    "duration_s": 600
+  },
+  "recents": [
+    "pod-test-claude.mp4",
+    "dorian-listings-tips.mp4",
+    "ssl-greenroom.mp4"
+  ],
+  "presets": {
+    "format": "16:9",
+    "target": 60,
+    "grade": "neutral_punch",
+    "mode": "single"
+  },
+  "candidates": [
+    {
+      "id": 1,
+      "tier": 3,
+      "beat": "HOOK",
+      "duration_s": 7.1,
+      "quote": "If you're cloning someone else's voice, it doesn't really matter as long as it sounds good, right?",
+      "picked": true,
+      "source_start_s": 13.58,
+      "source_end_s": 20.7
+    },
+    {
+      "id": 2,
+      "tier": 3,
+      "beat": "INSIGHT",
+      "duration_s": 12.4,
+      "quote": "Claude can write the listings, score the candidates, and render the cut. You read text, you don't scrub.",
+      "picked": true,
+      "source_start_s": 45.1,
+      "source_end_s": 57.5
+    },
+    {
+      "id": 3,
+      "tier": 2,
+      "beat": "BRIDGE",
+      "duration_s": 5.7,
+      "quote": "And here's why that matters when you do this in volume.",
+      "picked": false,
+      "source_start_s": 78.2,
+      "source_end_s": 83.9
+    },
+    {
+      "id": 4,
+      "tier": 3,
+      "beat": "DECISION",
+      "duration_s": 8.2,
+      "quote": "So we run it through Scribe, score against the SOP, and Claude knows what to surface.",
+      "picked": true,
+      "source_start_s": 112.4,
+      "source_end_s": 120.6
+    },
+    {
+      "id": 5,
+      "tier": 2,
+      "beat": "CONTEXT",
+      "duration_s": 9.3,
+      "quote": "Most podcast tools can't do this. They auto-cut the whole clip and you lose editorial control.",
+      "picked": false,
+      "source_start_s": 156.0,
+      "source_end_s": 165.3
+    },
+    {
+      "id": 6,
+      "tier": 3,
+      "beat": "CLOSE",
+      "duration_s": 11.1,
+      "quote": "Claude can do the work. It can write them.",
+      "picked": true,
+      "source_start_s": 198.7,
+      "source_end_s": 209.8
+    }
+  ],
+  "budget": {
+    "total_s": 38.8,
+    "target_s": 60,
+    "lower": 54,
+    "upper": 66,
+    "in_window": false,
+    "delta": -15.2
+  },
+  "gates": {
+    "boundary": {
+      "status": "pass",
+      "name": "Gate 1 · Boundary review",
+      "detail": "All 4 picks clean. No mid-word starts, no tail-word bleed-ins. Pick 1 start auto-shifted 13.58 → 14.16.",
+      "side": "±1.5s window"
+    },
+    "close": {
+      "status": "pass",
+      "name": "Gate 2 · Close check",
+      "detail": "Lands on payoff: \"It can write them.\"",
+      "side": "trail 1.4s"
+    },
+    "budget": {
+      "status": "warn",
+      "name": "Budget",
+      "detail": "38.8s of 54-66s window. Suggest add #2 INSIGHT (12.4s) → 51.2s.",
+      "side": "add → ✓"
+    }
+  },
+  "render": {
+    "progress": 0.72,
+    "current_stage": "grade",
+    "stages_done": ["extract"],
+    "output": {
+      "name": "preview.mp4",
+      "size_mb": 18.4,
+      "duration_s": 51.2,
+      "path": "edit/preview.mp4"
+    }
+  },
+  "verdict": null,
+  "ready": false,
+  "updated_at": "2026-05-02T18:30:00Z"
+}

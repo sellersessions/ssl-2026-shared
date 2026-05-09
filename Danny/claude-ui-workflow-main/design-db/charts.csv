@@ -1,0 +1,8 @@
+chart_type,best_for,library,style_notes,anti_patterns,example_use
+bar-horizontal,comparing categories (5-15 items),recharts,sorted descending. Brand primary for bars. No gridlines. Label on bar end.,vertical bars for >7 items (hard to read labels) | rainbow colours,ProductPion category comparison
+line-trend,time series and trends,recharts,smooth curve. Single colour for single metric. Area fill at 10% opacity for context.,too many lines (>4 becomes unreadable) | dual Y-axis (confusing),revenue over time
+donut,part-of-whole (2-5 segments),recharts,inner radius 60%. Legend below not beside. Brand colours only.,pie chart (donut is cleaner) | >5 segments (use bar instead) | 3D effects,market share breakdown
+stat-card,single KPI with delta,custom component,big number (text-4xl). Delta arrow green/red. Subtle card background. Group in 3-4 card row.,small numbers in tables (lose impact) | mixing too many stats in one card,ProductPion dashboard KPIs
+data-table,detailed multi-column data,custom or tanstack-table,zebra stripes on dark theme. Sticky header. Horizontal scroll on mobile. Sort indicators.,dense tables without row highlighting | no mobile strategy,product research comparisons
+sparkline,inline trend indicator,recharts or custom SVG,tiny (40x16px). No axes. Single colour. Used inside table cells or stat cards.,full-size charts crammed small (unreadable) | sparklines without context number,dashboard table cells
+heatmap,correlation or intensity grid,custom div grid,brand primary gradient from light to saturated. Cell labels for values. Legend strip.,too many colour stops (keep 5-7) | no legend (colours meaningless without scale),keyword density matrix

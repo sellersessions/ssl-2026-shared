@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Claude Remotion Flow system graph">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="hub-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="bg-vignette" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#1a1625" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0c0a14" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="700" fill="#0c0a14"/>
+  <rect width="1200" height="700" fill="url(#bg-vignette)"/>
+
+  <!-- Treatment-to-cluster spokes (animated flow) -->
+  <g stroke-width="1.5" fill="none" opacity="0.6">
+    <line x1="600" y1="350" x2="600" y2="110" stroke="#22d3ee" stroke-dasharray="4 6">
+      <animate attributeName="stroke-dashoffset" values="0;-30" dur="3s" repeatCount="indefinite"/>
+    </line>
+    <line x1="600" y1="350" x2="808" y2="230" stroke="#753EF7" stroke-dasharray="4 6">
+      <animate attributeName="stroke-dashoffset" values="0;-30" dur="3.2s" repeatCount="indefinite"/>
+    </line>
+    <line x1="600" y1="350" x2="808" y2="470" stroke="#00B894" stroke-dasharray="4 6">
+      <animate attributeName="stroke-dashoffset" values="0;-30" dur="3.4s" repeatCount="indefinite"/>
+    </line>
+    <line x1="600" y1="350" x2="600" y2="590" stroke="#FBBF24" stroke-dasharray="4 6">
+      <animate attributeName="stroke-dashoffset" values="0;-30" dur="3.6s" repeatCount="indefinite"/>
+    </line>
+    <line x1="600" y1="350" x2="392" y2="470" stroke="#c4b5fd" stroke-dasharray="4 6">
+      <animate attributeName="stroke-dashoffset" values="0;-30" dur="3.8s" repeatCount="indefinite"/>
+    </line>
+    <line x1="600" y1="350" x2="392" y2="230" stroke="#FBBF24" stroke-dasharray="4 6">
+      <animate attributeName="stroke-dashoffset" values="0;-30" dur="4s" repeatCount="indefinite"/>
+    </line>
+  </g>
+
+  <!-- Cross-cluster (audio/voice/beat → code, code → output) -->
+  <g stroke="#8b949e" stroke-width="1" fill="none" opacity="0.25" stroke-dasharray="2 4">
+    <line x1="392" y1="230" x2="808" y2="230"/>
+    <line x1="392" y1="470" x2="808" y2="230"/>
+    <line x1="600" y1="590" x2="808" y2="230"/>
+    <line x1="808" y1="230" x2="808" y2="470"/>
+  </g>
+
+  <!-- Satellite spokes (cluster hub → its satellites) -->
+  <g stroke-width="1" fill="none" opacity="0.35">
+    <!-- Authoring satellites -->
+    <line x1="600" y1="110" x2="490" y2="60" stroke="#22d3ee"/>
+    <line x1="600" y1="110" x2="710" y2="60" stroke="#22d3ee"/>
+    <line x1="600" y1="110" x2="600" y2="30" stroke="#22d3ee"/>
+    <!-- Code satellites -->
+    <line x1="808" y1="230" x2="940" y2="170" stroke="#753EF7"/>
+    <line x1="808" y1="230" x2="980" y2="240" stroke="#753EF7"/>
+    <line x1="808" y1="230" x2="940" y2="310" stroke="#753EF7"/>
+    <!-- Output satellites -->
+    <line x1="808" y1="470" x2="940" y2="410" stroke="#00B894"/>
+    <line x1="808" y1="470" x2="980" y2="470" stroke="#00B894"/>
+    <line x1="808" y1="470" x2="940" y2="540" stroke="#00B894"/>
+    <!-- Beat-sync satellites -->
+    <line x1="600" y1="590" x2="490" y2="650" stroke="#FBBF24"/>
+    <line x1="600" y1="590" x2="710" y2="650" stroke="#FBBF24"/>
+    <!-- Voice satellites -->
+    <line x1="392" y1="470" x2="260" y2="410" stroke="#c4b5fd"/>
+    <line x1="392" y1="470" x2="220" y2="470" stroke="#c4b5fd"/>
+    <line x1="392" y1="470" x2="260" y2="540" stroke="#c4b5fd"/>
+    <!-- Audio satellites -->
+    <line x1="392" y1="230" x2="260" y2="170" stroke="#FBBF24"/>
+    <line x1="392" y1="230" x2="220" y2="230" stroke="#FBBF24"/>
+    <line x1="392" y1="230" x2="260" y2="310" stroke="#FBBF24"/>
+  </g>
+
+  <!-- Cluster hubs (6 anchors around treatment center) -->
+  <g filter="url(#hub-glow)">
+    <!-- Authoring (top) cyan -->
+    <circle cx="600" cy="110" r="14" fill="#22d3ee" opacity="0.9">
+      <animate attributeName="r" values="14;17;14" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Code (top-right) purple -->
+    <circle cx="808" cy="230" r="14" fill="#753EF7" opacity="0.9">
+      <animate attributeName="r" values="14;17;14" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Output (bottom-right) green -->
+    <circle cx="808" cy="470" r="14" fill="#00B894" opacity="0.9">
+      <animate attributeName="r" values="14;17;14" dur="3.4s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Beat-sync (bottom) yellow -->
+    <circle cx="600" cy="590" r="14" fill="#FBBF24" opacity="0.9">
+      <animate attributeName="r" values="14;17;14" dur="3.6s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Voice (bottom-left) light-purple -->
+    <circle cx="392" cy="470" r="14" fill="#c4b5fd" opacity="0.9">
+      <animate attributeName="r" values="14;17;14" dur="3.8s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Audio (top-left) yellow -->
+    <circle cx="392" cy="230" r="14" fill="#FBBF24" opacity="0.9">
+      <animate attributeName="r" values="14;17;14" dur="4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Satellite nodes -->
+  <g filter="url(#glow)">
+    <!-- Authoring -->
+    <circle cx="490" cy="60" r="6" fill="#22d3ee" opacity="0.85"/>
+    <circle cx="710" cy="60" r="6" fill="#22d3ee" opacity="0.85"/>
+    <circle cx="600" cy="30" r="6" fill="#22d3ee" opacity="0.85"/>
+    <!-- Code -->
+    <circle cx="940" cy="170" r="6" fill="#753EF7" opacity="0.85"/>
+    <circle cx="980" cy="240" r="6" fill="#753EF7" opacity="0.85"/>
+    <circle cx="940" cy="310" r="6" fill="#753EF7" opacity="0.85"/>
+    <!-- Output -->
+    <circle cx="940" cy="410" r="6" fill="#00B894" opacity="0.85"/>
+    <circle cx="980" cy="470" r="6" fill="#00B894" opacity="0.85"/>
+    <circle cx="940" cy="540" r="6" fill="#00B894" opacity="0.85"/>
+    <!-- Beat-sync -->
+    <circle cx="490" cy="650" r="6" fill="#FBBF24" opacity="0.85"/>
+    <circle cx="710" cy="650" r="6" fill="#FBBF24" opacity="0.85"/>
+    <!-- Voice -->
+    <circle cx="260" cy="410" r="6" fill="#c4b5fd" opacity="0.85"/>
+    <circle cx="220" cy="470" r="6" fill="#c4b5fd" opacity="0.85"/>
+    <circle cx="260" cy="540" r="6" fill="#c4b5fd" opacity="0.85"/>
+    <!-- Audio -->
+    <circle cx="260" cy="170" r="6" fill="#FBBF24" opacity="0.85"/>
+    <circle cx="220" cy="230" r="6" fill="#FBBF24" opacity="0.85"/>
+    <circle cx="260" cy="310" r="6" fill="#FBBF24" opacity="0.85"/>
+  </g>
+
+  <!-- Treatment center hub (the source of truth) -->
+  <g filter="url(#hub-glow)">
+    <circle cx="600" cy="350" r="38" fill="#0c0a14" stroke="#22d3ee" stroke-width="2" opacity="0.95">
+      <animate attributeName="r" values="38;42;38" dur="2.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="600" cy="350" r="22" fill="#22d3ee" opacity="0.85">
+      <animate attributeName="opacity" values="0.85;1;0.85" dur="2.4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Cluster labels -->
+  <g font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle" fill="#e6edf3">
+    <text x="600" y="408" font-size="14" fill="#22d3ee" font-weight="700" letter-spacing="2">TREATMENT</text>
+    <text x="600" y="92" font-size="13">Authoring</text>
+    <text x="836" y="212" font-size="13">Code</text>
+    <text x="836" y="452" font-size="13">Output</text>
+    <text x="600" y="616" font-size="13">Beat-sync</text>
+    <text x="364" y="452" font-size="13">Voice</text>
+    <text x="364" y="212" font-size="13">Audio</text>
+  </g>
+
+  <!-- Satellite labels (subtle) -->
+  <g font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="10" text-anchor="middle" fill="#8b949e">
+    <!-- Authoring -->
+    <text x="490" y="48">treatment.md</text>
+    <text x="710" y="48">scenes</text>
+    <text x="600" y="18">VO copy</text>
+    <!-- Code -->
+    <text x="940" y="158">Remotion</text>
+    <text x="998" y="244">React</text>
+    <text x="940" y="298">props</text>
+    <!-- Output -->
+    <text x="940" y="398">MP4</text>
+    <text x="998" y="474">render</text>
+    <text x="940" y="552">poster</text>
+    <!-- Beat-sync -->
+    <text x="490" y="668">grid</text>
+    <text x="710" y="668">SFX</text>
+    <!-- Voice -->
+    <text x="260" y="398">ElevenLabs</text>
+    <text x="208" y="474">TTS</text>
+    <text x="260" y="552">VO clone</text>
+    <!-- Audio -->
+    <text x="260" y="158">music bed</text>
+    <text x="208" y="234">duck</text>
+    <text x="260" y="322">master</text>
+  </g>
+</svg>

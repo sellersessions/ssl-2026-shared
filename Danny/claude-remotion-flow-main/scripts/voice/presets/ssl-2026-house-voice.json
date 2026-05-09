@@ -1,0 +1,27 @@
+{
+  "_comment": "SSL 2026 house voice — locked 22 Apr 2026 after 2 rounds of A/B/C testing on Danny's Pro clone. Winner: variant-b-090. Use this preset as default_voice_settings for all SSL 2026 Remotion VO going forward. Text style: em-dashes + extra commas for cadence (do NOT use SSML <break> tags).",
+  "voice_id": "jQOgcOzmmipekvxJN09W",
+  "voice_name": "Danny Raw Voice 2026",
+  "model_id": "eleven_multilingual_v2",
+  "voice_settings": {
+    "stability": 0.31,
+    "similarity_boost": 1.0,
+    "style": 0.0,
+    "use_speaker_boost": true,
+    "speed": 0.9
+  },
+  "text_style_rules": [
+    "Use em-dashes (—) for mid-sentence pauses that are beats, not full stops.",
+    "Use extra commas to slow key phrases, e.g. 'and particularly, the work...'",
+    "Do NOT use SSML <break> tags — natural punctuation only.",
+    "Keep sentences short. 1 idea per sentence."
+  ],
+  "rounds_tested": {
+    "round_1_ABC": "A (clean) / B (em-dash pacing) / C (stability 0.20 expressive) — Danny picked B",
+    "round_2_speed": "B@0.80 / B1@0.85 / B2@0.90 / B3@0.95 — Danny picked B2 (0.90) as the pocket"
+  },
+  "reference_clip": "voice-box-generations/elevenlabs/ssl-2026-opener/variant-b-090.mp3",
+  "future_work": [
+    "Round 3: per-word pitch bump on 'guys' in 'Hey guys' (micro-amount). Requires DSP post-processing — ElevenLabs API can't do per-word pitch. See task #13."
+  ]
+}

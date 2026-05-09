@@ -1,0 +1,481 @@
+<h2 class="sr-only">Template 01: Node graph version 2. Ten nodes connected by orthogonal cables that route through dedicated margin lanes, never crossing other nodes.</h2>
+<style>
+:root{
+  --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
+  --bg-page:#06080F;
+  --bg-0:#030C1B;
+  --bg-1:#0A1228;
+  --ink-0:#F2EEF8;
+  --ink-1:#C8B6F0;
+  --ink-2:#8B92A8;
+  --ink-3:#5A627A;
+  --violet:#9D4EDD;
+  --teal:#5DCAA5;
+  --amber:#EF9F27;
+  --pink:#FF6BB4;
+  --gold:#C99554;
+  --r-wrap:12px;
+  --r-card:3px;
+  --stroke-hair:0.5px;
+  --stroke-bold:1.5px;
+  --border-soft:rgba(157,78,221,0.18);
+  --border-mid:rgba(157,78,221,0.35);
+  --card-fill:rgba(255,255,255,0.02);
+  --card-stroke:rgba(255,255,255,0.08);
+  --divider:rgba(255,255,255,0.06);
+}
+
+.ng-frame{width:100%;max-width:1080px;font-family:var(--font-sans);color:var(--ink-0)}
+.ng-wrap{
+  background:linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 100%);
+  border-radius:var(--r-wrap);
+  padding:28px 28px 18px;
+  position:relative;
+  overflow:hidden;
+  border:var(--stroke-hair) solid var(--border-soft);
+}
+.ng-wrap::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 110%, rgba(157,78,221,0.10), transparent 60%);
+  pointer-events:none;
+}
+.ng-wrap::after{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(157,78,221,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(157,78,221,0.025) 1px,transparent 1px);
+  background-size:24px 24px;
+  pointer-events:none;
+}
+
+.ng-spec{display:flex;align-items:center;gap:18px;margin-bottom:18px;position:relative;z-index:1}
+.ng-spec-id{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:2px;
+  color:var(--ink-2);text-transform:uppercase;
+  padding:3px 8px;border:var(--stroke-hair) solid var(--border-mid);border-radius:2px;
+}
+.ng-spec-name{font-size:20px;font-weight:600;letter-spacing:-0.2px;color:var(--ink-0);margin:0}
+.ng-spec-pat{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;
+  color:var(--gold);text-transform:uppercase;margin-left:auto;
+  display:flex;align-items:center;gap:8px;
+}
+.ng-spec-pat::before{
+  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 6px var(--gold);
+  animation:ngPulse 2s ease-in-out infinite;
+}
+@keyframes ngPulse{0%,100%{box-shadow:0 0 6px var(--gold)}50%{box-shadow:0 0 12px var(--gold)}}
+
+.ng-canvas{
+  position:relative;
+  background:var(--card-fill);
+  border-radius:var(--r-card);
+  border:var(--stroke-hair) solid var(--card-stroke);
+  z-index:1;
+  padding:48px 60px;
+}
+.ng-grid{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  column-gap:96px;
+  row-gap:56px;
+  z-index:2;
+}
+
+.ng-cables{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  width:100%;
+  height:100%;
+  overflow:visible;
+}
+
+.ng-node{
+  position:relative;
+  background:rgba(255,255,255,0.02);
+  border:var(--stroke-hair) solid var(--card-stroke);
+  border-top:var(--stroke-bold) solid var(--accent,var(--violet));
+  border-radius:var(--r-card);
+  min-height:64px;
+  transition:border-color .4s,box-shadow .4s,opacity .4s;
+}
+.ng-node.dim{opacity:0.4}
+.ng-node.active{
+  box-shadow:0 0 0 2px rgba(157,78,221,0.18), 0 4px 14px rgba(0,0,0,0.4);
+  border-color:rgba(157,78,221,0.45);
+}
+.ng-node.done{border-top-color:var(--teal);opacity:0.85}
+
+.ng-node-head{
+  padding:7px 11px;
+  border-bottom:var(--stroke-hair) solid var(--card-stroke);
+  display:flex;align-items:center;gap:8px;
+}
+.ng-node-dot{width:8px;height:8px;border-radius:50%;background:var(--accent,var(--violet));flex-shrink:0}
+.ng-node.done .ng-node-dot{background:var(--teal)}
+.ng-node-id{font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;color:var(--ink-3);text-transform:uppercase}
+.ng-node-title{color:var(--ink-0);font-size:12px;font-weight:600;margin-left:auto}
+.ng-node-body{padding:7px 11px;font-family:var(--font-mono);font-size:10px;color:var(--ink-2);letter-spacing:0.3px}
+
+.ng-port{
+  position:absolute;width:9px;height:9px;border-radius:50%;
+  background:var(--bg-0);
+  border:var(--stroke-bold) solid var(--ink-3);
+  top:50%;margin-top:-4.5px;
+  transition:border-color .3s;
+}
+.ng-port.in{left:-5.5px}
+.ng-port.out{right:-5.5px}
+.ng-port.bottom{top:auto;bottom:-5.5px;left:50%;margin-left:-4.5px;margin-top:0}
+.ng-port.top{top:-5.5px;left:50%;margin-left:-4.5px;margin-top:0}
+.ng-node.active .ng-port,.ng-node.done .ng-port{border-color:var(--violet)}
+.ng-node.done .ng-port{border-color:var(--teal)}
+
+.ng-cable{
+  stroke-dasharray:600;
+  stroke-dashoffset:600;
+  transition:stroke-dashoffset .8s ease-out, stroke .3s;
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.ng-cable.in{stroke-dashoffset:0}
+.ng-packet{fill:var(--gold);opacity:0;transition:opacity .3s}
+.ng-packet.flowing{opacity:1}
+
+.ng-foot{
+  display:flex;gap:10px;align-items:center;
+  margin-top:14px;padding-top:14px;
+  border-top:var(--stroke-hair) solid var(--divider);
+  position:relative;z-index:1;
+}
+.ng-btn{
+  background:rgba(255,255,255,0.02);
+  border:var(--stroke-hair) solid var(--border-mid);
+  color:var(--ink-1);
+  padding:7px 14px;
+  border-radius:2px;
+  cursor:pointer;
+  font-size:11px;
+  font-family:var(--font-mono);
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  transition:border-color .2s, color .2s, background .2s;
+}
+.ng-btn:hover{border-color:var(--violet);color:var(--ink-0);background:rgba(157,78,221,0.08)}
+.ng-stat{margin-left:auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-3);letter-spacing:1.2px;text-transform:uppercase}
+.ng-stat-v{color:var(--ink-1);margin-left:6px}
+
+@media (max-width:720px){
+  .ng-grid{grid-template-columns:1fr;column-gap:0;row-gap:10px}
+  .ng-cables{display:none}
+}
+</style>
+
+<div class="ng-frame">
+<div class="ng-wrap">
+
+<header class="ng-spec">
+<span class="ng-spec-id">TEMPLATE 01</span>
+<h1 class="ng-spec-name">Node graph</h1>
+<span class="ng-spec-pat">Join: orthogonal routing</span>
+</header>
+
+<div class="ng-canvas">
+<svg class="ng-cables" id="ng-cables"></svg>
+
+<div class="ng-grid" id="ng-grid">
+<div class="ng-node active" data-step="0" data-row="0" data-col="0" style="--accent:var(--violet)">
+<div class="ng-port out"></div>
+<div class="ng-node-head"><div class="ng-node-dot"></div><span class="ng-node-id">N01</span><span class="ng-node-title">{slot}</span></div>
+<div class="ng-node-body">{stat}</div>
+</div>
+
+<div class="ng-node dim" data-step="1" data-row="0" data-col="1" style="--accent:var(--violet)">
+<div class="ng-port in"></div><div class="ng-port out"></div>
+<div class="ng-node-head"><div class="ng-node-dot"></div><span class="ng-node-id">N02</span><span class="ng-node-title">{slot}</span></div>
+<div class="ng-node-body">{stat}</div>
+</div>
+
+<div class="ng-node dim" data-step="2" data-row="0" data-col="2" style="--accent:var(--teal)">
+<div class="ng-port in"></div><div class="ng-port out bottom"></div>
+<div class="ng-node-head"><div class="ng-node-dot"></div><span class="ng-node-id">N03</span><span class="ng-node-title">{slot}</span></div>
+<div class="ng-node-body">{stat}</div>
+</div>
+
+<div class="ng-node dim" data-step="3" data-row="1" data-col="0" style="--accent:var(--teal)">
+<div class="ng-port in top"></div><div class="ng-port out"></div>
+<div class="ng-node-head"><div class="ng-node-dot"></div><span class="ng-node-id">N04</span><span class="ng-node-title">{slot}</span></div>
+<div class="ng-node-body">{stat}</div>
+</div>
+
+<div class="ng-node dim" data-step="4" data-row="1" data-col="1" style="--accent:var(--teal)">
+<div class="ng-port in"></div><div class="ng-port out"></div>
+<div class="ng-node-head"><div class="ng-node-dot"></div><span class="ng-node-id">N05</span><span class="ng-node-title">{slot}</span></div>
+<div class="ng-node-body">{stat}</div>
+</div>
+
+<div class="ng-node dim" data-step="5" data-row="1" data-col="2" style="--accent:var(--amber)">
+<div class="ng-port in"></div><div class="ng-port out bottom"></div>
+<div class="ng-node-head"><div class="ng-node-dot"></div><span class="ng-node-id">N06</span><span class="ng-node-title">{slot}</span></div>
+<div class="ng-node-body">{stat}</div>
+</div>
+
+<div class="ng-node dim" data-step="6" data-row="2" data-col="0" style="--accent:var(--amber)">
+<div class="ng-port in top"></div><div class="ng-port out"></div>
+<div class="ng-node-head"><div class="ng-node-dot"></div><span class="ng-node-id">N07</span><span class="ng-node-title">{slot}</span></div>
+<div class="ng-node-body">{stat}</div>
+</div>
+
+<div class="ng-node dim" data-step="7" data-row="2" data-col="1" style="--accent:var(--pink)">
+<div class="ng-port in"></div><div class="ng-port out"></div>
+<div class="ng-node-head"><div class="ng-node-dot"></div><span class="ng-node-id">N08</span><span class="ng-node-title">{slot}</span></div>
+<div class="ng-node-body">{stat}</div>
+</div>
+
+<div class="ng-node dim" data-step="8" data-row="2" data-col="2" style="--accent:var(--pink)">
+<div class="ng-port in"></div><div class="ng-port out bottom"></div>
+<div class="ng-node-head"><div class="ng-node-dot"></div><span class="ng-node-id">N09</span><span class="ng-node-title">{slot}</span></div>
+<div class="ng-node-body">{stat}</div>
+</div>
+
+<div class="ng-node dim" data-step="9" data-row="3" data-col="2" style="--accent:var(--pink);grid-column:3">
+<div class="ng-port in top"></div>
+<div class="ng-node-head"><div class="ng-node-dot"></div><span class="ng-node-id">N10</span><span class="ng-node-title">{slot}</span></div>
+<div class="ng-node-body">{stat}</div>
+</div>
+</div>
+</div>
+
+<div class="ng-foot">
+<button class="ng-btn" onclick="ngPlay()">Run</button>
+<button class="ng-btn" onclick="ngStep()">Step</button>
+<span class="ng-stat">Node<span class="ng-stat-v" id="ng-counter">01 of 10</span></span>
+</div>
+
+</div>
+</div>
+
+<script>
+(function(){
+const cablesSvg=document.getElementById('ng-cables');
+const nodes=document.querySelectorAll('.ng-node');
+const counter=document.getElementById('ng-counter');
+
+// Each connection: {from:stepIdx, to:stepIdx, type:'sameRow'|'wrap'|'drop'}
+const connections=[
+  {from:0,to:1,type:'sameRow'},
+  {from:1,to:2,type:'sameRow'},
+  {from:2,to:3,type:'wrapDownRight'},   // N03 right edge → N04 top, wrap via right margin and down
+  {from:3,to:4,type:'sameRow'},
+  {from:4,to:5,type:'sameRow'},
+  {from:5,to:6,type:'wrapDownRight'},   // N06 right edge → N07 top
+  {from:6,to:7,type:'sameRow'},
+  {from:7,to:8,type:'sameRow'},
+  {from:8,to:9,type:'drop'}              // N09 bottom → N10 top, both in column 2
+];
+
+let cables=[],packets=[];
+let cur=0,timer=null;
+
+function getPortPos(stepIdx, side){
+  const node=document.querySelector('.ng-node[data-step="'+stepIdx+'"]');
+  if(!node)return null;
+  const port=node.querySelector('.ng-port.'+side);
+  if(!port)return null;
+  const canvasRect=cablesSvg.getBoundingClientRect();
+  const portRect=port.getBoundingClientRect();
+  return {
+    x:portRect.left+portRect.width/2-canvasRect.left,
+    y:portRect.top+portRect.height/2-canvasRect.top
+  };
+}
+
+function getNodeBox(stepIdx){
+  const node=document.querySelector('.ng-node[data-step="'+stepIdx+'"]');
+  const canvasRect=cablesSvg.getBoundingClientRect();
+  const r=node.getBoundingClientRect();
+  return {
+    left:r.left-canvasRect.left,
+    right:r.right-canvasRect.left,
+    top:r.top-canvasRect.top,
+    bottom:r.bottom-canvasRect.top,
+    width:r.width,
+    height:r.height
+  };
+}
+
+// Orthogonal path with rounded corners
+function ortho(points, radius=8){
+  if(points.length<2)return '';
+  let d=`M ${points[0].x} ${points[0].y}`;
+  for(let i=1;i<points.length-1;i++){
+    const prev=points[i-1];
+    const curr=points[i];
+    const next=points[i+1];
+    // Direction in
+    const inDx=Math.sign(curr.x-prev.x);
+    const inDy=Math.sign(curr.y-prev.y);
+    // Direction out
+    const outDx=Math.sign(next.x-curr.x);
+    const outDy=Math.sign(next.y-curr.y);
+    // Approach point
+    const ax=curr.x-inDx*radius;
+    const ay=curr.y-inDy*radius;
+    // Departure point
+    const bx=curr.x+outDx*radius;
+    const by=curr.y+outDy*radius;
+    d+=` L ${ax} ${ay} Q ${curr.x} ${curr.y} ${bx} ${by}`;
+  }
+  const last=points[points.length-1];
+  d+=` L ${last.x} ${last.y}`;
+  return d;
+}
+
+function buildCable(conn, idx){
+  const {from, to, type}=conn;
+  const canvasRect=cablesSvg.getBoundingClientRect();
+  
+  if(type==='sameRow'){
+    const a=getPortPos(from,'out');
+    const b=getPortPos(to,'in');
+    if(!a||!b)return '';
+    const midX=(a.x+b.x)/2;
+    return ortho([
+      {x:a.x,y:a.y},
+      {x:midX,y:a.y},
+      {x:midX,y:b.y},
+      {x:b.x,y:b.y}
+    ]);
+  }
+  
+  if(type==='wrapDownRight'){
+    // From: right-edge out-port at end of row (col 2)
+    // To: top in-port at start of next row (col 0)
+    // Route: out → right margin lane → down → bottom lane → left → up to in-port
+    const a=getPortPos(from,'out');
+    const b=getPortPos(to,'in top');
+    if(!a||!b)return '';
+    const fromBox=getNodeBox(from);
+    const toBox=getNodeBox(to);
+    
+    // Right margin: x position past the rightmost node, with per-cable offset
+    const rightLaneX=Math.max(fromBox.right, toBox.right)+30+(idx*4);
+    // Bottom lane: between the two rows
+    const bottomLaneY=(fromBox.bottom+toBox.top)/2;
+    
+    return ortho([
+      {x:a.x,y:a.y},
+      {x:rightLaneX,y:a.y},
+      {x:rightLaneX,y:bottomLaneY},
+      {x:b.x,y:bottomLaneY},
+      {x:b.x,y:b.y}
+    ]);
+  }
+  
+  if(type==='drop'){
+    // Vertical drop, both in same column
+    const a=getPortPos(from,'out bottom');
+    const b=getPortPos(to,'in top');
+    if(!a||!b)return '';
+    return ortho([
+      {x:a.x,y:a.y},
+      {x:a.x,y:(a.y+b.y)/2},
+      {x:b.x,y:(a.y+b.y)/2},
+      {x:b.x,y:b.y}
+    ]);
+  }
+  
+  return '';
+}
+
+// getPortPos extension to handle compound classes like "out bottom"
+function getPortPosCompound(stepIdx, sideClasses){
+  const node=document.querySelector('.ng-node[data-step="'+stepIdx+'"]');
+  if(!node)return null;
+  const classes=sideClasses.split(' ');
+  let selector='.ng-port';
+  classes.forEach(c=>selector+='.'+c);
+  const port=node.querySelector(selector);
+  if(!port)return null;
+  const canvasRect=cablesSvg.getBoundingClientRect();
+  const portRect=port.getBoundingClientRect();
+  return {
+    x:portRect.left+portRect.width/2-canvasRect.left,
+    y:portRect.top+portRect.height/2-canvasRect.top
+  };
+}
+
+// Patch getPortPos to handle compound side strings
+const origGetPort=getPortPos;
+getPortPos=function(stepIdx, side){
+  if(side.includes(' '))return getPortPosCompound(stepIdx,side);
+  return origGetPort(stepIdx,side);
+};
+
+function drawCables(){
+  cablesSvg.innerHTML='';
+  cables=[];packets=[];
+  const rect=cablesSvg.getBoundingClientRect();
+  cablesSvg.setAttribute('viewBox',`0 0 ${rect.width} ${rect.height}`);
+  
+  connections.forEach((conn,idx)=>{
+    const d=buildCable(conn,idx);
+    if(!d)return;
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',d);
+    path.setAttribute('class','ng-cable');
+    path.setAttribute('id','ng-cable-'+idx);
+    path.setAttribute('stroke','rgba(157,78,221,0.25)');
+    path.setAttribute('stroke-width','1.5');
+    cablesSvg.appendChild(path);
+    cables.push(path);
+    
+    const packet=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    packet.setAttribute('class','ng-packet');
+    packet.setAttribute('r','3.5');
+    const motion=document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
+    motion.setAttribute('dur','1.4s');
+    motion.setAttribute('repeatCount','indefinite');
+    const mpath=document.createElementNS('http://www.w3.org/2000/svg','mpath');
+    mpath.setAttribute('href','#ng-cable-'+idx);
+    motion.appendChild(mpath);
+    packet.appendChild(motion);
+    cablesSvg.appendChild(packet);
+    packets.push(packet);
+  });
+  applyState(cur);
+}
+
+function applyState(n){
+  nodes.forEach((nd,i)=>{
+    nd.classList.remove('active','done','dim');
+    if(i<n)nd.classList.add('done');
+    else if(i===n)nd.classList.add('active');
+    else nd.classList.add('dim');
+  });
+  cables.forEach((c,i)=>{
+    if(i<n){c.classList.add('in');c.setAttribute('stroke','rgba(93,202,165,0.55)')}
+    else{c.classList.remove('in');c.setAttribute('stroke','rgba(157,78,221,0.25)')}
+  });
+  packets.forEach((p,i)=>p.classList.toggle('flowing',i===n-1));
+  counter.textContent=String(n+1).padStart(2,'0')+' of 10';
+}
+
+function show(n){cur=n;applyState(n)}
+function reset(){cur=0;applyState(0)}
+
+window.ngStep=function(){const n=(cur+1)%10;if(n===0)reset();else show(n)};
+window.ngPlay=function(){clearInterval(timer);reset();let i=0;timer=setInterval(()=>{i++;if(i>9){clearInterval(timer);return}show(i)},1100)};
+
+function init(){drawCables();setTimeout(ngPlay,400)}
+if(document.readyState==='complete')init();
+else window.addEventListener('load',init);
+window.addEventListener('resize',drawCables);
+})();
+</script>

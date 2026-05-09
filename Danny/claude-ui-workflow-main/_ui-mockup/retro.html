@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>Claude UI Workflow — retro + reset (stages 9-10)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.retro-grid {
+  display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; align-items: start;
+}
+@media (max-width: 900px) { .retro-grid { grid-template-columns: 1fr; } }
+
+.retro-panel {
+  border: 1px solid var(--line-soft); border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, rgba(26,26,46,.55) 0%, rgba(19,13,42,.55) 100%);
+  overflow: hidden;
+}
+.retro-head {
+  padding: 16px 22px; border-bottom: 1px solid var(--line-soft);
+  background: rgba(0,0,0,.16);
+  display: flex; align-items: center; gap: 12px;
+}
+.retro-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  background: var(--ss-purple-light); color: #fff;
+}
+.retro-title { font-size: 14.5px; font-weight: 700; color: var(--ink); flex: 1; }
+.retro-title small {
+  display: block; font-family: var(--font-mono); font-size: 10.5px;
+  color: var(--ink-faint); font-weight: 500; margin-top: 2px;
+}
+.retro-body { padding: 18px 22px 22px; }
+
+/* Retro list groups ------------------------- */
+.retro-group { margin-bottom: 18px; }
+.retro-group:last-child { margin-bottom: 0; }
+.retro-group-label {
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 700;
+  color: var(--ink-faint); letter-spacing: 1.4px; text-transform: uppercase;
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+}
+.retro-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.retro-dot.good { background: var(--success); }
+.retro-dot.bad  { background: var(--ss-rose); }
+.retro-dot.lesson { background: var(--ss-cyan); }
+
+.retro-list { display: flex; flex-direction: column; gap: 8px; }
+.retro-item {
+  font-size: 13px; line-height: 1.55; color: var(--ink-muted);
+  padding: 10px 14px; border-radius: var(--radius-md);
+  border: 1px solid var(--line-soft); background: rgba(0,0,0,.18);
+}
+.retro-item b { color: var(--ink); font-weight: 600; }
+
+/* Reset gate options ------------------------ */
+.gate-option {
+  display: block; width: 100%; text-align: left;
+  padding: 16px 18px; border-radius: var(--radius-md);
+  border: 1px solid var(--line); background: rgba(26,26,46,.45);
+  color: var(--ink); cursor: pointer; transition: all var(--transition);
+  margin-bottom: 10px; font-family: inherit; text-decoration: none;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.gate-option:hover {
+  border-color: var(--copy); background: var(--copy-dim); transform: translateY(-1px);
+}
+.gate-option.primary {
+  background: linear-gradient(135deg, rgba(16,185,129,.10) 0%, rgba(117,62,247,.06) 100%);
+  border-color: rgba(16,185,129,.40);
+}
+.gate-option.primary:hover { border-color: var(--success); }
+.gate-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+.gate-sub { font-size: 12.5px; color: var(--ink-muted); line-height: 1.4; }
+.gate-key {
+  font-family: var(--font-mono); font-size: 10px; color: var(--ink-faint);
+  letter-spacing: .5px; margin-top: 2px;
+}
+
+/* Timeline at bottom ----------------------- */
+.timeline-wrap {
+  border: 1px solid var(--line-soft); border-radius: var(--radius-xl);
+  padding: 24px 28px;
+  background: linear-gradient(180deg, rgba(26,26,46,.4) 0%, rgba(19,13,42,.4) 100%);
+}
+.timeline-title {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  color: var(--ink-faint); letter-spacing: 1.6px; text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.timeline {
+  display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px;
+  position: relative;
+}
+@media (max-width: 720px) { .timeline { grid-template-columns: repeat(5, 1fr); } }
+.t-stage {
+  display: flex; flex-direction: column; gap: 6px; align-items: center;
+  text-align: center; padding: 10px 4px; border-radius: var(--radius-sm);
+  border: 1px solid var(--line-soft); background: rgba(0,0,0,.18);
+  font-family: var(--font-mono); font-size: 10px; color: var(--ink-faint);
+}
+.t-stage.done { border-color: rgba(16,185,129,.30); background: rgba(16,185,129,.05); }
+.t-num { font-size: 11px; font-weight: 700; color: var(--ink-muted); }
+.t-stage.done .t-num { color: var(--success); }
+.t-name { letter-spacing: .3px; }
+.t-elapsed { color: var(--ink-faint); }
+
+/* Final action ----------------------------- */
+.final-stats {
+  display: flex; gap: 28px; flex-wrap: wrap; align-items: center;
+  font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint);
+  margin-top: 18px;
+}
+.final-stats b { color: var(--ink); font-weight: 700; font-size: 16px; display: block; }
+</style>
+</head>
+<body>
+
+<div class="review-banner">
+  <span><b>review mode</b></span>
+  <a href="start.html">1 start</a>
+  <a href="autonomous.html">2 autonomous</a>
+  <a href="review.html">3 review</a>
+  <a href="index.html">4 stitch</a>
+  <a href="refine.html">5 refine</a>
+  <a class="here" href="retro.html">6 retro</a>
+</div>
+
+<header class="topbar">
+  <div class="logo">
+    <span class="logo-icon">C</span>
+    <span class="logo-text">Claude UI Workflow</span>
+  </div>
+  <div class="topbar-meta">
+    <span><b>run</b> 2026-05-03-1543</span>
+    <span><b>source</b> databrill.com</span>
+    <span><b>mode</b> redesign</span>
+  </div>
+  <div class="topbar-actions">
+    <a class="btn-mini" href="refine.html">&larr; refine</a>
+    <a class="btn-mini" href="start.html">new run</a>
+  </div>
+</header>
+
+<main class="main">
+
+  <section class="hero">
+    <span class="hero-eyebrow">stages 9 + 10 · retro and reset</span>
+    <h1 class="hero-title">Cycle complete. <b>Lock, iterate, or start over.</b></h1>
+    <div class="hero-meta">
+      <span><b>total</b> 4m 12s</span>
+      <span class="sep">·</span>
+      <span><b>final score</b> B+ · 87 / 100</span>
+      <span class="sep">·</span>
+      <span><b>fixes applied</b> 2 of 3</span>
+    </div>
+  </section>
+
+  <div class="retro-grid">
+
+    <article class="retro-panel">
+      <header class="retro-head">
+        <span class="retro-num">9</span>
+        <span class="retro-title">Retro <small>auto-extracted by Claude · editable</small></span>
+      </header>
+      <div class="retro-body">
+
+        <div class="retro-group">
+          <div class="retro-group-label"><span class="retro-dot good"></span>what worked</div>
+          <div class="retro-list">
+            <div class="retro-item"><b>Brand extraction was clean</b> · all 8 colour tokens carried through to Stitch output without manual intervention.</div>
+            <div class="retro-item"><b>Moodboard 1 was the right pick</b> · the indigo · warm direction matched the source vibe and Stitch reproduced it faithfully in the hero.</div>
+            <div class="retro-item"><b>Brief review gate caught nothing to revise</b> · the 14s autonomous compile produced a Stitch-ready prompt on first pass.</div>
+          </div>
+        </div>
+
+        <div class="retro-group">
+          <div class="retro-group-label"><span class="retro-dot bad"></span>what didn't</div>
+          <div class="retro-list">
+            <div class="retro-item"><b>Stitch paraphrased the H1</b> despite the brief saying "retain copy verbatim". This is the second run where Stitch has done this, worth tightening the prompt.</div>
+            <div class="retro-item"><b>Icon style drift in card 4</b> · Nano Banana Pro fell back to a different icon family. Pre-stage prompt should specify icon family (line, weight 1.5px).</div>
+          </div>
+        </div>
+
+        <div class="retro-group">
+          <div class="retro-group-label"><span class="retro-dot lesson"></span>lessons for next run</div>
+          <div class="retro-list">
+            <div class="retro-item"><b>Add "verbatim copy enforced" to brief boilerplate.</b> Auto-flag any drift in the audit step instead of catching it manually.</div>
+            <div class="retro-item"><b>Consider a "components.md" reference.</b> Codify icon family, button shape, card style up front, before Stitch sees the brief.</div>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+    <article class="retro-panel">
+      <header class="retro-head">
+        <span class="retro-num">10</span>
+        <span class="retro-title">Reset gate <small>where to next</small></span>
+      </header>
+      <div class="retro-body">
+
+        <a class="gate-option primary" href="#">
+          <span class="gate-name">Lock and ship &rarr;</span>
+          <span class="gate-sub">Save the final HTML/CSS to <code>build/databrill-redesign-001/</code>. Close this run.</span>
+          <span class="gate-key">↵ enter · default</span>
+        </a>
+
+        <a class="gate-option" href="autonomous.html">
+          <span class="gate-name">Another cycle · same brief</span>
+          <span class="gate-sub">Re-run from Stage 4. New moodboard variations, same brand and structure. Useful for A/B exploration.</span>
+          <span class="gate-key">r</span>
+        </a>
+
+        <a class="gate-option" href="start.html">
+          <span class="gate-name">New brief · same source</span>
+          <span class="gate-sub">Keep databrill.com as the URL but start over with a fresh intent (e.g. fresh-build instead of redesign).</span>
+          <span class="gate-key">b</span>
+        </a>
+
+        <a class="gate-option" href="start.html">
+          <span class="gate-name">Start over · new URL</span>
+          <span class="gate-sub">Wipe state and start from the wizard. Different site, different brief.</span>
+          <span class="gate-key">n</span>
+        </a>
+
+      </div>
+    </article>
+
+  </div>
+
+  <section class="timeline-wrap">
+    <div class="timeline-title">10-stage timeline · this run</div>
+    <div class="timeline">
+      <div class="t-stage done"><span class="t-num">1</span><span class="t-name">read source</span><span class="t-elapsed">3.8s</span></div>
+      <div class="t-stage done"><span class="t-num">2</span><span class="t-name">brand</span><span class="t-elapsed">2.1s</span></div>
+      <div class="t-stage done"><span class="t-num">3</span><span class="t-name">structure</span><span class="t-elapsed">1.4s</span></div>
+      <div class="t-stage done"><span class="t-num">4</span><span class="t-name">moodboard</span><span class="t-elapsed">38.2s</span></div>
+      <div class="t-stage done"><span class="t-num">5</span><span class="t-name">brief</span><span class="t-elapsed">14.2s</span></div>
+      <div class="t-stage done"><span class="t-num">6</span><span class="t-name">review</span><span class="t-elapsed">42s</span></div>
+      <div class="t-stage done"><span class="t-num">7</span><span class="t-name">stitch</span><span class="t-elapsed">2m 18s</span></div>
+      <div class="t-stage done"><span class="t-num">8</span><span class="t-name">refine</span><span class="t-elapsed">8.7s</span></div>
+      <div class="t-stage done"><span class="t-num">9</span><span class="t-name">retro</span><span class="t-elapsed">4.0s</span></div>
+      <div class="t-stage done"><span class="t-num">10</span><span class="t-name">reset</span><span class="t-elapsed">—</span></div>
+    </div>
+    <div class="final-stats">
+      <span><b>4m 12s</b>total</span>
+      <span><b>3</b>drift items</span>
+      <span><b>2</b>fixes applied</span>
+      <span><b>87 / 100</b>final</span>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

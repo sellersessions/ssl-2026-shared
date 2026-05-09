@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Brand Identity Exploration | Databrill Core</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#fcf8f8",
+                      "on-surface-variant": "#adaaaa",
+                      "tertiary": "#f9f9f9",
+                      "on-tertiary-container": "#555757",
+                      "surface-container": "#1a1919",
+                      "secondary-dim": "#8a4cfc",
+                      "surface": "#0e0e0e",
+                      "on-primary-container": "#431200",
+                      "tertiary-fixed-dim": "#f0f1f1",
+                      "on-surface": "#ffffff",
+                      "on-primary": "#571a00",
+                      "on-secondary-fixed": "#430097",
+                      "on-secondary-fixed-variant": "#6514d6",
+                      "on-primary-fixed-variant": "#531900",
+                      "surface-bright": "#2c2c2c",
+                      "secondary-fixed-dim": "#d0b8ff",
+                      "outline": "#777575",
+                      "tertiary-fixed": "#ffffff",
+                      "on-tertiary-fixed-variant": "#6c6d6e",
+                      "surface-container-highest": "#262626",
+                      "on-error-container": "#ffa8a3",
+                      "on-error": "#490006",
+                      "surface-variant": "#262626",
+                      "secondary-fixed": "#dcc9ff",
+                      "on-secondary": "#2b0065",
+                      "secondary": "#af88ff",
+                      "tertiary-dim": "#ebebeb",
+                      "on-background": "#ffffff",
+                      "inverse-primary": "#a83a00",
+                      "on-secondary-container": "#e1d0ff",
+                      "background": "#0e0e0e",
+                      "inverse-on-surface": "#565554",
+                      "secondary-container": "#6001d1",
+                      "surface-tint": "#ff9064",
+                      "primary-fixed": "#ff7941",
+                      "primary-container": "#ff7941",
+                      "tertiary-container": "#ebebeb",
+                      "surface-container-high": "#201f1f",
+                      "primary-dim": "#ff7439",
+                      "surface-container-low": "#131313",
+                      "error": "#ff716c",
+                      "error-dim": "#d7383b",
+                      "on-primary-fixed": "#000000",
+                      "surface-container-lowest": "#000000",
+                      "on-tertiary": "#5e5f60",
+                      "primary": "#ff9064",
+                      "surface-dim": "#0e0e0e",
+                      "outline-variant": "#494847",
+                      "primary-fixed-dim": "#ff5e07",
+                      "on-tertiary-fixed": "#4f5051",
+                      "error-container": "#9f0519"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "body": ["Manrope"],
+                      "label": ["Space Grotesk"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #0e0e0e; color: #ffffff; }
+        .font-space-grotesk { font-family: 'Space Grotesk', sans-serif; }
+        .font-manrope { font-family: 'Manrope', sans-serif; }
+        .glass-card {
+            background: rgba(14, 14, 14, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(73, 72, 71, 0.15);
+        }
+        .signature-gradient-text {
+            background: linear-gradient(90deg, #ff9064, #af88ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .signature-gradient-bg {
+            background: linear-gradient(135deg, #ff9064, #af88ff);
+        }
+        .ring-chain-gradient {
+            background: linear-gradient(to right, #ff9064, #af88ff);
+            -webkit-background-clip: padding-box;
+        }
+    </style>
+</head>
+<body class="bg-surface selection:bg-primary/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-neutral-950/60 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+<div class="flex justify-between items-center w-full px-8 py-6 max-w-full">
+<div class="flex items-center gap-4 cursor-pointer active:scale-95 group">
+<span class="material-symbols-outlined text-orange-400 text-2xl" data-icon="grid_view">grid_view</span>
+<span class="text-xl font-bold tracking-tighter text-white font-space-grotesk uppercase">Brand Identity Exploration</span>
+</div>
+<nav class="hidden md:flex gap-10">
+<a class="text-orange-400 border-b border-orange-400 font-manrope text-sm tracking-widest transition-colors duration-300" href="#">HOME</a>
+<a class="text-neutral-500 hover:text-orange-300 transition-colors duration-300 font-manrope text-sm tracking-widest" href="#">COLLECTIONS</a>
+<a class="text-neutral-500 hover:text-orange-300 transition-colors duration-300 font-manrope text-sm tracking-widest" href="#">ASSETS</a>
+</nav>
+<div class="flex items-center gap-6">
+<span class="font-space-grotesk font-bold tracking-tighter text-white uppercase opacity-80">Databrill Core</span>
+<button class="material-symbols-outlined text-neutral-500 hover:text-orange-400 transition-colors" data-icon="search">search</button>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-24 px-8 md:px-16 max-w-[1440px] mx-auto">
+<!-- Hero Section -->
+<section class="mb-24 flex flex-col md:flex-row items-end gap-12">
+<div class="max-w-3xl">
+<h1 class="text-3xl font-bold tracking-tight font-space-grotesk text-white mb-6 uppercase">Brand Identity Exploration</h1>
+<p class="text-on-surface-variant font-manrope text-lg leading-relaxed max-w-2xl">
+                    A series of conceptual directions for <span class="text-white font-semibold">Databrill Core</span>, visualizing the synthesis of information and radiant energy. Using the four interlocking rings as a recurring semantic anchor.
+                </p>
+</div>
+<div class="flex-grow flex justify-end">
+<!-- Signature Logo Mark -->
+<div class="flex -space-x-2">
+<div class="w-12 h-12 rounded-full border-2 border-orange-400 opacity-90"></div>
+<div class="w-12 h-12 rounded-full border-2 border-orange-400/80 opacity-90"></div>
+<div class="w-12 h-12 rounded-full border-2 border-secondary/80 opacity-90"></div>
+<div class="w-12 h-12 rounded-full border-2 border-secondary opacity-90"></div>
+</div>
+</div>
+</section>
+<!-- Bento Grid / Moodboard -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Concept 1 -->
+<div class="glass-card p-10 flex flex-col aspect-square justify-between group hover:bg-surface-container-low transition-all duration-500">
+<div class="flex justify-between items-start">
+<span class="font-space-grotesk text-xs tracking-widest text-primary font-bold">01</span>
+<span class="material-symbols-outlined text-outline-variant opacity-40" data-icon="lightbulb">lightbulb</span>
+</div>
+<div class="flex flex-col items-center justify-center flex-grow py-8">
+<div class="text-2xl font-space-grotesk font-bold tracking-tighter text-white flex items-center">
+                        C<div class="flex -space-x-1 mx-0.5">
+<div class="w-4 h-4 rounded-full border border-orange-400"></div>
+<div class="w-4 h-4 rounded-full border border-secondary"></div>
+</div>RE
+                    </div>
+</div>
+<div class="mt-4">
+<h3 class="font-space-grotesk font-bold text-white uppercase text-sm mb-2">Internalized Core</h3>
+<p class="text-on-surface-variant text-xs font-manrope leading-relaxed">Rings replace the letter O in "Core", suggesting energy at the center of the name.</p>
+</div>
+</div>
+<!-- Concept 2 -->
+<div class="glass-card p-10 flex flex-col aspect-square justify-between group hover:bg-surface-container-low transition-all duration-500">
+<div class="flex justify-between items-start">
+<span class="font-space-grotesk text-xs tracking-widest text-primary font-bold">02</span>
+<span class="material-symbols-outlined text-outline-variant opacity-40" data-icon="horizontal_rule">horizontal_rule</span>
+</div>
+<div class="flex flex-col items-center justify-center flex-grow">
+<div class="text-center">
+<div class="text-xl font-space-grotesk font-bold tracking-tighter text-white uppercase mb-1">Databrill Core</div>
+<div class="flex justify-center -space-x-1">
+<div class="w-12 h-0.5 signature-gradient-bg rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="mt-4">
+<h3 class="font-space-grotesk font-bold text-white uppercase text-sm mb-2">Foundation Underline</h3>
+<p class="text-on-surface-variant text-xs font-manrope leading-relaxed">Rings stylized as a decorative underline beneath "Databrill Core".</p>
+</div>
+</div>
+<!-- Concept 3 -->
+<div class="glass-card p-10 flex flex-col aspect-square justify-between group hover:bg-surface-container-low transition-all duration-500">
+<div class="flex justify-between items-start">
+<span class="font-space-grotesk text-xs tracking-widest text-primary font-bold">03</span>
+<span class="material-symbols-outlined text-outline-variant opacity-40" data-icon="join_inner">join_inner</span>
+</div>
+<div class="flex flex-col items-center justify-center flex-grow">
+<div class="text-lg font-space-grotesk font-bold tracking-tighter text-white uppercase flex items-center gap-2">
+                        Data
+                        <div class="flex -space-x-1.5">
+<div class="w-5 h-5 rounded-full border border-orange-400"></div>
+<div class="w-5 h-5 rounded-full border border-secondary"></div>
+</div>
+                        brill Core
+                    </div>
+</div>
+<div class="mt-4">
+<h3 class="font-space-grotesk font-bold text-white uppercase text-sm mb-2">The Bridge</h3>
+<p class="text-on-surface-variant text-xs font-manrope leading-relaxed">"Data" then rings then "brill Core", using the symbol as a connective tissue.</p>
+</div>
+</div>
+<!-- Concept 4 -->
+<div class="glass-card p-10 flex flex-col aspect-square justify-between group hover:bg-surface-container-low transition-all duration-500">
+<div class="flex justify-between items-start">
+<span class="font-space-grotesk text-xs tracking-widest text-primary font-bold">04</span>
+<span class="material-symbols-outlined text-outline-variant opacity-40" data-icon="lens">lens</span>
+</div>
+<div class="flex flex-col items-center justify-center flex-grow">
+<div class="text-2xl font-space-grotesk font-bold tracking-tighter text-white uppercase">
+                        databr<span class="relative">i<span class="absolute -top-3 left-0 w-2 h-2 rounded-full signature-gradient-bg"></span></span>ll
+                    </div>
+</div>
+<div class="mt-4">
+<h3 class="font-space-grotesk font-bold text-white uppercase text-sm mb-2">Orbital Dot</h3>
+<p class="text-on-surface-variant text-xs font-manrope leading-relaxed">A single ring replaces the dot on the letter 'i', creating a focal point.</p>
+</div>
+</div>
+<!-- Concept 5 -->
+<div class="glass-card p-10 flex flex-col aspect-square justify-between group hover:bg-surface-container-low transition-all duration-500">
+<div class="flex justify-between items-start">
+<span class="font-space-grotesk text-xs tracking-widest text-primary font-bold">05</span>
+<span class="material-symbols-outlined text-outline-variant opacity-40" data-icon="architecture">architecture</span>
+</div>
+<div class="flex flex-col items-center justify-center flex-grow">
+<div class="relative pt-6">
+<div class="absolute -top-1 left-1/2 -translate-x-1/2 flex -space-x-1">
+<div class="w-3 h-3 rounded-full border border-orange-400"></div>
+<div class="w-3 h-3 rounded-full border border-orange-300"></div>
+<div class="w-3 h-3 rounded-full border border-secondary"></div>
+</div>
+<div class="text-xl font-space-grotesk font-bold tracking-tighter text-white uppercase">Databrill</div>
+</div>
+</div>
+<div class="mt-4">
+<h3 class="font-space-grotesk font-bold text-white uppercase text-sm mb-2">The Crown</h3>
+<p class="text-on-surface-variant text-xs font-manrope leading-relaxed">Rings curve over the wordmark like a crown, suggesting leadership and status.</p>
+</div>
+</div>
+<!-- Concept 6 -->
+<div class="glass-card p-10 flex flex-col aspect-square justify-between group hover:bg-surface-container-low transition-all duration-500">
+<div class="flex justify-between items-start">
+<span class="font-space-grotesk text-xs tracking-widest text-primary font-bold">06</span>
+<span class="material-symbols-outlined text-outline-variant opacity-40" data-icon="link">link</span>
+</div>
+<div class="flex flex-col items-center justify-center flex-grow">
+<div class="text-lg font-space-grotesk font-bold tracking-tighter text-white uppercase flex items-center gap-4">
+                        Databrill 
+                        <div class="flex -space-x-1">
+<div class="w-4 h-4 rounded-full border border-orange-400 rotate-45"></div>
+<div class="w-4 h-4 rounded-full border border-secondary -rotate-45"></div>
+</div> 
+                        Core
+                    </div>
+</div>
+<div class="mt-4">
+<h3 class="font-space-grotesk font-bold text-white uppercase text-sm mb-2">Syntactic Ligature</h3>
+<p class="text-on-surface-variant text-xs font-manrope leading-relaxed">Rings between words as a functional ligature in a balanced layout.</p>
+</div>
+</div>
+<!-- Concept 7 -->
+<div class="glass-card p-10 flex flex-col aspect-square justify-between group hover:bg-surface-container-low transition-all duration-500">
+<div class="flex justify-between items-start">
+<span class="font-space-grotesk text-xs tracking-widest text-primary font-bold">07</span>
+<span class="material-symbols-outlined text-outline-variant opacity-40" data-icon="token">token</span>
+</div>
+<div class="flex flex-col items-center justify-center flex-grow">
+<div class="flex items-center gap-3">
+<div class="flex -space-x-2">
+<div class="w-10 h-10 rounded-full border-4 border-orange-400"></div>
+<div class="w-10 h-10 rounded-full border-4 border-secondary/40"></div>
+</div>
+<div class="text-3xl font-space-grotesk font-bold tracking-tighter text-white uppercase">atabrill</div>
+</div>
+</div>
+<div class="mt-4">
+<h3 class="font-space-grotesk font-bold text-white uppercase text-sm mb-2">Double-Ring 'D'</h3>
+<p class="text-on-surface-variant text-xs font-manrope leading-relaxed">The letter D is abstractly formed using two interlocking rings.</p>
+</div>
+</div>
+<!-- Concept 8 -->
+<div class="glass-card p-10 flex flex-col aspect-square justify-between group hover:bg-surface-container-low transition-all duration-500">
+<div class="flex justify-between items-start">
+<span class="font-space-grotesk text-xs tracking-widest text-primary font-bold">08</span>
+<span class="material-symbols-outlined text-outline-variant opacity-40" data-icon="view_sidebar">view_sidebar</span>
+</div>
+<div class="flex flex-col items-center justify-center flex-grow">
+<div class="flex items-center gap-8 border-l border-outline-variant/20 pl-8">
+<div class="flex flex-col -space-y-2">
+<div class="w-8 h-8 rounded-full border border-orange-400"></div>
+<div class="w-8 h-8 rounded-full border border-orange-300"></div>
+<div class="w-8 h-8 rounded-full border border-secondary"></div>
+</div>
+<div class="text-xl font-space-grotesk font-bold tracking-tighter text-white uppercase leading-none">
+                            Data<br/>brill<br/>Core
+                        </div>
+</div>
+</div>
+<div class="mt-4">
+<h3 class="font-space-grotesk font-bold text-white uppercase text-sm mb-2">Vertical Anchor</h3>
+<p class="text-on-surface-variant text-xs font-manrope leading-relaxed">Vertical stack: rings on left as a guiding spine, text on right.</p>
+</div>
+</div>
+<!-- Concept 9 -->
+<div class="glass-card p-10 flex flex-col aspect-square justify-between group hover:bg-surface-container-low transition-all duration-500">
+<div class="flex justify-between items-start">
+<span class="font-space-grotesk text-xs tracking-widest text-primary font-bold">09</span>
+<span class="material-symbols-outlined text-outline-variant opacity-40" data-icon="waves">waves</span>
+</div>
+<div class="flex flex-col items-center justify-center flex-grow">
+<div class="relative">
+<div class="text-2xl font-space-grotesk font-bold tracking-tighter text-white uppercase relative z-10">Databrill Core</div>
+<div class="absolute -bottom-1 left-0 right-0 flex -space-x-1 justify-center opacity-50">
+<div class="w-6 h-6 rounded-full border border-orange-400"></div>
+<div class="w-6 h-6 rounded-full border border-secondary"></div>
+</div>
+</div>
+</div>
+<div class="mt-4">
+<h3 class="font-space-grotesk font-bold text-white uppercase text-sm mb-2">Baseline Weave</h3>
+<p class="text-on-surface-variant text-xs font-manrope leading-relaxed">Rings weave through the baseline of the typography, grounding the brand.</p>
+</div>
+</div>
+<!-- Concept 10 -->
+<div class="glass-card p-10 flex flex-col aspect-square justify-between group hover:bg-surface-container-low transition-all duration-500">
+<div class="flex justify-between items-start">
+<span class="font-space-grotesk text-xs tracking-widest text-primary font-bold">10</span>
+<span class="material-symbols-outlined text-outline-variant opacity-40" data-icon="grid_guides">grid_guides</span>
+</div>
+<div class="flex flex-col items-center justify-center flex-grow">
+<div class="relative w-24 h-24 flex items-center justify-center">
+<div class="absolute inset-0 flex -space-x-4 opacity-30">
+<div class="w-full h-full rounded-full border border-orange-400"></div>
+<div class="w-full h-full rounded-full border border-secondary"></div>
+</div>
+<div class="text-4xl font-space-grotesk font-bold text-white z-10 tracking-tighter">DB</div>
+</div>
+</div>
+<div class="mt-4">
+<h3 class="font-space-grotesk font-bold text-white uppercase text-sm mb-2">Threaded Monogram</h3>
+<p class="text-on-surface-variant text-xs font-manrope leading-relaxed">Monogram 'DB' with large rings threading through the letterforms.</p>
+</div>
+</div>
+<!-- Concept 11 -->
+<div class="glass-card p-10 flex flex-col aspect-square justify-between group hover:bg-surface-container-low transition-all duration-500">
+<div class="flex justify-between items-start">
+<span class="font-space-grotesk text-xs tracking-widest text-primary font-bold">11</span>
+<span class="material-symbols-outlined text-outline-variant opacity-40" data-icon="settings_input_antenna">settings_input_antenna</span>
+</div>
+<div class="flex flex-col items-center justify-center flex-grow">
+<div class="relative w-32 h-32 flex items-center justify-center">
+<div class="absolute inset-0 rounded-full border border-orange-400/20"></div>
+<div class="absolute top-2 right-4 w-2 h-2 rounded-full signature-gradient-bg"></div>
+<div class="absolute bottom-4 left-2 w-3 h-3 rounded-full border border-secondary"></div>
+<div class="text-sm font-space-grotesk font-bold text-white uppercase tracking-tighter">Databrill</div>
+</div>
+</div>
+<div class="mt-4">
+<h3 class="font-space-grotesk font-bold text-white uppercase text-sm mb-2">Orbital Enclosure</h3>
+<p class="text-on-surface-variant text-xs font-manrope leading-relaxed">Large ring encircles wordmark with orbiting smaller rings like satellites.</p>
+</div>
+</div>
+<!-- Concept 12 -->
+<div class="glass-card p-10 flex flex-col aspect-square justify-between group hover:bg-surface-container-low transition-all duration-500 overflow-hidden">
+<div class="flex justify-between items-start">
+<span class="font-space-grotesk text-xs tracking-widest text-primary font-bold">12</span>
+<span class="material-symbols-outlined text-outline-variant opacity-40" data-icon="texture">texture</span>
+</div>
+<div class="flex flex-col items-center justify-center flex-grow -mx-10 my-4">
+<div class="w-full h-32 signature-gradient-bg flex items-center justify-center relative">
+<div class="flex -space-x-4 bg-surface px-8 py-4 mix-blend-multiply">
+<div class="w-12 h-12 rounded-full bg-white"></div>
+<div class="w-12 h-12 rounded-full bg-white"></div>
+<div class="w-12 h-12 rounded-full bg-white"></div>
+</div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-surface font-space-grotesk font-black text-xl tracking-tighter uppercase">VOID CONCEPT</span>
+</div>
+</div>
+</div>
+<div class="mt-4">
+<h3 class="font-space-grotesk font-bold text-white uppercase text-sm mb-2">Negative Space</h3>
+<p class="text-on-surface-variant text-xs font-manrope leading-relaxed">Negative space cutouts in a gradient rectangle, defining form through absence.</p>
+</div>
+</div>
+</div>
+<!-- Featured Visual -->
+<section class="mt-32">
+<div class="glass-card overflow-hidden h-[500px] relative">
+<img class="w-full h-full object-cover opacity-60" data-alt="Abstract geometric shapes with orange and purple light refraction on a deep black background, cinematic lighting, sleek tech aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN71sVZKUX6lsPsUhrkMZB4MU5T-SWg5b_7LxIgD6s49YnqYvTAP_NOQ7g9zBQLwPkFKka3afsr8yB3AizCFw3ulNjAxlNJxWfEnHk5Z_YPl3SoqIE4CxUp04cTT2R5CvTza115xWuy144Mh-pU8rmORtsL8_sbhF8F5QoGnHkQ5wXtfIHwG82LGUeBGQ4AALMGH0qjJxytBoL5s-djVMUNHlliQGiwG9VdnDLwY4gbPJc4XiZkzc7OqHqP6LCd9UNcCUqtt5ozNw"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-transparent to-transparent flex items-center px-16">
+<div class="max-w-xl">
+<h2 class="text-5xl font-headline font-bold text-white mb-6 leading-tight uppercase">The Obsidian Prism</h2>
+<p class="text-on-surface-variant text-lg font-manrope mb-8">
+                            Visualizing the moment data turns into insight. The prism effect represents the scattering of complexity into a clear, radiant spectrum of core intelligence.
+                        </p>
+<button class="px-8 py-3 signature-gradient-bg text-on-primary-fixed font-space-grotesk font-bold uppercase tracking-widest rounded-lg hover:scale-105 transition-transform">
+                            Download Specs
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-neutral-950 py-12 border-t border-neutral-800/20">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 w-full">
+<div class="mb-8 md:mb-0">
+<span class="font-space-grotesk font-bold text-neutral-200 text-lg uppercase tracking-tighter">Databrill Core</span>
+<p class="font-manrope text-xs tracking-widest uppercase text-neutral-600 mt-2">© 2024 Databrill Core. Information as Light.</p>
+</div>
+<div class="flex gap-12">
+<a class="font-manrope text-xs tracking-widest uppercase text-neutral-600 hover:text-neutral-200 transition-all opacity-80 hover:opacity-100" href="#">Design System</a>
+<a class="font-manrope text-xs tracking-widest uppercase text-neutral-600 hover:text-neutral-200 transition-all opacity-80 hover:opacity-100" href="#">Concept Index</a>
+<a class="font-manrope text-xs tracking-widest uppercase text-neutral-600 hover:text-neutral-200 transition-all opacity-80 hover:opacity-100 text-orange-400" href="#">Archive</a>
+</div>
+</div>
+</footer>
+</body></html>

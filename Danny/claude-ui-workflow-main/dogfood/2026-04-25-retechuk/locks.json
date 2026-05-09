@@ -1,0 +1,61 @@
+{
+  "_meta": {
+    "brand": "Re Tech UK",
+    "cycle": 3,
+    "purpose": "Stage 7 model gate + Stage 8 hard-fail audit. must_preserve_copy → forces 3.1 Pro routing. Every string here MUST appear verbatim in final HTML."
+  },
+  "must_preserve_copy": true,
+  "wordmark": {
+    "text": "RE TECH UK",
+    "capitalization": "uppercase",
+    "rationale": "Brand visual identity — wordmark always uppercase across site"
+  },
+  "tagline_options": [
+    "Everyday clothing for women"
+  ],
+  "story_verbatim": "Re Tech UK represents and inspires those who work with no boundaries.",
+  "value_prop_verbatim": [
+    "FREE UK DELIVERY & RETURNS"
+  ],
+  "product_names_verbatim": [
+    "Ribbed Cotton Polo Neck Tops",
+    "Long Sleeve Maxi Cardigan",
+    "V-Neck Longline Knit Jumper",
+    "Kids Clothing"
+  ],
+  "nav_order_locked": [
+    "Home",
+    "Ribbed Cotton Polo Neck Tops",
+    "Long Sleeve Maxi Cardigan",
+    "Kids Clothing",
+    "About Us",
+    "Rewards",
+    "Refer A Friend",
+    "Contact",
+    "Register / Login"
+  ],
+  "footer_legal_verbatim": [
+    "Terms of Service",
+    "Refund policy",
+    "Shipping Policy",
+    "Returns Policy",
+    "Privacy Policy"
+  ],
+  "trust_verbatim": [
+    "Check Out Our Reviews On Trustpilot"
+  ],
+  "newsletter_verbatim": {
+    "headline": "Sign up & get 10% OFF your first purchase today",
+    "body": "Be the first to receive latest collection drops & offers."
+  },
+  "social_links": [
+    { "platform": "Facebook", "url": "https://www.facebook.com/retechuk" },
+    { "platform": "Instagram", "url": "https://www.instagram.com/re_tech_uk/?hl=en" }
+  ],
+  "anti_drift_rules": [
+    "Do NOT use Stitch's invented copy: 'Effortlessly Layered', 'SHOP/ABOUT/JOURNAL/CONTACT', 'KNITS/POLOS/CARDIGANS/TEES', 'Ribbed knit dress', 'Relaxed-fit Polo', 'Knitted Cardigan', 'Soft basic Tee', 'Curated Collections', 'OUR WORLD/Sustainability'",
+    "Do NOT add fake reviews, fake product prices, or invented testimonials",
+    "Do NOT change brand story wording — must include 'represents and inspires those who work with no boundaries'",
+    "Use Stitch DESIGN.md for COLOR/TYPOGRAPHY/LAYOUT only — text content comes exclusively from source-truth.json"
+  ]
+}

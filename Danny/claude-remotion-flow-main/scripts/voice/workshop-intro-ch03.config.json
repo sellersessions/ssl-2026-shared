@@ -1,0 +1,39 @@
+{
+  "_comment": "Workshop Intro Chapter 03 — Extensions & Recovering from Loops. 6 scenes, ~155 words. Single-stem rendering: scenes joined with break tags, one ElevenLabs call. Visual concerns (sourceStart, clipDurationSeconds, label, title) live in src/WorkshopIntroCh03.tsx — this file is voice-generation only.",
+  "voice_id": "jQOgcOzmmipekvxJN09W",
+  "model_id": "eleven_multilingual_v2",
+  "output_dir": "public/assets/voice/generated/workshop-intro-ch03",
+  "default_voice_settings": {
+    "stability": 0.31,
+    "similarity_boost": 1.0,
+    "style": 0.0,
+    "use_speaker_boost": true,
+    "speed": 0.9
+  },
+  "scenes": [
+    {
+      "id": "scene-1-extensions-panel",
+      "text": "Inside the VS Code extensions panel, the Claude Code extension lives at the top of your installed list. Two controls matter — Restart, and Disable."
+    },
+    {
+      "id": "scene-2-restart-vs-disable",
+      "text": "Restart cycles the extension if Claude Code stops responding. Disable turns it off entirely without uninstalling — useful when something's interfering and you want to test in isolation."
+    },
+    {
+      "id": "scene-3-loop-recovery",
+      "text": "When Claude Code does get stuck mid-loop, restarting is the first move. If that's not enough, start a fresh conversation and ask the new instance to read the JSONL session files in your terminal. Those files capture every action — your recovery surface."
+    },
+    {
+      "id": "scene-4-master-log",
+      "text": "Better discipline than recovering after the fact — keep a master sessions log that mirrors the work as it happens. If a session dies, your context doesn't."
+    },
+    {
+      "id": "scene-5-other-extensions",
+      "text": "Beyond Claude Code, a few extensions earn their slot — image preview for inline screenshots, and a markdown reader hookup for Typora."
+    },
+    {
+      "id": "scene-6-marketplace-popular",
+      "text": "When you're scouting more extensions, search the marketplace with at-popular — it surfaces what the rest of the field is using. Install whatever earns its keep."
+    }
+  ]
+}

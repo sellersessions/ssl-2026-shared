@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>Claude UI Workflow — brief review (stage 6)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Stage 6 specifics ------------------------- */
+.summary-card {
+  padding: 22px 26px; border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, rgba(16,185,129,.10) 0%, rgba(117,62,247,.06) 100%);
+  border: 1px solid rgba(16,185,129,.30);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.summary-eyebrow {
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 700;
+  color: var(--success); letter-spacing: 1.4px; text-transform: uppercase;
+}
+.summary-text { font-size: 18px; font-weight: 600; line-height: 1.4; color: var(--ink); }
+
+.panel {
+  border: 1px solid var(--line-soft); border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, rgba(26,26,46,.55) 0%, rgba(19,13,42,.55) 100%);
+  overflow: hidden;
+}
+.panel-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 14px 20px; border-bottom: 1px solid var(--line-soft);
+  background: rgba(0,0,0,.16);
+}
+.panel-title { font-size: 13.5px; font-weight: 700; color: var(--ink); }
+.panel-title small {
+  display: block; font-family: var(--font-mono); font-size: 10.5px;
+  color: var(--ink-faint); font-weight: 500; letter-spacing: .3px; margin-top: 2px;
+}
+.panel-body { padding: 18px 20px 20px; }
+.panel-toggle {
+  font-family: var(--font-mono); font-size: 11px; color: var(--ss-purple-glow);
+  background: none; border: none; cursor: pointer; letter-spacing: .5px;
+}
+
+.swatches-mini {
+  display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+}
+.swatches-mini .swatch-chip {
+  width: 32px; height: 32px; border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,.06);
+}
+.swatches-mini .label {
+  font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint);
+  margin-left: 4px;
+}
+
+.moodboard-pick {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+}
+@media (max-width: 720px) { .moodboard-pick { grid-template-columns: repeat(2, 1fr); } }
+.mood-card {
+  display: flex; flex-direction: column; gap: 8px;
+  cursor: pointer; transition: transform var(--transition);
+}
+.mood-card:hover { transform: translateY(-2px); }
+.mood-image {
+  aspect-ratio: 4 / 5; border-radius: var(--radius-md);
+  border: 2px solid var(--line); transition: all var(--transition);
+}
+.mood-card.selected .mood-image {
+  border-color: var(--ss-gold);
+  box-shadow: 0 0 0 3px rgba(251,191,36,.15), 0 0 24px rgba(251,191,36,.20);
+}
+.mood-1 { background: radial-gradient(circle at 30% 20%, #7c6bbd 0%, transparent 50%), radial-gradient(circle at 70% 80%, #461499 0%, transparent 60%), linear-gradient(135deg, #0c0a14 0%, #1a1530 100%); }
+.mood-2 { background: radial-gradient(circle at 70% 30%, #e07a3a 0%, transparent 55%), radial-gradient(circle at 20% 80%, #7c6bbd 0%, transparent 60%), linear-gradient(135deg, #0c0a14 0%, #1f1430 100%); }
+.mood-3 { background: radial-gradient(circle at 30% 30%, #22d3ee 0%, transparent 50%), radial-gradient(circle at 80% 80%, #461499 0%, transparent 55%), linear-gradient(135deg, #0a1024 0%, #131a30 100%); }
+.mood-4 { background: radial-gradient(circle at 50% 30%, #10b981 0%, transparent 50%), radial-gradient(circle at 70% 80%, #7c6bbd 0%, transparent 55%), linear-gradient(135deg, #0a1810 0%, #131a30 100%); }
+.mood-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-mono); font-size: 11px;
+}
+.mood-name { color: var(--ink-muted); }
+.mood-tag {
+  padding: 2px 7px; border-radius: 4px; font-size: 10px;
+  background: rgba(117,62,247,.14); color: var(--ss-purple-glow);
+}
+.mood-card.selected .mood-tag { background: rgba(251,191,36,.18); color: var(--ss-gold); }
+
+.outline-collapsed {
+  font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted);
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+.outline-collapsed span { padding: 3px 8px; border-radius: 4px; background: rgba(0,0,0,.25); border: 1px solid var(--line-soft); }
+
+.prompt-wrap { display: flex; flex-direction: column; gap: 8px; }
+.prompt-area {
+  width: 100%; min-height: 220px; resize: vertical;
+  font-family: var(--font-mono); font-size: 12.5px; line-height: 1.65;
+  background: rgba(0,0,0,.45); border: 1px solid var(--line);
+  border-radius: var(--radius-md); padding: 16px 18px;
+  color: var(--ink); transition: all var(--transition);
+}
+.prompt-area:focus {
+  outline: none; border-color: var(--copy);
+  box-shadow: 0 0 0 4px var(--copy-dim);
+}
+.prompt-foot {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint);
+}
+
+.action-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  margin-top: 8px;
+}
+.btn-secondary {
+  font-family: inherit; font-size: 13px; font-weight: 600;
+  padding: 11px 18px; border-radius: var(--radius-md);
+  background: rgba(26,26,46,.6); border: 1px solid var(--line);
+  color: var(--ink-muted); cursor: pointer; transition: all var(--transition);
+}
+.btn-secondary:hover { color: var(--ink); border-color: var(--copy); }
+.btn-primary {
+  font-family: inherit; font-size: 14px; font-weight: 700;
+  padding: 12px 22px; border-radius: var(--radius-md);
+  background: var(--ss-purple-light); border: 1px solid var(--ss-purple-light);
+  color: #fff; cursor: pointer; transition: all var(--transition);
+  text-decoration: none; display: inline-block;
+}
+.btn-primary:hover {
+  background: var(--ss-purple-glow); border-color: var(--ss-purple-glow);
+  box-shadow: 0 0 18px rgba(117,62,247,.40);
+}
+</style>
+</head>
+<body>
+
+<div class="review-banner">
+  <span><b>review mode</b></span>
+  <a href="start.html">1 start</a>
+  <a href="autonomous.html">2 autonomous</a>
+  <a class="here" href="review.html">3 review</a>
+  <a href="index.html">4 stitch</a>
+  <a href="refine.html">5 refine</a>
+  <a href="retro.html">6 retro</a>
+</div>
+
+<header class="topbar">
+  <div class="logo">
+    <span class="logo-icon">C</span>
+    <span class="logo-text">Claude UI Workflow</span>
+  </div>
+  <div class="topbar-meta">
+    <span><b>run</b> 2026-05-03-1543</span>
+    <span><b>source</b> databrill.com</span>
+    <span><b>mode</b> redesign</span>
+  </div>
+  <div class="topbar-actions">
+    <a class="btn-mini" href="autonomous.html">&larr; autonomous</a>
+    <a class="btn-mini" href="index.html">stage 7 &rarr;</a>
+  </div>
+</header>
+
+<main class="main">
+
+  <section class="hero">
+    <span class="hero-eyebrow">stage 6 · brief review gate</span>
+    <h1 class="hero-title">Brief is ready. <b>Read, edit, approve.</b></h1>
+    <div class="hero-meta">
+      <span><b>compiled</b> in 14.2s</span>
+      <span class="sep">·</span>
+      <span><b>last edit</b> Claude · just now</span>
+      <span class="sep">·</span>
+      <span><b>next</b> Stitch (you)</span>
+    </div>
+  </section>
+
+  <section class="summary-card">
+    <span class="summary-eyebrow">3-second summary</span>
+    <p class="summary-text">A redesign of the Databrill home page. Mesh-gradient hero, 4-card glass grid for "What you get", existing copy retained throughout. Same brand palette, refreshed visual direction.</p>
+  </section>
+
+  <section class="panel">
+    <header class="panel-head">
+      <div class="panel-title">Brand <small>extracted from databrill.com</small></div>
+      <span class="panel-toggle">unchanged from source</span>
+    </header>
+    <div class="panel-body">
+      <div class="swatches-mini">
+        <span class="swatch-chip" style="background:#0c0a14"></span>
+        <span class="swatch-chip" style="background:#1a1530"></span>
+        <span class="swatch-chip" style="background:#7c6bbd"></span>
+        <span class="swatch-chip" style="background:#e07a3a"></span>
+        <span class="swatch-chip" style="background:#fbbf24"></span>
+        <span class="swatch-chip" style="background:#10b981"></span>
+        <span class="swatch-chip" style="background:#fafafc"></span>
+        <span class="swatch-chip" style="background:#6e6588"></span>
+        <span class="label">Plus Jakarta Sans · mesh-gradient signature</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <header class="panel-head">
+      <div class="panel-title">Moodboard direction <small>4 variations rendered · click to switch</small></div>
+      <span class="panel-toggle">option 1 selected</span>
+    </header>
+    <div class="panel-body">
+      <div class="moodboard-pick">
+        <div class="mood-card selected">
+          <div class="mood-image mood-1"></div>
+          <div class="mood-meta"><span class="mood-name">indigo · warm</span><span class="mood-tag">picked</span></div>
+        </div>
+        <div class="mood-card">
+          <div class="mood-image mood-2"></div>
+          <div class="mood-meta"><span class="mood-name">amber · pop</span><span class="mood-tag">alt</span></div>
+        </div>
+        <div class="mood-card">
+          <div class="mood-image mood-3"></div>
+          <div class="mood-meta"><span class="mood-name">cyan · cool</span><span class="mood-tag">alt</span></div>
+        </div>
+        <div class="mood-card">
+          <div class="mood-image mood-4"></div>
+          <div class="mood-meta"><span class="mood-name">emerald · fresh</span><span class="mood-tag">alt</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <header class="panel-head">
+      <div class="panel-title">Structure <small>5 sections retained from source</small></div>
+      <button class="panel-toggle">expand outline &darr;</button>
+    </header>
+    <div class="panel-body">
+      <div class="outline-collapsed">
+        <span>hero</span>
+        <span>what you get · 4-card grid</span>
+        <span>how it works · 3-step</span>
+        <span>pricing · 2-tier</span>
+        <span>FAQ + final CTA</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <header class="panel-head">
+      <div class="panel-title">The prompt <small>literal text that will be pasted into Stitch · editable</small></div>
+      <span class="panel-toggle" style="color:var(--ss-gold)">read this before approving</span>
+    </header>
+    <div class="panel-body">
+      <div class="prompt-wrap">
+        <textarea class="prompt-area" spellcheck="false">Redesign the Databrill home page in Stitch (Redesign mode, Nano Banana Pro).
+
+Brand: dark base #0C0A14, surface #1A1530, primary purple #7C6BBD, accent orange #E07A3A, accent gold #FBBF24, success #10B981. Type: Plus Jakarta Sans 700 headings, 400 body. Signature: mesh-gradient hero (indigo → purple → amber).
+
+Structure (retain all copy):
+- Hero: "Own your Amazon data." + "Built for sellers who'd rather see the numbers themselves." Split layout, CTA right.
+- What you get: 4-card glass grid, icon + title + 1-line copy.
+- How it works: 3-step horizontal, numbered.
+- Pricing: 2-tier comparison table.
+- FAQ + final CTA.
+
+Vibe: refresh, not rebuild. Mesh-gradient hero, glass cards over the gradient, generous whitespace. Reference moodboard 1 (indigo · warm).</textarea>
+        <div class="prompt-foot">
+          <span>847 chars · ~210 tokens</span>
+          <span>edit inline before approving · changes go to Stitch as-is</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="action-row">
+    <button class="btn-secondary">&larr; Adjust (re-run a section)</button>
+    <a class="btn-primary" href="index.html">Approve and continue to Stitch &rarr;</a>
+  </div>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+pair_name,heading_font,body_font,mood,industry,google_fonts_url,notes
+jakarta-poppins,Plus Jakarta Sans,Poppins,premium modern,events/podcast,https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap,SS design system -- headings Jakarta buttons Poppins
+jakarta-inter,Plus Jakarta Sans,Inter,clean professional,saas/data,https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap,Databrill design system -- both heading and body
+grotesk-inter,Space Grotesk,Inter,technical modern,saas/startup,https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap,Databrill Stitch build -- display headings
+inter-inter,Inter,Inter,neutral swiss,any,https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap,safe default for any project
+cal-sans-inter,Cal Sans,Inter,bold saas,saas/b2b,https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap,Cal.com style -- Cal Sans is custom (needs self-hosting)
+dm-sans-dm-sans,DM Sans,DM Sans,friendly geometric,ecommerce/consumer,https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap,rounded friendly feel
+outfit-inter,Outfit,Inter,geometric clean,fintech/health,https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap,modern geometric headings
+bricolage-inter,Bricolage Grotesque,Inter,editorial bold,media/content,https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap,strong editorial presence
+tiktok-inter,Inter,,inspiration,design/branding,,tiktok/ayathedesigner - font inspiration
+tiktok-poppins,Poppins,,inspiration,design/branding,,tiktok/ayathedesigner - font inspiration
+tiktok-archivo-satoshi,Archivo,Satoshi,inspiration,design/branding,,tiktok/brandlet_official - font combination
+tiktok-gilroy-outfit,Gilroy,Outfit,inspiration,design/branding,,tiktok/brandlet_official - font combination
+tiktok-fira-mono-inter,Fira Mono,Inter,inspiration,design/branding,,tiktok/brandlet_official - font combination
+tiktok-playfair-raleway,Playfair,Raleway,inspiration,design/branding,,tiktok/brandlet_official - font combination
+tiktok-switzer,Switzer,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-overused-grotesk,Overused Grotesk,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-inter-satoshi,Inter,Satoshi,inspiration,design/branding,,tiktok/brandlet_official - font combination
+tiktok-montserrat-source-sans-3,Montserrat,Source Sans 3,inspiration,design/branding,,tiktok/brandlet_official - font combination
+tiktok-merriweather-roboto,Merriweather,Roboto,inspiration,design/branding,,tiktok/brandlet_official - font combination
+tiktok-rubik-open-sans,Rubik,Open Sans,inspiration,design/branding,,tiktok/brandlet_official - font combination
+tiktok-playfair,Playfair,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-playfair-display,Playfair Display,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-montserrat,Montserrat,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-open-sans,Open Sans,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-dm-sans,DM Sans,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-yapari,Yapari,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-plus-jakarta-sans,Plus Jakarta Sans,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-bebas-neue,Bebas Neue,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-onest,Onest,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-neue-haas-grotesk,Neue Haas Grotesk,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-crimson,Crimson,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-satoshi,Satoshi,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-outfit,Outfit,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-bebas-neue-dm-sans,Bebas Neue,DM Sans,inspiration,design/branding,,tiktok/brandlet_official - font combination
+tiktok-geist-mono-geist,Geist Mono,Geist,inspiration,design/branding,,tiktok/brandlet_official - font combination
+tiktok-outfit-switzer,Outfit,Switzer,inspiration,design/branding,,tiktok/brandlet_official - font combination
+tiktok-manrope,Manrope,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-quicksand,Quicksand,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-syne,Syne,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration
+tiktok-geist,Geist,,inspiration,design/branding,,tiktok/brandlet_official - font inspiration

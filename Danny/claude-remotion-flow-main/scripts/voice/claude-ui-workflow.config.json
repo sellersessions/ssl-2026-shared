@@ -1,0 +1,69 @@
+{
+  "_comment": "Claude UI Workflow explainer — SSL 2026 conference (9 May). Per-LINE generation: each sentence is its own TTS call, chained via request-id. Files: {scene}__{line}.mp3 → stitched per-scene → final listen-through. Finder colour-tag review (blue=keep, red=regen, green=mid) drives selective regen. Em-dashes used as TTS breath markers ONLY (never read by humans, never copied to mailers/READMEs/UI).",
+  "voice_id": "jQOgcOzmmipekvxJN09W",
+  "model_id": "eleven_multilingual_v2",
+  "output_dir": "public/assets/voice/generated/claude-ui-workflow",
+  "default_voice_settings": {
+    "stability": 0.45,
+    "similarity_boost": 1.0,
+    "style": 0.0,
+    "use_speaker_boost": true,
+    "speed": 0.9
+  },
+  "scenes": [
+    {
+      "id": "scene-1-hook",
+      "lines": [
+        { "id": "L1", "text": "Designing a landing page — or refactoring a Shopify store — used to take weeks." }
+      ]
+    },
+    {
+      "id": "scene-2-turn",
+      "lines": [
+        { "id": "L1", "text": "What if you could have agency-quality design — without waiting three weeks." }
+      ]
+    },
+    {
+      "id": "scene-3-intake",
+      "lines": [
+        { "id": "L1", "text": "To get started — drop in your chosen URL." },
+        { "id": "L2", "text": "It captures your design system — fonts, brand colours, voice." }
+      ]
+    },
+    {
+      "id": "scene-4a-rules",
+      "lines": [
+        { "id": "L1", "text": "Next stage — it runs through fifteen design databases." },
+        { "id": "L2", "text": "One hundred and sixty-five rules — anti-AI gates, UI and UX frameworks, conversion methodologies." },
+        { "id": "L3", "text": "Claude automates seven of the ten stages." }
+      ]
+    },
+    {
+      "id": "scene-4b-stitch",
+      "lines": [
+        { "id": "L1", "text": "Then you take the prompt — hand it to Google Stitch — and out come high-quality designs." },
+        { "id": "L2", "text": "Claude picks it up — and refactors all the drifts." }
+      ]
+    },
+    {
+      "id": "scene-5-proof",
+      "lines": [
+        { "id": "L1", "text": "Re Tech UK — Databrill — and The Push Pull Agency." },
+        { "id": "L2", "text": "All cleared at high rates." }
+      ]
+    },
+    {
+      "id": "scene-6-time",
+      "lines": [
+        { "id": "L1", "text": "The process end-to-end — outside of revisions — takes around ten minutes." },
+        { "id": "L2", "text": "Leaving you more time to spend in Stitch." }
+      ]
+    },
+    {
+      "id": "scene-7-cta",
+      "lines": [
+        { "id": "L1", "text": "Pull the repo — and put Claude to work." }
+      ]
+    }
+  ]
+}

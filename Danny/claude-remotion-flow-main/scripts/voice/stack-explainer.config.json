@@ -1,0 +1,47 @@
+{
+  "_comment": "StackExplainer VO — references the SSL 2026 house voice preset. Scripts drafted via 3-layer protocol (see treatments/stack-explainer-vo.md). Session 10, 23 Apr 2026.",
+  "voice_id": "jQOgcOzmmipekvxJN09W",
+  "model_id": "eleven_multilingual_v2",
+  "output_dir": "public/assets/voice/generated/StackExplainer",
+  "default_voice_settings": {
+    "stability": 0.31,
+    "similarity_boost": 1.0,
+    "style": 0.0,
+    "use_speaker_boost": true,
+    "speed": 0.9
+  },
+  "scenes": [
+    {
+      "id": "scene-1-title",
+      "text": "From stock Remotion — to a production engine."
+    },
+    {
+      "id": "scene-2-stock",
+      "text": "Out of the box — Remotion gives you a stage, a clock, and a tag that plays a file. That's it."
+    },
+    {
+      "id": "scene-3-plugins",
+      "text": "Then we stacked eighteen plugins on top — transitions, motion blur, noise, fonts, media utils. Every cinematic move is a bolt-on."
+    },
+    {
+      "id": "scene-4-design-system",
+      "text": "The design system — palette, scene skeleton, auto-sizing from the voiceover. One pattern — every video."
+    },
+    {
+      "id": "scene-5-voice",
+      "text": "The voice — one JSON config, one preset. Script in, MP3s out. Per-scene overrides if a line needs a push."
+    },
+    {
+      "id": "scene-6-library",
+      "text": "The library — every sound and music bed indexed. Shortlist in the auditioner — paste the path, done."
+    },
+    {
+      "id": "scene-7-beats",
+      "text": "Beat tracking — librosa finds the phrase starts, and we snap scene cuts to the ones that fit. No tempo changes to the voice."
+    },
+    {
+      "id": "scene-8-envelope",
+      "text": "The envelope — whoosh in, boom out, fade to black. That's how a forty-second explainer ships in one pass."
+    }
+  ]
+}

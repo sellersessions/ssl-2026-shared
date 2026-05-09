@@ -1,0 +1,27 @@
+{
+  "_comment": "Workshop Video 02 — The System (split version, scenes 1-3 of original 6). Master Log + Recover + Shipped Slash Commands. Single-stem rendering. JSONL spelt JSON-L in scene 2 so ElevenLabs reads it 'jay-son-L'. House voice preset.",
+  "voice_id": "jQOgcOzmmipekvxJN09W",
+  "model_id": "eleven_multilingual_v2",
+  "output_dir": "public/assets/voice/generated/workshop-video-02-the-system",
+  "default_voice_settings": {
+    "stability": 0.31,
+    "similarity_boost": 1.0,
+    "style": 0.0,
+    "use_speaker_boost": true,
+    "speed": 0.9
+  },
+  "scenes": [
+    {
+      "id": "scene-1-master-log",
+      "text": "The Master Log lives at the project level — these are your breadcrumbs. When you sit back down to work, you don't want to get buried in files. Open the log, get a quick read of where you are, and Claude picks up the context you've already captured."
+    },
+    {
+      "id": "scene-2-recover",
+      "text": "Claude crashes. You're out of context. No problem — you don't paste anything. You ask. Claude, review the JSON-L file for this project and pick up where we left off. It reads the session and you're back."
+    },
+    {
+      "id": "scene-3-slash-shipped",
+      "text": "Slash commands are your shortcuts inside Claude Code — and plenty ship out of the box. Slash-new. Slash-resume. Slash-clear. Slash-mcp-status. Slash-models. Five strokes saves you a sentence."
+    }
+  ]
+}

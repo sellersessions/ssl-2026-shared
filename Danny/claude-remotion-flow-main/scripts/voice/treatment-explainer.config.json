@@ -1,0 +1,39 @@
+{
+  "_comment": "TreatmentExplainer VO — references the SSL 2026 house voice preset. Scripts drafted via 3-layer protocol (see treatments/treatment-explainer-vo.md).",
+  "voice_id": "jQOgcOzmmipekvxJN09W",
+  "model_id": "eleven_multilingual_v2",
+  "output_dir": "public/assets/voice/generated/TreatmentExplainer",
+  "default_voice_settings": {
+    "stability": 0.31,
+    "similarity_boost": 1.0,
+    "style": 0.0,
+    "use_speaker_boost": true,
+    "speed": 0.9
+  },
+  "scenes": [
+    {
+      "id": "scene-1-title",
+      "text": "Brief any video — in three layers."
+    },
+    {
+      "id": "scene-2-layers",
+      "text": "Every video follows three layers — the brief, the skeleton, and the treatment."
+    },
+    {
+      "id": "scene-3-brief",
+      "text": "Layer one is the brief — what you want, who watches, and the feel you're going for."
+    },
+    {
+      "id": "scene-4-skeletons",
+      "text": "Layer two — pick your shape. Story, sales, social, or audio-led — each has its own skeleton."
+    },
+    {
+      "id": "scene-5-treatment",
+      "text": "Layer three — the treatment. Scene by scene — visual, motion, text, audio, all spelled out."
+    },
+    {
+      "id": "scene-6-pipeline",
+      "text": "That's the whole pipeline — from idea to shipped video."
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VOID_GALLERY | Wild Card Logo Exploration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-dim": "#ebebeb",
+                        "on-tertiary-fixed-variant": "#6c6d6e",
+                        "on-tertiary-container": "#555757",
+                        "on-error-container": "#ffa8a3",
+                        "on-tertiary": "#5e5f60",
+                        "on-primary-fixed-variant": "#531900",
+                        "surface": "#0e0e0e",
+                        "outline-variant": "#494847",
+                        "on-surface-variant": "#adaaaa",
+                        "secondary": "#af88ff",
+                        "primary": "#ff9064",
+                        "on-background": "#ffffff",
+                        "surface-container-low": "#131313",
+                        "on-error": "#490006",
+                        "inverse-primary": "#a83a00",
+                        "error-dim": "#d7383b",
+                        "error": "#ff716c",
+                        "background": "#0e0e0e",
+                        "on-surface": "#ffffff",
+                        "on-secondary": "#2b0065",
+                        "outline": "#777575",
+                        "on-primary-fixed": "#000000",
+                        "surface-container-high": "#201f1f",
+                        "tertiary-container": "#ebebeb",
+                        "secondary-container": "#6001d1",
+                        "surface-tint": "#ff9064",
+                        "secondary-fixed": "#dcc9ff",
+                        "tertiary": "#f9f9f9",
+                        "error-container": "#9f0519",
+                        "surface-bright": "#2c2c2c",
+                        "on-primary": "#571a00",
+                        "tertiary-fixed-dim": "#f0f1f1",
+                        "secondary-dim": "#8a4cfc",
+                        "surface-variant": "#262626",
+                        "on-primary-container": "#431200",
+                        "on-secondary-fixed": "#430097",
+                        "primary-fixed-dim": "#ff5e07",
+                        "surface-container": "#1a1919",
+                        "surface-container-highest": "#262626",
+                        "primary-container": "#ff7941",
+                        "on-secondary-fixed-variant": "#6514d6",
+                        "on-secondary-container": "#e1d0ff",
+                        "primary-fixed": "#ff7941",
+                        "on-tertiary-fixed": "#4f5051",
+                        "surface-dim": "#0e0e0e",
+                        "primary-dim": "#ff7439",
+                        "secondary-fixed-dim": "#d0b8ff",
+                        "tertiary-fixed": "#ffffff",
+                        "surface-container-lowest": "#000000",
+                        "inverse-surface": "#fcf8f8",
+                        "inverse-on-surface": "#565554"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .signature-gradient {
+            background: linear-gradient(to right, #ff9064, #af88ff);
+        }
+        .glass-card {
+            background: rgba(14, 14, 14, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .text-glow {
+            text-shadow: 0 0 15px rgba(255, 144, 100, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0e0e0e]/60 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.4)] flex justify-between items-center px-12 py-6 w-full">
+<div class="text-2xl font-bold bg-gradient-to-r from-[#ff9064] to-[#af88ff] bg-clip-text text-transparent font-['Space_Grotesk'] tracking-tight uppercase">VOID_GALLERY</div>
+<div class="hidden md:flex items-center gap-10 font-['Space_Grotesk'] tracking-tight uppercase">
+<a class="text-[#af88ff]/60 hover:text-[#af88ff] transition-colors" href="#">Explorations</a>
+<a class="text-[#af88ff]/60 hover:text-[#af88ff] transition-colors" href="#">Archive</a>
+<a class="text-[#ff9064] border-b-2 border-[#ff9064] pb-1" href="#">Studio</a>
+<a class="text-[#af88ff]/60 hover:text-[#af88ff] transition-colors" href="#">Process</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="px-6 py-2 bg-primary-container text-on-primary-fixed font-label font-bold uppercase tracking-wider rounded-DEFAULT scale-95 active:scale-90 transition-transform">Connect</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<img alt="Studio Profile" class="w-full h-full object-cover" data-alt="Professional portrait of a digital artist in a dark studio setting with warm accent lighting on their face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGI4JmN3THccqGwzKeBBHJOfH_agCtpKI2CrV9DDHciiikd0dyN0gExAOYBl1Ink0Qk5sEdnH4Jw0ATCgROThHBnesSqlD6ACgpzMR8Euwr8JTYdux1yR40XvlRYYd2SzqZXv_EfoeT1tzZu0OL9JdeRrrrD1yPNdFj6deEle4A9pp_mjgxpYsJlDN1s4CqqC3-_UC1Rcffon4farhEe10GhrWviaNwHXCeVLbENNyo4qKw4JRpbfL3Ac9tG1io3Fr9GXvmXvUssE"/>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-12 max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="mb-20 text-left border-l-2 border-primary/40 pl-12">
+<h1 class="font-headline text-6xl md:text-7xl font-bold tracking-tight mb-6 uppercase">
+                Wild Card <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Manifesto</span>
+</h1>
+<p class="text-on-surface-variant text-xl max-w-3xl font-light leading-relaxed">
+                Exploring the boundaries of Databrill Core's identity. This gallery presents experimental prototypes where data meets visceral art. These concepts reject standard corporate safety in favor of aggressive visual intelligence and kinetic motion.
+            </p>
+</header>
+<!-- Gallery Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Concept 01 -->
+<div class="glass-card group p-8 rounded-xl border border-outline-variant/15 flex flex-col hover:border-primary/40 transition-all duration-500">
+<div class="aspect-square w-full mb-8 overflow-hidden rounded-lg bg-surface-container-low relative">
+<img alt="Databrill_01" class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700 opacity-80 group-hover:opacity-100" data-alt="Abstract digital glitch art with vibrant orange and purple light trails, high-frequency interference patterns on deep black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMlq0DA4p4JkVPIRIz8yljgQI29bN-Xc5McSvvpHWn9cZ3-sh2rqBW0s9hxAxw0xaiTS1SN121SKFIz4AEt6F6WwRmY0yHzC16KVxmJHCy3YTO9vqUtHESjzpMSGGc-EqzlqiWWUf8tnOm2re6dXsUM2RTcF6zC2TLRgXmNhnAbQZM0tj3FIh15IHHN45sZwmDD1FvFzvPuNJjTP4F61sDlLcXp9Me0Vq3XfZsb7tJCVjeIdkzCSP0_nNL85AuugCGyWw3LwH7xsk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"></div>
+</div>
+<div class="space-y-2">
+<span class="font-headline text-primary text-xs tracking-widest uppercase font-bold">Databrill_01</span>
+<h3 class="font-headline text-2xl font-bold uppercase">The Kinetic Glitch</h3>
+<p class="text-on-surface-variant font-light leading-snug">Visualizing high-frequency digital interference and glowing trails that represent the raw energy of real-time data processing.</p>
+</div>
+</div>
+<!-- Concept 02 -->
+<div class="glass-card group p-8 rounded-xl border border-outline-variant/15 flex flex-col hover:border-secondary/40 transition-all duration-500">
+<div class="aspect-square w-full mb-8 overflow-hidden rounded-lg bg-surface-container-low relative">
+<img alt="Databrill_02" class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700 opacity-80 group-hover:opacity-100" data-alt="Monolithic dark glass pillar with glowing cyan and purple etched rings, atmospheric lighting in a deep void" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDnUwcXcfQd5PfnxxOy1YYv83oeRKMIjIFa8WiqFuL2NIEhqCYsN5RzmpvQywBt-Qof2HT6ShPUVlwR_H2OzlcOZTEoe6LUlPwZC4An74PjijwSkoDpjUx-gbchLGgsq4ea-3XF5miUuLLGZ-1WE_ICcaPAzHvMaG_S48miqMITREKMx_Z5pcLXUgbHpyclHoIjwoORnd_9ICddzW_gMfJy1EUjKF6yTGqQ4GDsAXZdGKUSAZimUrkgpcm1JLKihqN_ZD01MH2_Mk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"></div>
+</div>
+<div class="space-y-2">
+<span class="font-headline text-primary text-xs tracking-widest uppercase font-bold">Databrill_02</span>
+<h3 class="font-headline text-2xl font-bold uppercase">The Obsidian Monolith</h3>
+<p class="text-on-surface-variant font-light leading-snug">A dark glass pillar with etched glowing rings, symbolizing the indestructible stability and depth of the core infrastructure.</p>
+</div>
+</div>
+<!-- Concept 03 -->
+<div class="glass-card group p-8 rounded-xl border border-outline-variant/15 flex flex-col hover:border-primary/40 transition-all duration-500">
+<div class="aspect-square w-full mb-8 overflow-hidden rounded-lg bg-surface-container-low relative">
+<img alt="Databrill_03" class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700 opacity-80 group-hover:opacity-100" data-alt="Swarm of thousands of tiny glowing particles forming concentric circular rings in a cosmic dark space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVCp_TOxIACboV62HY3mh7GtZLU8_jMmFogFbSl_xcjTPlmVgsYD1ihy2iv1LEfyKSbPyvDOu5C4sehmsR1YWgF9skjm4WzIpi2vGZ9RTgH0Wmsh4Vj1rrQGUptrbcM8Tm1esDsuN_VBY16HQRaCFs9Lq485kfLZJjULYln3R_hp0Rz-iA31HNrbfL07SfwN5rEif2LVMA3xVjhNwt9NSWnXerahjrAOn_qQZodfPDW6SgKYIWoBSdpu6ZVdIfyAeb1PjFbaaYoCE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"></div>
+</div>
+<div class="space-y-2">
+<span class="font-headline text-primary text-xs tracking-widest uppercase font-bold">Databrill_03</span>
+<h3 class="font-headline text-2xl font-bold uppercase">The Data Swarm</h3>
+<p class="text-on-surface-variant font-light leading-snug">Thousands of luminous particles forming complex rings, illustrating the collective power of granular data points in motion.</p>
+</div>
+</div>
+<!-- Concept 04 -->
+<div class="glass-card group p-8 rounded-xl border border-outline-variant/15 flex flex-col hover:border-secondary/40 transition-all duration-500">
+<div class="aspect-square w-full mb-8 overflow-hidden rounded-lg bg-surface-container-low relative">
+<img alt="Databrill_04" class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700 opacity-80 group-hover:opacity-100" data-alt="Optical refraction flare with rainbow prismatic edges and vibrant orange light against a midnight black sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVA4ruZpLdQoyHhbzZPhU8DwuGvABRepn0z8VWRRwf6G3oPk55sCanHVR9WbzeDmKUNhLpgIqJQx3OFkYPIdTZeQdgyitrCpigv0rG6ciY85mqG9TWbMa-2lDUzszd8CYyB6QSFez-fqB89kBqcqWUDxM6WlXxXc-bVkp0C_zN3tzLF8Ses2PDdMyQvnmJkctcGOVxf0ak698qEwvv7p58Efphc5n85imPxUGZJWEeS3RovbBfej9PdM26O_9K-_piMJkP84Cc0Yo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"></div>
+</div>
+<div class="space-y-2">
+<span class="font-headline text-primary text-xs tracking-widest uppercase font-bold">Databrill_04</span>
+<h3 class="font-headline text-2xl font-bold uppercase">The Prismatic Flare</h3>
+<p class="text-on-surface-variant font-light leading-snug">Optical refraction and vibrant gradients that capture the moment data insights are clarified through the Databrill lens.</p>
+</div>
+</div>
+<!-- Concept 05 -->
+<div class="glass-card group p-8 rounded-xl border border-outline-variant/15 flex flex-col hover:border-primary/40 transition-all duration-500">
+<div class="aspect-square w-full mb-8 overflow-hidden rounded-lg bg-surface-container-low relative">
+<img alt="Databrill_05" class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700 opacity-80 group-hover:opacity-100" data-alt="Minimalist abstract circles radiating from a central point, glowing orange light rings on a matte black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHm8UHnwrWL7ALPEUu-8X6zuim3YN_kyzcMJpC2_tFR8MR98-0KvZUHEldWGIHBxesktvgWzxWbjsgNFjZPTU8BBsj_Sk3XHf13QzI1YR6eluRsDewggE8OkWBmXUQgjHbFo0kIuEHHN9iQ6QiaRfkDaF6CBuzqYv36cnjgMjNW7cqvvXxI8vz5N0G33V-F-8AItGXmrQY6ogRrEzeb6VdC9ftLj-ZkKnQ0d7Y-xoMCIov7A-0TxAbKx9E8_aSEaZeCH6W7amCkF4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"></div>
+</div>
+<div class="space-y-2">
+<span class="font-headline text-primary text-xs tracking-widest uppercase font-bold">Databrill_05</span>
+<h3 class="font-headline text-2xl font-bold uppercase">The Core Pulse</h3>
+<p class="text-on-surface-variant font-light leading-snug">Minimalist radiating concentric rings depicting a steady, rhythmic pulse of system-wide vitality and synchronization.</p>
+</div>
+</div>
+<!-- Concept 06 -->
+<div class="glass-card group p-8 rounded-xl border border-outline-variant/15 flex flex-col hover:border-secondary/40 transition-all duration-500">
+<div class="aspect-square w-full mb-8 overflow-hidden rounded-lg bg-surface-container-low relative">
+<img alt="Databrill_06" class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700 opacity-80 group-hover:opacity-100" data-alt="Abstract single-line knot structure glowing with purple neon light, geometric complexity in a dark void" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHHAjyjjecPR8S70gylTpdJOAcwI3FrKUrUA5gYMl45Z2sGn6cfUI90FGjr_qJw3EFj_c2rh288XQInx_nSgmAeX8JENc8swllqYQY9B_L4YMHHdA9iYCnZywLwCI7Sc59Go2QgEBrY8IOJQR2CGlUoyhazPr1dHDAKRxiFlL7s0H1NFEsDVDx2YgutbjxT5uBWhDRDfzF_veSEE77RtENCkV_cG-STYtp8OC44I4cICpwkedntk8WoW4SltvMErB8u3HQziP4ncI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"></div>
+</div>
+<div class="space-y-2">
+<span class="font-headline text-primary text-xs tracking-widest uppercase font-bold">Databrill_06</span>
+<h3 class="font-headline text-2xl font-bold uppercase">The Generative Glyph</h3>
+<p class="text-on-surface-variant font-light leading-snug">An abstract single-line knot structure that emerges from generative algorithms, embodying the unity of code and design.</p>
+</div>
+</div>
+</div>
+<!-- CTA Section -->
+<div class="mt-24 text-center">
+<button class="signature-gradient px-12 py-5 font-headline font-bold text-on-primary-fixed uppercase tracking-widest rounded-DEFAULT hover:shadow-[0_0_30px_rgba(255,144,100,0.5)] transition-all duration-300 transform hover:-translate-y-1 active:scale-95">
+                VOTE FOR CONCEPT
+            </button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0e0e0e] w-full py-12 px-12 border-t border-[#494847]/15 flex flex-col md:flex-row justify-between items-center gap-8 w-full">
+<div class="text-[#ff9064] font-black font-['Space_Grotesk'] tracking-widest uppercase">VOID_GALLERY</div>
+<div class="text-[#494847] font-['Manrope'] text-sm tracking-widest uppercase">© 2024 THE LUMINESCENT VOID. ALL RIGHTS RESERVED.</div>
+<div class="flex gap-8 font-['Manrope'] text-sm tracking-widest uppercase">
+<a class="text-[#494847] hover:text-[#af88ff] transition-colors opacity-80 hover:opacity-100" href="#">Instagram</a>
+<a class="text-[#494847] hover:text-[#af88ff] transition-colors opacity-80 hover:opacity-100" href="#">Behance</a>
+<a class="text-[#494847] hover:text-[#af88ff] transition-colors opacity-80 hover:opacity-100" href="#">Dribbble</a>
+<a class="text-[#494847] hover:text-[#af88ff] transition-colors opacity-80 hover:opacity-100" href="#">Privacy</a>
+</div>
+</footer>
+</body></html>

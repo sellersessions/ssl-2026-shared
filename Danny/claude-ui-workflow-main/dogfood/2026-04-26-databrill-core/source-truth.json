@@ -1,0 +1,223 @@
+{
+  "_meta": {
+    "source": "core.databrill.com (live)",
+    "fetched": "2026-04-26",
+    "method": "WebFetch",
+    "sections_on_live": 9,
+    "sections_in_brief": 11,
+    "missing_from_live": ["trust_ticker", "pricing"],
+    "note": "Truth source for cycle-2 merge build. For sections missing on live (ticker, pricing), fall back to brief spec in stitch-prompt.md or omit per the operator's call."
+  },
+  "sections": [
+    {
+      "id": "nav",
+      "order": 1,
+      "layout": "sticky-top-nav",
+      "logo": "DataBrill",
+      "nav_links": ["Features", "Pricing", "FAQ"],
+      "cta_label": "Log in",
+      "cta_style": "ghost-pill"
+    },
+    {
+      "id": "hero",
+      "order": 2,
+      "layout": "centred-hero-with-mesh-gradient",
+      "eyebrow": null,
+      "headline_line_1": "Own Your Amazon Data.",
+      "headline_line_2": "Finally.",
+      "gradient_word": "Finally.",
+      "subhead": "Automated extraction from Amazon APIs into your database. No vendor lock-in. No data hostages. Just transparent, reliable data ownership for your Amazon business.",
+      "cta_primary": "Start Free Trial",
+      "cta_secondary": "See How It Works",
+      "trust_line": null
+    },
+    {
+      "id": "problem",
+      "order": 3,
+      "layout": "4-card-glass-grid-2x2",
+      "headline": "Tired of Being a Data Hostage?",
+      "cards": [
+        {
+          "title": "Access",
+          "body": "You can't get a complete picture of your Amazon business without juggling 5 different platforms"
+        },
+        {
+          "title": "Cost",
+          "body": "Third-party tools charge you monthly fees to access YOUR data, then charge again for exports"
+        },
+        {
+          "title": "Time",
+          "body": "Finance asks for last quarter's numbers and you spend 3 hours copying from dashboards"
+        },
+        {
+          "title": "Build",
+          "body": "Your BI team can't build the custom reports you need because data is locked in proprietary systems"
+        }
+      ],
+      "emphasis_quote": "Every dollar locked in Amazon is YOUR money. Why isn't your data?"
+    },
+    {
+      "id": "solution",
+      "order": 4,
+      "layout": "3-column-feature-row",
+      "headline": "Your Data, Your Database, Your Rules",
+      "columns": [
+        {
+          "title": "EXTRACT",
+          "icon_role": "extract",
+          "items": [
+            "Automated pulls from Selling Partner API and Advertising API",
+            "Orders, inventory, ads, settlements, performance metrics",
+            "Historical backfill + continuous incremental syncs",
+            "Secure OAuth integration"
+          ]
+        },
+        {
+          "title": "OWN",
+          "icon_role": "own",
+          "items": [
+            "Data lands in YOUR PostgreSQL database",
+            "Managed hosting or bring your own",
+            "No vendor lock-in, ever",
+            "Complete access and control"
+          ]
+        },
+        {
+          "title": "ANALYZE",
+          "icon_role": "analyze",
+          "items": [
+            "Direct SQL access for custom queries",
+            "Connect any BI tool instantly",
+            "Export to CSV anytime",
+            "Feed your existing systems"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "how_it_works",
+      "order": 5,
+      "layout": "numbered-timeline-vertical",
+      "headline": "How It Works",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Connect Your Amazon Account",
+          "body": "Secure OAuth flow connects to Selling Partner and Advertising APIs. Takes 3 minutes. We handle token management and renewals automatically."
+        },
+        {
+          "number": 2,
+          "title": "Choose Your Database",
+          "body": "Use our managed PostgreSQL (live in 60 seconds) or bring your own database credentials. Your data lands where YOU decide."
+        },
+        {
+          "number": 3,
+          "title": "Data Flows Automatically",
+          "body": "Scheduled syncs run on your timeline. Historical backfill loads your past data. Watch real-time status and get alerts if anything needs attention."
+        },
+        {
+          "number": 4,
+          "title": "Query, Analyze, Export",
+          "body": "Your data, your way. Write SQL queries, connect Tableau or Looker, export to CSV, feed your accounting system. No limits, no fees, no permission needed."
+        }
+      ]
+    },
+    {
+      "id": "personas",
+      "order": 6,
+      "layout": "4-column-persona-row",
+      "headline": "Who It's For",
+      "personas": [
+        {
+          "title": "Amazon-Native Brands",
+          "body": "You've built a real business on Amazon, not a side hustle. You need data infrastructure that matches your sophistication. Make decisions based on YOUR data in YOUR systems."
+        },
+        {
+          "title": "Agencies & Aggregators",
+          "body": "Managing 10, 50, or 100+ seller accounts? Stop logging into separate dashboards. Unified multi-tenant platform with clean data separation and central oversight."
+        },
+        {
+          "title": "Finance & Operations Teams",
+          "body": "Tired of reconciling numbers from three different sources? Get a single source of truth that feeds directly into your financial systems and operational dashboards."
+        },
+        {
+          "title": "Data-Driven Leaders",
+          "body": "You want to train ML models, build predictive analytics, or create custom automation. You need raw data access, not another pretty dashboard you can't query."
+        }
+      ]
+    },
+    {
+      "id": "comparison",
+      "order": 7,
+      "layout": "3-col-comparison-table",
+      "headline": "Why DataBrill vs. Account Management Services?",
+      "subhead": "Account management services do tasks FOR you. DataBrill gives you the DATA to do anything.",
+      "rows": [
+        {
+          "feature": "Service Model",
+          "traditional": "Manual operations team",
+          "databrill": "Automated data infrastructure"
+        },
+        {
+          "feature": "Data Ownership",
+          "traditional": "Lives in their platform",
+          "databrill": "Lives in YOUR database"
+        },
+        {
+          "feature": "Access to Raw Data",
+          "traditional": "Limited exports, fees",
+          "databrill": "Full SQL access, unlimited"
+        },
+        {
+          "feature": "BI Tool Integration",
+          "traditional": "Screenshots & CSVs",
+          "databrill": "Direct SQL connection"
+        },
+        {
+          "feature": "Custom Analytics",
+          "traditional": "Request reports, wait days",
+          "databrill": "Query yourself, instant"
+        }
+      ]
+    },
+    {
+      "id": "closing_cta",
+      "order": 8,
+      "layout": "full-bleed-band-orange",
+      "headline": "Stop Paying to Access Your Own Data",
+      "subhead": "Get 14 days free. See your complete Amazon data in one database. No credit card required.",
+      "cta_primary": "Start Free Trial"
+    },
+    {
+      "id": "footer",
+      "order": 9,
+      "layout": "4-column-footer",
+      "tagline": "Your data. Your database. Your business.",
+      "columns": [
+        {
+          "title": "Product",
+          "links": ["Features", "Pricing", "FAQ"]
+        },
+        {
+          "title": "Company",
+          "links": ["About", "Contact"]
+        },
+        {
+          "title": "Legal",
+          "links": ["Privacy Policy", "Terms of Service", "Cookie Policy"]
+        }
+      ],
+      "copyright": "© 2025 DataBrill. All rights reserved."
+    }
+  ],
+  "_brief_only_sections_omitted": {
+    "trust_ticker": {
+      "reason": "Not present on live core.databrill.com",
+      "decision": "Skip — not part of truth source. Brief had it as add-on for technical credibility. Can be added cycle-3 if the operator wants."
+    },
+    "pricing": {
+      "reason": "Not present on live core.databrill.com",
+      "decision": "Skip — no source-truth copy for tier names, prices, or feature lists. Brief had placeholder Starter/Pro/Agency. Adding without truth = same hallucination problem we're trying to solve."
+    }
+  }
+}

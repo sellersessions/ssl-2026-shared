@@ -1,0 +1,31 @@
+{
+  "_comment": "AI Workshop 2.0 — companion to SSL 26 Edition README.md. Course-level overview, <65s, 4 scenes. Phonetic patches: 'read me file' (=README), 'Clawd-dot-M-D' (=CLAUDE.md only), 'M-C-Ps' (=MCPs), 'Module zero-zero-zero' (=Module-000). 'Claude' / 'Claude Code' restored — only the .md file form needs the Clawd correction. Em-dash flow over hard stops to keep cadence natural.",
+  "voice_id": "jQOgcOzmmipekvxJN09W",
+  "model_id": "eleven_multilingual_v2",
+  "output_dir": "public/assets/voice/generated/workshop-overview",
+  "default_voice_settings": {
+    "stability": 0.31,
+    "similarity_boost": 1.0,
+    "style": 0.0,
+    "use_speaker_boost": true,
+    "speed": 0.9
+  },
+  "scenes": [
+    {
+      "id": "scene-1-welcome",
+      "text": "This is a self-drive course — you digest the read me file, then you give Claude the setup file, and Claude does the work. It asks you questions, you ask it back. Simple."
+    },
+    {
+      "id": "scene-2-loop",
+      "text": "Every module works the same way. Start with the read me file — understand what you're building. Then right-click the setup file, copy the path, and paste that path into Claude. Answer the questions, verify the result, and move on."
+    },
+    {
+      "id": "scene-3-path",
+      "text": "Seven modules, in order. You start by installing Claude Code. Then Clawd-dot-M-D, Master Log, Slash Commands, M-C-Ps, and finally Agents. Each one builds on the last — don't skip."
+    },
+    {
+      "id": "scene-4-start",
+      "text": "Open Module zero-zero-zero, get Claude Code on your machine, and the rest unlocks one module at a time."
+    }
+  ]
+}

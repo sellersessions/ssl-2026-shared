@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Databrill Core - Brand Identity Lockups</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=DM+Sans:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: "#0c0a14",
+                            orange: "#e07a3a",
+                            purple: "#7c6bbd",
+                            lightOrange: "#f09050",
+                            offWhite: "#f5f5fa"
+                        }
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Space Grotesk"],
+                        body: ["Dm Sans"],
+                        label: ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .brand-rings-gradient {
+            background: linear-gradient(135deg, #e07a3a, #7c6bbd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .ring-svg {
+            stroke: url(#brand-gradient);
+            stroke-width: 2;
+            fill: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-[#0c0a14] text-white font-body selection:bg-orange-500/30">
+<!-- TopNavBar (Shared Component) -->
+<nav class="flex justify-between items-center px-8 h-16 w-full fixed top-0 z-50 bg-[#0c0a14]/80 backdrop-blur-md border-b border-white/10 font-['Space_Grotesk'] tracking-tight shadow-2xl">
+<div class="text-xl font-semibold text-white tracking-[-0.02em]">Databrill Core</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-400 font-medium hover:text-white transition-colors" href="#">Guidelines</a>
+<a class="text-orange-500 border-b-2 border-orange-500 pb-1 hover:text-white transition-colors" href="#">Assets</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors" href="#">Downloads</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors" href="#">Press</a>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-white transition-colors" data-icon="settings">settings</span>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-white transition-colors" data-icon="help">help</span>
+</div>
+<button class="bg-orange-500 text-white px-5 py-1.5 rounded-full text-sm font-medium hover:opacity-80 transition-all duration-150">
+                Share Guidelines
+            </button>
+</div>
+</nav>
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 border-r border-white/5 bg-[#0c0a14] flex flex-col py-6 font-['Space_Grotesk'] z-40">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-gradient-to-br from-orange-500 to-purple-500 p-[1px]">
+<div class="w-full h-full bg-[#0c0a14] rounded-sm flex items-center justify-center">
+<span class="text-[10px] font-bold text-orange-500">DB</span>
+</div>
+</div>
+<div>
+<div class="text-sm font-bold text-orange-500 uppercase tracking-wider leading-none">Core System</div>
+<div class="text-[10px] text-slate-500 font-medium">v1.2.0</div>
+</div>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 text-slate-500 px-4 py-3 hover:bg-white/10 hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="fingerprint">fingerprint</span>
+<span>Identity</span>
+</a>
+<a class="flex items-center gap-3 bg-white/5 text-white rounded-lg px-4 py-3 border-l-2 border-orange-500 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span>Lockups</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 px-4 py-3 hover:bg-white/10 hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="palette">palette</span>
+<span>Color</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 px-4 py-3 hover:bg-white/10 hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="match_case">match_case</span>
+<span>Typography</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 px-4 py-3 hover:bg-white/10 hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="animation">animation</span>
+<span>Motion</span>
+</a>
+</nav>
+<div class="px-3 mt-auto border-t border-white/5 pt-4 space-y-1">
+<a class="flex items-center gap-3 text-slate-500 px-4 py-3 hover:bg-white/10 hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-sm">Archive</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 px-4 py-3 hover:bg-white/10 hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+</div>
+</aside>
+<!-- SVG Definition for Rings Gradient -->
+<svg class="absolute" height="0" width="0">
+<defs>
+<lineargradient id="brand-gradient" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#e07a3a;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#7c6bbd;stop-opacity:1"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Main Content -->
+<main class="pl-64 pt-16">
+<div class="max-w-6xl mx-auto px-12 py-20">
+<!-- Hero Header -->
+<section class="mb-24">
+<h1 class="font-headline text-5xl font-light mb-4 tracking-tight">Lockups &amp; <span class="text-orange-500 font-semibold">Signatures</span></h1>
+<p class="text-slate-400 text-lg max-w-2xl leading-relaxed">The Databrill Core identity system provides flexible lockup configurations designed for various applications across digital and physical touchpoints.</p>
+</section>
+<!-- Logo Lockups Section -->
+<section class="mb-32">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Primary Horizontal -->
+<div class="glass p-12 rounded-xl flex flex-col items-center justify-center min-h-[300px]">
+<div class="flex items-center gap-6 mb-12">
+<!-- Ring Icon -->
+<svg class="w-16 h-16" viewbox="0 0 100 100">
+<circle class="ring-svg" cx="35" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="45" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="55" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="65" cy="50" r="18"></circle>
+</svg>
+<span class="font-headline text-4xl font-medium tracking-[-0.02em]">Databrill Core</span>
+</div>
+<span class="text-[10px] font-label font-semibold uppercase tracking-[0.2em] text-slate-500">HORIZONTAL LOCKUP</span>
+</div>
+<!-- Condensed -->
+<div class="glass p-12 rounded-xl flex flex-col items-center justify-center min-h-[300px]">
+<div class="flex items-center gap-5 mb-12">
+<svg class="w-12 h-12" viewbox="0 0 100 100">
+<circle class="ring-svg" cx="35" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="45" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="55" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="65" cy="50" r="18"></circle>
+</svg>
+<span class="font-headline text-3xl font-medium tracking-tight">DB Core</span>
+</div>
+<span class="text-[10px] font-label font-semibold uppercase tracking-[0.2em] text-slate-500">CONDENSED LOCKUP</span>
+</div>
+<!-- Monogram -->
+<div class="glass p-12 rounded-xl flex flex-col items-center justify-center min-h-[300px]">
+<div class="flex items-center gap-4 mb-12">
+<svg class="w-10 h-10" viewbox="0 0 100 100">
+<circle class="ring-svg" cx="35" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="45" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="55" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="65" cy="50" r="18"></circle>
+</svg>
+<span class="font-headline text-3xl font-bold tracking-tighter">DBC</span>
+</div>
+<span class="text-[10px] font-label font-semibold uppercase tracking-[0.2em] text-slate-500">MONOGRAM</span>
+</div>
+<!-- Stacked -->
+<div class="glass p-12 rounded-xl flex flex-col items-center justify-center min-h-[300px]">
+<div class="flex flex-col items-center gap-4 mb-12 text-center">
+<svg class="w-14 h-14" viewbox="0 0 100 100">
+<circle class="ring-svg" cx="35" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="45" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="55" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="65" cy="50" r="18"></circle>
+</svg>
+<span class="font-headline text-3xl font-medium tracking-tight">Databrill Core</span>
+</div>
+<span class="text-[10px] font-label font-semibold uppercase tracking-[0.2em] text-slate-500">STACKED LOCKUP</span>
+</div>
+<!-- Icon Only Sizes -->
+<div class="glass p-12 rounded-xl flex flex-col items-center justify-center min-h-[300px] md:col-span-2">
+<div class="flex items-end gap-16 mb-12">
+<div class="flex flex-col items-center gap-4">
+<svg class="w-24 h-24" viewbox="0 0 100 100">
+<circle class="ring-svg" cx="35" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="45" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="55" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="65" cy="50" r="18"></circle>
+</svg>
+<span class="text-[10px] text-slate-600">LG</span>
+</div>
+<div class="flex flex-col items-center gap-4">
+<svg class="w-16 h-16" viewbox="0 0 100 100">
+<circle class="ring-svg" cx="35" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="45" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="55" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="65" cy="50" r="18"></circle>
+</svg>
+<span class="text-[10px] text-slate-600">MD</span>
+</div>
+<div class="flex flex-col items-center gap-4">
+<svg class="w-8 h-8" viewbox="0 0 100 100">
+<circle class="ring-svg" cx="35" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="45" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="55" cy="50" r="18"></circle>
+<circle class="ring-svg" cx="65" cy="50" r="18"></circle>
+</svg>
+<span class="text-[10px] text-slate-600">SM</span>
+</div>
+</div>
+<span class="text-[10px] font-label font-semibold uppercase tracking-[0.2em] text-slate-500">ICON ONLY</span>
+</div>
+</div>
+</section>
+<!-- Color Palette Section -->
+<section class="mb-32">
+<h2 class="font-headline text-2xl font-medium mb-12 tracking-tight">Primary Palette</h2>
+<div class="flex w-full h-48 rounded-xl overflow-hidden shadow-2xl">
+<div class="flex-1 bg-[#0c0a14] group relative flex items-end p-6 border-r border-white/5">
+<div class="z-10">
+<div class="text-[10px] font-label uppercase tracking-widest text-slate-500 mb-1">Deep Background</div>
+<div class="font-headline font-semibold text-white">#0c0a14</div>
+</div>
+</div>
+<div class="flex-1 bg-[#e07a3a] group relative flex items-end p-6">
+<div class="z-10">
+<div class="text-[10px] font-label uppercase tracking-widest text-white/60 mb-1">Orange Accent</div>
+<div class="font-headline font-semibold text-white">#e07a3a</div>
+</div>
+</div>
+<div class="flex-1 bg-[#7c6bbd] group relative flex items-end p-6">
+<div class="z-10">
+<div class="text-[10px] font-label uppercase tracking-widest text-white/60 mb-1">Purple Secondary</div>
+<div class="font-headline font-semibold text-white">#7c6bbd</div>
+</div>
+</div>
+<div class="flex-1 bg-[#f09050] group relative flex items-end p-6">
+<div class="z-10">
+<div class="text-[10px] font-label uppercase tracking-widest text-white/60 mb-1">Light Orange</div>
+<div class="font-headline font-semibold text-white">#f09050</div>
+</div>
+</div>
+<div class="flex-1 bg-[#f5f5fa] group relative flex items-end p-6">
+<div class="z-10">
+<div class="text-[10px] font-label uppercase tracking-widest text-black/40 mb-1">Off-white</div>
+<div class="font-headline font-semibold text-black">#f5f5fa</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Typography Section -->
+<section class="mb-32">
+<h2 class="font-headline text-2xl font-medium mb-12 tracking-tight">Typography</h2>
+<div class="space-y-16">
+<div class="border-b border-white/5 pb-12">
+<div class="text-[10px] font-label uppercase tracking-widest text-slate-500 mb-4">Display — Space Grotesk</div>
+<div class="font-headline text-6xl font-light text-white leading-none">The evolution of technical infrastructure.</div>
+</div>
+<div class="border-b border-white/5 pb-12">
+<div class="text-[10px] font-label uppercase tracking-widest text-slate-500 mb-4">Headings — Inter</div>
+<div class="font-['Inter'] text-4xl font-semibold text-white tracking-tight">Streamlining data connectivity at scale.</div>
+</div>
+<div>
+<div class="text-[10px] font-label uppercase tracking-widest text-slate-500 mb-4">Body — DM Sans</div>
+<div class="font-body text-xl text-slate-400 max-w-3xl leading-relaxed">Built for the future of interoperability, Databrill Core provides a robust foundation for modern data ecosystems. We prioritize clarity, performance, and technical precision in every layer of our identity.</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="flex flex-col items-center gap-4 w-full mt-auto bg-[#0c0a14] py-12 border-t border-white/5 font-['Inter'] text-xs font-medium uppercase tracking-widest">
+<div class="flex gap-8 text-slate-600 mb-4">
+<a class="hover:text-orange-400 transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-orange-400 transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-orange-400 transition-colors" href="#">Contact Support</a>
+</div>
+<div class="text-slate-600">© 2024 Databrill Core. All rights reserved.</div>
+</footer>
+</body></html>

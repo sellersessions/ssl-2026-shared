@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Re Tech UK - Everyday clothing for women</title>
+<meta name="description" content="Shop quality everyday women's clothing at Re Tech UK. Cosy knitwear, polo neck jumpers, cardigans, and comfortable essentials. Sizes 8-26, fast UK delivery."/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface": "#fbf9f4", "surface-dim": "#dbdad5", "surface-bright": "#fbf9f4",
+        "surface-container-lowest": "#ffffff", "surface-container-low": "#f5f3ee",
+        "surface-container": "#f0eee9", "surface-container-high": "#eae8e3",
+        "surface-container-highest": "#e4e2dd",
+        "on-surface": "#1b1c19", "on-surface-variant": "#524345",
+        "inverse-surface": "#30312e", "inverse-on-surface": "#f2f1ec",
+        "outline": "#847375", "outline-variant": "#d6c2c4",
+        "primary": "#481925", "on-primary": "#ffffff",
+        "primary-container": "#632e3a", "on-primary-container": "#de96a4",
+        "secondary": "#8b4d48", "on-secondary": "#ffffff",
+        "secondary-container": "#ffb0a8", "on-secondary-container": "#7a403b",
+        "tertiary": "#332705", "on-tertiary": "#ffffff",
+        "tertiary-container": "#4b3d19", "on-tertiary-container": "#bca87a",
+        "background": "#fbf9f4", "on-background": "#1b1c19",
+        "surface-variant": "#e4e2dd", "surface-tint": "#884d59"
+      },
+      borderRadius: { "sm": "0.125rem", "DEFAULT": "0.25rem", "md": "0.375rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+      spacing: { "section-gap": "120px", "gutter": "24px", "container-max": "1440px", "margin-desktop": "64px" },
+      fontFamily: {
+        "display-hero": ["Noto Serif"], "headline-lg": ["Noto Serif"], "headline-md": ["Noto Serif"],
+        "body-lg": ["Manrope"], "body-md": ["Manrope"], "label-caps": ["Manrope"]
+      },
+      fontSize: {
+        "display-hero": ["64px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "400" }],
+        "headline-lg": ["40px", { lineHeight: "1.2", fontWeight: "400" }],
+        "headline-md": ["28px", { lineHeight: "1.3", fontWeight: "400" }],
+        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+        "label-caps": ["12px", { lineHeight: "1.2", letterSpacing: "0.1em", fontWeight: "600" }]
+      }
+    }
+  }
+}
+</script>
+<style>
+  body {
+    background-color: #fbf9f4;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+  .petal-blur-pink   { background: radial-gradient(circle, rgba(222, 150, 164, 0.15) 0%, rgba(251, 249, 244, 0) 70%); }
+  .petal-blur-yellow { background: radial-gradient(circle, rgba(247, 224, 175, 0.15) 0%, rgba(251, 249, 244, 0) 70%); }
+  .petal-blur-purple { background: radial-gradient(circle, rgba(99, 46, 58, 0.08) 0%, rgba(251, 249, 244, 0) 70%); }
+  .organic-circle {
+    position: absolute; width: 300px; height: 300px;
+    border: 1px solid rgba(99, 46, 58, 0.1);
+    border-radius: 43% 57% 55% 45% / 46% 38% 62% 54%;
+    z-index: 0; pointer-events: none;
+  }
+  .organic-underline { position: relative; display: inline-block; }
+  .organic-underline::after {
+    content: ''; position: absolute; bottom: -5px; left: -5%;
+    width: 110%; height: 8px;
+    border-bottom: 2px solid rgba(99, 46, 58, 0.3);
+    border-radius: 50% / 100% 100% 0 0;
+    transform: rotate(-1deg);
+  }
+</style>
+</head>
+<body class="text-on-background min-h-screen relative overflow-x-hidden">
+<!-- Decorative petal blurs -->
+<div class="fixed top-[-100px] left-[-100px] w-[500px] h-[500px] petal-blur-pink rounded-full -z-10 pointer-events-none"></div>
+<div class="fixed top-[20%] right-[-150px] w-[600px] h-[600px] petal-blur-yellow rounded-full -z-10 pointer-events-none"></div>
+<div class="fixed bottom-[-200px] left-[10%] w-[800px] h-[800px] petal-blur-purple rounded-full -z-10 pointer-events-none"></div>
+
+<!-- Announcement bar -->
+<div class="bg-primary text-on-primary text-center py-2 font-label-caps text-label-caps tracking-widest">
+  FREE UK DELIVERY &amp; RETURNS
+</div>
+
+<!-- Top nav (curated 4 + Shop panel + drawer for everything else) -->
+<nav class="bg-[#fbf9f4] font-serif sticky top-0 z-50 border-b border-surface-container-highest">
+  <div class="flex justify-between items-center w-full px-6 py-5 md:px-12 max-w-[1440px] mx-auto gap-6">
+    <!-- Mobile / small desktop hamburger -->
+    <button id="drawer-open" type="button" aria-label="Open menu" class="lg:hidden text-primary-container hover:opacity-70 transition-opacity">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+
+    <!-- Wordmark -->
+    <a href="/" class="text-xl font-bold tracking-tighter text-primary-container font-serif">RE TECH UK</a>
+
+    <!-- Primary nav (curated 4) — desktop only -->
+    <div class="hidden lg:flex space-x-10 items-center text-sm tracking-widest uppercase">
+      <!-- Shop with hover/click panel -->
+      <div class="relative group">
+        <button id="shop-toggle" type="button" aria-haspopup="true" aria-expanded="false" class="text-primary-container hover:text-primary transition-colors flex items-center gap-1">
+          Shop <span class="material-symbols-outlined text-base">expand_more</span>
+        </button>
+        <!-- Shop panel -->
+        <div id="shop-panel" class="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-[640px] bg-surface-container-lowest border border-surface-container-highest rounded-xl shadow-[0_20px_40px_rgba(99,46,58,0.08)] p-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+          <span class="font-label-caps text-label-caps text-secondary tracking-widest">Collections</span>
+          <div class="grid grid-cols-2 gap-x-8 gap-y-3 mt-4">
+            <a href="#polos" class="font-body-md text-body-md text-on-surface hover:text-primary transition-colors normal-case">Ribbed Cotton Polo Neck Tops</a>
+            <a href="#cardigans" class="font-body-md text-body-md text-on-surface hover:text-primary transition-colors normal-case">Long Sleeve Maxi Cardigan</a>
+            <a href="#shop" class="font-body-md text-body-md text-on-surface hover:text-primary transition-colors normal-case">Light Knits</a>
+            <a href="#kids" class="font-body-md text-body-md text-on-surface hover:text-primary transition-colors normal-case">Kids Clothing</a>
+          </div>
+          <div class="mt-6 pt-6 border-t border-surface-container-highest flex items-center justify-between">
+            <a href="#refer" class="font-label-caps text-label-caps text-primary-container hover:text-primary transition-colors">Refer A Friend &middot; Give 10%, get 10%</a>
+            <a href="#shop" class="font-label-caps text-label-caps text-primary-container hover:text-primary transition-colors border-b border-primary-container pb-1">SHOP ALL</a>
+          </div>
+        </div>
+      </div>
+      <a href="#about" class="text-primary-container hover:text-primary transition-colors">About</a>
+      <a href="#rewards" class="text-primary-container hover:text-primary transition-colors">Rewards</a>
+      <a href="#contact" class="text-primary-container hover:text-primary transition-colors">Contact</a>
+    </div>
+
+    <!-- Utility icon cluster -->
+    <div class="flex space-x-5 items-center text-primary-container">
+      <a class="hover:opacity-70 transition-opacity" aria-label="Search" href="#search"><span class="material-symbols-outlined">search</span></a>
+      <a class="hover:opacity-70 transition-opacity hidden sm:inline-flex" aria-label="Register or log in" href="#account"><span class="material-symbols-outlined">person</span></a>
+      <a class="hover:opacity-70 transition-opacity" aria-label="Bag" href="#cart"><span class="material-symbols-outlined">shopping_bag</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- Drawer (off-canvas, slides from left) — used for mobile + as overflow on desktop -->
+<div id="drawer-backdrop" class="fixed inset-0 bg-on-surface/30 backdrop-blur-sm opacity-0 invisible transition-all duration-300 z-[60]" onclick="document.getElementById('drawer').classList.remove('translate-x-0'); document.getElementById('drawer').classList.add('-translate-x-full'); this.classList.remove('opacity-100','visible'); this.classList.add('opacity-0','invisible');"></div>
+<aside id="drawer" class="fixed top-0 left-0 h-full w-[320px] max-w-[80vw] bg-surface-container-lowest -translate-x-full transition-transform duration-300 z-[70] shadow-[0_20px_60px_rgba(99,46,58,0.12)] overflow-y-auto" aria-label="Site menu">
+  <div class="p-8 relative">
+    <div class="absolute inset-0 petal-blur-pink opacity-30 pointer-events-none -z-10"></div>
+    <div class="flex justify-between items-center mb-10">
+      <span class="text-lg font-bold tracking-tighter text-primary-container font-serif">RE TECH UK</span>
+      <button type="button" aria-label="Close menu" onclick="document.getElementById('drawer').classList.remove('translate-x-0'); document.getElementById('drawer').classList.add('-translate-x-full'); document.getElementById('drawer-backdrop').classList.remove('opacity-100','visible'); document.getElementById('drawer-backdrop').classList.add('opacity-0','invisible');" class="text-primary-container hover:opacity-70 transition-opacity">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <span class="font-label-caps text-label-caps text-secondary tracking-widest">Shop</span>
+    <nav class="flex flex-col gap-3 mt-3 mb-8 font-headline-md text-headline-md">
+      <a href="/" class="text-on-surface hover:text-primary transition-colors">Home</a>
+      <a href="#polos" class="text-on-surface hover:text-primary transition-colors">Ribbed Cotton Polo Neck Tops</a>
+      <a href="#cardigans" class="text-on-surface hover:text-primary transition-colors">Long Sleeve Maxi Cardigan</a>
+      <a href="#kids" class="text-on-surface hover:text-primary transition-colors">Kids Clothing</a>
+    </nav>
+    <span class="font-label-caps text-label-caps text-secondary tracking-widest">More</span>
+    <nav class="flex flex-col gap-3 mt-3 mb-8 font-body-lg text-body-lg">
+      <a href="#about" class="text-on-surface hover:text-primary transition-colors">About Us</a>
+      <a href="#rewards" class="text-on-surface hover:text-primary transition-colors">Rewards</a>
+      <a href="#refer" class="text-on-surface hover:text-primary transition-colors">Refer A Friend</a>
+      <a href="#contact" class="text-on-surface hover:text-primary transition-colors">Contact</a>
+      <a href="#account" class="text-on-surface hover:text-primary transition-colors">Register / Login</a>
+    </nav>
+    <div class="pt-6 border-t border-surface-container-highest">
+      <span class="font-label-caps text-label-caps text-secondary tracking-widest">Connect</span>
+      <div class="flex gap-3 mt-3">
+        <a href="https://www.facebook.com/retechuk" aria-label="Facebook" class="text-primary-container hover:opacity-70 transition-opacity"><span class="material-symbols-outlined">facebook</span></a>
+        <a href="https://www.instagram.com/re_tech_uk/?hl=en" aria-label="Instagram" class="text-primary-container hover:opacity-70 transition-opacity"><span class="material-symbols-outlined">photo_camera</span></a>
+      </div>
+    </div>
+  </div>
+</aside>
+<script>
+  document.getElementById('drawer-open').addEventListener('click', function() {
+    document.getElementById('drawer').classList.remove('-translate-x-full');
+    document.getElementById('drawer').classList.add('translate-x-0');
+    var bd = document.getElementById('drawer-backdrop');
+    bd.classList.remove('opacity-0','invisible');
+    bd.classList.add('opacity-100','visible');
+  });
+</script>
+
+<main class="max-w-[1440px] mx-auto">
+<!-- HERO -->
+<section class="px-6 md:px-12 py-12 md:py-24 relative">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+    <div class="md:col-span-5 md:col-start-2 z-10 flex flex-col items-start gap-6 relative">
+      <div class="organic-circle top-[-50px] left-[-80px]"></div>
+      <span class="font-label-caps text-label-caps text-secondary tracking-widest">Everyday clothing for women</span>
+      <h1 class="font-display-hero text-display-hero text-primary">
+        Considered everyday <br/><span class="organic-underline">essentials</span>
+      </h1>
+      <p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+        Re Tech UK represents and inspires those who work with no boundaries. Quality knitwear, polo necks, cardigans and comfortable essentials — sizes 8 to 26.
+      </p>
+      <div class="flex flex-wrap items-center gap-6 mt-4">
+        <a class="bg-primary-container text-on-primary px-8 py-4 rounded-full font-label-caps text-label-caps hover:bg-primary transition-colors" href="#shop">SHOP THE COLLECTION</a>
+        <a class="font-headline-md text-headline-md text-primary-container underline decoration-outline-variant underline-offset-8 hover:text-primary transition-colors" href="#about">Our Story</a>
+      </div>
+    </div>
+    <div class="md:col-span-6 relative mt-12 md:mt-0">
+      <img alt="Woman wearing a soft purple knitted cardigan in a sunlit field" class="w-full h-auto aspect-[4/5] object-cover rounded-xl shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzYSb_ttOEpZoabqHxSqU4PlVuvagMd_1kPp4RdH7q13o2h4cLO2Eb_orKMi-geabCWAEiGp_S_amY8Zh57Fk1ZayBhxDF_2YUzk0ylgXE_fLkuV4dtEcd5iexvxoHhLgIzVYK7Rq1oC39wFES2bdeNVPqowNGQFRfFAuatvMGXNwCXX106L59Ro7XlJ47wpAgf7fBdedpOHzwHC4X0-zgq_NuTLfJS5YU6ONP9zNij0zHM2AffJ1FDHyYP7beqz74vfT51U85iw"/>
+      <div class="absolute inset-0 petal-blur-purple opacity-30 pointer-events-none rounded-xl"></div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTIONS (real product categories from retechuk.com) -->
+<section id="shop" class="px-6 md:px-12 py-12 relative">
+  <div class="organic-circle top-[10%] right-[5%] w-[400px] h-[400px]"></div>
+  <h2 class="font-headline-lg text-headline-lg text-center mb-4 text-primary">Shop the Collections</h2>
+  <p class="font-body-md text-body-md text-center text-on-surface-variant max-w-2xl mx-auto mb-16">Cosy knitwear, polo neck jumpers and cardigans designed for everyday wear.</p>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+    <a id="polos" class="group block relative overflow-hidden rounded-lg aspect-[3/4]" href="#polo-collection">
+      <img alt="Ribbed cotton polo neck top" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1NhGP-CG5P7M_-kMriaq0ssJKdMvLf4Aj_RoLq0RPmRXUXV0VFASdbQrZfHjkNKO2-Fj6NHIsCOnILvdXzwXtNSRU1Md-gCWx7SxH9W5JNqOiZ8wlDkeV2UzyD1Lh0sXa1WZzhwzBrxp4qrizvbU-LxK2q2OALpYdRaxZoWFkmUpaNmzj2ix9Apt0qfs8BvPxlgVzkAwCB5wl7nckoXuHwpx0my2HfXN5s0HpB8fisHj1v1CqyRh9JOBay9aezfGcEWNbeKPPhg"/>
+      <div class="absolute inset-0 bg-surface/20 group-hover:bg-surface/10 transition-colors"></div>
+      <div class="absolute bottom-0 w-full text-center pb-8 pt-12 bg-gradient-to-t from-surface to-transparent">
+        <span class="font-label-caps text-label-caps text-primary tracking-widest">Ribbed Cotton Polo Neck Tops</span>
+      </div>
+    </a>
+    <a id="cardigans" class="group block relative overflow-hidden rounded-lg aspect-[3/4] md:mt-12" href="#cardigan-collection">
+      <img alt="Long sleeve maxi cardigan in dusty pink" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsyE4RMnOuDf4Wn96Y0l3Jdp4T6zLcOFeZPG6XK7JvXAKG4uQSU8XmT-Zkc81rWcttAhd3uZjlVPfFnthQYxZukY8PcoKju1-8qpCC1wGlHCg1yqAe9jcvLTe-UQuY-f-UkqVt84-0fh6GiPVxJgH6QOiyJRfn8NpLYou7nFtPJco2WLO6irmxP-KndsENAZqUBqOLBof0-CQf-KcEPft3RycUYzMjRB1HUqiRMy8YEi9N_GkaO2DbdfVv2-goQkzLab4grUjIAw"/>
+      <div class="absolute inset-0 bg-surface/20 group-hover:bg-surface/10 transition-colors"></div>
+      <div class="absolute bottom-0 w-full text-center pb-8 pt-12 bg-gradient-to-t from-surface to-transparent">
+        <span class="font-label-caps text-label-caps text-primary tracking-widest">Long Sleeve Maxi Cardigan</span>
+      </div>
+    </a>
+    <a class="group block relative overflow-hidden rounded-lg aspect-[3/4]" href="#knits-collection">
+      <img alt="Light knits — V-neck longline knit jumper" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg8yrBJsC0uvdu9LwgzdBoCZvaN1lkcB77K3PSFHbFZUqY9M61KpniWO8K1ebZ-WvxjUc0-eke5Nz5VLOQf8a2-15bBBSOwFtyeYcGILfgv_vT3niNb8AewOoqybyuObByi_3Mr5ko03dY8BC_o00JTNS1r7xkUzx0JIh-cOl99GLGfXBghjrAUJeDilov7Q2yyUZ9VRFx7Rn2ujTQY74BXXl9m-Lp0JRF_cEin7bROf27iMT1ed0W3LhIe-fjnM4XhIyEHD_HoA"/>
+      <div class="absolute inset-0 bg-surface/20 group-hover:bg-surface/10 transition-colors"></div>
+      <div class="absolute bottom-0 w-full text-center pb-8 pt-12 bg-gradient-to-t from-surface to-transparent">
+        <span class="font-label-caps text-label-caps text-primary tracking-widest">Light Knits</span>
+      </div>
+    </a>
+    <a id="kids" class="group block relative overflow-hidden rounded-lg aspect-[3/4] md:mt-12" href="#kids-collection">
+      <img alt="Kids clothing — soft cotton tees" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz1_pBrczgL7m024tsRj_bhcU3ic3IwCv2BmqMDmKoBO-NiCYIBJfFbFN4LW5c2NUwb71-gsrvJSg9WVKklUJdMqeyraNr1C_vplfAEoajqRb8jSjjQjI1GJ0G1L2NUksHqImYE7YGdyyI2hpqe_HDyhbTdVZ-PxG3SZUboIt1hUt7O0BXZvzglRGLhwGb50KDhRJl9gJGqkJJXI_mNcdfgdOt0i3ZNl_LdOduv-iF68gnvI66THWl8NafCjhCP1NJG06hWryVrw"/>
+      <div class="absolute inset-0 bg-surface/20 group-hover:bg-surface/10 transition-colors"></div>
+      <div class="absolute bottom-0 w-full text-center pb-8 pt-12 bg-gradient-to-t from-surface to-transparent">
+        <span class="font-label-caps text-label-caps text-primary tracking-widest">Kids Clothing</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- BRAND STORY -->
+<section id="about" class="py-32 px-6 relative">
+  <div class="absolute inset-0 petal-blur-yellow opacity-40 rounded-full w-3/4 h-full mx-auto -z-10"></div>
+  <div class="max-w-3xl mx-auto text-center">
+    <span class="font-label-caps text-label-caps text-secondary tracking-widest">Our Story</span>
+    <p class="font-headline-lg text-headline-lg text-primary-container italic leading-relaxed mt-6">
+      Re Tech UK represents and inspires those who work with no boundaries.
+    </p>
+    <p class="font-body-lg text-body-lg text-on-surface-variant mt-8">
+      Quality everyday clothing for women who don&rsquo;t draw lines between work and life. Cosy knitwear, polo neck jumpers, cardigans, and comfortable essentials &mdash; thoughtfully made, sized 8 to 26, delivered free across the UK.
+    </p>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section class="py-8 border-y border-surface-container-highest my-12">
+  <div class="flex flex-wrap justify-center items-center gap-6 md:gap-12 font-label-caps text-label-caps text-on-surface-variant px-6">
+    <div class="flex items-center gap-2"><span class="material-symbols-outlined text-lg">local_shipping</span><span>Free UK Delivery</span></div>
+    <div class="w-1 h-1 bg-outline-variant rounded-full hidden md:block"></div>
+    <div class="flex items-center gap-2"><span class="material-symbols-outlined text-lg">sync</span><span>Free Returns</span></div>
+    <div class="w-1 h-1 bg-outline-variant rounded-full hidden md:block"></div>
+    <div class="flex items-center gap-2"><span class="material-symbols-outlined text-lg">star</span><span>Check Out Our Reviews On Trustpilot</span></div>
+    <div class="w-1 h-1 bg-outline-variant rounded-full hidden md:block"></div>
+    <div class="flex items-center gap-2"><span class="material-symbols-outlined text-lg">straighten</span><span>Sizes 8&ndash;26</span></div>
+  </div>
+</section>
+
+<!-- NEW ARRIVALS -->
+<section class="px-6 md:px-12 py-12 mb-section-gap">
+  <div class="flex justify-between items-end mb-12">
+    <h2 class="font-headline-lg text-headline-lg text-primary">New Arrivals</h2>
+    <a class="font-label-caps text-label-caps text-primary-container hover:text-primary transition-colors border-b border-primary-container pb-1" href="#shop">SEE MORE</a>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-16">
+    <div class="group cursor-pointer">
+      <div class="aspect-[3/4] overflow-hidden rounded bg-surface-container-low mb-6">
+        <img alt="Ribbed cotton polo neck top in cream" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4fUQP8fOugtvKneban5Aj8jnIaSBfxZe3Pn0nbCyOL3GhOlhX7tdXT9RcLK9pHc6FNJcDY3mU0KZpqgHYitOxnfW_g9OkFQR-SzUam9I-EGTBeS9ZMsX_d4ly_eOjnBu3Wu10puMKG8xmjyvyKlVm-6pMg8bvMhwBQN5_6vhYvS4hPJK9_v4Bk0-4uDx350ZLm-RFanSM5WK-aajx-8049ZWdzRm5qyZevGAcCpBdUBvsbfh9WLRoauRQfqoPOjRpc2opLHEjJw"/>
+      </div>
+      <div class="text-center space-y-2">
+        <h3 class="font-body-md text-body-md text-on-surface">Ribbed Cotton Polo Neck Top</h3>
+        <p class="font-body-md text-body-md text-outline">From &pound;28</p>
+      </div>
+    </div>
+    <div class="group cursor-pointer">
+      <div class="aspect-[3/4] overflow-hidden rounded bg-surface-container-low mb-6">
+        <img alt="Long sleeve maxi cardigan in soft aubergine" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR5w_87oxMjgCyzn0mtmPRea0eZnr2oUBedMboNnrTdAuVYU_GokMdTnREJ2g4rSEjXIYBGc_usgrTAZrpO0hqnqm8YMaX7sbgotZlrSqByNVfYT17swyXVWG8AIELGPnVxkYG1pnP4ocudMeb5-rmZmbJiiNTYkzFYouaXkRu565XIjnSxreZ5UYGNo8J7kjpFM7xnxqqLgGfW7Q8VvFUL86fJ---IAlqaPgUBsdrybHa4opJRH72cHQnAfGY32M3Gq1FRPNvBg"/>
+      </div>
+      <div class="text-center space-y-2">
+        <h3 class="font-body-md text-body-md text-on-surface">Long Sleeve Maxi Cardigan</h3>
+        <p class="font-body-md text-body-md text-outline">From &pound;48</p>
+      </div>
+    </div>
+    <div class="group cursor-pointer">
+      <div class="aspect-[3/4] overflow-hidden rounded bg-surface-container-low mb-6">
+        <img alt="V-neck longline knit jumper in warm taupe" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdtMEmJ3Fr17BIPq2L7AQquzfw6L1DuQmyTOQeR9mhwtnlQNMVxhq2Y8zvbW9CbQQxiuu-BQlVNO7_SlJx4kYMubYQESP3ABajiXsF4jFn2EyNqXDNeJ-8ugn6rq7AgKrGdG8xMiqW2zpOvL72F9Tmo_XKzS_-QhC_Lswgnnfvgd9-pX-tppE00ubmIxoz4Vp7Rd2X91ekp2QOMCjVjybt1tuLFiRO-Jgd1R4QES3t1a-ew8oI_jnyPWinh3gkrKGen9jKjFXM3A"/>
+      </div>
+      <div class="text-center space-y-2">
+        <h3 class="font-body-md text-body-md text-on-surface">V-Neck Longline Knit Jumper</h3>
+        <p class="font-body-md text-body-md text-outline">From &pound;42</p>
+      </div>
+    </div>
+    <div class="group cursor-pointer">
+      <div class="aspect-[3/4] overflow-hidden rounded bg-surface-container-low mb-6">
+        <img alt="Spring collection t-shirt in soft heather" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsYzyFbd9kUbmdWTRn6fOVh4Xr9USY94c22eiFSrvwWOTIr94z--DmCtgdguoGY5MCPC-FS6x_3eSHrLsqDymqkEx3dV2He-3AKdSRd4slf1Rvo1rB0zBvRBaJVsmXMjDgYLPJZUwhtmNXa6tN9Xwbt2rEadvfQHVyMRukdVDb5NlmTXXQeG1_Lp_Yd6gAuM7h9E_i0yBopN1pAN_nCmFHa5g2bNxtK1YakYIs0YNqXux3P4Nz4GYtfF_FPsdF2gusPooRLsrIwQ"/>
+      </div>
+      <div class="text-center space-y-2">
+        <h3 class="font-body-md text-body-md text-on-surface">Spring collection t-shirt</h3>
+        <p class="font-body-md text-body-md text-outline">From &pound;22</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDITORIAL LOOKBOOK -->
+<section class="mb-section-gap relative">
+  <div class="w-full h-[716px] md:h-[870px] relative overflow-hidden">
+    <img alt="Woman in soft layered knitwear standing in a sunlit field, editorial style" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJaEQW8rOK9Wmjvi92n0VyeMr3WYGLF2PXtAA577SyjmOpshqnga-pXwB4gYBIW9FR22obj4OJgc2OYr_Y1DguDMGABqb9bjAl1F2hGMJCStPEqevkP_3d1IXSutk2eq7d0eKfInkilp08tWJ6wk7H0N-FVww1afdj9X2j3UsEU5avGB2wjH7f3tn6e7OqKTNPgU3gz87F7Qz7wa1QtcaHYfoI_gWf3lbFuNHyLcVoWodPbBV7eDZgujak8X80Fhi3mVs7r-RVvg"/>
+    <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-80"></div>
+    <div class="absolute bottom-0 left-0 w-full p-6 md:p-16 flex justify-center">
+      <div class="bg-surface/80 backdrop-blur-md p-8 md:p-12 max-w-2xl text-center rounded-xl border border-surface-container-highest shadow-[0_20px_40px_rgba(99,46,58,0.05)]">
+        <span class="font-label-caps text-label-caps text-secondary tracking-widest">Lookbook</span>
+        <p class="font-headline-md text-headline-md text-primary italic leading-relaxed mt-4">
+          Quality knitwear, polo necks, and cardigans &mdash; for women who work with no boundaries.
+        </p>
+        <a href="#shop" class="inline-block mt-6 font-label-caps text-label-caps text-primary-container hover:text-primary border-b border-primary-container pb-1 transition-colors">SEE MORE</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="px-6 md:px-12 py-24 mb-section-gap relative">
+  <div class="absolute inset-0 petal-blur-pink opacity-50 rounded-full w-3/4 h-full mx-auto -z-10"></div>
+  <div class="max-w-2xl mx-auto text-center">
+    <h2 class="font-headline-lg text-headline-lg text-primary">Sign up &amp; get 10% OFF your first purchase today</h2>
+    <p class="font-body-lg text-body-lg text-on-surface-variant mt-6">
+      Be the first to receive latest collection drops &amp; offers.
+    </p>
+    <form class="mt-10 flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+      <input type="email" required placeholder="Your email address" aria-label="Email address" class="flex-1 px-5 py-3 bg-transparent border border-outline-variant rounded-full font-body-md text-body-md text-on-surface placeholder:text-outline focus:border-primary focus:outline-none transition-colors"/>
+      <button type="submit" class="bg-primary-container text-on-primary px-8 py-3 rounded-full font-label-caps text-label-caps tracking-widest hover:bg-primary transition-colors">SIGN UP</button>
+    </form>
+  </div>
+</section>
+
+<!-- REWARDS / REFER A FRIEND -->
+<section class="px-6 md:px-12 py-12 mb-section-gap">
+  <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+    <div id="rewards" class="bg-surface-container-low rounded-xl p-10 relative overflow-hidden">
+      <div class="organic-circle top-[-100px] right-[-100px] w-[200px] h-[200px]"></div>
+      <span class="font-label-caps text-label-caps text-secondary tracking-widest">Rewards</span>
+      <h3 class="font-headline-md text-headline-md text-primary mt-3">Earn points on every order</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant mt-4">Join Re Tech UK Rewards and earn points on every purchase, redeemable against future orders.</p>
+      <a href="#rewards-join" class="inline-block mt-6 font-label-caps text-label-caps text-primary-container hover:text-primary border-b border-primary-container pb-1 transition-colors">JOIN REWARDS</a>
+    </div>
+    <div id="refer" class="bg-surface-container-low rounded-xl p-10 relative overflow-hidden">
+      <div class="organic-circle top-[-100px] left-[-100px] w-[200px] h-[200px]"></div>
+      <span class="font-label-caps text-label-caps text-secondary tracking-widest">Refer A Friend</span>
+      <h3 class="font-headline-md text-headline-md text-primary mt-3">Give 10%, get 10%</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant mt-4">Share Re Tech UK with a friend &mdash; you both get 10% off your next order when they shop.</p>
+      <a href="#refer-form" class="inline-block mt-6 font-label-caps text-label-caps text-primary-container hover:text-primary border-b border-primary-container pb-1 transition-colors">REFER A FRIEND</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-surface-container-low font-serif border-t border-surface-container-highest mt-20">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 w-full px-6 py-16 md:px-12 max-w-[1440px] mx-auto">
+    <div class="col-span-1 flex flex-col">
+      <div class="text-lg font-bold tracking-tighter text-primary-container font-serif">RE TECH UK</div>
+      <p class="font-body-md text-body-md text-on-surface-variant mt-4 max-w-xs">Everyday clothing for women. Sizes 8&ndash;26. Free UK delivery &amp; returns.</p>
+      <div class="flex gap-3 mt-6">
+        <a href="https://www.facebook.com/retechuk" aria-label="Facebook" class="text-primary-container hover:opacity-70 transition-opacity"><span class="material-symbols-outlined">facebook</span></a>
+        <a href="https://www.instagram.com/re_tech_uk/?hl=en" aria-label="Instagram" class="text-primary-container hover:opacity-70 transition-opacity"><span class="material-symbols-outlined">photo_camera</span></a>
+      </div>
+    </div>
+    <div class="col-span-1 md:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-8">
+      <div class="flex flex-col space-y-3">
+        <span class="font-label-caps text-label-caps text-primary tracking-widest">Shop</span>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#polos">Ribbed Cotton Polo Neck Tops</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#cardigans">Long Sleeve Maxi Cardigan</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#kids">Kids Clothing</a>
+      </div>
+      <div class="flex flex-col space-y-3">
+        <span class="font-label-caps text-label-caps text-primary tracking-widest">Help</span>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#contact">Contact</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#about">About Us</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#rewards">Rewards</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#refer">Refer A Friend</a>
+      </div>
+      <div class="flex flex-col space-y-3">
+        <span class="font-label-caps text-label-caps text-primary tracking-widest">Legal</span>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="/policies/terms-of-service">Terms of Service</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="/policies/refund-policy">Refund policy</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="/policies/shipping-policy">Shipping Policy</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="/policies/returns-policy">Returns Policy</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="/policies/privacy-policy">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="col-span-1 flex flex-col items-start md:items-end gap-4">
+      <span class="font-label-caps text-label-caps text-primary tracking-widest">We accept</span>
+      <p class="font-body-md text-body-md text-on-surface-variant text-left md:text-right">American Express &middot; Apple Pay &middot; Diners Club &middot; Discover &middot; Google Pay &middot; Maestro &middot; Mastercard &middot; PayPal &middot; Shop Pay &middot; Union Pay &middot; Visa</p>
+    </div>
+  </div>
+  <div class="border-t border-surface-container-highest">
+    <div class="flex flex-col md:flex-row justify-between items-center px-6 md:px-12 py-6 max-w-[1440px] mx-auto">
+      <span class="font-body-md text-body-md text-on-surface-variant">&copy; 2026 Re Tech UK</span>
+      <span class="font-body-md text-body-md text-on-surface-variant mt-2 md:mt-0">Check Out Our Reviews On Trustpilot</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

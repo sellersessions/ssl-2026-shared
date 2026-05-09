@@ -1,0 +1,457 @@
+<h2 class="sr-only">Template 08: Card stack reveal. Six cards drawn one at a time from a stacked deck, each flipping to reveal phase-coloured slot content.</h2>
+<style>
+:root{
+  --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
+  --font-serif:'Source Serif Pro',Georgia,serif;
+  --bg-page:#06080F;
+  --bg-0:#030C1B;
+  --bg-1:#0A1228;
+  --ink-0:#F2EEF8;
+  --ink-1:#C8B6F0;
+  --ink-2:#8B92A8;
+  --ink-3:#5A627A;
+  --violet:#9D4EDD;
+  --teal:#5DCAA5;
+  --amber:#EF9F27;
+  --pink:#FF6BB4;
+  --gold:#C99554;
+  --r-wrap:12px;
+  --r-card:3px;
+  --stroke-hair:0.5px;
+  --stroke-bold:1.5px;
+  --border-soft:rgba(157,78,221,0.18);
+  --border-mid:rgba(157,78,221,0.35);
+  --card-fill:rgba(255,255,255,0.02);
+  --card-stroke:rgba(255,255,255,0.08);
+  --divider:rgba(255,255,255,0.06);
+}
+
+.cs-frame{width:100%;max-width:1080px;font-family:var(--font-sans);color:var(--ink-0)}
+.cs-wrap{
+  background:linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 100%);
+  border-radius:var(--r-wrap);
+  padding:28px 28px 18px;
+  position:relative;
+  overflow:hidden;
+  border:var(--stroke-hair) solid var(--border-soft);
+}
+.cs-wrap::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 110%, rgba(157,78,221,0.10), transparent 60%);
+  pointer-events:none;
+}
+.cs-wrap::after{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(157,78,221,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(157,78,221,0.025) 1px,transparent 1px);
+  background-size:24px 24px;
+  pointer-events:none;
+}
+
+.cs-spec{display:flex;align-items:center;gap:18px;margin-bottom:18px;position:relative;z-index:1}
+.cs-spec-id{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:2px;
+  color:var(--ink-2);text-transform:uppercase;
+  padding:3px 8px;border:var(--stroke-hair) solid var(--border-mid);border-radius:2px;
+}
+.cs-spec-name{font-size:20px;font-weight:600;letter-spacing:-0.2px;color:var(--ink-0);margin:0}
+.cs-spec-pat{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;
+  color:var(--gold);text-transform:uppercase;margin-left:auto;
+  display:flex;align-items:center;gap:8px;
+}
+.cs-spec-pat::before{
+  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 6px var(--gold);
+  animation:csPulse 2s ease-in-out infinite;
+}
+@keyframes csPulse{0%,100%{box-shadow:0 0 6px var(--gold)}50%{box-shadow:0 0 12px var(--gold)}}
+
+.cs-canvas{
+  position:relative;
+  background:var(--card-fill);
+  border-radius:var(--r-card);
+  border:var(--stroke-hair) solid var(--card-stroke);
+  z-index:1;
+  height:440px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:1400px;
+}
+
+.cs-deck-stack{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  z-index:1;
+}
+.cs-stack-layer{
+  position:absolute;
+  width:240px;height:340px;
+  border-radius:var(--r-card);
+  background:linear-gradient(180deg,var(--bg-0) 0%,#0A0F22 100%);
+  border:var(--stroke-hair) solid var(--card-stroke);
+  transform-origin:center;
+}
+.cs-stack-layer:nth-child(1){top:-170px;left:-120px;transform:translate(8px,8px) rotate(0.5deg);opacity:0.5}
+.cs-stack-layer:nth-child(2){top:-170px;left:-120px;transform:translate(4px,4px) rotate(-0.3deg);opacity:0.7}
+
+.cs-card-area{
+  position:relative;
+  width:240px;
+  height:340px;
+  z-index:2;
+  perspective:1400px;
+  transform-style:preserve-3d;
+}
+
+.cs-card{
+  position:absolute;
+  inset:0;
+  transform-style:preserve-3d;
+  transition:transform .8s cubic-bezier(0.34,1.2,0.64,1);
+  transform:rotateY(0deg);
+}
+.cs-card.flipped{transform:rotateY(180deg)}
+
+.cs-face{
+  position:absolute;
+  inset:0;
+  border-radius:var(--r-card);
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+  display:flex;
+  flex-direction:column;
+  padding:18px;
+  border:var(--stroke-hair) solid var(--card-stroke);
+}
+
+/* Card back */
+.cs-back{
+  background:linear-gradient(180deg,#0A0F22 0%,var(--bg-0) 100%);
+  align-items:center;
+  justify-content:center;
+}
+.cs-back-frame{
+  position:absolute;
+  inset:14px;
+  border:var(--stroke-hair) solid var(--border-mid);
+  border-radius:2px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.cs-back-mark{
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:2px;
+  color:var(--ink-3);
+  text-transform:uppercase;
+  text-align:center;
+}
+.cs-back-mark span{
+  display:block;color:var(--ink-1);font-size:14px;letter-spacing:3px;margin-top:6px;
+}
+
+/* Card front */
+.cs-front{
+  transform:rotateY(180deg);
+  background:linear-gradient(180deg,var(--bg-1) 0%,var(--bg-0) 100%);
+  border-top:var(--stroke-bold) solid var(--accent,var(--violet));
+  justify-content:space-between;
+}
+.cs-front-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:1.5px;
+  color:var(--ink-3);
+  text-transform:uppercase;
+}
+.cs-front-num{color:var(--accent,var(--violet));font-weight:600}
+.cs-front-body{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:14px;
+  padding:8px 0;
+}
+.cs-glyph{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.02);
+  border:var(--stroke-hair) solid var(--border-mid);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--accent,var(--violet));
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:1.5px;
+}
+.cs-glyph-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--accent,var(--violet));
+  box-shadow:0 0 12px var(--accent,var(--violet));
+}
+.cs-front-title{
+  font-size:18px;
+  font-weight:600;
+  color:var(--ink-0);
+  letter-spacing:-0.2px;
+  line-height:1.2;
+  margin:0;
+}
+.cs-front-stat{
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:1px;
+  color:var(--ink-2);
+}
+.cs-front-foot{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:1.5px;
+  color:var(--ink-3);
+  text-transform:uppercase;
+  border-top:var(--stroke-hair) solid var(--card-stroke);
+  padding-top:10px;
+}
+.cs-front-tag{color:var(--accent,var(--violet))}
+
+/* Drawn cards list at bottom */
+.cs-drawn{
+  position:absolute;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:6px;
+  z-index:1;
+}
+.cs-drawn-pip{
+  width:18px;height:24px;
+  border:var(--stroke-hair) solid var(--card-stroke);
+  border-radius:2px;
+  font-family:var(--font-mono);
+  font-size:8px;
+  color:var(--ink-3);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:all .3s;
+}
+.cs-drawn-pip.done{
+  border-top:var(--stroke-bold) solid var(--accent-pip,var(--ink-3));
+  color:var(--ink-1);
+  background:rgba(255,255,255,0.02);
+}
+.cs-drawn-pip.active{
+  border-color:var(--accent-pip);
+  color:var(--ink-0);
+  box-shadow:0 0 0 1px var(--accent-pip);
+}
+
+.cs-foot{
+  display:flex;gap:10px;align-items:center;
+  margin-top:14px;padding-top:14px;
+  border-top:var(--stroke-hair) solid var(--divider);
+  position:relative;z-index:1;
+}
+.cs-btn{
+  background:rgba(255,255,255,0.02);
+  border:var(--stroke-hair) solid var(--border-mid);
+  color:var(--ink-1);
+  padding:7px 14px;
+  border-radius:2px;
+  cursor:pointer;
+  font-size:11px;
+  font-family:var(--font-mono);
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  transition:border-color .2s, color .2s, background .2s;
+}
+.cs-btn:hover{border-color:var(--violet);color:var(--ink-0);background:rgba(157,78,221,0.08)}
+.cs-cap{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;
+  color:var(--ink-3);text-transform:uppercase;
+  padding:3px 8px;border:var(--stroke-hair) solid var(--border-mid);border-radius:2px;
+}
+.cs-stat{margin-left:auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-3);letter-spacing:1.2px;text-transform:uppercase}
+.cs-stat-v{color:var(--ink-1);margin-left:6px}
+</style>
+
+<div class="cs-frame">
+<div class="cs-wrap">
+
+<header class="cs-spec">
+<span class="cs-spec-id">TEMPLATE 08</span>
+<h1 class="cs-spec-name">Card stack</h1>
+<span class="cs-spec-pat">Cap: 6 cards max, sequenced reveal</span>
+</header>
+
+<div class="cs-canvas" id="cs-canvas">
+
+<!-- DECK STACK SLOT -->
+<div class="cs-deck-stack">
+<div class="cs-stack-layer"></div>
+<div class="cs-stack-layer"></div>
+</div>
+
+<!-- ACTIVE CARD SLOT -->
+<div class="cs-card-area">
+<div class="cs-card" id="cs-card">
+<div class="cs-face cs-back">
+<div class="cs-back-frame">
+<div class="cs-back-mark">Template<span>08</span></div>
+</div>
+</div>
+<div class="cs-face cs-front" id="cs-front" style="--accent:var(--violet)">
+<div class="cs-front-head">
+<span>Card</span>
+<span class="cs-front-num" id="cs-num">01 of 06</span>
+</div>
+<div class="cs-front-body">
+<div class="cs-glyph"><div class="cs-glyph-dot"></div></div>
+<h2 class="cs-front-title" id="cs-title">{slot}</h2>
+<div class="cs-front-stat" id="cs-stat">{stat}</div>
+</div>
+<div class="cs-front-foot">
+<span class="cs-front-tag" id="cs-tag">{phase}</span>
+<span id="cs-side">draw</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- DRAWN PIPS SLOT -->
+<div class="cs-drawn" id="cs-drawn"></div>
+
+</div>
+
+<div class="cs-foot">
+<span class="cs-cap">N = 6</span>
+<button class="cs-btn" onclick="csPlay()">Draw deck</button>
+<button class="cs-btn" onclick="csStep()">Next</button>
+<span class="cs-stat">Card<span class="cs-stat-v" id="cs-counter">01 of 06</span></span>
+</div>
+
+</div>
+</div>
+
+<script>
+(function(){
+// === HARD CONSTRAINT ===
+const N=6;
+// =======================
+
+// CARD CONTENT SLOTS for 6 cards
+const cards=[
+  {title:'{slot 1}',stat:'{stat}',phase:'SETUP',accent:'var(--violet)',accentHex:'#9D4EDD'},
+  {title:'{slot 2}',stat:'{stat}',phase:'SETUP',accent:'var(--violet)',accentHex:'#9D4EDD'},
+  {title:'{slot 3}',stat:'{stat}',phase:'CAPTURE',accent:'var(--teal)',accentHex:'#5DCAA5'},
+  {title:'{slot 4}',stat:'{stat}',phase:'BUILD',accent:'var(--amber)',accentHex:'#EF9F27'},
+  {title:'{slot 5}',stat:'{stat}',phase:'BUILD',accent:'var(--amber)',accentHex:'#EF9F27'},
+  {title:'{slot 6}',stat:'{stat}',phase:'QUALITY',accent:'var(--pink)',accentHex:'#FF6BB4'}
+];
+
+const card=document.getElementById('cs-card');
+const front=document.getElementById('cs-front');
+const numEl=document.getElementById('cs-num');
+const titleEl=document.getElementById('cs-title');
+const statEl=document.getElementById('cs-stat');
+const tagEl=document.getElementById('cs-tag');
+const drawnEl=document.getElementById('cs-drawn');
+const counter=document.getElementById('cs-counter');
+
+// Build pips
+function buildPips(){
+  drawnEl.innerHTML='';
+  for(let i=0;i<N;i++){
+    const pip=document.createElement('div');
+    pip.className='cs-drawn-pip';
+    pip.textContent=String(i+1).padStart(2,'0');
+    pip.style.setProperty('--accent-pip',cards[i].accentHex);
+    drawnEl.appendChild(pip);
+  }
+}
+
+let cur=-1,timer=null,flipping=false;
+
+function showCard(n){
+  // Step 1: flip card back
+  card.classList.remove('flipped');
+  flipping=true;
+  
+  setTimeout(()=>{
+    // Step 2: while back-facing, swap content
+    const c=cards[n];
+    front.style.setProperty('--accent',c.accent);
+    numEl.textContent=String(n+1).padStart(2,'0')+' of '+String(N).padStart(2,'0');
+    titleEl.textContent=c.title;
+    statEl.textContent=c.stat;
+    tagEl.textContent=c.phase;
+    
+    // Update pips
+    drawnEl.querySelectorAll('.cs-drawn-pip').forEach((pip,i)=>{
+      pip.classList.remove('done','active');
+      if(i<n)pip.classList.add('done');
+      else if(i===n)pip.classList.add('active');
+    });
+    
+    counter.textContent=String(n+1).padStart(2,'0')+' of '+String(N).padStart(2,'0');
+    cur=n;
+    
+    // Step 3: wait one paint frame, then flip to reveal
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        card.classList.add('flipped');
+        setTimeout(()=>{flipping=false},800);
+      });
+    });
+  },n===0?50:400);
+}
+
+function reset(){
+  cur=-1;
+  card.classList.remove('flipped');
+  drawnEl.querySelectorAll('.cs-drawn-pip').forEach(p=>p.classList.remove('done','active'));
+}
+
+window.csStep=function(){
+  if(flipping)return;
+  const n=(cur+1)%N;
+  if(n===0){reset();setTimeout(()=>showCard(0),300)}
+  else showCard(n);
+};
+
+window.csPlay=function(){
+  clearInterval(timer);
+  reset();
+  setTimeout(()=>showCard(0),200);
+  let i=0;
+  timer=setInterval(()=>{
+    i++;
+    if(i>=N){clearInterval(timer);return}
+    showCard(i);
+  },2000);
+};
+
+buildPips();
+setTimeout(()=>{showCard(0);setTimeout(csPlay,2200)},300);
+})();
+</script>

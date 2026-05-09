@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#262626",
+                        "on-tertiary-container": "#555757",
+                        "surface-tint": "#ff9064",
+                        "surface-container-high": "#201f1f",
+                        "on-background": "#ffffff",
+                        "on-secondary-fixed": "#430097",
+                        "on-secondary": "#2b0065",
+                        "tertiary": "#f9f9f9",
+                        "surface-dim": "#0e0e0e",
+                        "background": "#0e0e0e",
+                        "surface-container-highest": "#262626",
+                        "error": "#ff716c",
+                        "outline": "#777575",
+                        "surface": "#0e0e0e",
+                        "tertiary-dim": "#ebebeb",
+                        "outline-variant": "#494847",
+                        "error-container": "#9f0519",
+                        "secondary-container": "#6001d1",
+                        "inverse-primary": "#a83a00",
+                        "tertiary-fixed": "#ffffff",
+                        "surface-bright": "#2c2c2c",
+                        "on-primary": "#571a00",
+                        "on-error-container": "#ffa8a3",
+                        "error-dim": "#d7383b",
+                        "primary-container": "#ff7941",
+                        "surface-container-lowest": "#000000",
+                        "primary-fixed": "#ff7941",
+                        "primary-fixed-dim": "#ff5e07",
+                        "on-primary-fixed-variant": "#531900",
+                        "on-primary-container": "#431200",
+                        "tertiary-container": "#ebebeb",
+                        "inverse-on-surface": "#565554",
+                        "on-primary-fixed": "#000000",
+                        "secondary-fixed-dim": "#d0b8ff",
+                        "on-secondary-fixed-variant": "#6514d6",
+                        "tertiary-fixed-dim": "#f0f1f1",
+                        "surface-container": "#1a1919",
+                        "surface-container-low": "#131313",
+                        "on-tertiary": "#5e5f60",
+                        "on-surface-variant": "#adaaaa",
+                        "on-secondary-container": "#e1d0ff",
+                        "on-tertiary-fixed": "#4f5051",
+                        "inverse-surface": "#fcf8f8",
+                        "on-tertiary-fixed-variant": "#6c6d6e",
+                        "secondary-dim": "#8a4cfc",
+                        "on-surface": "#ffffff",
+                        "on-error": "#490006",
+                        "primary": "#ff9064",
+                        "secondary": "#af88ff",
+                        "primary-dim": "#ff7439",
+                        "secondary-fixed": "#dcc9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0e0e0e;
+            color: #ffffff;
+            font-family: 'Manrope', sans-serif;
+        }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .signature-gradient {
+            background: linear-gradient(to right, #ff9064, #af88ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .signature-gradient-bg {
+            background: linear-gradient(to right, #ff9064, #af88ff);
+        }
+        .glass-card {
+            background: rgba(14, 14, 14, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(73, 72, 71, 0.15);
+        }
+        .data-glow {
+            filter: drop-shadow(0 0 12px rgba(255, 144, 100, 0.3));
+        }
+    </style>
+</head>
+<body class="bg-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0e0e0e]/60 backdrop-blur-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)]">
+<div class="flex justify-between items-center h-20 px-12 w-full mx-auto font-['Space_Grotesk'] tracking-tight">
+<div class="text-2xl font-bold bg-gradient-to-r from-[#ff9064] to-[#af88ff] bg-clip-text text-transparent">
+                Databrill Core
+            </div>
+<div class="hidden md:flex space-x-8">
+<a class="text-gray-400 font-medium hover:text-white transition-colors duration-300" href="#">Platform</a>
+<a class="text-gray-400 font-medium hover:text-white transition-colors duration-300" href="#">Solutions</a>
+<a class="text-gray-400 font-medium hover:text-white transition-colors duration-300" href="#">Resources</a>
+<a class="text-gray-400 font-medium hover:text-white transition-colors duration-300" href="#">Pricing</a>
+</div>
+<div class="flex items-center space-x-6">
+<button class="text-gray-400 font-medium hover:text-white transition-colors duration-300">Log In</button>
+<button class="bg-primary-container px-6 py-2 rounded-full text-on-primary-fixed font-bold scale-95 transition-transform hover:scale-100">
+                    Get Started
+                </button>
+</div>
+</div>
+</nav>
+<!-- Hero Content -->
+<main class="pt-32 pb-20 px-12 max-w-7xl mx-auto">
+<header class="mb-24 flex flex-col items-start gap-4">
+<span class="text-primary font-headline tracking-widest text-sm font-bold uppercase">Design Systems v1.0</span>
+<h1 class="text-7xl font-headline font-bold tracking-tighter leading-none mb-4">
+                Typographic Identity <br/> <span class="signature-gradient">Exploration</span>
+</h1>
+<p class="text-on-surface-variant max-w-2xl text-lg leading-relaxed font-body">
+                Analyzing the visual hierarchy and technical precision of Databrill Core through diverse typographic lenses. From brutalist architecture to minimalist code.
+            </p>
+</header>
+<!-- Bento Grid of Variations -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- 01 Weight Contrast -->
+<div class="glass-card p-12 rounded-xl col-span-1 lg:col-span-2 group hover:bg-[#131313] transition-all duration-500">
+<div class="flex flex-col h-full">
+<div class="flex justify-between items-start mb-16">
+<span class="text-xs font-headline tracking-[0.3em] text-on-surface-variant uppercase">01. WEIGHT CONTRAST</span>
+<span class="material-symbols-outlined text-primary">text_fields</span>
+</div>
+<div class="flex-grow flex items-center justify-center py-12">
+<div class="text-6xl md:text-8xl font-headline tracking-tighter">
+<span class="font-bold">Databrill</span><span class="font-extralight text-on-surface-variant">Core</span>
+</div>
+</div>
+<div class="mt-8">
+<h3 class="font-headline text-xl mb-2">The Dynamic Balance</h3>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed">
+                            Juxtaposing maximum structural weight with minimalist lightness to emphasize the transition from data density to operational clarity.
+                        </p>
+</div>
+</div>
+</div>
+<!-- 02 Tracking & Spacing -->
+<div class="glass-card p-12 rounded-xl col-span-1 group hover:bg-[#131313] transition-all duration-500">
+<div class="flex flex-col h-full">
+<div class="flex justify-between items-start mb-16">
+<span class="text-xs font-headline tracking-[0.3em] text-on-surface-variant uppercase">02. TRACKING &amp; SPACING</span>
+<span class="material-symbols-outlined text-secondary">space_bar</span>
+</div>
+<div class="flex-grow flex items-center justify-center">
+<div class="text-7xl font-headline tracking-[1.5em] signature-gradient pl-10">
+                            DBC
+                        </div>
+</div>
+<div class="mt-8">
+<h3 class="font-headline text-xl mb-2">Expansion Theory</h3>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed">
+                            Utilizing extreme horizontal breathing room to evoke a sense of premium high-end luxury and vast digital potential.
+                        </p>
+</div>
+</div>
+</div>
+<!-- 03 Stacked & Justified -->
+<div class="glass-card p-12 rounded-xl col-span-1 group hover:bg-[#131313] transition-all duration-500">
+<div class="flex flex-col h-full">
+<div class="flex justify-between items-start mb-16">
+<span class="text-xs font-headline tracking-[0.3em] text-on-surface-variant uppercase">03. STACKED &amp; JUSTIFIED</span>
+<span class="material-symbols-outlined text-primary">view_stream</span>
+</div>
+<div class="flex-grow flex flex-col items-center justify-center leading-[0.8] font-headline font-black italic">
+<div class="text-5xl tracking-widest text-white">DATABRILL</div>
+<div class="text-5xl tracking-[0.15em] signature-gradient">CORE</div>
+</div>
+<div class="mt-8">
+<h3 class="font-headline text-xl mb-2">Architectural Foundation</h3>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed">
+                            A brutalist approach that treats letterforms as building blocks, creating a sense of unshakeable technical stability.
+                        </p>
+</div>
+</div>
+</div>
+<!-- 04 The Monogram -->
+<div class="glass-card p-12 rounded-xl col-span-1 group hover:bg-[#131313] transition-all duration-500">
+<div class="flex flex-col h-full">
+<div class="flex justify-between items-start mb-16">
+<span class="text-xs font-headline tracking-[0.3em] text-on-surface-variant uppercase">04. THE MONOGRAM</span>
+<span class="material-symbols-outlined text-secondary">token</span>
+</div>
+<div class="flex-grow flex items-center justify-center relative">
+<div class="relative flex items-center justify-center">
+<div class="text-9xl font-headline font-bold text-white opacity-20 absolute -translate-x-4">D</div>
+<div class="text-9xl font-headline font-bold signature-gradient translate-x-4">B</div>
+<div class="absolute text-3xl font-bold tracking-tighter mix-blend-difference">DATABRILL</div>
+</div>
+</div>
+<div class="mt-8">
+<h3 class="font-headline text-xl mb-2">Core Symbiosis</h3>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed">
+                            Interlocking initials forming a singular mark that represents the integrated nature of our core processing engine.
+                        </p>
+</div>
+</div>
+</div>
+<!-- 05 Lowercase Technical -->
+<div class="glass-card p-12 rounded-xl col-span-1 group hover:bg-[#131313] transition-all duration-500">
+<div class="flex flex-col h-full">
+<div class="flex justify-between items-start mb-16">
+<span class="text-xs font-headline tracking-[0.3em] text-on-surface-variant uppercase">05. LOWERCASE TECHNICAL</span>
+<span class="material-symbols-outlined text-primary">code</span>
+</div>
+<div class="flex-grow flex flex-col items-center justify-center">
+<div class="font-mono text-4xl tracking-tight text-white mb-2">
+                            databrill_core<span class="text-primary animate-pulse">|</span>
+</div>
+<div class="h-1 w-32 signature-gradient-bg rounded-full"></div>
+</div>
+<div class="mt-8">
+<h3 class="font-headline text-xl mb-2">The Logic Layer</h3>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed">
+                            A developer-first aesthetic that mirrors syntax and command-line interfaces, signaling raw power and transparency.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Decorative Section -->
+<section class="mt-32 p-16 rounded-xl overflow-hidden relative surface-container-low border border-outline-variant/10">
+<div class="relative z-10 flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-1/2">
+<h2 class="text-4xl font-headline font-bold mb-6">Beyond Typography</h2>
+<p class="text-on-surface-variant font-body mb-8 leading-relaxed">
+                        Every curve of a character, every pixel of spacing is a deliberate choice. Our typographic identity isn't just a label—it's the voice of the Luminescent Void.
+                    </p>
+<button class="px-8 py-3 rounded-full border border-outline-variant/30 font-headline font-medium hover:bg-surface-bright transition-all">
+                        View Brand Guidelines
+                    </button>
+</div>
+<div class="md:w-1/2 grid grid-cols-2 gap-4">
+<img class="rounded-xl grayscale hover:grayscale-0 transition-all duration-700 opacity-40" data-alt="Abstract macro shot of computer motherboard components with deep shadows and orange glowing fiber optic cables" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN6dpnHgrivloTjN2v-sCPpjhMKE5W0YoVJFLP89XYrGjdaBoxMUkq8FnfYBI-Wzy-hdGihJuQ9QaaYnIgPdNFYVxXtOCByYjDwGyquj0nzbnEAT4_KPIY-WJ-9-egxpeJmxBvaeXTNfP4CBsERnQX8S8GISGCpZEJ2nJktk4zXu0P_xwnDIRNYTDRCbJ36BSy1FKFeMfjLqRB1kJm2DurQHe3Bi0dnivrV6msqcr4KgpwRGkK95MEwPlftlkyJECvwfuKWWB2Nl8"/>
+<img class="rounded-xl grayscale hover:grayscale-0 transition-all duration-700 opacity-40 translate-y-8" data-alt="Geometric glass sculpture reflecting a gradient of orange and purple light against a solid black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxLtVqUTgNw63NvuGDj755kgA8ZFbj7Ka_HP0HbeVoVwCxD-16WsrB5SarRlA-n2DLSkwk_JC38_qPwfPlklGwKuHSRBNHz7zMdHlTD6innXzU_SM-rB_ap0eB_ay6-k3XLHWwyjOeglu5tZhX_Qr7s0qEyQR077UtKVRA5vU5jzeMeZ7QsrpkPlOUitvHQhgX9oWRvgbVi9wgsehOnOjO0FBIZn30NsVkTavzHq1QJyiHzSLSd8Cn3Ie_cAo2Qb68mGzppJN8AQ0"/>
+</div>
+</div>
+<!-- Ambient Light Source -->
+<div class="absolute -top-32 -right-32 w-96 h-96 signature-gradient-bg rounded-full blur-[160px] opacity-10"></div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0e0e0e] border-t border-[#494847]/20 font-['Manrope'] text-sm tracking-wide">
+<div class="flex flex-col md:flex-row justify-between items-center py-12 px-12 w-full">
+<div class="mb-8 md:mb-0">
+<div class="text-xl font-bold text-white mb-2">Databrill Core</div>
+<p class="text-gray-500 opacity-80">© 2024 Databrill Core. Powered by The Luminescent Void.</p>
+</div>
+<div class="flex space-x-10">
+<a class="text-gray-500 hover:text-[#ff9064] transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-gray-500 hover:text-[#ff9064] transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="text-gray-500 hover:text-[#ff9064] transition-colors opacity-80 hover:opacity-100" href="#">Security</a>
+<a class="text-gray-500 hover:text-[#ff9064] transition-colors opacity-80 hover:opacity-100" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</body></html>
