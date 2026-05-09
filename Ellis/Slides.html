@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Seller Sessions Live -- Ellis Whitehead</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--bg: #000;
+				--fg: #e0e0e0;
+				--dim: #888;
+				--orange: #e07a3a;
+				--purple: #7c6bbd;
+				--mono: "JetBrains Mono", "Menlo", "Consolas", monospace;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+				width: 100%;
+				height: 100%;
+				background: var(--bg);
+				color: var(--fg);
+				font-family: var(--mono);
+				font-size: clamp(16px, 1.9vw, 28px);
+				line-height: 1.2;
+				overflow: hidden;
+			}
+
+			body {
+				display: grid;
+				grid-template-rows: 1fr auto;
+			}
+
+			.deck {
+				position: relative;
+				overflow: hidden;
+			}
+
+			.slide {
+				position: absolute;
+				inset: 0;
+				display: none;
+				flex-direction: column;
+				align-items: center; /* block-centre horizontally */
+				justify-content: flex-start; /* top-align vertically */
+				padding: 4vh 4vw 2vh 4vw;
+				gap: 1.5vh;
+			}
+			.slide.active {
+				display: flex;
+			}
+
+			pre {
+				margin: 0;
+				font-family: inherit;
+				font-size: inherit;
+				line-height: inherit;
+				color: var(--fg);
+				white-space: pre;
+				text-align: left;
+			}
+
+			.title {
+				color: var(--orange);
+				font-weight: bold;
+			}
+			.rule {
+				color: var(--purple);
+			}
+			.num {
+				color: var(--orange);
+				font-weight: bold;
+			}
+			.tick {
+				color: var(--purple);
+			}
+			.em {
+				color: var(--orange);
+				font-weight: bold;
+			}
+			.dim {
+				color: var(--dim);
+			}
+			.frame {
+				color: var(--orange);
+			}
+			.subhead {
+				color: var(--purple);
+				font-weight: bold;
+			}
+
+			img {
+				max-width: 90vw;
+				max-height: 80vh;
+				margin: 0;
+			}
+			[data-name="06-coder"] img {
+				max-height: 45vh;
+			}
+
+			/* Reveals: keep the line in place, just hide its glyphs. */
+			.fragment {
+				visibility: hidden;
+			}
+			.fragment.visible {
+				visibility: visible;
+			}
+
+			.footer {
+				padding: 0.4em 1em;
+				color: var(--dim);
+				text-align: right;
+				user-select: none;
+			}
+			.footer.hidden {
+				visibility: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="deck">
+			<!-- 1: THE PROMISE -->
+			<section class="slide active" data-name="01-promise">
+				<pre>
+<span class="title">THE PROMISE</span>
+<span class="rule">─────────────────</span>
+
+<span style="font-weight:bold">Data-driven business decisions.</span>
+
+<span class="dim">Push ads.   Update a listing.   Order more inventory.</span>
+<span class="dim">Cut losses on a launch.   Defend an ASIN.</span>
+
+<span style="color: var(--purple)">You wish you could make these calls more data-driven, less gut.</span>
+<span style="color: var(--purple)">Claude looks like the answer.</span>
+</pre>
+			</section>
+
+			<!-- 2: THE PAIN -->
+			<section class="slide" data-name="02-pain">
+				<pre>
+<span class="title">THE PAIN</span>
+<span class="rule">──────────────</span>
+
+<span class="fragment"><span class="num">1.</span>  <span class="em">Slow.</span>        <span class="dim">Your dashboard could have answered faster.</span></span>
+<span class="fragment"><span class="num">2.</span>  <span class="em">Costly.</span>      <span class="dim">Every byte of data burns tokens.</span></span>
+<span class="fragment"><span class="num">3.</span>  <span class="em">Unreliable.</span></span>
+<span class="fragment">       <span class="tick">▸</span>  Hallucinates when data is missing.</span>
+<span class="fragment">       <span class="tick">▸</span>  Math errors, like a human doing it in their head.</span>
+<span class="fragment">       <span class="tick">▸</span>  Different approach every time you ask.</span>
+<span class="fragment">       <span class="tick">▸</span>  Misreads columns.</span>
+<span class="fragment">       <span class="tick">▸</span>  Can't connect reports to each other.</span>
+
+<span class="fragment"><span class="frame">┌───────────────────────────────────────────────┐</span>
+<span class="frame">│   If you can't trust it, that's a <span style="font-weight:bold">deal-breaker</span>.   │</span>
+<span class="frame">└───────────────────────────────────────────────┘</span></span>
+</pre>
+			</section>
+
+			<!-- 3: THE CONTEXT -->
+			<section class="slide" data-name="03-context">
+				<pre>
+<span class="title">THE CONTEXT</span>
+<span class="rule">─────────────────</span>
+
+<span class="subhead">The Trap</span>
+
+<span class="fragment"><span class="tick">▸</span>  Claude <span style="font-weight:bold">forgets</span> everything between sessions.</span>
+<span class="fragment"><span class="tick">▸</span>  So you load more memory at the start of each one.</span>
+<span class="fragment"><span class="tick">▸</span>  But instruction bloat makes Claude <span style="font-weight:bold">confused</span>, not smarter.</span>
+
+<span class="fragment"><span class="subhead">Context Window</span></span>
+
+<span class="fragment"><span class="dim">It's like a person with a head injury who can't store short-term memories.</span>
+<span class="dim">Every day, he wakes up at the mental age of the day the injury happened.</span></span>
+
+<span class="fragment"><span class="frame">┌───────────────────────────────────────────────────────────────┐</span>
+<span class="frame">│   Today's top agents start getting dumber around </span><span style="font-weight:bold">50K tokens</span><span class="frame">.        │</span>
+<span class="frame">└───────────────────────────────────────────────────────────────┘</span></span>
+</pre>
+			</section>
+
+			<!-- 4: THE HOPE -->
+			<section class="slide" data-name="04-hope">
+				<pre>
+<span class="title">THE HOPE</span>
+<span class="rule">──────────────</span>
+
+<span class="dim">The fix isn't new. DBAs and engineers have done it for decades.</span>
+<span class="dim">Claude helps you follow the same principles without being one.</span>
+
+
+<span class="num">1.</span> <span class="em">Data foundations:</span>
+        Centralize all your data into a single database
+        because important insights require merging unconnected reports.
+
+<span class="num">2.</span> <span class="em">Guidance and guardrails:</span>
+        Implement your key business logic as executable code
+        so Claude doesn't try to rediscover it on every call.
+</pre>
+			</section>
+
+			<!-- 5: THE FOUNDATION -->
+			<section class="slide" data-name="05-foundation">
+				<pre>
+<span class="title">THE FOUNDATION</span>
+<span class="rule">──────────────────────</span>
+</pre>
+				<img src="assets/foundation.png" alt="Foundation diagram" />
+			</section>
+
+			<!-- 6: THE CODER -->
+			<section class="slide" data-name="06-coder">
+				<pre>
+<span class="title">THE GUARDRAILS</span>
+<span class="rule">───────────────</span>
+
+<span class="dim">Stop making Claude rediscover its learnings every session.</span>
+<span class="dim">Have it translate them into reliable code it can run every time.</span>
+
+<span class="num">1.</span>  <span class="em">Data model guide</span>
+        <span class="dim">Document the structure of your business data.</span>
+
+<span class="num">2.</span>  <span class="em">Command-line tool</span>
+        <span class="dim">Implement the common queries as a small CLI.</span>
+
+<span class="num">3.</span>  <span class="em">MCP wrapper</span>
+        <span class="dim">Expose the CLI to Claude as a typed tool.</span>
+
+        <img src="assets/coder-benchmark.png" alt="Coder diagram" />
+        <span class="dim">See LinkedIn for benchmark details</span>
+</pre>
+			</section>
+
+			<!-- 8: THE INSIGHT -->
+			<section class="slide" data-name="08-insight">
+				<pre>
+<span class="title">THE INSIGHT</span>
+<span class="rule">─────────────────</span>
+
+(1)
+
+Data-driven decisions require an investment in <span class="em">data foundations</span>
+
+and a <span class="em">single source of truth</span>.
+
+<span class="fragment">(2)
+
+Do NOT think of Claude as your data analyst.
+
+Think of it as your <span class="em">data engineer & programmer</span>
+</span>
+
+</pre>
+			</section>
+
+			<!-- 10: THE OUTLOOK -->
+			<section class="slide" data-name="10-outlook">
+				<pre>
+<span class="title">THE OUTLOOK</span>
+<span class="rule">─────────────────</span>
+
+Recurring theme today:  <span class="em">own your systems</span>.
+
+  Own your data.
+  Own your dashboards.
+  Own your processes.
+
+<span class="dim">Until Claude Code, real data ownership wasn't feasible</span>
+<span class="dim">for non-programmers. Now it is.</span>
+
+
+In Session 2: your own SP-API access, your own database (among other things)
+
+
+A forewarning: SP-API is complicated and poorly documented.
+
+
+<span class="dim">Find me at the breaks and in the evening.</span>
+</pre>
+			</section>
+		</div>
+
+		<div class="footer" id="footer">
+			<span id="footer-text"
+				>1 / 10 -- promise -- space = next · ← back · n / p slide · f fullscreen · . hide</span
+			>
+		</div>
+
+		<script>
+			const slides = document.querySelectorAll(".slide");
+			let slideIdx = 0;
+			let fragIdx = 0;
+
+			function fragmentsOf(slide) {
+				return slide.querySelectorAll(".fragment");
+			}
+
+			function slugOf(slide) {
+				return (slide.dataset.name || "").replace(/^\d+-/, "");
+			}
+
+			function findBySlug(slug) {
+				for (let i = 0; i < slides.length; i++) {
+					if (slugOf(slides[i]) === slug) return i;
+				}
+				return -1;
+			}
+
+			function render() {
+				slides.forEach((s, i) => s.classList.toggle("active", i === slideIdx));
+				const slide = slides[slideIdx];
+				const frags = fragmentsOf(slide);
+				frags.forEach((f, i) => f.classList.toggle("visible", i < fragIdx));
+
+				const slug = slugOf(slide);
+				document.getElementById("footer-text").textContent =
+					`${slideIdx + 1} / ${slides.length} -- ${slug} -- space = next   ·   ←  back   ·   n / p  slide   ·   f  fullscreen   ·   .  hide`;
+
+				// Reflect current slide in URL so refresh / bookmark restores position.
+				const desired = "#" + slug;
+				if (location.hash !== desired) {
+					history.replaceState(null, "", desired);
+				}
+			}
+
+			function next() {
+				const frags = fragmentsOf(slides[slideIdx]);
+				if (fragIdx < frags.length) {
+					fragIdx++;
+				} else if (slideIdx < slides.length - 1) {
+					slideIdx++;
+					fragIdx = 0;
+				}
+				render();
+			}
+
+			function prev() {
+				if (fragIdx > 0) {
+					fragIdx--;
+				} else if (slideIdx > 0) {
+					slideIdx--;
+					fragIdx = fragmentsOf(slides[slideIdx]).length;
+				}
+				render();
+			}
+
+			function nextSlide() {
+				if (slideIdx < slides.length - 1) {
+					slideIdx++;
+					fragIdx = 0;
+					render();
+				}
+			}
+
+			function prevSlide() {
+				if (slideIdx > 0) {
+					slideIdx--;
+					fragIdx = 0;
+					render();
+				}
+			}
+
+			document.addEventListener("keydown", (e) => {
+				switch (e.key) {
+					case " ":
+					case "Enter":
+					case "ArrowRight":
+					case "l":
+						e.preventDefault();
+						next();
+						break;
+					case "ArrowLeft":
+					case "Backspace":
+					case "h":
+					case "b":
+						e.preventDefault();
+						prev();
+						break;
+					case "n":
+					case "N":
+						e.preventDefault();
+						nextSlide();
+						break;
+					case "p":
+					case "P":
+						e.preventDefault();
+						prevSlide();
+						break;
+					case "f":
+					case "F":
+						e.preventDefault();
+						if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+						else document.exitFullscreen?.();
+						break;
+					case ".":
+						document.getElementById("footer").classList.toggle("hidden");
+						break;
+					case "Home":
+						slideIdx = 0;
+						fragIdx = 0;
+						render();
+						break;
+					case "End":
+						slideIdx = slides.length - 1;
+						fragIdx = fragmentsOf(slides[slideIdx]).length;
+						render();
+						break;
+				}
+			});
+
+			document.addEventListener("click", (e) => {
+				e.preventDefault();
+				next();
+			});
+			document.addEventListener("contextmenu", (e) => {
+				e.preventDefault();
+				prev();
+			});
+
+			// React to manual URL changes (e.g. typing a different #slug).
+			window.addEventListener("hashchange", () => {
+				const slug = decodeURIComponent(location.hash.replace(/^#/, ""));
+				const idx = findBySlug(slug);
+				if (idx >= 0 && idx !== slideIdx) {
+					slideIdx = idx;
+					fragIdx = 0;
+					render();
+				}
+			});
+
+			// Seed initial slide from URL hash on load.
+			{
+				const slug = decodeURIComponent(location.hash.replace(/^#/, ""));
+				if (slug) {
+					const idx = findBySlug(slug);
+					if (idx >= 0) slideIdx = idx;
+				}
+			}
+
+			render();
+		</script>
+	</body>
+</html>
