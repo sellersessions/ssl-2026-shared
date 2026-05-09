@@ -25,21 +25,18 @@ No take-home repo for Session 1 — this talk sets up the thesis. The build land
 
 ## The thesis at a glance
 
-```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'nodeTextColor': '#e8e8e8', 'primaryTextColor': '#e8e8e8', 'clusterBkg': 'transparent', 'clusterBorder': '#8b949e'}}}%%
-flowchart LR
-    REPORTS["Disconnected<br/>reports"] --> DB["Single<br/>database"]
-    DB --> GUIDE["Data model<br/>guide"]
-    GUIDE --> CLI["CLI<br/>(your queries)"]
-    CLI --> MCP["MCP<br/>(typed tool)"]
-    MCP --> CLAUDE["Claude<br/>calls it"]
-
-    style REPORTS fill:none,stroke:#8b949e,stroke-width:1px,color:#cccccc
-    style DB fill:none,stroke:#14B8A6,stroke-width:1px,color:#fff
-    style GUIDE fill:none,stroke:#8B5CF6,stroke-width:1px,color:#fff
-    style CLI fill:none,stroke:#8B5CF6,stroke-width:1px,color:#fff
-    style MCP fill:none,stroke:#8B5CF6,stroke-width:1px,color:#fff
-    style CLAUDE fill:none,stroke:#EC4899,stroke-width:1px,color:#fff
+```
+Disconnected reports
+        ↓
+  Single database
+        ↓
+  Data model guide
+        ↓
+  CLI (your queries)
+        ↓
+   MCP (typed tool)
+        ↓
+   Claude calls it
 ```
 
 ---
