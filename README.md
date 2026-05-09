@@ -1,29 +1,29 @@
-# SSL 2026 — Shared Workshop Repo
+# Seller Sessions Live 2026 — Workshop Materials
 
-One repo, one folder per speaker. Each speaker pushes only into their own folder.
+Welcome. This repo holds the workshop materials from every speaker at SSL 2026, in one place, so you can grab what you need after the event.
 
-## Speakers
+## How it's organised
 
-| Folder | Speaker |
-|---|---|
-| [`Matt/`](./Matt) | Matt |
-| [`Shubhash/`](./Shubhash) | Shubhash Sharma |
+One folder per speaker. Open the folder for the speaker whose session you want, and you'll find their projects inside.
 
-## Structure
+| Folder | Speaker | Session |
+|---|---|---|
+| [`Matt/`](./Matt) | Matt Kostan | Florence — AI Chief Data Analyst for Amazon |
+| [`Shubhash/`](./Shubhash) | Shubhash Sharma | Architecting the Amazon Operator's Stack |
 
-```
-ssl-2026-shared/
-├── README.md
-└── <Speaker>/
-    ├── <project-1>/
-    ├── <project-2>/
-    └── ...
-```
+More speakers will be added here as their materials land.
 
-Each speaker's top-level folder is named after them (e.g. `Matt/`, `Shubhash/`). Inside, one subfolder per project — typically named after the source repo or zip the speaker provided.
+## How to use this
 
-## For speakers adding content
+You don't need to be technical, and you don't need git.
 
-1. Stay inside your own top-level folder.
-2. One subfolder per project, named after your repo / zip.
-3. If you have a multi-project session, add a short `README.md` at the top of your folder explaining what each subfolder is.
+1. Click the green **`<> Code`** button at the top of this page.
+2. Choose **Download ZIP**.
+3. Unzip on your laptop.
+4. Open the speaker's folder you care about, and follow the `README.md` inside it — each speaker has their own setup steps.
+
+If you only want one speaker's material, you can also just open their folder here on GitHub and download files individually.
+
+## Questions
+
+If something in a speaker's folder doesn't work or is missing, ask in the SSL 2026 attendee channel and we'll route it to the right speaker.
