@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/cowork-mcp.json",
+  "comment": "Florence registers Cowork's native connectors only. No custom MCP servers — n8n holds the credentials and HTTP work. Slack/Notion/ClickUp/Calendar are optional control surfaces, picked during start Phase 4.",
+  "connectors": {
+    "slack": {
+      "scope": "optional",
+      "purpose": "Daily brief delivery, team handoffs"
+    },
+    "notion": {
+      "scope": "optional",
+      "purpose": "Tracker page (daily briefs, test history, image library)"
+    },
+    "clickup": {
+      "scope": "optional",
+      "purpose": "Task-based control surface (statuses, assignees)"
+    },
+    "google_calendar": {
+      "scope": "optional",
+      "purpose": "Schedule blocks for action items from the brief"
+    }
+  }
+}

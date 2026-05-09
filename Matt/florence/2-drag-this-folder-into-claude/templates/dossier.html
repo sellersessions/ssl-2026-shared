@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Florence — Product Dossier</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --ink: #152823;
+    --ink-2: #2A3D37;
+    --ink-3: #5E6E68;
+    --cream: #F4F1EA;
+    --cream-2: #E9E5DA;
+    --paper: #FCFAF4;
+    --accent: #1FA877;
+    --accent-2: #178A60;
+    --green-soft: #D6F0E5;
+    --gold: #D4A53A;
+    --gold-soft: #F4E5BC;
+    --red: #B84A3D;
+    --red-soft: #F4D8D2;
+    --slate: #5E6E68;
+    --slate-2: #8C9A93;
+    --slate-3: #B5C0BB;
+    --rule: #D4D0C4;
+    --rule-soft: #E2DED2;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Inter", sans-serif;
+    --mono: ui-monospace, "SF Mono", "Menlo", "Cascadia Mono", "Roboto Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-size: 13.5px; line-height: 1.55; letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
+  em { font-style: normal; color: var(--accent); font-weight: 700; }
+  strong { color: var(--ink); font-weight: 700; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 28px 56px; }
+
+  header {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 28px;
+  }
+  .head-img { width: 100px; height: 100px; object-fit: contain; background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; }
+  .head-meta { min-width: 0; }
+  .eyebrow { font-family: var(--mono); font-size: 10.5px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.16em; color: var(--slate); }
+  .title { font-size: 26px; font-weight: 800; letter-spacing: -0.028em; line-height: 1.15; margin-top: 6px; }
+  .title em { color: var(--accent); }
+  .head-asin { font-family: var(--mono); font-size: 11px; color: var(--slate); margin-top: 6px; letter-spacing: 0.06em; }
+  .head-stats { text-align: right; display: flex; flex-direction: column; gap: 6px; }
+  .head-stat { display: flex; justify-content: flex-end; gap: 8px; align-items: baseline; font-size: 12.5px; }
+  .head-stat .k { font-family: var(--mono); font-size: 10px; color: var(--slate); text-transform: uppercase; letter-spacing: 0.1em; }
+  .head-stat .v { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+  .goal-row {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .goal-row .lbl { font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--accent-2); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 4px; }
+  .goal-row .body { color: var(--ink-2); }
+  .goal-row .body strong { color: var(--ink); }
+
+  .h2 {
+    font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.18em; color: var(--slate);
+    margin: 28px 0 12px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule-soft);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .h2 .counter { color: var(--ink); font-weight: 700; }
+  .h2:first-of-type { margin-top: 0; }
+
+  .links { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+  .link {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .link.empty { border-style: dashed; background: var(--cream-2); }
+  .link-eyebrow { font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--accent-2); text-transform: uppercase; letter-spacing: 0.14em; }
+  .link.empty .link-eyebrow { color: var(--slate-2); }
+  .link-title { font-size: 14px; font-weight: 700; color: var(--ink); letter-spacing: -0.012em; }
+  .link.empty .link-title { color: var(--slate-2); font-weight: 500; }
+  .link-summary { font-size: 12.5px; color: var(--slate); line-height: 1.5; margin-top: 2px; }
+  .link-meta { font-family: var(--mono); font-size: 10px; color: var(--slate-2); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+  .link-cta { font-family: var(--mono); font-size: 11px; color: var(--accent-2); font-weight: 600; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--rule-soft); letter-spacing: 0.06em; }
+
+  .timeline { display: flex; flex-direction: column; gap: 8px; }
+  .event {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 12px;
+    font-size: 12.5px;
+    align-items: baseline;
+  }
+  .event .when { font-family: var(--mono); font-size: 10.5px; color: var(--slate); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+  .event .what { color: var(--ink-2); line-height: 1.5; }
+  .event .what strong { color: var(--ink); }
+
+  footer {
+    margin-top: 24px;
+    padding: 18px 22px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    border-radius: 6px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .footer-msg { font-size: 13.5px; font-weight: 500; color: var(--ink-2); }
+  .footer-msg em { color: var(--accent); font-weight: 700; }
+  .footer-meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<!--
+  TEMPLATE — substitute {{placeholders}} before writing to disk.
+  See templates/_placeholders.md § dossier.html for the full contract.
+  Strip this comment before substitution.
+
+  Quick reference (per-product top-level rollup):
+    {{brand}}              "Lumen Sleep"
+    {{asin}}               "B07XYZ4231"
+    {{geo}}                "uk"
+    {{product-title}}      Real product title
+    {{product-image-url}}  Live image URL
+    {{stats-html}}         3-5 inline kv stats (price/BSR/rating/reviews)
+    {{goal-html}}          Brain goal for this ASIN (or empty-state)
+    {{research-link-html}} <div class="link">…</div> linking florence-research-{asin} (or empty stub)
+    {{concepts-link-html}} same for florence-concepts-{asin}
+    {{tests-link-html}}    same for florence-tests-{asin}
+    {{timeline-html}}      Optional event list ({{event}} rows) or empty-state
+    {{footer-msg-html}}    e.g. "<strong>Latest:</strong> 5 concepts ready · <em>send to test</em>."
+    {{generated-at}}       "Wed 6 May · 11:02"
+-->
+
+<div class="wrap">
+  <header>
+    <img class="head-img" src="{{product-image-url}}" alt="{{product-title}}" />
+    <div class="head-meta">
+      <div class="eyebrow">Product dossier · <span>{{brand}}</span></div>
+      <h1 class="title">{{product-title}}</h1>
+      <div class="head-asin">{{asin}} · {{geo}}</div>
+    </div>
+    <div class="head-stats">
+      {{stats-html}}
+    </div>
+  </header>
+
+  <div class="goal-row">
+    <div class="lbl">Goal</div>
+    <div class="body">{{goal-html}}</div>
+  </div>
+
+  <div class="h2">Linked artifacts</div>
+  <div class="links">
+    {{research-link-html}}
+    {{concepts-link-html}}
+    {{tests-link-html}}
+  </div>
+
+  <div class="h2">Recent activity</div>
+  <div class="timeline">
+    {{timeline-html}}
+  </div>
+
+  <footer>
+    <div class="footer-msg">{{footer-msg-html}}</div>
+    <div class="footer-meta">{{generated-at}}</div>
+  </footer>
+</div>
+
+</body>
+</html>

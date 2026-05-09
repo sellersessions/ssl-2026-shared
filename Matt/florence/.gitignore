@@ -1,0 +1,41 @@
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+.credentials.json
+
+# Editor
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Node / Python
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Build output
+dist/
+build/
+.next/
+
+# Local-only
+local/
+scratch/
+.claude/settings.local.json
+.claude/cache/
+.claude/logs/
+
+# Knowledge inbox — drop reference files here, gitignored.
+knowledge/inbox/**
+!knowledge/inbox/README.md
+!knowledge/inbox/dorian/
+!knowledge/inbox/dorian/.gitkeep
+!knowledge/inbox/matt/
+!knowledge/inbox/matt/.gitkeep

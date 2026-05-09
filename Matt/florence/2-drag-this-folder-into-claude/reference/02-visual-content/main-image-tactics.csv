@@ -1,0 +1,1567 @@
+tactic_id,database_order,guide_heading_number,source_order,tactic_name,tactic_category,best_for,avoid_for,core_strategy,visual_transformation,required_user_inputs,optional_user_inputs,standalone_json_prompt,customer_facing_prompt,negative_prompt,productpinion_test_hypothesis,what_to_measure,expected_ctr_impact,difficulty,internal_notes,source_url
+MI-001,1,1,1,Megalabel It,Bundle value signal,"bundles, kits, two-packs, multi-piece offers",single-item products or premium products where a large label would cheapen the image,Visually group multiple items as one cohesive offer and make the main value proposition readable from the SERP.,"Add a large contiguous banner, ribbon, or wrap that spans across the bundle and carries the strongest offer message.",offer_message; bundle_quantity,supporting_claims; brand_colors; key_ingredients,"{""task"":""edit_product_main_image"",""tactic"":""Megalabel It"",""input_image"":""{{customer_product_image}}"",""objective"":""Visually group multiple items as one cohesive offer and make the main value proposition readable from the SERP."",""required_user_inputs"":[""offer_message"",""bundle_quantity""],""optional_user_inputs"":[""supporting_claims"",""brand_colors"",""key_ingredients""],""edit_instructions"":{""primary_visual_change"":""Add a large contiguous banner, ribbon, or wrap that spans across the bundle and carries the strongest offer message."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""large banner obscuring product identity"",""misleading pack count"",""cluttered label text""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Megalabel It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Visually group multiple items as one cohesive offer and make the main value proposition readable from the SERP."",
+  ""required_user_inputs"": [
+    ""offer_message"",
+    ""bundle_quantity""
+  ],
+  ""optional_user_inputs"": [
+    ""supporting_claims"",
+    ""brand_colors"",
+    ""key_ingredients""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add a large contiguous banner, ribbon, or wrap that spans across the bundle and carries the strongest offer message."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""large banner obscuring product identity"",
+    ""misleading pack count"",
+    ""cluttered label text""
+  ]
+}",large banner obscuring product identity; misleading pack count; cluttered label text,"If the product is a bundle, adding a large unifying offer label will improve perceived value and increase preference over a plain bundle shot.","CTR preference, perceived value, message recall, confusion about quantity",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-002,2,2,2,Humanize It,Use context and scale,"apparel, accessories, beauty, body-contact products",products where a model/body part could distract from the item or create fit ambiguity,"Help shoppers understand fit, scale, body placement, and real-world use immediately.",Show the product being worn or held on the relevant body part while preserving the product as the main subject.,product_use_area,model_demographic; skin_tone; pose; styling_direction,"{""task"":""edit_product_main_image"",""tactic"":""Humanize It"",""input_image"":""{{customer_product_image}}"",""objective"":""Help shoppers understand fit, scale, body placement, and real-world use immediately."",""required_user_inputs"":[""product_use_area""],""optional_user_inputs"":[""model_demographic"",""skin_tone"",""pose"",""styling_direction""],""edit_instructions"":{""primary_visual_change"":""Show the product being worn or held on the relevant body part while preserving the product as the main subject."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""sexualized pose"",""unrealistic fit"",""hiding important product details""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Humanize It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Help shoppers understand fit, scale, body placement, and real-world use immediately."",
+  ""required_user_inputs"": [
+    ""product_use_area""
+  ],
+  ""optional_user_inputs"": [
+    ""model_demographic"",
+    ""skin_tone"",
+    ""pose"",
+    ""styling_direction""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Show the product being worn or held on the relevant body part while preserving the product as the main subject."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""sexualized pose"",
+    ""unrealistic fit"",
+    ""hiding important product details""
+  ]
+}",sexualized pose; unrealistic fit; hiding important product details,Showing the product on a relevant person or body part will reduce imagination burden and lift click preference versus an isolated product shot.,"CTR preference, fit confidence, scale clarity, perceived usefulness",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-003,3,3,3,Add Packaging,Information billboard,"products with boxes, kits, electronics, supplements, accessories",products where added packaging would imply an included box that materially changes expectations,Use packaging behind the product as a value-proposition billboard.,Place a clean product box behind or beside the item with benefit-led copy and category keywords visible.,primary_benefit; product_category,package_copy; box_style; brand_colors,"{""task"":""edit_product_main_image"",""tactic"":""Add Packaging"",""input_image"":""{{customer_product_image}}"",""objective"":""Use packaging behind the product as a value-proposition billboard."",""required_user_inputs"":[""primary_benefit"",""product_category""],""optional_user_inputs"":[""package_copy"",""box_style"",""brand_colors""],""edit_instructions"":{""primary_visual_change"":""Place a clean product box behind or beside the item with benefit-led copy and category keywords visible."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""overly premium fictional packaging"",""unreadable tiny copy"",""covering product""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Add Packaging"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Use packaging behind the product as a value-proposition billboard."",
+  ""required_user_inputs"": [
+    ""primary_benefit"",
+    ""product_category""
+  ],
+  ""optional_user_inputs"": [
+    ""package_copy"",
+    ""box_style"",
+    ""brand_colors""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Place a clean product box behind or beside the item with benefit-led copy and category keywords visible."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""overly premium fictional packaging"",
+    ""unreadable tiny copy"",
+    ""covering product""
+  ]
+}",overly premium fictional packaging; unreadable tiny copy; covering product,Adding a packaging billboard will make benefits more scannable and improve preference over a product-only image.,"CTR preference, benefit comprehension, trust, perceived completeness",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-004,4,4,4,Keywordtize It,Search intent match,products with high-intent keywords or must-see benefits,products where keyword claims are unverified or confusing,Make the shopper see the exact searched-for benefit directly in the image.,"Add one critical non-branded keyword or benefit onto existing packaging, label space, or a clear callout area.",target_keyword_or_benefit,supporting_claim; preferred_label_location,"{""task"":""edit_product_main_image"",""tactic"":""Keywordtize It"",""input_image"":""{{customer_product_image}}"",""objective"":""Make the shopper see the exact searched-for benefit directly in the image."",""required_user_inputs"":[""target_keyword_or_benefit""],""optional_user_inputs"":[""supporting_claim"",""preferred_label_location""],""edit_instructions"":{""primary_visual_change"":""Add one critical non-branded keyword or benefit onto existing packaging, label space, or a clear callout area."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""keyword stuffing"",""fake certifications"",""illegible text"",""changing brand name""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Keywordtize It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Make the shopper see the exact searched-for benefit directly in the image."",
+  ""required_user_inputs"": [
+    ""target_keyword_or_benefit""
+  ],
+  ""optional_user_inputs"": [
+    ""supporting_claim"",
+    ""preferred_label_location""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add one critical non-branded keyword or benefit onto existing packaging, label space, or a clear callout area."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""keyword stuffing"",
+    ""fake certifications"",
+    ""illegible text"",
+    ""changing brand name""
+  ]
+}",keyword stuffing; fake certifications; illegible text; changing brand name,A visible search-intent keyword on the product/packaging will increase relevance perception and click preference.,"CTR preference, relevance rating, message recall",High,Low,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-005,5,5,5,Tilt It,Pattern interrupt,"bottles, boxes, tools, single-product hero shots",products that rely on precise alignment or dimensions,Break visual sameness in the SERP with subtle dynamic tension.,"Tilt the product 5 to 15 degrees while keeping it large, legible, and fully visible.",none beyond source image,tilt_direction; tilt_degrees,"{""task"":""edit_product_main_image"",""tactic"":""Tilt It"",""input_image"":""{{customer_product_image}}"",""objective"":""Break visual sameness in the SERP with subtle dynamic tension."",""required_user_inputs"":[],""optional_user_inputs"":[""tilt_direction"",""tilt_degrees""],""edit_instructions"":{""primary_visual_change"":""Tilt the product 5 to 15 degrees while keeping it large, legible, and fully visible."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""warping label"",""extreme angle"",""cropped corners""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Tilt It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Break visual sameness in the SERP with subtle dynamic tension."",
+  ""required_user_inputs"": [],
+  ""optional_user_inputs"": [
+    ""tilt_direction"",
+    ""tilt_degrees""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Tilt the product 5 to 15 degrees while keeping it large, legible, and fully visible."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""warping label"",
+    ""extreme angle"",
+    ""cropped corners""
+  ]
+}",warping label; extreme angle; cropped corners,A subtle tilt will make the listing more noticeable than a straight-on product shot without changing the offer.,"CTR preference, attention/noticeability, perceived dynamism",Medium,Low,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-006,6,6,6,Hang Tag It,Floating value callout,"products with hidden benefits, color options, variants, tools, accessories",minimalist premium products where tags would reduce brand feel,"Create a compact mini-billboard for value, variants, or options.",Add a small hang tag attached to or visually near the product with one concise benefit or variant cue.,tag_message,tag_shape; swatch_colors; attachment_point,"{""task"":""edit_product_main_image"",""tactic"":""Hang Tag It"",""input_image"":""{{customer_product_image}}"",""objective"":""Create a compact mini-billboard for value, variants, or options."",""required_user_inputs"":[""tag_message""],""optional_user_inputs"":[""tag_shape"",""swatch_colors"",""attachment_point""],""edit_instructions"":{""primary_visual_change"":""Add a small hang tag attached to or visually near the product with one concise benefit or variant cue."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""floating tag that feels disconnected"",""too much copy"",""fake discount language""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Hang Tag It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Create a compact mini-billboard for value, variants, or options."",
+  ""required_user_inputs"": [
+    ""tag_message""
+  ],
+  ""optional_user_inputs"": [
+    ""tag_shape"",
+    ""swatch_colors"",
+    ""attachment_point""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add a small hang tag attached to or visually near the product with one concise benefit or variant cue."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""floating tag that feels disconnected"",
+    ""too much copy"",
+    ""fake discount language""
+  ]
+}",floating tag that feels disconnected; too much copy; fake discount language,A hang tag callout will improve value comprehension and variant awareness versus a plain image.,"CTR preference, variant awareness, benefit recall",Medium,Low,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-007,7,7,7,Sunburst It,Depth and attention,"flat product shots, bottles, boxes, hero images needing energy",products where glow would create a false powered/electronic implication,Add depth and visual importance while keeping the product central.,Place a subtle warm or brand-colored halo/sunburst behind the product with soft studio lighting.,none beyond source image,glow_color; intensity,"{""task"":""edit_product_main_image"",""tactic"":""Sunburst It"",""input_image"":""{{customer_product_image}}"",""objective"":""Add depth and visual importance while keeping the product central."",""required_user_inputs"":[],""optional_user_inputs"":[""glow_color"",""intensity""],""edit_instructions"":{""primary_visual_change"":""Place a subtle warm or brand-colored halo/sunburst behind the product with soft studio lighting."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""harsh starburst"",""nightclub lighting"",""obscuring silhouette""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Sunburst It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Add depth and visual importance while keeping the product central."",
+  ""required_user_inputs"": [],
+  ""optional_user_inputs"": [
+    ""glow_color"",
+    ""intensity""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Place a subtle warm or brand-colored halo/sunburst behind the product with soft studio lighting."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""harsh starburst"",
+    ""nightclub lighting"",
+    ""obscuring silhouette""
+  ]
+}",harsh starburst; nightclub lighting; obscuring silhouette,A subtle glow behind the product will make it feel more dimensional and attention-grabbing.,"CTR preference, perceived quality, visual standout",Medium,Low,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-008,8,8,8,Solid Color It,Color differentiation,"supplements, food, beauty, bottles, jars, packaging-led products",transparent products where contents visibility is the main trust driver,Use bold opaque packaging color as a SERP signature.,Re-render or recolor the primary container/packaging in a bold solid color while preserving brand readability.,desired_container_color,brand_palette; competitor_color_context,"{""task"":""edit_product_main_image"",""tactic"":""Solid Color It"",""input_image"":""{{customer_product_image}}"",""objective"":""Use bold opaque packaging color as a SERP signature."",""required_user_inputs"":[""desired_container_color""],""optional_user_inputs"":[""brand_palette"",""competitor_color_context""],""edit_instructions"":{""primary_visual_change"":""Re-render or recolor the primary container/packaging in a bold solid color while preserving brand readability."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""changing product identity too far"",""unreadable label"",""clashing colors""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Solid Color It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Use bold opaque packaging color as a SERP signature."",
+  ""required_user_inputs"": [
+    ""desired_container_color""
+  ],
+  ""optional_user_inputs"": [
+    ""brand_palette"",
+    ""competitor_color_context""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Re-render or recolor the primary container/packaging in a bold solid color while preserving brand readability."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""changing product identity too far"",
+    ""unreadable label"",
+    ""clashing colors""
+  ]
+}",changing product identity too far; unreadable label; clashing colors,A bold solid package color will increase visual distinctiveness against generic competitor packaging.,"CTR preference, recognition, standout rating",Medium,High,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-009,9,9,9,Unpackage It,Product transparency,"balms, jars, tubs, creams, products where texture matters",sealed goods where opening would confuse hygiene or contents,Remove uncertainty by showing what is inside the container.,Show the lid/cap removed and expose visible product texture or color inside.,none beyond source image,texture_description; lid_position,"{""task"":""edit_product_main_image"",""tactic"":""Unpackage It"",""input_image"":""{{customer_product_image}}"",""objective"":""Remove uncertainty by showing what is inside the container."",""required_user_inputs"":[],""optional_user_inputs"":[""texture_description"",""lid_position""],""edit_instructions"":{""primary_visual_change"":""Show the lid/cap removed and expose visible product texture or color inside."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""messy spill"",""unrealistic fill level"",""hiding brand label""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Unpackage It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Remove uncertainty by showing what is inside the container."",
+  ""required_user_inputs"": [],
+  ""optional_user_inputs"": [
+    ""texture_description"",
+    ""lid_position""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Show the lid/cap removed and expose visible product texture or color inside."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""messy spill"",
+    ""unrealistic fill level"",
+    ""hiding brand label""
+  ]
+}",messy spill; unrealistic fill level; hiding brand label,Showing the opened product will increase transparency and confidence versus a sealed container image.,"CTR preference, texture clarity, purchase confidence",Medium,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-010,10,10,10,Ingredient It,Ingredient proof,"supplements, health foods, natural products, beauty, consumables",products with ingredients that are visually unappealing or not central to purchase,Build trust by making the key ingredients instantly visible.,"Place clean, realistic hero ingredients beside or around the product without overpowering the main item.",key_ingredients,ingredient_quantity; arrangement_style,"{""task"":""edit_product_main_image"",""tactic"":""Ingredient It"",""input_image"":""{{customer_product_image}}"",""objective"":""Build trust by making the key ingredients instantly visible."",""required_user_inputs"":[""key_ingredients""],""optional_user_inputs"":[""ingredient_quantity"",""arrangement_style""],""edit_instructions"":{""primary_visual_change"":""Place clean, realistic hero ingredients beside or around the product without overpowering the main item."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""inaccurate ingredients"",""food mess"",""ingredient dominance over product""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Ingredient It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Build trust by making the key ingredients instantly visible."",
+  ""required_user_inputs"": [
+    ""key_ingredients""
+  ],
+  ""optional_user_inputs"": [
+    ""ingredient_quantity"",
+    ""arrangement_style""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Place clean, realistic hero ingredients beside or around the product without overpowering the main item."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""inaccurate ingredients"",
+    ""food mess"",
+    ""ingredient dominance over product""
+  ]
+}",inaccurate ingredients; food mess; ingredient dominance over product,Displaying recognizable ingredients will improve naturalness perception and click preference.,"CTR preference, ingredient recognition, trust",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-011,11,11,11,Smear It,Texture proof,"skincare, creams, balms, gels, lotions",dry goods or products where smear could look like damage/leakage,Show texture and consistency before the click.,"Add a controlled smear, dollop, or swatch of the product near the packaging.",texture_description,smear_shape; smear_location,"{""task"":""edit_product_main_image"",""tactic"":""Smear It"",""input_image"":""{{customer_product_image}}"",""objective"":""Show texture and consistency before the click."",""required_user_inputs"":[""texture_description""],""optional_user_inputs"":[""smear_shape"",""smear_location""],""edit_instructions"":{""primary_visual_change"":""Add a controlled smear, dollop, or swatch of the product near the packaging."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""messy leakage"",""exaggerated amount"",""color mismatch""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Smear It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Show texture and consistency before the click."",
+  ""required_user_inputs"": [
+    ""texture_description""
+  ],
+  ""optional_user_inputs"": [
+    ""smear_shape"",
+    ""smear_location""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add a controlled smear, dollop, or swatch of the product near the packaging."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""messy leakage"",
+    ""exaggerated amount"",
+    ""color mismatch""
+  ]
+}",messy leakage; exaggerated amount; color mismatch,A visible texture smear will improve shopper confidence in the product feel and increase preference.,"CTR preference, texture clarity, confidence",High,Low,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-012,12,12,12,Finalize It,Finished outcome,"powders, mixes, supplements, meal kits, drink mixes",products where prepared outcome varies heavily by user preparation,Make the end use more appetizing and concrete.,"Show the product next to the attractive finished preparation, such as a mixed drink or plated result.",finished_use_case,serving_vessel; flavor; garnish,"{""task"":""edit_product_main_image"",""tactic"":""Finalize It"",""input_image"":""{{customer_product_image}}"",""objective"":""Make the end use more appetizing and concrete."",""required_user_inputs"":[""finished_use_case""],""optional_user_inputs"":[""serving_vessel"",""flavor"",""garnish""],""edit_instructions"":{""primary_visual_change"":""Show the product next to the attractive finished preparation, such as a mixed drink or plated result."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""unrealistic serving"",""hiding product"",""implying extra items included""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Finalize It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Make the end use more appetizing and concrete."",
+  ""required_user_inputs"": [
+    ""finished_use_case""
+  ],
+  ""optional_user_inputs"": [
+    ""serving_vessel"",
+    ""flavor"",
+    ""garnish""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Show the product next to the attractive finished preparation, such as a mixed drink or plated result."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""unrealistic serving"",
+    ""hiding product"",
+    ""implying extra items included""
+  ]
+}",unrealistic serving; hiding product; implying extra items included,Showing the final prepared outcome will increase desirability versus container-only imagery.,"CTR preference, appetite appeal, use clarity",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-013,13,13,13,America It,Origin trust cue,"US-made consumables, supplements, skincare, durable goods",products without substantiated domestic-origin positioning,Signal domestic sourcing and quality trust quickly.,Add a clear Made in USA style flag/badge on packaging or a nearby callout area.,origin_claim_text,badge_style; placement,"{""task"":""edit_product_main_image"",""tactic"":""America It"",""input_image"":""{{customer_product_image}}"",""objective"":""Signal domestic sourcing and quality trust quickly."",""required_user_inputs"":[""origin_claim_text""],""optional_user_inputs"":[""badge_style"",""placement""],""edit_instructions"":{""primary_visual_change"":""Add a clear Made in USA style flag/badge on packaging or a nearby callout area."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""unsupported origin claims"",""oversized flag"",""clutter""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""America It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Signal domestic sourcing and quality trust quickly."",
+  ""required_user_inputs"": [
+    ""origin_claim_text""
+  ],
+  ""optional_user_inputs"": [
+    ""badge_style"",
+    ""placement""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add a clear Made in USA style flag/badge on packaging or a nearby callout area."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""unsupported origin claims"",
+    ""oversized flag"",
+    ""clutter""
+  ]
+}",unsupported origin claims; oversized flag; clutter,A visible domestic-origin cue will improve trust and preference among shoppers who value US-made products.,"CTR preference, trust, origin recall",Medium,Low,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-014,14,14,14,TikTok It,Social proof,viral/trending consumer products,products without real social traction or where trendiness is irrelevant,Tap into trend recognition and FOMO.,Add a clean viral/social-proof badge or callout that communicates the product is trending.,social_proof_claim,platform_reference; badge_color,"{""task"":""edit_product_main_image"",""tactic"":""TikTok It"",""input_image"":""{{customer_product_image}}"",""objective"":""Tap into trend recognition and FOMO."",""required_user_inputs"":[""social_proof_claim""],""optional_user_inputs"":[""platform_reference"",""badge_color""],""edit_instructions"":{""primary_visual_change"":""Add a clean viral/social-proof badge or callout that communicates the product is trending."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""false virality claim"",""cheap-looking sticker"",""too much copy""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""TikTok It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Tap into trend recognition and FOMO."",
+  ""required_user_inputs"": [
+    ""social_proof_claim""
+  ],
+  ""optional_user_inputs"": [
+    ""platform_reference"",
+    ""badge_color""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add a clean viral/social-proof badge or callout that communicates the product is trending."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""false virality claim"",
+    ""cheap-looking sticker"",
+    ""too much copy""
+  ]
+}",false virality claim; cheap-looking sticker; too much copy,A trending/social-proof callout will increase curiosity and click preference for trend-sensitive categories.,"CTR preference, curiosity, social proof believability",Medium,Low,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-015,15,15,15,Dead Pixel Space It,Unused-space callout,"products with lids, caps, blank panels, unused visible surfaces",products with no readable dead space or premium minimal packaging,Turn unused surface area into a high-impact benefit callout.,"Add one short benefit, seal, or claim to the blank cap/lid/panel area already visible in the image.",benefit_message,surface_location; typography_style,"{""task"":""edit_product_main_image"",""tactic"":""Dead Pixel Space It"",""input_image"":""{{customer_product_image}}"",""objective"":""Turn unused surface area into a high-impact benefit callout."",""required_user_inputs"":[""benefit_message""],""optional_user_inputs"":[""surface_location"",""typography_style""],""edit_instructions"":{""primary_visual_change"":""Add one short benefit, seal, or claim to the blank cap/lid/panel area already visible in the image."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""crowded label"",""tiny unreadable text"",""fake certifications""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Dead Pixel Space It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Turn unused surface area into a high-impact benefit callout."",
+  ""required_user_inputs"": [
+    ""benefit_message""
+  ],
+  ""optional_user_inputs"": [
+    ""surface_location"",
+    ""typography_style""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add one short benefit, seal, or claim to the blank cap/lid/panel area already visible in the image."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""crowded label"",
+    ""tiny unreadable text"",
+    ""fake certifications""
+  ]
+}",crowded label; tiny unreadable text; fake certifications,Using dead space for a benefit will improve message recall without adding new objects.,"CTR preference, benefit recall, visual clarity",High,Low,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-016,16,16,16,Expand Explode It,Value inventory display,"kits, tool sets, storage systems, makeup sets, multi-component products",single-piece products or sets where exact included components are uncertain,Make the full value of the offer visible at a glance.,Separate and arrange all components around the main product in an exploded but organized view.,component_list,layout_style; hero_component,"{""task"":""edit_product_main_image"",""tactic"":""Expand Explode It"",""input_image"":""{{customer_product_image}}"",""objective"":""Make the full value of the offer visible at a glance."",""required_user_inputs"":[""component_list""],""optional_user_inputs"":[""layout_style"",""hero_component""],""edit_instructions"":{""primary_visual_change"":""Separate and arrange all components around the main product in an exploded but organized view."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""missing components"",""duplicate components"",""chaotic layout""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Expand Explode It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Make the full value of the offer visible at a glance."",
+  ""required_user_inputs"": [
+    ""component_list""
+  ],
+  ""optional_user_inputs"": [
+    ""layout_style"",
+    ""hero_component""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Separate and arrange all components around the main product in an exploded but organized view."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""missing components"",
+    ""duplicate components"",
+    ""chaotic layout""
+  ]
+}",missing components; duplicate components; chaotic layout,An exploded component view will increase perceived value and clarity versus showing only the closed form.,"CTR preference, perceived value, completeness clarity",High,High,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-017,17,17,17,Light It,Active feature visualization,"LED, illuminated, electronic, nightlight, toys, devices",products without a light function,Show the active feature in the image rather than the product in off mode.,Turn on or render the product lighting with realistic glow and reflections.,light_color_or_mode,ambient_light_level; glow_intensity,"{""task"":""edit_product_main_image"",""tactic"":""Light It"",""input_image"":""{{customer_product_image}}"",""objective"":""Show the active feature in the image rather than the product in off mode."",""required_user_inputs"":[""light_color_or_mode""],""optional_user_inputs"":[""ambient_light_level"",""glow_intensity""],""edit_instructions"":{""primary_visual_change"":""Turn on or render the product lighting with realistic glow and reflections."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""unrealistic brightness"",""changing product hardware"",""dark background dependence""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Light It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Show the active feature in the image rather than the product in off mode."",
+  ""required_user_inputs"": [
+    ""light_color_or_mode""
+  ],
+  ""optional_user_inputs"": [
+    ""ambient_light_level"",
+    ""glow_intensity""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Turn on or render the product lighting with realistic glow and reflections."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""unrealistic brightness"",
+    ""changing product hardware"",
+    ""dark background dependence""
+  ]
+}",unrealistic brightness; changing product hardware; dark background dependence,Showing the product lit up will improve feature comprehension and visual engagement.,"CTR preference, feature clarity, excitement",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-018,18,18,18,Lifestyle It,In-context aspiration,"home, pet, decor, kitchen, indoor/outdoor use products",tiny products that would disappear in a scene or products needing exact spec inspection,Help shoppers picture the product in its real environment.,"Place the product in a clean, aspirational lifestyle setting while keeping it the obvious main subject.",use_environment,scene_style; props_to_include,"{""task"":""edit_product_main_image"",""tactic"":""Lifestyle It"",""input_image"":""{{customer_product_image}}"",""objective"":""Help shoppers picture the product in its real environment."",""required_user_inputs"":[""use_environment""],""optional_user_inputs"":[""scene_style"",""props_to_include""],""edit_instructions"":{""primary_visual_change"":""Place the product in a clean, aspirational lifestyle setting while keeping it the obvious main subject."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""busy room"",""product too small"",""unrelated props""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Lifestyle It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Help shoppers picture the product in its real environment."",
+  ""required_user_inputs"": [
+    ""use_environment""
+  ],
+  ""optional_user_inputs"": [
+    ""scene_style"",
+    ""props_to_include""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Place the product in a clean, aspirational lifestyle setting while keeping it the obvious main subject."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""busy room"",
+    ""product too small"",
+    ""unrelated props""
+  ]
+}",busy room; product too small; unrelated props,A tasteful lifestyle scene will improve visualization and preference versus an isolated shot.,"CTR preference, use-case clarity, aesthetic appeal",Medium,High,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-019,19,18,19,Petify It,Relevant user/beneficiary,"pet products, pet supplements, pet accessories",products where pet breed choice could polarize or misrepresent use,Show the specific animal beneficiary next to or using the product.,"Add a relevant dog/cat/pet beside the product, ideally matching the target use case or ailment.",pet_type,breed; pet_pose; ailment_context,"{""task"":""edit_product_main_image"",""tactic"":""Petify It"",""input_image"":""{{customer_product_image}}"",""objective"":""Show the specific animal beneficiary next to or using the product."",""required_user_inputs"":[""pet_type""],""optional_user_inputs"":[""breed"",""pet_pose"",""ailment_context""],""edit_instructions"":{""primary_visual_change"":""Add a relevant dog/cat/pet beside the product, ideally matching the target use case or ailment."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""polarizing breeds"",""distressed animal"",""product hidden""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Petify It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Show the specific animal beneficiary next to or using the product."",
+  ""required_user_inputs"": [
+    ""pet_type""
+  ],
+  ""optional_user_inputs"": [
+    ""breed"",
+    ""pet_pose"",
+    ""ailment_context""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add a relevant dog/cat/pet beside the product, ideally matching the target use case or ailment."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""polarizing breeds"",
+    ""distressed animal"",
+    ""product hidden""
+  ]
+}",polarizing breeds; distressed animal; product hidden,Including the relevant pet will improve shopper self-identification and use clarity.,"CTR preference, relevance, emotional response",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-020,20,19,20,Splash It,Flavor and refreshment cue,"liquids, drinks, flavor-led consumables",dry products or products where splash implies leakage,"Communicate flavor, freshness, and liquid energy visually.",Add a controlled splash behind or around the product in a color/flavor style that matches the product.,flavor_or_liquid_type,splash_color; intensity,"{""task"":""edit_product_main_image"",""tactic"":""Splash It"",""input_image"":""{{customer_product_image}}"",""objective"":""Communicate flavor, freshness, and liquid energy visually."",""required_user_inputs"":[""flavor_or_liquid_type""],""optional_user_inputs"":[""splash_color"",""intensity""],""edit_instructions"":{""primary_visual_change"":""Add a controlled splash behind or around the product in a color/flavor style that matches the product."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""messy spill"",""covering label"",""unrealistic liquid behavior""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Splash It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Communicate flavor, freshness, and liquid energy visually."",
+  ""required_user_inputs"": [
+    ""flavor_or_liquid_type""
+  ],
+  ""optional_user_inputs"": [
+    ""splash_color"",
+    ""intensity""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add a controlled splash behind or around the product in a color/flavor style that matches the product."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""messy spill"",
+    ""covering label"",
+    ""unrealistic liquid behavior""
+  ]
+}",messy spill; covering label; unrealistic liquid behavior,A flavor-matched splash will increase appetite appeal and attention.,"CTR preference, flavor clarity, refreshment rating",Medium,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-021,21,20,21,Spill It,Liquid transparency,"serums, peptides, oils, liquids","products where spill suggests damage, leakage, or waste",Use a controlled spill to show the liquid’s appearance and occupy more visual space.,Add a tasteful spilled liquid shape behind or beside the bottle/box.,liquid_color_texture,spill_shape; spill_location,"{""task"":""edit_product_main_image"",""tactic"":""Spill It"",""input_image"":""{{customer_product_image}}"",""objective"":""Use a controlled spill to show the liquid\u2019s appearance and occupy more visual space."",""required_user_inputs"":[""liquid_color_texture""],""optional_user_inputs"":[""spill_shape"",""spill_location""],""edit_instructions"":{""primary_visual_change"":""Add a tasteful spilled liquid shape behind or beside the bottle/box."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""messy accident look"",""label obstruction"",""excessive amount""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Spill It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Use a controlled spill to show the liquid\u2019s appearance and occupy more visual space."",
+  ""required_user_inputs"": [
+    ""liquid_color_texture""
+  ],
+  ""optional_user_inputs"": [
+    ""spill_shape"",
+    ""spill_location""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add a tasteful spilled liquid shape behind or beside the bottle/box."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""messy accident look"",
+    ""label obstruction"",
+    ""excessive amount""
+  ]
+}",messy accident look; label obstruction; excessive amount,Showing a controlled spill will improve texture transparency and visual real estate.,"CTR preference, product transparency, standout",Medium,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-022,22,21,22,iPhone It,Scale reference,"bags, organizers, pockets, compartments, storage products",products where phone scale is irrelevant or misleading,Use a universally understood object to show size and capacity.,Show a hand placing an iPhone-sized smartphone into the product pocket or compartment.,storage_area_to_demonstrate,phone_model_size; hand_pose,"{""task"":""edit_product_main_image"",""tactic"":""iPhone It"",""input_image"":""{{customer_product_image}}"",""objective"":""Use a universally understood object to show size and capacity."",""required_user_inputs"":[""storage_area_to_demonstrate""],""optional_user_inputs"":[""phone_model_size"",""hand_pose""],""edit_instructions"":{""primary_visual_change"":""Show a hand placing an iPhone-sized smartphone into the product pocket or compartment."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""brand-specific phone logo"",""distorted scale"",""blocked product details""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""iPhone It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Use a universally understood object to show size and capacity."",
+  ""required_user_inputs"": [
+    ""storage_area_to_demonstrate""
+  ],
+  ""optional_user_inputs"": [
+    ""phone_model_size"",
+    ""hand_pose""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Show a hand placing an iPhone-sized smartphone into the product pocket or compartment."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""brand-specific phone logo"",
+    ""distorted scale"",
+    ""blocked product details""
+  ]
+}",brand-specific phone logo; distorted scale; blocked product details,A familiar phone scale reference will improve size comprehension and confidence.,"CTR preference, scale clarity, use-case confidence",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-023,23,22,23,Clone It,Variant visualization,"apparel, color variants, wearable products",products where variants are not actually available,Show multiple colorways together instead of relying on hidden swatches.,Duplicate the product/model view into multiple available color variants in one hero composition.,variant_colors,model_pose; number_of_variants,"{""task"":""edit_product_main_image"",""tactic"":""Clone It"",""input_image"":""{{customer_product_image}}"",""objective"":""Show multiple colorways together instead of relying on hidden swatches."",""required_user_inputs"":[""variant_colors""],""optional_user_inputs"":[""model_pose"",""number_of_variants""],""edit_instructions"":{""primary_visual_change"":""Duplicate the product/model view into multiple available color variants in one hero composition."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""unavailable colors"",""clutter"",""inconsistent fit""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Clone It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Show multiple colorways together instead of relying on hidden swatches."",
+  ""required_user_inputs"": [
+    ""variant_colors""
+  ],
+  ""optional_user_inputs"": [
+    ""model_pose"",
+    ""number_of_variants""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Duplicate the product/model view into multiple available color variants in one hero composition."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""unavailable colors"",
+    ""clutter"",
+    ""inconsistent fit""
+  ]
+}",unavailable colors; clutter; inconsistent fit,Showing multiple variants together will improve color awareness and click preference.,"CTR preference, variant awareness, perceived selection",High,High,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-024,24,23,24,Position It,Multiple form factors,"foldable, collapsible, convertible, adjustable products",fixed-form products,Answer the operational question directly in the image.,"Show the product in two or more relevant positions, such as open and folded, side by side.",positions_to_show,layout_order; scale_relationship,"{""task"":""edit_product_main_image"",""tactic"":""Position It"",""input_image"":""{{customer_product_image}}"",""objective"":""Answer the operational question directly in the image."",""required_user_inputs"":[""positions_to_show""],""optional_user_inputs"":[""layout_order"",""scale_relationship""],""edit_instructions"":{""primary_visual_change"":""Show the product in two or more relevant positions, such as open and folded, side by side."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""confusing duplicate count"",""impossible positions"",""cropped form""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Position It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Answer the operational question directly in the image."",
+  ""required_user_inputs"": [
+    ""positions_to_show""
+  ],
+  ""optional_user_inputs"": [
+    ""layout_order"",
+    ""scale_relationship""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Show the product in two or more relevant positions, such as open and folded, side by side."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""confusing duplicate count"",
+    ""impossible positions"",
+    ""cropped form""
+  ]
+}",confusing duplicate count; impossible positions; cropped form,Showing key positions will improve functional clarity and reduce uncertainty.,"CTR preference, function clarity, confidence",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-025,25,24,25,Swatch It,Color option cue,products with multiple colors or finishes,single-color products,Make available variants visible without needing a click.,Add clean color swatches near the product with the exact available colors or finishes.,variant_colors,swatch_shape; placement,"{""task"":""edit_product_main_image"",""tactic"":""Swatch It"",""input_image"":""{{customer_product_image}}"",""objective"":""Make available variants visible without needing a click."",""required_user_inputs"":[""variant_colors""],""optional_user_inputs"":[""swatch_shape"",""placement""],""edit_instructions"":{""primary_visual_change"":""Add clean color swatches near the product with the exact available colors or finishes."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""unavailable colors"",""oversized swatches"",""label obstruction""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Swatch It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Make available variants visible without needing a click."",
+  ""required_user_inputs"": [
+    ""variant_colors""
+  ],
+  ""optional_user_inputs"": [
+    ""swatch_shape"",
+    ""placement""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add clean color swatches near the product with the exact available colors or finishes."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""unavailable colors"",
+    ""oversized swatches"",
+    ""label obstruction""
+  ]
+}",unavailable colors; oversized swatches; label obstruction,Visible swatches will increase awareness of available choices and click preference.,"CTR preference, variant awareness, visual clarity",High,Low,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-026,26,25,26,Merchandise It,Use-case staging,"racks, holders, organizers, trays, storage products",products where staged items could imply included accessories,Show the product doing its job with realistic contents.,Place relevant items on/in the product to demonstrate its purpose and capacity.,items_to_merchandise,arrangement_style; quantity,"{""task"":""edit_product_main_image"",""tactic"":""Merchandise It"",""input_image"":""{{customer_product_image}}"",""objective"":""Show the product doing its job with realistic contents."",""required_user_inputs"":[""items_to_merchandise""],""optional_user_inputs"":[""arrangement_style"",""quantity""],""edit_instructions"":{""primary_visual_change"":""Place relevant items on/in the product to demonstrate its purpose and capacity."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""implying accessories included"",""messy staging"",""hiding structure""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Merchandise It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Show the product doing its job with realistic contents."",
+  ""required_user_inputs"": [
+    ""items_to_merchandise""
+  ],
+  ""optional_user_inputs"": [
+    ""arrangement_style"",
+    ""quantity""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Place relevant items on/in the product to demonstrate its purpose and capacity."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""implying accessories included"",
+    ""messy staging"",
+    ""hiding structure""
+  ]
+}",implying accessories included; messy staging; hiding structure,Merchandising the product with relevant items will improve use comprehension and perceived utility.,"CTR preference, use clarity, perceived usefulness",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-027,27,26,27,Weight It,Capacity proof,"chairs, shelves, mounts, mobility, storage, load-bearing products",products without a meaningful capacity claim,Surface a critical capacity decision factor immediately.,"Add a clear weight capacity callout on packaging, a tag, or a structural callout near the product.",weight_capacity,unit; callout_style,"{""task"":""edit_product_main_image"",""tactic"":""Weight It"",""input_image"":""{{customer_product_image}}"",""objective"":""Surface a critical capacity decision factor immediately."",""required_user_inputs"":[""weight_capacity""],""optional_user_inputs"":[""unit"",""callout_style""],""edit_instructions"":{""primary_visual_change"":""Add a clear weight capacity callout on packaging, a tag, or a structural callout near the product."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""unsupported capacity"",""tiny text"",""unsafe demonstration""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Weight It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Surface a critical capacity decision factor immediately."",
+  ""required_user_inputs"": [
+    ""weight_capacity""
+  ],
+  ""optional_user_inputs"": [
+    ""unit"",
+    ""callout_style""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add a clear weight capacity callout on packaging, a tag, or a structural callout near the product."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""unsupported capacity"",
+    ""tiny text"",
+    ""unsafe demonstration""
+  ]
+}",unsupported capacity; tiny text; unsafe demonstration,A clear capacity callout will improve shopper qualification and preference among suitable buyers.,"CTR preference, capacity recall, qualification accuracy",High,Low,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-028,28,27,28,Arrow It,Motion explanation,"rotating, twisting, adjustable, 360-degree, moving products",static products,Make invisible movement visible.,Add curved or directional arrows around the moving component to show rotation or movement path.,movement_type,arrow_color; arrow_path,"{""task"":""edit_product_main_image"",""tactic"":""Arrow It"",""input_image"":""{{customer_product_image}}"",""objective"":""Make invisible movement visible."",""required_user_inputs"":[""movement_type""],""optional_user_inputs"":[""arrow_color"",""arrow_path""],""edit_instructions"":{""primary_visual_change"":""Add curved or directional arrows around the moving component to show rotation or movement path."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""arrows that imply impossible motion"",""clutter"",""hiding mechanism""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Arrow It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Make invisible movement visible."",
+  ""required_user_inputs"": [
+    ""movement_type""
+  ],
+  ""optional_user_inputs"": [
+    ""arrow_color"",
+    ""arrow_path""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add curved or directional arrows around the moving component to show rotation or movement path."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""arrows that imply impossible motion"",
+    ""clutter"",
+    ""hiding mechanism""
+  ]
+}",arrows that imply impossible motion; clutter; hiding mechanism,Motion arrows will improve functional comprehension and click preference.,"CTR preference, feature clarity, use understanding",High,Low,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-029,29,28,29,Breeze It,Invisible force visualization,"fans, air purifiers, vents, cooling/heating products",products where airflow is not a benefit,Make airflow visible as a benefit.,"Render soft colored air/wind streams showing direction, width, and strength of the breeze.",airflow_direction,airflow_color; intensity,"{""task"":""edit_product_main_image"",""tactic"":""Breeze It"",""input_image"":""{{customer_product_image}}"",""objective"":""Make airflow visible as a benefit."",""required_user_inputs"":[""airflow_direction""],""optional_user_inputs"":[""airflow_color"",""intensity""],""edit_instructions"":{""primary_visual_change"":""Render soft colored air/wind streams showing direction, width, and strength of the breeze."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""smoke-like pollution"",""unrealistic blast"",""product obstruction""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Breeze It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Make airflow visible as a benefit."",
+  ""required_user_inputs"": [
+    ""airflow_direction""
+  ],
+  ""optional_user_inputs"": [
+    ""airflow_color"",
+    ""intensity""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Render soft colored air/wind streams showing direction, width, and strength of the breeze."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""smoke-like pollution"",
+    ""unrealistic blast"",
+    ""product obstruction""
+  ]
+}",smoke-like pollution; unrealistic blast; product obstruction,Visible airflow will improve benefit comprehension for air-moving products.,"CTR preference, airflow clarity, perceived power",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-030,30,29,30,Waterproof It,Proof of resistance,"waterproof speakers, bags, covers, outdoor gear",products not designed for water exposure,Make waterproofing instantly understandable.,"Add realistic water droplets, splashes, or wet surface interaction on/around the product.",waterproof_feature,splash_intensity; water_location,"{""task"":""edit_product_main_image"",""tactic"":""Waterproof It"",""input_image"":""{{customer_product_image}}"",""objective"":""Make waterproofing instantly understandable."",""required_user_inputs"":[""waterproof_feature""],""optional_user_inputs"":[""splash_intensity"",""water_location""],""edit_instructions"":{""primary_visual_change"":""Add realistic water droplets, splashes, or wet surface interaction on/around the product."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""water damage implication"",""label hidden"",""unsafe use context""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Waterproof It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Make waterproofing instantly understandable."",
+  ""required_user_inputs"": [
+    ""waterproof_feature""
+  ],
+  ""optional_user_inputs"": [
+    ""splash_intensity"",
+    ""water_location""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add realistic water droplets, splashes, or wet surface interaction on/around the product."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""water damage implication"",
+    ""label hidden"",
+    ""unsafe use context""
+  ]
+}",water damage implication; label hidden; unsafe use context,Water interaction will improve waterproof benefit recognition and preference.,"CTR preference, waterproof recall, confidence",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-031,31,30,31,Demo It,Action proof,"waterproof, spill-proof, stain-proof, installable, functional products",products where demonstration could misstate performance,"Show the benefit happening, not just claimed.","Create a clear action demonstration, such as liquid being poured onto the protected surface.",demo_action,demonstrator_hand; liquid_or_object,"{""task"":""edit_product_main_image"",""tactic"":""Demo It"",""input_image"":""{{customer_product_image}}"",""objective"":""Show the benefit happening, not just claimed."",""required_user_inputs"":[""demo_action""],""optional_user_inputs"":[""demonstrator_hand"",""liquid_or_object""],""edit_instructions"":{""primary_visual_change"":""Create a clear action demonstration, such as liquid being poured onto the protected surface."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""unsafe demo"",""exaggerated performance"",""clutter""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Demo It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Show the benefit happening, not just claimed."",
+  ""required_user_inputs"": [
+    ""demo_action""
+  ],
+  ""optional_user_inputs"": [
+    ""demonstrator_hand"",
+    ""liquid_or_object""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Create a clear action demonstration, such as liquid being poured onto the protected surface."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""unsafe demo"",
+    ""exaggerated performance"",
+    ""clutter""
+  ]
+}",unsafe demo; exaggerated performance; clutter,An action demo will improve understanding of the product benefit and click preference.,"CTR preference, benefit clarity, believability",High,High,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-032,32,31,32,Wrap It,Bundle grouping,"multi-pack sets, cutting boards, towels, grouped variants",single products or giftable products where wrap changes perceived packaging,Visually bind a set together and clarify quantity/options.,Add a clean wrap or band around multiple items to group them into one offer.,pack_quantity,wrap_message; colors_or_variants,"{""task"":""edit_product_main_image"",""tactic"":""Wrap It"",""input_image"":""{{customer_product_image}}"",""objective"":""Visually bind a set together and clarify quantity/options."",""required_user_inputs"":[""pack_quantity""],""optional_user_inputs"":[""wrap_message"",""colors_or_variants""],""edit_instructions"":{""primary_visual_change"":""Add a clean wrap or band around multiple items to group them into one offer."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""misleading packaging expectation"",""covering important details""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Wrap It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Visually bind a set together and clarify quantity/options."",
+  ""required_user_inputs"": [
+    ""pack_quantity""
+  ],
+  ""optional_user_inputs"": [
+    ""wrap_message"",
+    ""colors_or_variants""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add a clean wrap or band around multiple items to group them into one offer."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""misleading packaging expectation"",
+    ""covering important details""
+  ]
+}",misleading packaging expectation; covering important details,A grouping wrap will increase quantity clarity and perceived set value.,"CTR preference, quantity clarity, perceived value",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-033,33,32,33,Feature It,Third-party proof,"award-winning, press-featured, certified, endorsed products",products without real feature/award proof,Use credible recognition as a de-commoditizing cue.,"Add a tasteful featured-in, award, or recognition badge on packaging or beside the product.",feature_or_award_claim,logo_or_badge_style; placement,"{""task"":""edit_product_main_image"",""tactic"":""Feature It"",""input_image"":""{{customer_product_image}}"",""objective"":""Use credible recognition as a de-commoditizing cue."",""required_user_inputs"":[""feature_or_award_claim""],""optional_user_inputs"":[""logo_or_badge_style"",""placement""],""edit_instructions"":{""primary_visual_change"":""Add a tasteful featured-in, award, or recognition badge on packaging or beside the product."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""unsupported award"",""fake media logo"",""clutter""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Feature It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Use credible recognition as a de-commoditizing cue."",
+  ""required_user_inputs"": [
+    ""feature_or_award_claim""
+  ],
+  ""optional_user_inputs"": [
+    ""logo_or_badge_style"",
+    ""placement""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add a tasteful featured-in, award, or recognition badge on packaging or beside the product."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""unsupported award"",
+    ""fake media logo"",
+    ""clutter""
+  ]
+}",unsupported award; fake media logo; clutter,A credible feature badge will increase trust and preference in commoditized categories.,"CTR preference, trust, social proof recall",Medium,Low,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-034,34,33,34,Accessorize It,Completeness display,"products with attachments, accessories, configurations",products where accessories are optional or not included,Win on transparency by showing everything included.,"Arrange accessories and attachments around the main product in a tidy, countable layout.",accessory_list,layout_style; hero_product_position,"{""task"":""edit_product_main_image"",""tactic"":""Accessorize It"",""input_image"":""{{customer_product_image}}"",""objective"":""Win on transparency by showing everything included."",""required_user_inputs"":[""accessory_list""],""optional_user_inputs"":[""layout_style"",""hero_product_position""],""edit_instructions"":{""primary_visual_change"":""Arrange accessories and attachments around the main product in a tidy, countable layout."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""showing non-included items"",""chaotic layout"",""duplicate confusion""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Accessorize It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Win on transparency by showing everything included."",
+  ""required_user_inputs"": [
+    ""accessory_list""
+  ],
+  ""optional_user_inputs"": [
+    ""layout_style"",
+    ""hero_product_position""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Arrange accessories and attachments around the main product in a tidy, countable layout."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""showing non-included items"",
+    ""chaotic layout"",
+    ""duplicate confusion""
+  ]
+}",showing non-included items; chaotic layout; duplicate confusion,Showing accessories will increase perceived value and reduce uncertainty.,"CTR preference, completeness clarity, perceived value",High,High,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-035,35,34,35,Screen Real Estate It,Screen as billboard,"TVs, monitors, tablets, devices with displays",products without a screen or where display content must be accurate,Use the screen itself to communicate value props.,"Replace the screen content with concise value callouts, awards, sizes, or feature proof.",screen_messages,visual_background; typography_style,"{""task"":""edit_product_main_image"",""tactic"":""Screen Real Estate It"",""input_image"":""{{customer_product_image}}"",""objective"":""Use the screen itself to communicate value props."",""required_user_inputs"":[""screen_messages""],""optional_user_inputs"":[""visual_background"",""typography_style""],""edit_instructions"":{""primary_visual_change"":""Replace the screen content with concise value callouts, awards, sizes, or feature proof."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""too much text"",""fake UI claims"",""unreadable screen""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Screen Real Estate It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Use the screen itself to communicate value props."",
+  ""required_user_inputs"": [
+    ""screen_messages""
+  ],
+  ""optional_user_inputs"": [
+    ""visual_background"",
+    ""typography_style""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Replace the screen content with concise value callouts, awards, sizes, or feature proof."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""too much text"",
+    ""fake UI claims"",
+    ""unreadable screen""
+  ]
+}",too much text; fake UI claims; unreadable screen,Using the screen for value props will improve benefit comprehension while keeping the product clean.,"CTR preference, message recall, perceived feature depth",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-036,36,35,36,Run Off Label It,Label readability expansion,"bottles, supplements, labels that wrap around curved packaging",flat packages or products where label expansion would confuse quantity,Reveal label information that normally disappears around the curve.,Extend the label visually off the bottle in a straight readable panel connected to the original label.,label_information_to_reveal,extension_direction; label_style,"{""task"":""edit_product_main_image"",""tactic"":""Run Off Label It"",""input_image"":""{{customer_product_image}}"",""objective"":""Reveal label information that normally disappears around the curve."",""required_user_inputs"":[""label_information_to_reveal""],""optional_user_inputs"":[""extension_direction"",""label_style""],""edit_instructions"":{""primary_visual_change"":""Extend the label visually off the bottle in a straight readable panel connected to the original label."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""floating disconnected label"",""unreadable copy"",""implying extra item""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Run Off Label It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Reveal label information that normally disappears around the curve."",
+  ""required_user_inputs"": [
+    ""label_information_to_reveal""
+  ],
+  ""optional_user_inputs"": [
+    ""extension_direction"",
+    ""label_style""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Extend the label visually off the bottle in a straight readable panel connected to the original label."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""floating disconnected label"",
+    ""unreadable copy"",
+    ""implying extra item""
+  ]
+}",floating disconnected label; unreadable copy; implying extra item,A run-off label will increase information readability and visual differentiation.,"CTR preference, information clarity, standout",Medium,High,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-037,37,36,37,Background It,Subtle visual pop,"items without packaging, simple silhouettes, plain products",categories where background would distract from product form,Add subtle color/shape around the product to create separation from white SERP space.,Create a slight integrated background shape or side color that feels connected to the product.,background_color_or_style,side_or_shape; intensity,"{""task"":""edit_product_main_image"",""tactic"":""Background It"",""input_image"":""{{customer_product_image}}"",""objective"":""Add subtle color/shape around the product to create separation from white SERP space."",""required_user_inputs"":[""background_color_or_style""],""optional_user_inputs"":[""side_or_shape"",""intensity""],""edit_instructions"":{""primary_visual_change"":""Create a slight integrated background shape or side color that feels connected to the product."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""independent full background scene"",""overwhelming color"",""product hidden""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Background It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Add subtle color/shape around the product to create separation from white SERP space."",
+  ""required_user_inputs"": [
+    ""background_color_or_style""
+  ],
+  ""optional_user_inputs"": [
+    ""side_or_shape"",
+    ""intensity""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Create a slight integrated background shape or side color that feels connected to the product."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""independent full background scene"",
+    ""overwhelming color"",
+    ""product hidden""
+  ]
+}",independent full background scene; overwhelming color; product hidden,A subtle connected background cue will increase visual pop and click preference.,Medium,"visual standout, CTR preference, perceived polish",Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-038,38,37,38,Teacup Handle It,Connected callout bridge,packaged products needing a color pop or linked benefit area,products where bridge element would look like a separate accessory,Connect packaging and product with a thin shaped color element to create a scroll-stopping composition.,Add a handle-like connected shape from package to product carrying color or a concise cue.,connection_message_or_color,shape_style; connection_points,"{""task"":""edit_product_main_image"",""tactic"":""Teacup Handle It"",""input_image"":""{{customer_product_image}}"",""objective"":""Connect packaging and product with a thin shaped color element to create a scroll-stopping composition."",""required_user_inputs"":[""connection_message_or_color""],""optional_user_inputs"":[""shape_style"",""connection_points""],""edit_instructions"":{""primary_visual_change"":""Add a handle-like connected shape from package to product carrying color or a concise cue."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""floating element"",""thick distracting bridge"",""false accessory""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Teacup Handle It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Connect packaging and product with a thin shaped color element to create a scroll-stopping composition."",
+  ""required_user_inputs"": [
+    ""connection_message_or_color""
+  ],
+  ""optional_user_inputs"": [
+    ""shape_style"",
+    ""connection_points""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add a handle-like connected shape from package to product carrying color or a concise cue."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""floating element"",
+    ""thick distracting bridge"",
+    ""false accessory""
+  ]
+}",floating element; thick distracting bridge; false accessory,A connected bridge element will improve visual standout without feeling like an unrelated object.,"CTR preference, visual standout, message clarity",Medium,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-039,39,38,39,Flip It,Dual-side information,"supplements, bottles, boxes with useful back-panel info",products where showing two sides suggests a two-pack,Double information real estate by showing front and back/side views together.,Show the main package front plus a clearly secondary flipped/back view with useful facts visible.,back_panel_info,spacing; front_back_scale,"{""task"":""edit_product_main_image"",""tactic"":""Flip It"",""input_image"":""{{customer_product_image}}"",""objective"":""Double information real estate by showing front and back/side views together."",""required_user_inputs"":[""back_panel_info""],""optional_user_inputs"":[""spacing"",""front_back_scale""],""edit_instructions"":{""primary_visual_change"":""Show the main package front plus a clearly secondary flipped/back view with useful facts visible."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""implying two units"",""tiny facts"",""hiding front label""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Flip It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Double information real estate by showing front and back/side views together."",
+  ""required_user_inputs"": [
+    ""back_panel_info""
+  ],
+  ""optional_user_inputs"": [
+    ""spacing"",
+    ""front_back_scale""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Show the main package front plus a clearly secondary flipped/back view with useful facts visible."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""implying two units"",
+    ""tiny facts"",
+    ""hiding front label""
+  ]
+}",implying two units; tiny facts; hiding front label,Showing a secondary back/side view will improve information density and trust.,"CTR preference, info clarity, two-pack confusion check",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-040,40,39,40,Grab It,In-use quantity access,"gloves, wipes, tissues, dispenser boxes, high-quantity boxed goods",products where hand-in-box could look unhygienic or confusing,"Show use, dispensing, and quantity access in one image.",Show a hand using the product while another item is visibly being pulled from the box/dispenser.,dispensing_action,hand_position; item_count_visible,"{""task"":""edit_product_main_image"",""tactic"":""Grab It"",""input_image"":""{{customer_product_image}}"",""objective"":""Show use, dispensing, and quantity access in one image."",""required_user_inputs"":[""dispensing_action""],""optional_user_inputs"":[""hand_position"",""item_count_visible""],""edit_instructions"":{""primary_visual_change"":""Show a hand using the product while another item is visibly being pulled from the box/dispenser."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""unhygienic look"",""product blocked"",""unrealistic hand scale""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Grab It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Show use, dispensing, and quantity access in one image."",
+  ""required_user_inputs"": [
+    ""dispensing_action""
+  ],
+  ""optional_user_inputs"": [
+    ""hand_position"",
+    ""item_count_visible""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Show a hand using the product while another item is visibly being pulled from the box/dispenser."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""unhygienic look"",
+    ""product blocked"",
+    ""unrealistic hand scale""
+  ]
+}",unhygienic look; product blocked; unrealistic hand scale,A grab/dispense scene will improve use clarity and perceived abundance.,"CTR preference, use clarity, quantity perception",Medium,High,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-041,41,40,41,Before and After It,Outcome contrast,"cleaning, beauty, repair, health-adjacent, transformation products",products where outcomes vary or claims need careful substantiation,Show the pain and solved state in one quick visual contrast.,Create a realistic before/after split or side-by-side result with the product as the solution.,before_state; after_state,split_style; realism_level,"{""task"":""edit_product_main_image"",""tactic"":""Before and After It"",""input_image"":""{{customer_product_image}}"",""objective"":""Show the pain and solved state in one quick visual contrast."",""required_user_inputs"":[""before_state"",""after_state""],""optional_user_inputs"":[""split_style"",""realism_level""],""edit_instructions"":{""primary_visual_change"":""Create a realistic before/after split or side-by-side result with the product as the solution."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""unrealistic transformation"",""medical overclaim"",""product too small""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Before and After It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Show the pain and solved state in one quick visual contrast."",
+  ""required_user_inputs"": [
+    ""before_state"",
+    ""after_state""
+  ],
+  ""optional_user_inputs"": [
+    ""split_style"",
+    ""realism_level""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Create a realistic before/after split or side-by-side result with the product as the solution."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""unrealistic transformation"",
+    ""medical overclaim"",
+    ""product too small""
+  ]
+}",unrealistic transformation; medical overclaim; product too small,A realistic before/after visual will increase problem-solution clarity and preference.,"CTR preference, outcome believability, problem recognition",High,High,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-042,42,41,42,Lifetime Warranty It,Risk reversal,"durable goods, tools, commoditized products with strong warranty",products without a genuine warranty,Use warranty as a de-commoditizing value prop.,"Add a clear lifetime warranty callout to the box, label, tag, or adjacent badge.",warranty_claim,badge_style; placement,"{""task"":""edit_product_main_image"",""tactic"":""Lifetime Warranty It"",""input_image"":""{{customer_product_image}}"",""objective"":""Use warranty as a de-commoditizing value prop."",""required_user_inputs"":[""warranty_claim""],""optional_user_inputs"":[""badge_style"",""placement""],""edit_instructions"":{""primary_visual_change"":""Add a clear lifetime warranty callout to the box, label, tag, or adjacent badge."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""unsupported warranty"",""legal fine print"",""clutter""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Lifetime Warranty It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Use warranty as a de-commoditizing value prop."",
+  ""required_user_inputs"": [
+    ""warranty_claim""
+  ],
+  ""optional_user_inputs"": [
+    ""badge_style"",
+    ""placement""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add a clear lifetime warranty callout to the box, label, tag, or adjacent badge."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""unsupported warranty"",
+    ""legal fine print"",
+    ""clutter""
+  ]
+}",unsupported warranty; legal fine print; clutter,A warranty callout will increase trust and preference versus similar commodity products.,"CTR preference, trust, risk reversal recall",Medium,Low,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-043,43,42,43,X-Ray It,Internal mechanism/benefit,"human, pet, machine, ergonomic, support, supplement-adjacent products",products where internal claim is speculative or sensitive,Reveal the internal target or mechanism in a visual layer.,Add a semi-transparent x-ray or cutaway overlay showing where/how the product works.,internal_target,overlay_style; use_context,"{""task"":""edit_product_main_image"",""tactic"":""X-Ray It"",""input_image"":""{{customer_product_image}}"",""objective"":""Reveal the internal target or mechanism in a visual layer."",""required_user_inputs"":[""internal_target""],""optional_user_inputs"":[""overlay_style"",""use_context""],""edit_instructions"":{""primary_visual_change"":""Add a semi-transparent x-ray or cutaway overlay showing where/how the product works."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""medical overclaim"",""scary imagery"",""unrealistic anatomy""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""X-Ray It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Reveal the internal target or mechanism in a visual layer."",
+  ""required_user_inputs"": [
+    ""internal_target""
+  ],
+  ""optional_user_inputs"": [
+    ""overlay_style"",
+    ""use_context""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add a semi-transparent x-ray or cutaway overlay showing where/how the product works."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""medical overclaim"",
+    ""scary imagery"",
+    ""unrealistic anatomy""
+  ]
+}",medical overclaim; scary imagery; unrealistic anatomy,An x-ray/cutaway layer will improve mechanism understanding and relevance.,"CTR preference, mechanism clarity, trust",Medium,High,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-044,44,43,44,Multiply It,Pack-size abundance,"20-pack, 40-pack, multipack, refills, snacks, disposable goods",small pack counts or products where fanning all units creates clutter,Make pack size impossible to miss.,Fan out or stack many units to visually communicate quantity and abundance.,pack_quantity,fan_layout; unit_count_to_show,"{""task"":""edit_product_main_image"",""tactic"":""Multiply It"",""input_image"":""{{customer_product_image}}"",""objective"":""Make pack size impossible to miss."",""required_user_inputs"":[""pack_quantity""],""optional_user_inputs"":[""fan_layout"",""unit_count_to_show""],""edit_instructions"":{""primary_visual_change"":""Fan out or stack many units to visually communicate quantity and abundance."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""misleading quantity"",""visual chaos"",""hidden hero unit""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Multiply It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Make pack size impossible to miss."",
+  ""required_user_inputs"": [
+    ""pack_quantity""
+  ],
+  ""optional_user_inputs"": [
+    ""fan_layout"",
+    ""unit_count_to_show""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Fan out or stack many units to visually communicate quantity and abundance."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""misleading quantity"",
+    ""visual chaos"",
+    ""hidden hero unit""
+  ]
+}",misleading quantity; visual chaos; hidden hero unit,Showing multiple units will increase perceived abundance and value clarity.,"CTR preference, quantity recall, perceived value",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-045,45,43,45,Box It,Utilitarian box billboard,"snack boxes, variety packs, aggregated packs, commodity kits",giftable/premium products where fictional packaging changes expectations,"Use a simple box to clarify logo, quantity, and value for a utilitarian offer.",Generate a basic branded/utilitarian box behind or beside the product with clear quantity and offer info.,box_message; pack_quantity,box_style; flavor_or_variant_list,"{""task"":""edit_product_main_image"",""tactic"":""Box It"",""input_image"":""{{customer_product_image}}"",""objective"":""Use a simple box to clarify logo, quantity, and value for a utilitarian offer."",""required_user_inputs"":[""box_message"",""pack_quantity""],""optional_user_inputs"":[""box_style"",""flavor_or_variant_list""],""edit_instructions"":{""primary_visual_change"":""Generate a basic branded/utilitarian box behind or beside the product with clear quantity and offer info."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""premium fake gift box"",""misleading packaging"",""product hidden""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Box It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Use a simple box to clarify logo, quantity, and value for a utilitarian offer."",
+  ""required_user_inputs"": [
+    ""box_message"",
+    ""pack_quantity""
+  ],
+  ""optional_user_inputs"": [
+    ""box_style"",
+    ""flavor_or_variant_list""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Generate a basic branded/utilitarian box behind or beside the product with clear quantity and offer info."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""premium fake gift box"",
+    ""misleading packaging"",
+    ""product hidden""
+  ]
+}",premium fake gift box; misleading packaging; product hidden,A clear utilitarian box will improve quantity and offer comprehension.,"CTR preference, quantity clarity, perceived organization",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-046,46,44,46,Case It,Bulk-pack structure,"drink cans, bottles, multipacks, consumables",single-unit offers,Clarify bulk quantity and package economics.,Show the main item in front with a visible case/pack behind it that communicates quantity and size.,case_quantity; unit_size,case_copy; case_angle,"{""task"":""edit_product_main_image"",""tactic"":""Case It"",""input_image"":""{{customer_product_image}}"",""objective"":""Clarify bulk quantity and package economics."",""required_user_inputs"":[""case_quantity"",""unit_size""],""optional_user_inputs"":[""case_copy"",""case_angle""],""edit_instructions"":{""primary_visual_change"":""Show the main item in front with a visible case/pack behind it that communicates quantity and size."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""implying wrong case type"",""hidden main item"",""clutter""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Case It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Clarify bulk quantity and package economics."",
+  ""required_user_inputs"": [
+    ""case_quantity"",
+    ""unit_size""
+  ],
+  ""optional_user_inputs"": [
+    ""case_copy"",
+    ""case_angle""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Show the main item in front with a visible case/pack behind it that communicates quantity and size."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""implying wrong case type"",
+    ""hidden main item"",
+    ""clutter""
+  ]
+}",implying wrong case type; hidden main item; clutter,A case-behind composition will improve pack-size comprehension and value perception.,"CTR preference, quantity recall, perceived value",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-047,47,45,47,Value Size It,Size/value cue,"large-size consumables, supplements, household goods",standard-size products,Make the larger/value size obvious before the click.,Add a clear value size or larger-size callout to packaging or bottle surface.,value_size_claim,placement; typography_style,"{""task"":""edit_product_main_image"",""tactic"":""Value Size It"",""input_image"":""{{customer_product_image}}"",""objective"":""Make the larger/value size obvious before the click."",""required_user_inputs"":[""value_size_claim""],""optional_user_inputs"":[""placement"",""typography_style""],""edit_instructions"":{""primary_visual_change"":""Add a clear value size or larger-size callout to packaging or bottle surface."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""unsupported value claim"",""too much copy"",""distorted scale""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Value Size It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Make the larger/value size obvious before the click."",
+  ""required_user_inputs"": [
+    ""value_size_claim""
+  ],
+  ""optional_user_inputs"": [
+    ""placement"",
+    ""typography_style""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add a clear value size or larger-size callout to packaging or bottle surface."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""unsupported value claim"",
+    ""too much copy"",
+    ""distorted scale""
+  ]
+}",unsupported value claim; too much copy; distorted scale,A value-size callout will improve perceived deal value and size clarity.,"CTR preference, size clarity, value perception",High,Low,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-048,48,46,48,Seasonal Merchandise It,Occasion positioning,"giftable, seasonal, holiday-relevant products",evergreen utility products where seasonality distracts,Position the product for a timely buying occasion.,Add seasonal merchandising elements or a holiday context around the product while keeping it central.,season_or_holiday,seasonal_props; color_palette,"{""task"":""edit_product_main_image"",""tactic"":""Seasonal Merchandise It"",""input_image"":""{{customer_product_image}}"",""objective"":""Position the product for a timely buying occasion."",""required_user_inputs"":[""season_or_holiday""],""optional_user_inputs"":[""seasonal_props"",""color_palette""],""edit_instructions"":{""primary_visual_change"":""Add seasonal merchandising elements or a holiday context around the product while keeping it central."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""overly busy holiday scene"",""product too small"",""off-season mismatch""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Seasonal Merchandise It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Position the product for a timely buying occasion."",
+  ""required_user_inputs"": [
+    ""season_or_holiday""
+  ],
+  ""optional_user_inputs"": [
+    ""seasonal_props"",
+    ""color_palette""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add seasonal merchandising elements or a holiday context around the product while keeping it central."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""overly busy holiday scene"",
+    ""product too small"",
+    ""off-season mismatch""
+  ]
+}",overly busy holiday scene; product too small; off-season mismatch,Seasonal context will improve relevance and preference during the matching buying period.,"CTR preference, occasion fit, giftability",Medium,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-049,49,47,49,Write Directly On It,Surface messaging,"large installed products, covers, mats, pools, tarps, flat surfaces",small products or products where writing looks like actual included print,Use unused installed-surface area as a message canvas.,Add concise benefit text directly onto the large product/use surface that is not the purchased item.,surface_message,surface_location; text_angle,"{""task"":""edit_product_main_image"",""tactic"":""Write Directly On It"",""input_image"":""{{customer_product_image}}"",""objective"":""Use unused installed-surface area as a message canvas."",""required_user_inputs"":[""surface_message""],""optional_user_inputs"":[""surface_location"",""text_angle""],""edit_instructions"":{""primary_visual_change"":""Add concise benefit text directly onto the large product/use surface that is not the purchased item."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""confusing included print"",""unreadable perspective"",""clutter""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Write Directly On It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Use unused installed-surface area as a message canvas."",
+  ""required_user_inputs"": [
+    ""surface_message""
+  ],
+  ""optional_user_inputs"": [
+    ""surface_location"",
+    ""text_angle""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add concise benefit text directly onto the large product/use surface that is not the purchased item."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""confusing included print"",
+    ""unreadable perspective"",
+    ""clutter""
+  ]
+}",confusing included print; unreadable perspective; clutter,Writing on the visible surface will increase benefit comprehension for large-format products.,"CTR preference, benefit recall, clarity",Medium,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-050,50,48,50,Explain Install It,Instructional clarity,"installable, assembled, battery-powered, modular products",products where install complexity could scare shoppers if overemphasized,Answer the setup question directly in the hero image.,"Add arrows, labels, or simple step indicators showing where/how the product installs or assembles.",installation_step_or_question,arrow_style; label_text,"{""task"":""edit_product_main_image"",""tactic"":""Explain Install It"",""input_image"":""{{customer_product_image}}"",""objective"":""Answer the setup question directly in the hero image."",""required_user_inputs"":[""installation_step_or_question""],""optional_user_inputs"":[""arrow_style"",""label_text""],""edit_instructions"":{""primary_visual_change"":""Add arrows, labels, or simple step indicators showing where/how the product installs or assembles."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""too many steps"",""technical clutter"",""inaccurate install path""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Explain Install It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Answer the setup question directly in the hero image."",
+  ""required_user_inputs"": [
+    ""installation_step_or_question""
+  ],
+  ""optional_user_inputs"": [
+    ""arrow_style"",
+    ""label_text""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Add arrows, labels, or simple step indicators showing where/how the product installs or assembles."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""too many steps"",
+    ""technical clutter"",
+    ""inaccurate install path""
+  ]
+}",too many steps; technical clutter; inaccurate install path,An install explanation will improve confidence and click preference for setup-sensitive products.,"CTR preference, install clarity, confidence",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-051,51,49,51,Fold It,Pattern/material reveal,"towels, sheets, textiles, reversible fabrics",rigid products or non-foldable items,Create a pattern interrupt and show both sides/material layers.,"Show the textile folded over with alternate side, texture, or pattern visible.",side_or_pattern_to_reveal,fold_style; texture_detail,"{""task"":""edit_product_main_image"",""tactic"":""Fold It"",""input_image"":""{{customer_product_image}}"",""objective"":""Create a pattern interrupt and show both sides/material layers."",""required_user_inputs"":[""side_or_pattern_to_reveal""],""optional_user_inputs"":[""fold_style"",""texture_detail""],""edit_instructions"":{""primary_visual_change"":""Show the textile folded over with alternate side, texture, or pattern visible."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""unnatural fold"",""hiding main pattern"",""messy fabric""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""Fold It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Create a pattern interrupt and show both sides/material layers."",
+  ""required_user_inputs"": [
+    ""side_or_pattern_to_reveal""
+  ],
+  ""optional_user_inputs"": [
+    ""fold_style"",
+    ""texture_detail""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Show the textile folded over with alternate side, texture, or pattern visible."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""unnatural fold"",
+    ""hiding main pattern"",
+    ""messy fabric""
+  ]
+}",unnatural fold; hiding main pattern; messy fabric,A folded presentation will increase visual interest and material understanding.,"CTR preference, texture clarity, standout",Medium,Low,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz
+MI-052,52,50,52,AI Generate Box It,Generated info box,"commoditized, non-giftable utility products without useful packaging",premium or giftable products where box quality matters,Add a basic generated box as an information board for practical buying questions.,"Generate a plain utilitarian box behind the product with useful callouts such as size, color, part number, or keyword.",box_callouts,box_material; box_angle,"{""task"":""edit_product_main_image"",""tactic"":""AI Generate Box It"",""input_image"":""{{customer_product_image}}"",""objective"":""Add a basic generated box as an information board for practical buying questions."",""required_user_inputs"":[""box_callouts""],""optional_user_inputs"":[""box_material"",""box_angle""],""edit_instructions"":{""primary_visual_change"":""Generate a plain utilitarian box behind the product with useful callouts such as size, color, part number, or keyword."",""preserve_product_identity"":true,""preserve_branding_and_label_accuracy"":true,""keep_product_as_main_subject"":true,""composition"":""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",""background"":""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",""lighting"":""Use polished commercial product lighting with realistic shadows and reflections."",""output_goal"":""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""},""avoid"":[""too fancy/premium box"",""unsupported claims"",""fake included packaging expectations""]}","Use the attached customer product image as the source image. Apply the following API-agnostic JSON instructions to create a new main image concept. Preserve the product identity, label accuracy, and the core offer unless the JSON explicitly asks for a visual merchandising addition.
+
+{
+  ""task"": ""edit_product_main_image"",
+  ""tactic"": ""AI Generate Box It"",
+  ""input_image"": ""{{customer_product_image}}"",
+  ""objective"": ""Add a basic generated box as an information board for practical buying questions."",
+  ""required_user_inputs"": [
+    ""box_callouts""
+  ],
+  ""optional_user_inputs"": [
+    ""box_material"",
+    ""box_angle""
+  ],
+  ""edit_instructions"": {
+    ""primary_visual_change"": ""Generate a plain utilitarian box behind the product with useful callouts such as size, color, part number, or keyword."",
+    ""preserve_product_identity"": true,
+    ""preserve_branding_and_label_accuracy"": true,
+    ""keep_product_as_main_subject"": true,
+    ""composition"": ""Create a clean Amazon-style hero image with the product large, clear, and visually dominant."",
+    ""background"": ""Use a clean studio-style background unless the tactic specifically calls for a lifestyle or contextual scene."",
+    ""lighting"": ""Use polished commercial product lighting with realistic shadows and reflections."",
+    ""output_goal"": ""Generate a scroll-stopping main image concept that applies this tactic while retaining the original product identity.""
+  },
+  ""avoid"": [
+    ""too fancy/premium box"",
+    ""unsupported claims"",
+    ""fake included packaging expectations""
+  ]
+}",too fancy/premium box; unsupported claims; fake included packaging expectations,A simple generated info box will improve practical information clarity and click preference.,"CTR preference, question-answer clarity, value perception",High,Medium,Internal ProductPinion prompt-library row. No Amazon compliance gate included per current scope.,https://docs.google.com/document/d/19J3Mfz2ZYdrxMB_e0eKrdLAeGSWMmxC3RJ0U7QGneW8/edit?tab=t.0#heading=h.jaiiudrnl2vz

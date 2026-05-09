@@ -1,0 +1,135 @@
+{
+  "name": "florence-shopper-pp-ranking-launch",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## florence-shopper-pp-ranking-launch\n\n**Skill:** /shopper-interrogator (Skill 3)\n**Trigger:** POST webhook with `x-florence-secret` header\n\nFires the second PP poll: \"Which of these concerns would most stop you from buying?\" Ranks the synthesised objections from #12.\n\n**Input shape:**\n```json\n{\n  \"asin\": \"B07XYZ4231\",\n  \"objections\": [\n    { \"rank\": 1, \"text\": \"Wheels look too thin to support a child\" },\n    { \"rank\": 2, \"text\": \"Sharp edges at the bottom\" }\n  ],\n  \"sample_size\": 100\n}\n```\n\n**Output shape:**\n```json\n{ \"poll_id\": \"abc456\", \"status\": \"launched\", \"expected_fill_minutes\": 15 }\n```\n\n**External dependency:** Product Pinion API. Uses `Florence — Product Pinion API` credential. Replace URL + body shape per Matt's API spec.\n\n**DEMO RISK:** This is the second PP wait. For workshop demo, pre-launch Wed/Thu and use `brain/demo/ranking-pre-poll.json` as cached input.",
+        "height": 460,
+        "width": 480,
+        "color": 4
+      },
+      "id": "0a000004-0000-0000-0000-000000000001",
+      "name": "About this workflow",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-160, 60]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "florence/shopper/pp-ranking-launch",
+        "responseMode": "responseNode",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "id": "0a000004-0000-0000-0000-000000000002",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [240, 300],
+      "webhookId": "florence-shopper-pp-ranking-launch",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REPLACE_WITH_CREDENTIAL_ID",
+          "name": "Florence — Webhook Secret"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://REPLACE_WITH_PRODUCT_PINION_API_BASE/polls",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  type: 'ranked',\n  target_url: 'https://www.amazon.com/dp/' + $json.body.asin,\n  question: 'Which of these concerns would most stop you from buying?',\n  options: ($json.body.objections || []).map(o => o.text),\n  sample_size: $json.body.sample_size || 100\n}) }}",
+        "options": {
+          "timeout": 15000
+        }
+      },
+      "id": "0a000004-0000-0000-0000-000000000003",
+      "name": "Launch PP Ranked Poll",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [540, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REPLACE_WITH_CREDENTIAL_ID",
+          "name": "Florence — Product Pinion API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "poll-id",
+              "name": "poll_id",
+              "value": "={{ $json.id || $json.poll_id }}",
+              "type": "string"
+            },
+            {
+              "id": "status",
+              "name": "status",
+              "value": "launched",
+              "type": "string"
+            },
+            {
+              "id": "fill-mins",
+              "name": "expected_fill_minutes",
+              "value": "={{ $json.expected_fill_minutes || 15 }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0a000004-0000-0000-0000-000000000004",
+      "name": "Shape Output",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [840, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "0a000004-0000-0000-0000-000000000005",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [1140, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Launch PP Ranked Poll", "type": "main", "index": 0 }]]
+    },
+    "Launch PP Ranked Poll": {
+      "main": [[{ "node": "Shape Output", "type": "main", "index": 0 }]]
+    },
+    "Shape Output": {
+      "main": [[{ "node": "Respond", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    { "name": "florence" },
+    { "name": "skill-3-shopper" },
+    { "name": "p0" }
+  ],
+  "meta": {
+    "templateCreatedBy": "florence",
+    "templateVersion": "0.1.0"
+  },
+  "pinData": {}
+}

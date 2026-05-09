@@ -1,0 +1,122 @@
+{
+  "name": "florence-shopper-objection-synthesis",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## florence-shopper-objection-synthesis\n\n**Skill:** /shopper-interrogator (Skill 3)\n**Trigger:** POST webhook with `x-florence-secret` header\n\nClaude reads outputs from #9 (review-mining), #10 (rufus-extract), and #11 (pp-openended once filled), and consolidates 5–7 distinct objection clusters with evidence from each source.\n\n**Input shape:**\n```json\n{\n  \"asin\": \"B07XYZ4231\",\n  \"reviews_objections\": [...],\n  \"rufus_questions\": [...],\n  \"pp_responses\": [\"verbatim 1\", \"verbatim 2\"]\n}\n```\n\n**Output shape:**\n```json\n{\n  \"asin\": \"B07XYZ4231\",\n  \"objections\": [\n    { \"rank\": 1, \"text\": \"...\", \"evidence\": { \"reviews\": [...], \"rufus\": [...], \"pp\": [...] } }\n  ]\n}\n```\n\n**External dependency:** Anthropic API. Uses `Florence — Anthropic API` credential (httpHeaderAuth, header `x-api-key`). Recommended model: `claude-sonnet-4-6` for speed, or `claude-opus-4-7` for quality.",
+        "height": 540,
+        "width": 480,
+        "color": 4
+      },
+      "id": "0a000003-0000-0000-0000-000000000001",
+      "name": "About this workflow",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-160, 60]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "florence/shopper/objection-synthesis",
+        "responseMode": "responseNode",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "id": "0a000003-0000-0000-0000-000000000002",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [240, 300],
+      "webhookId": "florence-shopper-objection-synthesis",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REPLACE_WITH_CREDENTIAL_ID",
+          "name": "Florence — Webhook Secret"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  model: 'claude-sonnet-4-6',\n  max_tokens: 4096,\n  system: \"You are Florence's objection synthesizer. Given competitor reviews, Rufus questions, and ProductPinion verbatim responses for one ASIN, consolidate them into 5–7 distinct objection clusters. Output JSON only: { objections: [{ rank: number, text: string, evidence: { reviews: string[], rufus: string[], pp: string[] } }] }. Rank 1 = most painful objection.\",\n  messages: [{\n    role: 'user',\n    content: 'ASIN: ' + $json.body.asin + '\\n\\nREVIEWS:\\n' + JSON.stringify($json.body.reviews_objections || [], null, 2) + '\\n\\nRUFUS:\\n' + JSON.stringify($json.body.rufus_questions || [], null, 2) + '\\n\\nPP:\\n' + JSON.stringify($json.body.pp_responses || [], null, 2)\n  }]\n}) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "0a000003-0000-0000-0000-000000000003",
+      "name": "Claude Synthesise",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [540, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REPLACE_WITH_CREDENTIAL_ID",
+          "name": "Florence — Anthropic API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "// Parse Claude's JSON output and shape the response.\nconst raw = items[0].json.content?.[0]?.text || '{}';\nlet parsed;\ntry {\n  parsed = JSON.parse(raw);\n} catch (e) {\n  // Attempt to extract a JSON block if Claude wrapped its output\n  const match = raw.match(/\\{[\\s\\S]*\\}/);\n  parsed = match ? JSON.parse(match[0]) : { objections: [] };\n}\nconst asin = $('Webhook').first().json.body.asin;\nreturn [{ json: { asin, objections: parsed.objections || [] } }];"
+      },
+      "id": "0a000003-0000-0000-0000-000000000004",
+      "name": "Parse + Shape",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [840, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "0a000003-0000-0000-0000-000000000005",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [1140, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Claude Synthesise", "type": "main", "index": 0 }]]
+    },
+    "Claude Synthesise": {
+      "main": [[{ "node": "Parse + Shape", "type": "main", "index": 0 }]]
+    },
+    "Parse + Shape": {
+      "main": [[{ "node": "Respond", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    { "name": "florence" },
+    { "name": "skill-3-shopper" },
+    { "name": "p0" }
+  ],
+  "meta": {
+    "templateCreatedBy": "florence",
+    "templateVersion": "0.1.0"
+  },
+  "pinData": {}
+}

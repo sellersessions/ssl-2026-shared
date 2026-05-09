@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Florence — Welcome</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --ink: #152823;
+    --ink-2: #2A3D37;
+    --ink-3: #5E6E68;
+    --cream: #F4F1EA;
+    --cream-2: #E9E5DA;
+    --paper: #FCFAF4;
+    --accent: #1FA877;
+    --accent-2: #178A60;
+    --green-soft: #D6F0E5;
+    --gold: #D4A53A;
+    --gold-soft: #F4E5BC;
+    --red: #B84A3D;
+    --red-soft: #F4D8D2;
+    --slate: #5E6E68;
+    --slate-2: #8C9A93;
+    --slate-3: #B5C0BB;
+    --rule: #D4D0C4;
+    --rule-soft: #E2DED2;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Inter", sans-serif;
+    --mono: ui-monospace, "SF Mono", "Menlo", "Cascadia Mono", "Roboto Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-size: 14px; line-height: 1.6; letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
+  em { font-style: normal; color: var(--accent); font-weight: 700; }
+  strong { color: var(--ink); font-weight: 700; }
+  code { font-family: var(--mono); font-size: 0.9em; background: var(--cream-2); padding: 1px 6px; border-radius: 3px; color: var(--ink); }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 40px 32px 56px; }
+
+  /* ── Hero ───────────────────────────────────────────────────────── */
+  .hero {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 36px 32px;
+    margin-bottom: 28px;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent-2);
+    margin-bottom: 10px;
+  }
+  .hero-title {
+    font-size: 40px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.05;
+    margin-bottom: 18px;
+  }
+  .hero-title em { color: var(--accent); }
+  .hero-tagline { font-size: 17px; line-height: 1.55; color: var(--ink-2); max-width: 680px; }
+  .hero-tagline strong { color: var(--ink); }
+
+  /* ── Section heading ────────────────────────────────────────────── */
+  .h2 {
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.18em; color: var(--slate);
+    margin: 36px 0 14px; padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  /* ── Thesis ─────────────────────────────────────────────────────── */
+  .thesis {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin-bottom: 18px;
+    font-size: 15.5px;
+    color: var(--ink-2);
+  }
+  .thesis p + p { margin-top: 14px; }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .pillar {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 18px 20px;
+  }
+  .pillar-title {
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    letter-spacing: -0.012em; margin-bottom: 6px;
+  }
+  .pillar-body { font-size: 13.5px; color: var(--ink-2); line-height: 1.55; }
+
+  /* ── How ───────────────────────────────────────────────────────── */
+  .how {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 22px 26px;
+    margin-bottom: 14px;
+    font-size: 14.5px;
+    color: var(--ink-2);
+  }
+  .how-list { margin-top: 12px; padding-left: 0; list-style: none; }
+  .how-list li { padding: 7px 0 7px 18px; position: relative; line-height: 1.55; }
+  .how-list li::before {
+    content: "—"; position: absolute; left: 0; color: var(--accent); font-weight: 700;
+  }
+  .how-list li strong { color: var(--ink); }
+  .how-closer { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--rule-soft); font-size: 14px; color: var(--ink-2); }
+  .how-closer strong { color: var(--ink); }
+
+  /* ── Skills grid ───────────────────────────────────────────────── */
+  .skills {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-bottom: 14px;
+  }
+  .skill {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 18px;
+    align-items: baseline;
+  }
+  .skill-cmd {
+    font-family: var(--mono); font-size: 12.5px; font-weight: 600;
+    color: var(--accent-2); background: var(--green-soft);
+    padding: 5px 10px; border-radius: 4px;
+    word-break: break-word; line-height: 1.4;
+  }
+  .skill-desc { font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+  .skill-desc strong { color: var(--ink); }
+  .skills-footer {
+    font-size: 12.5px; color: var(--slate); font-style: italic;
+    text-align: center; padding-top: 6px;
+  }
+
+  /* ── Workshop footer ──────────────────────────────────────────── */
+  .workshop {
+    background: var(--cream-2);
+    border: 1px dashed var(--rule);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 28px 0 14px;
+  }
+  .workshop-eyebrow {
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.16em; color: var(--slate);
+    margin-bottom: 10px;
+  }
+  .workshop-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 12px; letter-spacing: -0.012em; }
+  .workshop-tracks { display: flex; flex-direction: column; gap: 8px; }
+  .workshop-track { font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+  .workshop-track strong { color: var(--ink); }
+  .workshop-track .who { font-family: var(--mono); font-size: 11px; color: var(--accent-2); margin-left: 4px; letter-spacing: 0.04em; }
+
+  /* ── CTA ───────────────────────────────────────────────────────── */
+  .cta {
+    background: var(--green-soft);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    padding: 22px 26px;
+    margin-top: 24px;
+    font-size: 16px;
+    color: var(--ink);
+    text-align: center;
+    line-height: 1.55;
+  }
+  .cta strong { color: var(--accent-2); }
+  .cta code { background: var(--paper); color: var(--accent-2); font-weight: 700; }
+  .cta-meta {
+    font-family: var(--mono); font-size: 11px; color: var(--slate);
+    text-transform: uppercase; letter-spacing: 0.14em;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<!--
+  TEMPLATE — substitute {{placeholders}} before writing to disk.
+  See templates/_placeholders.md § welcome.html for the full contract.
+  Strip this comment before substitution.
+
+  Quick reference:
+    {{version}}              "0.1.13-image-verify-embed"
+    {{install-time}}         "~22 minutes"  (or whatever the current onboard total is)
+
+  All other content is static — Florence renders this template once at the
+  start of onboard before the cockpit emission. Single emission per
+  conversation; not updated during onboarding.
+-->
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Florence · {{version}}</div>
+    <h1 class="hero-title">Your AI <em>Chief Data Analyst</em><br/>for Amazon.</h1>
+    <p class="hero-tagline">
+      Florence runs your CRO loop end-to-end inside Claude Cowork. <strong>Mines reviews. Watches competitors. Generates image variants. Validates them with real shoppers. Logs every project in a tracker you own.</strong> About {{install-time}} to wire her up; runs forever.
+    </p>
+  </section>
+
+  <!-- THESIS -->
+  <div class="h2">Why Florence — AI slop vs. connected systems</div>
+  <div class="thesis">
+    <p>Most CRO today is a stack of one-off prompts and disconnected tools. Midjourney for images. ChatGPT for copy. A spreadsheet for tracking. A Notion page for research. None of them know your brand. None of them remember last week. Every time you start, you start from zero.</p>
+    <p><strong>Florence is the opposite.</strong> She's a connected system — your brand context, your products, your goals, your voice rules, all in one brain that travels with every task. She's the perfect example of <em>scalable systems you own</em>: build a workflow, integrate it with your stack, automate, train on your own brand. Then change it. It's yours.</p>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-title">Own your automations</div>
+      <div class="pillar-body">Florence is yours. The skills, the brain, the artifacts. Fork her, modify her, take her with you. No subscription lock-in.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-title">Own your data</div>
+      <div class="pillar-body">Your <code>brain.json</code> sits on your laptop. The reference library is in your Project Files. Nothing leaves your Cowork instance unless you tell it to.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-title">Scalable</div>
+      <div class="pillar-body">Built using best-in-class CRO methodology + ProductPinion's test library + Higgsfield's image gen. Add your own MCPs. Connect your own tools. She grows with you.</div>
+    </div>
+  </div>
+
+  <!-- HOW -->
+  <div class="h2">How she works</div>
+  <div class="how">
+    Florence is built on the shoulders of:
+    <ul class="how-list">
+      <li><strong>100+ hours of CRO methodology</strong> — distilled from Keplo's client work + Matt Kostan's 2026 ProductPinion interview</li>
+      <li><strong>17 ProductPinion test templates</strong> — calibration data for what actually lifts CTR / CVR</li>
+      <li><strong>Three creative-director references</strong> — main image (1:1), listing slots (1:1), A+ Content (16:9), each with a 13-step canonical flow</li>
+      <li><strong>52-tactic main-image library</strong> — every variant Florence renders cites a specific tactic by number</li>
+      <li><strong>Claude Cowork as the runtime</strong> — plugs into Slack, Notion, Calendar, ProductPinion, Higgsfield, your own MCPs (custom or official)</li>
+    </ul>
+    <div class="how-closer">
+      <strong>How that translates:</strong> when you type <code>optimize-listing B07X</code>, Florence chains 5 SellerApp endpoints, triangulates objections from reviews + Rufus, scores the keyword pool against the metric-to-action quadrant matrix, cites the exact tactic from the library — and emits a portable research artifact you can hand to a designer. Your brain stays current; the next skill picks up where this one left off.
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="h2">What Florence does — example skills</div>
+  <div class="skills">
+    <div class="skill">
+      <div class="skill-cmd">optimize-listing B07X</div>
+      <div class="skill-desc"><strong>Fast CRO audit (~30s).</strong> 5 SellerApp endpoints chained, 3 ranked actions with 40/30/15/15 scores, citations to the reference library.</div>
+    </div>
+    <div class="skill">
+      <div class="skill-cmd">shopper-interrogator B07X</div>
+      <div class="skill-desc"><strong>Full objection-mining loop.</strong> Reviews → Rufus → Pinion polls → image blueprint. The headline workshop demo.</div>
+    </div>
+    <div class="skill">
+      <div class="skill-cmd">render main image for B07X</div>
+      <div class="skill-desc"><strong>5 image variants in ~90s.</strong> Pulls reference image, picks 5 enhancement techniques, generates at 1:1, scores each on 4 axes, iterates failures up to 3 attempts.</div>
+    </div>
+    <div class="skill">
+      <div class="skill-cmd">pinion launch image split</div>
+      <div class="skill-desc"><strong>Validate with real shoppers.</strong> ProductPinion test panel, calibration-cited results, verbatim shopper quotes.</div>
+    </div>
+    <div class="skill">
+      <div class="skill-cmd">idea "test the no-grease angle"</div>
+      <div class="skill-desc"><strong>Capture hypothesis.</strong> Surfaces on the cockpit Ideas tab. Promote to a project when you're ready to act.</div>
+    </div>
+    <div class="skill">
+      <div class="skill-cmd">today</div>
+      <div class="skill-desc"><strong>Daily brief.</strong> Priority pick + signals + "what I'd do today" line. Schedule via Cowork Routine for 8am delivery.</div>
+    </div>
+    <div class="skills-footer">Plus 46 advanced skills in <code>skills/cro-library/</code> for power users.</div>
+  </div>
+
+  <!-- WORKSHOP FOOTER -->
+  <section class="workshop">
+    <div class="workshop-eyebrow">Today's workshop · AI slop vs. connected systems</div>
+    <div class="workshop-title">Florence is one of four sister tracks:</div>
+    <div class="workshop-tracks">
+      <div class="workshop-track"><strong>LoRAs primer</strong> — fine-tune image-gen models on your own products <span class="who">(Matt)</span></div>
+      <div class="workshop-track"><strong>Ethical Prompt Injection skill</strong> — bias your shopper's own LLM toward your brand <span class="who">(Matt)</span></div>
+      <div class="workshop-track"><strong>Systems Consultant Agent</strong> — interview agent that maps your custom system roadmap <span class="who">(Dorian)</span></div>
+      <div class="workshop-track"><strong>Florence</strong> — the connected CRO system you can take home today <span class="who">(Matt + Dorian)</span></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta">
+    Type <code>ready</code> when you are.<br/>
+    <strong>~{{install-time}} from here to a fully-wired Florence.</strong>
+    <div class="cta-meta">Brand → MCPs → Products → Voice → Goals → Done.</div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Florence — Concepts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --ink: #152823;
+    --ink-2: #2A3D37;
+    --ink-3: #5E6E68;
+    --cream: #F4F1EA;
+    --cream-2: #E9E5DA;
+    --paper: #FCFAF4;
+    --accent: #1FA877;
+    --accent-2: #178A60;
+    --green-soft: #D6F0E5;
+    --gold: #D4A53A;
+    --gold-soft: #F4E5BC;
+    --red: #B84A3D;
+    --red-soft: #F4D8D2;
+    --slate: #5E6E68;
+    --slate-2: #8C9A93;
+    --slate-3: #B5C0BB;
+    --rule: #D4D0C4;
+    --rule-soft: #E2DED2;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Inter", sans-serif;
+    --mono: ui-monospace, "SF Mono", "Menlo", "Cascadia Mono", "Roboto Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-size: 13.5px; line-height: 1.55; letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
+  em { font-style: normal; color: var(--accent); font-weight: 700; }
+  strong { color: var(--ink); font-weight: 700; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 32px 28px 56px; }
+
+  header { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 24px; border-bottom: 1px solid var(--rule); margin-bottom: 28px; gap: 24px; }
+  .head-l { min-width: 0; }
+  .eyebrow { font-family: var(--mono); font-size: 10.5px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.16em; color: var(--slate); }
+  .title { font-size: 24px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.18; margin-top: 6px; }
+  .title em { color: var(--accent); }
+  .meta { text-align: right; flex-shrink: 0; }
+  .meta .num { font-size: 24px; font-weight: 800; letter-spacing: -0.025em; }
+  .meta .num em { color: var(--accent); }
+  .meta .lbl { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--slate); margin-top: 4px; }
+
+  .reference {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .reference img { width: 80px; height: 80px; object-fit: contain; background: var(--cream); border: 1px solid var(--rule); border-radius: 4px; }
+  .reference-meta .ref-eyebrow { font-family: var(--mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-2); }
+  .reference-meta .ref-title { font-size: 13.5px; font-weight: 600; color: var(--ink); margin-top: 4px; letter-spacing: -0.012em; }
+  .reference-meta .ref-asin { font-family: var(--mono); font-size: 10.5px; color: var(--slate); margin-top: 3px; letter-spacing: 0.06em; }
+
+  .h2 {
+    font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.18em; color: var(--slate);
+    margin: 28px 0 12px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule-soft);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .h2 .counter { color: var(--ink); font-weight: 700; }
+  .h2:first-of-type { margin-top: 0; }
+
+  .slot-section { margin-bottom: 32px; }
+  .slot-meta {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .slot-meta strong { color: var(--ink); }
+  .slot-meta .aspect { font-family: var(--mono); font-size: 10.5px; color: var(--accent-2); background: var(--green-soft); padding: 2px 8px; border-radius: 3px; letter-spacing: 0.08em; text-transform: uppercase; margin-left: 8px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .concept {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .concept-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--cream);
+    object-fit: contain;
+    border-bottom: 1px solid var(--rule);
+  }
+  .concept-img.aspect-16-9 { aspect-ratio: 16 / 9; }
+  .concept-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .technique-row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .badge {
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 7px; border-radius: 3px;
+  }
+  .badge.technique { color: var(--accent-2); background: var(--green-soft); }
+  .badge.score-good { color: var(--accent-2); background: var(--green-soft); }
+  .badge.score-mid  { color: var(--gold); background: var(--gold-soft); }
+  .badge.score-low  { color: var(--red); background: var(--red-soft); }
+  .badge.attempt    { color: var(--slate); background: var(--cream-2); }
+  .concept-num { font-family: var(--mono); font-size: 10.5px; font-weight: 600; color: var(--slate); letter-spacing: 0.08em; }
+
+  .scores {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+    font-size: 12px;
+  }
+  .scores .sk { color: var(--slate); font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .scores .sv { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink-2); text-align: right; }
+  .scores .sv.fail { color: var(--red); }
+  .scores .sv.warn { color: var(--gold); }
+  .scores .sv.pass { color: var(--accent-2); }
+
+  .citation {
+    border-left: 2px solid var(--accent);
+    padding: 4px 0 4px 10px;
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .citation .src { font-family: var(--mono); font-size: 10px; color: var(--slate-2); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; display: block; }
+
+  details.prompt { font-size: 12px; }
+  details.prompt summary { cursor: pointer; font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--slate); letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 0; user-select: none; }
+  details.prompt summary:hover { color: var(--ink); }
+  details.prompt[open] summary { color: var(--ink); margin-bottom: 6px; }
+  details.prompt .prompt-text { background: var(--cream); border: 1px solid var(--rule-soft); border-radius: 4px; padding: 10px 12px; font-family: var(--mono); font-size: 11px; line-height: 1.55; color: var(--ink-2); white-space: pre-wrap; word-break: break-word; }
+
+  .send-cta {
+    margin-top: 4px;
+    padding: 8px 12px;
+    background: var(--green-soft);
+    border: 1px solid var(--accent-2);
+    border-radius: 4px;
+    color: var(--accent-2);
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: -0.005em;
+  }
+  .send-cta code { font-family: var(--mono); font-size: 11px; background: rgba(255,255,255,0.5); padding: 1px 4px; border-radius: 2px; }
+
+  footer {
+    margin-top: 24px;
+    padding: 18px 22px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    border-radius: 6px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .footer-msg { font-size: 13.5px; font-weight: 500; color: var(--ink-2); }
+  .footer-msg em { color: var(--accent); font-weight: 700; }
+  .footer-meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); white-space: nowrap; }
+
+  .empty-block { background: var(--paper); border: 1px dashed var(--rule); border-radius: 6px; padding: 18px 22px; color: var(--slate-2); font-size: 13px; font-style: italic; text-align: center; }
+</style>
+</head>
+<body>
+
+<!--
+  TEMPLATE — substitute {{placeholders}} before writing to disk.
+  See templates/_placeholders.md § concepts.html for the full contract.
+  Strip this comment before substitution.
+
+  Quick reference (per-product image concept gallery):
+    {{brand}}              "Lumen Sleep"
+    {{asin}}               "B07XYZ4231"
+    {{geo}}                "uk"
+    {{product-title}}      Real product title
+    {{product-image-url}}  Reference image passed to Higgsfield
+    {{model}}              "Higgsfield Soul" / "Flux Kontext" / "Nano Banana Pro"
+    {{concept-count}}      integer
+    {{concept-lbl}}        "Concepts" or "Concept"
+    {{slots-html}}         One <section class="slot-section">…</section> per slot type;
+                           inside, a <div class="grid">…</div> of <div class="concept">…</div> cards.
+    {{footer-msg-html}}    e.g. "<strong>Top pick:</strong> #3 Swing Tag · score 91. <em>Send to pinion to validate.</em>"
+    {{generated-at}}       "Tue 5 May · 16:48"
+-->
+
+<div class="wrap">
+  <header>
+    <div class="head-l">
+      <div class="eyebrow">Image concepts · <span>{{brand}}</span></div>
+      <h1 class="title">{{product-title}}</h1>
+    </div>
+    <div class="meta">
+      <div class="num"><em>{{concept-count}}</em></div>
+      <div class="lbl">{{concept-lbl}}</div>
+    </div>
+  </header>
+
+  <div class="reference">
+    <img src="{{product-image-url}}" alt="{{product-title}}" />
+    <div class="reference-meta">
+      <div class="ref-eyebrow">Reference image — passed to {{model}}</div>
+      <div class="ref-title">{{product-title}}</div>
+      <div class="ref-asin">{{asin}} · {{geo}}</div>
+    </div>
+  </div>
+
+  {{slots-html}}
+
+  <footer>
+    <div class="footer-msg">{{footer-msg-html}}</div>
+    <div class="footer-meta">{{model}} · {{generated-at}}</div>
+  </footer>
+</div>
+
+</body>
+</html>

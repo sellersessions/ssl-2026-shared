@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Florence — Image Strategy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --ink: #152823;
+    --ink-2: #2A3D37;
+    --ink-3: #5E6E68;
+    --cream: #F4F1EA;
+    --cream-2: #E9E5DA;
+    --paper: #FCFAF4;
+    --accent: #1FA877;
+    --accent-2: #178A60;
+    --green-soft: #D6F0E5;
+    --gold: #D4A53A;
+    --gold-soft: #F4E5BC;
+    --red: #B84A3D;
+    --red-soft: #F4D8D2;
+    --slate: #5E6E68;
+    --slate-2: #8C9A93;
+    --slate-3: #B5C0BB;
+    --rule: #D4D0C4;
+    --rule-soft: #E2DED2;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Inter", sans-serif;
+    --mono: ui-monospace, "SF Mono", "Menlo", "Cascadia Mono", "Roboto Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-size: 14px; line-height: 1.55; letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
+  em { font-style: normal; color: var(--accent); font-weight: 700; }
+  strong { color: var(--ink); font-weight: 700; }
+  code { font-family: var(--mono); font-size: 0.9em; background: var(--cream-2); padding: 1px 5px; border-radius: 3px; color: var(--ink); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 28px 56px; }
+
+  header { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 24px; border-bottom: 1px solid var(--rule); margin-bottom: 28px; gap: 24px; flex-wrap: wrap; }
+  .head-l { min-width: 0; }
+  .eyebrow { font-family: var(--mono); font-size: 10.5px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.16em; color: var(--slate); }
+  .title { font-size: 28px; font-weight: 800; letter-spacing: -0.028em; line-height: 1.15; margin-top: 6px; }
+  .title em { color: var(--accent); }
+  .head-meta { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 12px; }
+  .head-stat { font-family: var(--mono); font-size: 11px; color: var(--slate); letter-spacing: 0.06em; }
+  .head-stat strong { color: var(--ink); }
+
+  .lede {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin-bottom: 28px;
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: 1.55;
+  }
+  .lede strong { color: var(--ink); }
+
+  .h2 {
+    font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.18em; color: var(--slate);
+    margin: 32px 0 14px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule-soft);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .h2 .counter { color: var(--ink); font-weight: 700; }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin-bottom: 14px;
+  }
+
+  .pattern-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .pattern-list li {
+    display: grid; grid-template-columns: 28px 1fr; gap: 14px; align-items: baseline;
+    padding: 12px 16px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+  }
+  .pattern-list li.gap { border-left: 3px solid var(--accent); padding-left: 13px; }
+  .pattern-list .num { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--slate); }
+  .pattern-list strong { color: var(--ink); }
+
+  /* ── Directional bets ────────────────────────────────────────────── */
+  .bets-by-surface {
+    display: flex; flex-direction: column; gap: 22px;
+  }
+  .surface-block {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 18px 22px;
+  }
+  .surface-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .surface-name { font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: -0.012em; }
+  .surface-meta { font-family: var(--mono); font-size: 10.5px; color: var(--slate); letter-spacing: 0.08em; text-transform: uppercase; }
+  .surface-meta .ratio { color: var(--accent-2); margin-right: 4px; font-weight: 700; }
+
+  .bet {
+    background: var(--cream);
+    border: 1px solid var(--rule-soft);
+    border-radius: 5px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+  }
+  .bet:last-child { margin-bottom: 0; }
+  .bet-desc { font-size: 14.5px; font-weight: 600; color: var(--ink); margin-bottom: 10px; line-height: 1.5; letter-spacing: -0.01em; }
+  .bet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 10px; }
+  .bet-col { font-size: 12.5px; }
+  .bet-col .lbl {
+    font-family: var(--mono); font-size: 9.5px; color: var(--slate); text-transform: uppercase;
+    letter-spacing: 0.12em; margin-bottom: 6px; display: block;
+  }
+  .bet-col .lbl.bias { color: var(--accent-2); }
+  .bet-col .lbl.avoid { color: var(--red); }
+  .bet-tags { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 4px; }
+  .bet-tags li {
+    font-family: var(--mono); font-size: 10.5px; padding: 3px 8px; border-radius: 3px;
+    background: var(--paper); color: var(--ink-2); border: 1px solid var(--rule-soft);
+    line-height: 1.4;
+  }
+  .bet-tags li.bias { color: var(--accent-2); background: var(--green-soft); border-color: transparent; }
+  .bet-tags li.avoid { color: var(--red); background: var(--red-soft); border-color: transparent; }
+  .bet-evidence {
+    margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--rule-soft);
+    font-size: 12.5px; color: var(--slate); font-style: italic; line-height: 1.5;
+  }
+  .bet-evidence strong { color: var(--ink); font-style: normal; }
+
+  /* ── Prompt adjustments ─────────────────────────────────────────── */
+  .adjustments { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .adjustment {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px 18px;
+  }
+  .adjustment .ad-lbl {
+    font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-2);
+    margin-bottom: 8px;
+  }
+  .adjustment .ad-lbl.avoid { color: var(--red); }
+  .adjustment .ad-meta {
+    font-family: var(--mono); font-size: 9.5px; color: var(--slate-2);
+    text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;
+  }
+  .adjustment .ad-tokens { display: flex; flex-wrap: wrap; gap: 4px; }
+  .adjustment .ad-tokens span {
+    font-family: var(--mono); font-size: 11px; padding: 3px 8px; border-radius: 3px;
+    background: var(--cream); color: var(--ink-2); border: 1px solid var(--rule-soft);
+    line-height: 1.5;
+  }
+  .adjustment.avoid .ad-tokens span { background: var(--red-soft); color: var(--red); border-color: transparent; }
+
+  /* ── Footer ─────────────────────────────────────────────────────── */
+  footer {
+    margin-top: 32px;
+    padding: 18px 22px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    border-radius: 6px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .footer-msg { font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+  .footer-msg strong { color: var(--ink); }
+  .footer-msg em { color: var(--accent); font-weight: 700; }
+  .footer-meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); white-space: nowrap; }
+
+  .empty-block { background: var(--paper); border: 1px dashed var(--rule); border-radius: 6px; padding: 18px 22px; color: var(--slate-2); font-size: 13px; font-style: italic; text-align: center; }
+</style>
+</head>
+<body>
+
+<!--
+  TEMPLATE — substitute {{placeholders}} before writing to disk.
+  See templates/_placeholders.md § image-strategy.html for the full contract.
+  Strip this comment before substitution.
+
+  Quick reference:
+    {{brand}}                       brand.business.brand
+    {{category}}                    e.g. "Supplements"
+    {{main-keyword}}                e.g. "ashwagandha capsules"
+    {{geo}}                         e.g. "uk"
+    {{competitors-analysed-count}}  integer
+    {{lede-html}}                   one-paragraph headline of the directional bet
+    {{table-stakes-html}}           <li class="...">...</li> per pattern
+    {{differentiation-gaps-html}}   <li class="gap">...</li> per gap
+    {{bets-by-surface-html}}        full <section class="surface-block">…</section> per surface (main / listing / aplus)
+    {{prompt-adjustments-html}}     4 .adjustment cards (scene / palette / mood / anti-patterns)
+    {{footer-msg-html}}             "What I'd render today: …" closing line
+    {{last-updated}}                ISO 8601 -> human (e.g. "Thu 8 May · 22:48")
+-->
+
+<div class="wrap">
+  <header>
+    <div class="head-l">
+      <div class="eyebrow">Image strategy · <span>{{brand}}</span></div>
+      <h1 class="title">Direction for <em>{{category}}</em></h1>
+      <div class="head-meta">
+        <div class="head-stat"><strong>Main keyword:</strong> {{main-keyword}}</div>
+        <div class="head-stat"><strong>Marketplace:</strong> {{geo}}</div>
+        <div class="head-stat"><strong>Bestsellers analysed:</strong> {{competitors-analysed-count}}</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="lede">{{lede-html}}</div>
+
+  <div class="h2">Table stakes <span class="counter">what every winner does</span></div>
+  <ul class="pattern-list">{{table-stakes-html}}</ul>
+
+  <div class="h2">Differentiation gaps <span class="counter">opportunity space</span></div>
+  <ul class="pattern-list">{{differentiation-gaps-html}}</ul>
+
+  <div class="h2">Directional bets <span class="counter">what Florence will lean into</span></div>
+  <div class="bets-by-surface">{{bets-by-surface-html}}</div>
+
+  <div class="h2">Prompt adjustments <span class="counter">tokens injected into every Higgsfield prompt</span></div>
+  <div class="adjustments">{{prompt-adjustments-html}}</div>
+
+  <footer>
+    <div class="footer-msg">{{footer-msg-html}}</div>
+    <div class="footer-meta">{{last-updated}}</div>
+  </footer>
+</div>
+
+</body>
+</html>

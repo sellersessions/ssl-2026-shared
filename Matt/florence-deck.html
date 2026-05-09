@@ -1,0 +1,1786 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Florence — Seller Sessions Workshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script type="application/json" id="speaker-notes">
+[]
+</script>
+
+<style>
+  /* ============================================================
+     FLORENCE — Seller Sessions deck
+     1920×1080. Pinion Green palette. Fraunces / Inter / JBMono.
+     Slides are <section>s under <deck-stage>.
+     ============================================================ */
+  :root {
+    --bg:        #F4F1EA;
+    --bg-soft:   #E9E5DA;
+    --paper:    #FCFAF4;
+    --ink:      #152823;
+    --ink-2:    #2A3D37;
+    --ink-3:    #5E6E68;
+    --rule:     #D4D0C4;
+    --accent:   #1FA877;   /* mint, deepened for contrast */
+    --accent-2: #2BC4D8;   /* cyan */
+    --warn:     #D4A53A;
+
+    --serif: "Fraunces", "Times New Roman", serif;
+    --sans:  "Inter", system-ui, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #000; }
+
+  deck-stage { display: block; width: 100%; height: 100vh; background: #000; }
+
+  /* Each slide is 1920×1080 by default (deck-stage handles scaling). */
+  section[data-slide] {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    overflow: hidden;
+  }
+
+  /* ── Common chrome ─────────────────────────────────── */
+  .chrome-tl, .chrome-tr, .chrome-bl, .chrome-br {
+    position: absolute;
+    font-family: var(--mono);
+    font-size: 16px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .chrome-tl { top: 56px; left: 72px; display: flex; align-items: center; gap: 14px; }
+  .chrome-tr { top: 56px; right: 72px; }
+  .chrome-bl { bottom: 56px; left: 72px; }
+  .chrome-br { bottom: 56px; right: 72px; font-variant-numeric: tabular-nums; }
+
+  .wm-mini {
+    display: inline-flex; align-items: center; gap: 0.4em;
+    font-family: var(--sans); font-weight: 600; font-size: 14px;
+    letter-spacing: 0.18em; color: var(--ink);
+  }
+  .wm-mini::after {
+    content: ""; display: inline-block;
+    width: 0.5em; height: 1.05em; background: var(--accent);
+    transform: translateY(0.06em);
+  }
+
+  /* monogram inline svg helper */
+  .mono-mark { width: 28px; height: 28px; flex-shrink: 0; }
+
+  /* ── Type roles ────────────────────────────────────── */
+  .eyebrow {
+    font-family: var(--mono); font-size: 18px;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-3); margin: 0 0 32px;
+    display: flex; gap: 16px; align-items: center;
+  }
+  .eyebrow::before {
+    content: ""; display: block; width: 36px; height: 1px;
+    background: var(--accent);
+  }
+  .eyebrow.no-bar::before { display: none; }
+
+  h1.display {
+    font-family: var(--serif); font-weight: 300;
+    font-size: 168px; line-height: .92;
+    letter-spacing: -0.03em; margin: 0;
+  }
+  h1.display em { font-style: italic; color: var(--accent); font-weight: 400; }
+
+  h2.title {
+    font-family: var(--serif); font-weight: 300;
+    font-size: 124px; line-height: .96;
+    letter-spacing: -0.025em; margin: 0;
+  }
+  h2.title em { font-style: italic; color: var(--accent); font-weight: 400; }
+
+  h3.section-num {
+    font-family: var(--mono); font-size: 22px;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 24px;
+    font-weight: 400;
+  }
+
+  p.lede {
+    font-family: var(--serif); font-style: italic;
+    font-weight: 300; font-size: 48px;
+    line-height: 1.3; letter-spacing: -0.005em;
+    color: var(--ink-2); max-width: 26ch; margin: 0;
+  }
+
+  p.body {
+    font-family: var(--sans); font-size: 26px;
+    line-height: 1.5; color: var(--ink-2);
+    max-width: 32ch; margin: 0 0 24px;
+  }
+
+  .footnote {
+    font-family: var(--mono); font-size: 14px;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  /* ── Layout helpers ────────────────────────────────── */
+  .pad { padding: 140px 120px; height: 100%; }
+  .center { display: flex; flex-direction: column; justify-content: center; height: 100%; padding: 0 120px; }
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 96px; height: 100%; padding: 140px 120px; }
+  .twocol.narrow-left { grid-template-columns: 0.8fr 1fr; }
+
+  /* ── Decorative rose stamp ─────────────────────────── */
+  .rose {
+    position: absolute;
+    pointer-events: none;
+    color: var(--accent);
+  }
+
+  /* ── Section divider slide ─────────────────────────── */
+  section[data-slide].divider {
+    background: var(--ink); color: var(--paper);
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 0 120px;
+  }
+  .divider .num {
+    font-family: var(--mono); font-size: 22px;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 32px;
+  }
+  .divider h2 {
+    font-family: var(--serif); font-weight: 300;
+    font-size: 156px; line-height: .92;
+    letter-spacing: -0.03em; margin: 0;
+    color: var(--paper);
+  }
+  .divider h2 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .divider .footnote { color: rgba(252,250,244,.5); margin-top: 48px; }
+
+  /* ── Quote block ───────────────────────────────────── */
+  .pullquote {
+    font-family: var(--serif); font-style: italic;
+    font-weight: 300; font-size: 92px;
+    line-height: 1.08; letter-spacing: -0.02em;
+    color: var(--ink); max-width: 24ch;
+  }
+  .pullquote em { color: var(--accent); font-weight: 400; }
+
+  /* ── Cards / tables ────────────────────────────────── */
+  .card-grid {
+    display: grid; gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .card {
+    background: var(--paper);
+    padding: 40px 36px;
+    display: flex; flex-direction: column;
+  }
+  .card .h {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 36px; line-height: 1.1;
+    letter-spacing: -0.01em; margin: 0 0 14px;
+  }
+  .card .h em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .card .b {
+    font-family: var(--sans); font-size: 19px;
+    line-height: 1.5; color: var(--ink-2);
+    margin: 0;
+  }
+  .card .l {
+    font-family: var(--mono); font-size: 13px;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 22px;
+    font-weight: 500;
+  }
+
+  /* ── List patterns ─────────────────────────────────── */
+  ul.clean {
+    list-style: none; padding: 0; margin: 0;
+    font-family: var(--sans); font-size: 26px;
+    line-height: 1.5; color: var(--ink-2);
+  }
+  ul.clean li { padding: 18px 0; border-top: 1px solid var(--rule); }
+  ul.clean li:first-child { border-top: 0; }
+  ul.clean li b { color: var(--ink); font-weight: 600; display: block; font-family: var(--serif); font-size: 32px; font-weight: 400; letter-spacing: -.01em; margin-bottom: 4px; }
+
+  /* ── Big stat ──────────────────────────────────────── */
+  .stat {
+    font-family: var(--serif); font-weight: 300;
+    font-size: 260px; line-height: .9;
+    letter-spacing: -0.04em; color: var(--ink);
+  }
+  .stat em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .stat-cap {
+    font-family: var(--mono); font-size: 18px;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-3); margin-bottom: 32px;
+  }
+
+  /* ── Terminal panel ────────────────────────────────── */
+  .term {
+    background: #0E1A16; color: #dce8e3;
+    font-family: var(--mono); font-size: 18px;
+    line-height: 1.7; padding: 36px 44px;
+    border-radius: 6px; overflow: hidden;
+    border: 1px solid #243832;
+    box-shadow: 0 30px 80px rgba(0,0,0,.18);
+  }
+  .term .prompt-line { color: #fcfaf4; }
+  .term .prompt { color: var(--accent); }
+  .term .mute { color: #7e9089; }
+  .term .h    { color: #fcfaf4; font-weight: 500; margin-top: 6px; }
+  .term .sub  { color: #7e9089; font-size: 16px; }
+  .term .reco { color: #fcfaf4; font-weight: 500; margin-top: 8px; }
+  .term .reco-arrow { color: var(--accent); }
+  .term .blank { height: 8px; }
+  .term .bar  {
+    color: #56685f; font-size: 13px; letter-spacing: .14em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #243832; padding-bottom: 14px;
+    margin-bottom: 16px; display: flex; gap: 16px; align-items: center;
+  }
+  .term .bar .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+  /* ── Skill icon ────────────────────────────────────── */
+  .skill-icon {
+    width: 64px; height: 64px;
+    display: grid; place-items: center;
+    background: var(--ink); color: var(--accent);
+    border-radius: 4px;
+    margin-bottom: 28px;
+  }
+
+  /* ── Schedule timeline (rhythm slide) ──────────────── */
+  .week {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .week .day {
+    background: var(--paper);
+    padding: 32px 28px;
+    min-height: 320px;
+    display: flex; flex-direction: column;
+  }
+  .week .day .when {
+    font-family: var(--mono); font-size: 13px;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .week .day .what {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 28px; line-height: 1.15;
+    letter-spacing: -0.01em; margin: 0 0 14px;
+    color: var(--ink);
+  }
+  .week .day .desc {
+    font-family: var(--sans); font-size: 17px;
+    line-height: 1.5; color: var(--ink-2); margin: 0;
+  }
+
+  /* ── Architecture tree ─────────────────────────────── */
+  .tree {
+    font-family: var(--mono); font-size: 20px;
+    line-height: 1.85; color: var(--ink-2);
+    background: var(--paper); border: 1px solid var(--rule);
+    padding: 36px 40px; border-radius: 4px;
+  }
+  .tree .root { color: var(--ink); font-weight: 500; }
+  .tree .dir  { color: var(--accent); font-weight: 500; }
+  .tree .cmt  { color: var(--ink-3); }
+
+  /* ── Two-up signature ──────────────────────────────── */
+  .signature {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+  }
+  .signature .person .name {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 48px; letter-spacing: -.01em;
+    margin: 0 0 8px;
+  }
+  .signature .person .role {
+    font-family: var(--sans); font-size: 22px;
+    color: var(--ink-2); margin: 0 0 6px;
+  }
+  .signature .person .org {
+    font-family: var(--mono); font-size: 14px;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ── Pitch slide ───────────────────────────────────── */
+  .pitch {
+    font-family: var(--serif); font-weight: 300;
+    font-size: 84px; line-height: 1.1;
+    letter-spacing: -0.02em; color: var(--ink);
+    max-width: 24ch;
+  }
+  .pitch em { font-style: italic; color: var(--accent); font-weight: 400; }
+
+  /* ── Tag chips ─────────────────────────────────────── */
+  .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+  .tag {
+    font-family: var(--mono); font-size: 14px;
+    letter-spacing: .14em; text-transform: uppercase;
+    padding: 8px 14px; border: 1px solid var(--ink);
+    color: var(--ink); border-radius: 999px;
+  }
+  .tag.solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .tag.accent { border-color: var(--accent); color: var(--accent); }
+
+  /* ── Co-brand placeholders ─────────────────────────── */
+  .cobrand {
+    display: flex; gap: 28px; align-items: center;
+    font-family: var(--serif); font-weight: 500;
+  }
+  .cobrand .slot {
+    padding: 12px 22px;
+    border: 1px dashed var(--ink-3);
+    color: var(--ink); font-size: 26px;
+    letter-spacing: -.01em;
+  }
+
+  /* ── Pain table ────────────────────────────────────── */
+  .pain {
+    width: 100%; border-collapse: collapse;
+    font-family: var(--sans);
+  }
+  .pain th, .pain td {
+    text-align: left; padding: 24px 28px;
+    border-top: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .pain th {
+    font-family: var(--mono); font-size: 13px;
+    letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 500;
+    border-top: 0; padding-bottom: 14px;
+  }
+  .pain td.pain-h {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 28px; letter-spacing: -.01em;
+    color: var(--ink); width: 28%;
+  }
+  .pain td.pain-do {
+    font-size: 19px; color: var(--ink-2); width: 32%; line-height: 1.4;
+  }
+  .pain td.pain-broken {
+    font-size: 19px; color: var(--ink-2); width: 40%; line-height: 1.4;
+    font-style: italic;
+  }
+  .pain td.pain-broken b {
+    font-style: normal; font-weight: 500; color: var(--accent);
+  }
+
+  /* ── Skill slide layout ────────────────────────────── */
+  .skill-layout {
+    display: grid; grid-template-columns: 0.9fr 1.1fr;
+    gap: 96px; height: 100%;
+    padding: 140px 120px;
+  }
+  .skill-layout .left .head {
+    font-family: var(--mono); font-size: 16px;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 24px;
+  }
+  .skill-layout .left h2 {
+    font-family: var(--serif); font-weight: 300;
+    font-size: 84px; line-height: .98;
+    letter-spacing: -0.02em; margin: 0 0 36px;
+  }
+  .skill-layout .left h2 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .skill-layout .left .tag-line {
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: 32px; line-height: 1.35; color: var(--ink-2);
+    max-width: 16ch; margin-bottom: 36px;
+  }
+  .skill-layout .left .solves {
+    font-family: var(--sans); font-size: 18px;
+    color: var(--ink-3); border-left: 2px solid var(--accent);
+    padding: 14px 20px; max-width: 36ch;
+    background: var(--bg-soft); font-style: italic;
+  }
+  .skill-layout .left .solves b { color: var(--ink); font-style: normal; font-weight: 500; }
+  .skill-layout .right ul {
+    list-style: none; padding: 0; margin: 0;
+    font-family: var(--sans); font-size: 22px; line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .skill-layout .right ul li {
+    padding: 22px 0; border-top: 1px solid var(--rule);
+    display: flex; gap: 18px; align-items: flex-start;
+  }
+  .skill-layout .right ul li::before {
+    content: ""; display: block; width: 12px; height: 12px;
+    background: var(--accent); margin-top: 12px; flex-shrink: 0;
+    border-radius: 1px;
+  }
+  .skill-layout .right ul li:first-child { border-top: 0; }
+
+  /* ── Big donut for prioritization ──────────────────── */
+  .donut-wrap {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .formula {
+    font-family: var(--sans); font-size: 22px; line-height: 1.6;
+  }
+  .formula .row {
+    display: grid; grid-template-columns: 80px 1fr;
+    gap: 24px; padding: 24px 0;
+    border-top: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .formula .row:first-child { border-top: 0; }
+  .formula .pct {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 56px; letter-spacing: -.01em;
+    color: var(--accent); font-variant-numeric: tabular-nums;
+  }
+  .formula .row .label b {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 32px; color: var(--ink);
+    display: block; margin-bottom: 4px;
+    letter-spacing: -.01em;
+  }
+  .formula .row .label span { color: var(--ink-2); font-size: 20px; }
+
+  /* ── Pitch divider variant — light ─────────────────── */
+  .pitch-card {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 96px;
+    border-radius: 4px;
+  }
+  .pitch-card .pitch { color: var(--paper); }
+  .pitch-card .pitch em { color: var(--accent); }
+
+  /* ── Surface table (where she lives) ───────────────── */
+  .surface {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+  }
+  .surface th, .surface td {
+    text-align: left; padding: 22px 28px;
+    border-top: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .surface th {
+    font-family: var(--mono); font-size: 13px;
+    letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 500;
+    padding-bottom: 14px; border-top: 0;
+  }
+  .surface td.s-h {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 26px; letter-spacing: -.01em;
+    color: var(--ink); width: 32%;
+  }
+  .surface td.s-h .sub {
+    display: block; font-family: var(--mono); font-size: 13px;
+    letter-spacing: .12em; color: var(--accent); text-transform: uppercase;
+    margin-top: 4px; font-weight: 500;
+  }
+  .surface td.s-d { font-size: 19px; color: var(--ink-2); line-height: 1.45; }
+
+  /* ── Connections diagram ───────────────────────────── */
+  .conn-grid {
+    display: grid; grid-template-columns: 1fr 200px 1fr; gap: 56px;
+    align-items: center;
+  }
+  .conn-col h4 {
+    font-family: var(--mono); font-size: 14px;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 24px; font-weight: 500;
+  }
+  .conn-col .item {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 28px; letter-spacing: -.01em;
+    padding: 16px 0; border-top: 1px solid var(--rule);
+    color: var(--ink);
+  }
+  .conn-col .item:first-of-type { border-top: 0; }
+  .conn-col .item span {
+    display: block; font-family: var(--sans); font-size: 16px;
+    color: var(--ink-3); margin-top: 4px;
+  }
+  .conn-mark {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+
+  /* ── Q&A ───────────────────────────────────────────── */
+  .qa-mark {
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: 360px; line-height: 1; color: var(--accent);
+    letter-spacing: -.05em;
+  }
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 01 — TITLE
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="01 Title">
+  <!-- Big rose stamp top-right -->
+  <div class="rose" style="top: -120px; right: -120px;">
+    <svg width="900" height="900" viewBox="0 0 120 120" style="opacity:.14">
+      <!-- 12-wedge polar area, uneven slices -->
+      <g id="rose-wedges-1"></g>
+    </svg>
+  </div>
+
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">Seller Sessions · 2026</div>
+
+  <div class="center" style="position:relative; z-index:2;">
+    <div class="eyebrow no-bar" style="margin-bottom: 56px;">Workshop · Track 03 · Tools</div>
+    <h1 class="display">Florence<span style="color:var(--accent); font-style: italic; font-weight: 400;">.</span></h1>
+    <p class="lede" style="font-size: 56px; max-width: 30ch; margin-top: 56px;">
+      Your chief data analyst<br>for Amazon.
+    </p>
+  </div>
+
+  <div class="chrome-bl">
+    <div class="cobrand">
+      <span class="slot">Keplo</span>
+      <span style="color: var(--ink-3); font-family: var(--mono); font-size: 14px;">×</span>
+      <span class="slot">Product Pinion</span>
+    </div>
+  </div>
+  <div class="chrome-br">florence.dev · open source</div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 02 — DIVIDER 01: MEET FLORENCE
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="02 Divider — Meet Florence" class="divider">
+  <div class="num">Section 01</div>
+  <h2>Meet <em>Florence.</em></h2>
+  <div class="footnote">Born 1820. Statistician. Saved 38% of soldiers nobody else could.</div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 03 — THE NIGHTINGALE STORY
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="03 The Nightingale story">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">01 · Meet Florence</div>
+
+  <div class="twocol">
+    <div style="display:flex; flex-direction:column; justify-content:center;">
+      <h3 class="section-num">A brief history</h3>
+      <h2 class="title">Most people remember her as a <em>nurse.</em></h2>
+      <p class="lede" style="margin-top: 48px; font-size: 36px;">
+        She was actually one of Europe's foremost statisticians.
+      </p>
+    </div>
+    <div style="display:flex; flex-direction:column; justify-content:center; gap: 28px;">
+      <p class="body" style="font-size: 28px; max-width: 28ch;">
+        During the Crimean War, she didn't just nurse soldiers — she tracked <b style="color:var(--ink);">why</b> they were dying.
+      </p>
+      <p class="body" style="font-size: 28px; max-width: 28ch;">
+        She invented the polar-area "rose diagram" to make the data undeniable. She showed Queen Victoria. The British Army overhauled its sanitation system.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 04 — THE BIG STAT
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="04 40 to 2 percent">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">01 · Meet Florence</div>
+
+  <!-- Decorative rose bottom-right -->
+  <div class="rose" style="bottom: -160px; right: -160px;">
+    <svg width="800" height="800" viewBox="0 0 120 120" style="opacity:.10">
+      <g id="rose-wedges-2"></g>
+    </svg>
+  </div>
+
+  <div class="center" style="position:relative; z-index:2;">
+    <div class="stat-cap">Hospital mortality, Crimean War</div>
+    <div class="stat" style="display: flex; align-items: baseline; gap: 56px;">
+      <span>40<span style="font-size: 0.32em; color: var(--ink-3); font-style: italic; vertical-align: 0.35em; margin-left: 0.04em;">%</span></span>
+      <span style="font-size: 0.28em; color: var(--ink-3); font-family: var(--mono); font-style: normal; letter-spacing: 0;">→</span>
+      <span><em>2<span style="font-size: 0.32em; vertical-align: 0.35em; margin-left: 0.04em;">%</span></em></span>
+    </div>
+    <p class="lede" style="margin-top: 56px; font-size: 40px; max-width: 36ch;">
+      She didn't just collect data. She turned it into decisions that saved lives.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 05 — YOUR FLORENCE
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="05 Your Florence">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">01 · Meet Florence</div>
+
+  <div class="center">
+    <h3 class="section-num">Your Florence</h3>
+    <h2 class="title">She does the same — for your <em>Amazon business.</em></h2>
+
+    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-top: 80px;">
+      <div class="card" style="padding: 36px 32px;">
+        <div class="l">She watches</div>
+        <div class="b" style="font-size: 22px;">Your competitors. Their images. Their prices. Their SQP movements.</div>
+      </div>
+      <div class="card" style="padding: 36px 32px;">
+        <div class="l">She interrogates</div>
+        <div class="b" style="font-size: 22px;">Real shoppers, on a real panel, with the question that matters.</div>
+      </div>
+      <div class="card" style="padding: 36px 32px;">
+        <div class="l">She tests</div>
+        <div class="b" style="font-size: 22px;">Your images against the field. Real clicks, real reasons.</div>
+      </div>
+      <div class="card" style="padding: 36px 32px;">
+        <div class="l">She tells you</div>
+        <div class="b" style="font-size: 22px;">Exactly what to do next — and why it matters this week.</div>
+      </div>
+    </div>
+
+    <p class="lede" style="margin-top: 64px; font-size: 32px; max-width: 60ch; font-style: normal; font-family: var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); font-size: 18px;">
+      No login · No subscription · No vendor lock-in · Just code you own
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 06 — DIVIDER 02
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="06 Divider — Why we are building it" class="divider">
+  <div class="num">Section 02</div>
+  <h2>Why we are <em>building</em> this.</h2>
+  <div class="footnote">Three things changed. The category hasn't caught up.</div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 07 — THE HONEST PROBLEM
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="07 The honest problem">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">02 · Why we're building it</div>
+
+  <div class="pad" style="padding-top: 180px;">
+    <h3 class="section-num">The honest problem with Amazon AI today</h3>
+    <h2 class="title" style="font-size: 84px; max-width: 22ch; margin-bottom: 64px;">
+      Every Amazon "AI tool" looks the <em>same.</em>
+    </h2>
+
+    <ul class="clean" style="max-width: none; columns: 2; column-gap: 96px; font-size: 24px;">
+      <li style="break-inside: avoid;">
+        <b>A dashboard, a blue gradient, a glowing brain icon, $99/month.</b>
+        Most are wrappers around ChatGPT that rewrite your bullets and call it optimization.
+      </li>
+      <li style="break-inside: avoid;">
+        <b>They don't use your data.</b>
+        They don't know your competitors. They don't measure if their suggestions actually move CVR.
+      </li>
+      <li style="break-inside: avoid;">
+        <b>They're rented, not owned.</b>
+        Cancel the subscription, lose the work. Lose the history. Lose the memory.
+      </li>
+      <li style="break-inside: avoid;">
+        <b>They wait for you to ask.</b>
+        A chatbot. Not an analyst. Nobody on your team is paid by the prompt.
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 08 — THREE THINGS CHANGED
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="08 Three things changed">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">02 · Why we're building it</div>
+
+  <div class="pad" style="padding-top: 180px;">
+    <h3 class="section-num">The shift we're betting on</h3>
+    <h2 class="title" style="font-size: 76px; max-width: 22ch; margin-bottom: 80px;">
+      Three things changed in the last <em>18 months.</em>
+    </h2>
+
+    <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="card">
+        <div class="l">01</div>
+        <div class="h"><em>Claude Code</em> became real.</div>
+        <p class="b">Sellers can run agentic workflows on their own machines. No SaaS required.</p>
+      </div>
+      <div class="card">
+        <div class="l">02</div>
+        <div class="h"><em>MCP</em> made tool integration trivial.</div>
+        <p class="b">Florence can talk to Amazon, Product Pinion, Slack, your spreadsheets — from one place.</p>
+      </div>
+      <div class="card">
+        <div class="l">03</div>
+        <div class="h"><em>Agents</em> > chatbots.</div>
+        <p class="b">A chatbot waits. An agent has a goal: grow sales. It gathers data, prioritizes, and tells you what matters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 09 — WHAT WE WANT TO PROVE (pull quote)
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="09 What we want to prove">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">02 · Why we're building it</div>
+
+  <div class="center">
+    <h3 class="section-num">What we want to prove</h3>
+    <p class="pullquote">
+      You can build a <em>Chief Data Analyst</em> for your Amazon business — better than any SaaS — for the cost of a Claude subscription.
+    </p>
+    <p class="lede" style="margin-top: 56px; font-size: 36px; max-width: none;">
+      And give the code <em style="color:var(--accent); font-style: italic;">away.</em>
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 10 — DIVIDER 03
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="10 Divider — What is the need" class="divider">
+  <div class="num">Section 03</div>
+  <h2>What sellers actually <em>struggle</em> with.</h2>
+  <div class="footnote">5 years, hundreds of brands. The same five patterns.</div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 11 — PAIN TABLE
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="11 Pain table">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">03 · The need</div>
+
+  <div class="pad" style="padding-top: 180px;">
+    <h3 class="section-num">The same patterns show up</h3>
+    <h2 class="title" style="font-size: 64px; margin-bottom: 56px; max-width: 28ch;">
+      Five pains. Five workarounds. None of them <em>work.</em>
+    </h2>
+
+    <table class="pain">
+      <thead><tr>
+        <th>The pain</th>
+        <th>What sellers do today</th>
+        <th>What's broken</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="pain-h">CTR is dropping and I don't know why</td>
+          <td class="pain-do">Stare at the search page once a quarter</td>
+          <td class="pain-broken">Competitors test images <b>weekly</b>; you find out in the rear-view</td>
+        </tr>
+        <tr>
+          <td class="pain-h">My main image is "fine"</td>
+          <td class="pain-do">Set it once, leave it for 2 years</td>
+          <td class="pain-broken">No feedback loop; <b>no idea</b> if it actually wins on the SERP</td>
+        </tr>
+        <tr>
+          <td class="pain-h">My secondary images don't convert</td>
+          <td class="pain-do">Guess what shoppers care about</td>
+          <td class="pain-broken">Build images for objections that <b>aren't the real objections</b></td>
+        </tr>
+        <tr>
+          <td class="pain-h">Too many things to fix</td>
+          <td class="pain-do">Whoever shouts loudest wins</td>
+          <td class="pain-broken">No prioritization, <b>no math</b>, no ROI lens</td>
+        </tr>
+        <tr>
+          <td class="pain-h">I can't tell what's working</td>
+          <td class="pain-do">Pull reports manually, eyeball trends</td>
+          <td class="pain-broken">Data lives in 6 tools, <b>never gets synthesized</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 12 — UNIFYING NEED (pull quote)
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="12 The unifying need">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">03 · The need</div>
+
+  <div class="center">
+    <h3 class="section-num">The unifying need</h3>
+    <p class="pullquote" style="font-size: 96px; max-width: 22ch;">
+      Sellers don't need more data. They need <em>prioritized decisions</em>.
+    </p>
+    <p class="lede" style="margin-top: 48px; font-size: 36px;">
+      Backed by evidence. Delivered proactively.
+    </p>
+    <p class="lede" style="margin-top: 24px; font-size: 36px; font-style: normal; color: var(--ink); font-family: var(--mono); letter-spacing: .04em; text-transform: uppercase; font-size: 18px;">
+      That's what Florence is.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 13 — DIVIDER 04
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="13 Divider — Main use cases" class="divider">
+  <div class="num">Section 04</div>
+  <h2>Four <em>skills.</em></h2>
+  <div class="footnote">Each one maps to a workflow. The prioritization layer ties them together.</div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 14 — SKILL 1: MARKET INFORMANT
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="14 Skill 01 — Market Informant">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">04 · Skills</div>
+
+  <div class="skill-layout">
+    <div class="left">
+      <div class="head">Skill 01 of 04</div>
+      <h2>Market <em>Informant.</em></h2>
+      <div class="tag-line">She watches your competitors so you don't have to.</div>
+      <div class="solves">
+        <b>Solves:</b> "I never see competitor changes coming until my CTR has already dropped."
+      </div>
+    </div>
+    <div class="right" style="display:flex; flex-direction:column; justify-content:center;">
+      <ul>
+        <li>Monitors competitor ASINs on a schedule</li>
+        <li><b style="color:var(--ink); font-weight:600;">Triggers on SQP CVR/CTR movement</b> — sales signal first, then forensics</li>
+        <li>Flags meaningful price changes</li>
+        <li>Pushes a Slack alert: what changed, what to investigate, what action to consider</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 15 — SKILL 2: VARIATION ENGINE
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="15 Skill 02 — Variation Engine">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">04 · Skills</div>
+
+  <div class="skill-layout">
+    <div class="left">
+      <div class="head">Skill 02 of 04</div>
+      <h2>Variation <em>Engine.</em></h2>
+      <div class="tag-line">She redesigns your main image with proven CTR techniques.</div>
+      <div class="solves">
+        <b>Solves:</b> "I set my main image two years ago and have no idea if it's still the best version."
+      </div>
+    </div>
+    <div class="right" style="display:flex; flex-direction:column; justify-content:center;">
+      <ul>
+        <li>Analyzes your current main image — angle, background, text, whitespace, lifestyle vs. studio</li>
+        <li>Cross-references a curated database of <b style="color:var(--ink); font-weight:600;">CTR-boosting techniques</b></li>
+        <li>Returns 3–5 prioritized recommendations with rationale</li>
+        <li>Generates a mockup or a ready-to-paste prompt for ChatGPT / Gemini</li>
+        <li>Designed to test a new variation each month</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 16 — SKILL 3: SHOPPER INTERROGATOR
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="16 Skill 03 — Shopper Interrogator">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">04 · Skills · the live demo</div>
+
+  <div class="skill-layout">
+    <div class="left">
+      <div class="head">Skill 03 of 04 · live demo skill</div>
+      <h2>Shopper <em>Interrogator.</em></h2>
+      <div class="tag-line">She uncovers the real objections stopping shoppers from buying.</div>
+      <div class="solves">
+        <b>Solves:</b> "I'm building secondary images around what I think buyers care about — not what they actually do."
+      </div>
+    </div>
+    <div class="right" style="display:flex; flex-direction:column; justify-content:center;">
+      <ul>
+        <li>Mines competitor 1- and 3-star reviews for recurring objections</li>
+        <li>Pulls Amazon Rufus questions</li>
+        <li>Runs an open-ended Product Pinion poll: <i>"What would stop you from buying this?"</i></li>
+        <li>Synthesizes into <b style="color:var(--ink); font-weight:600;">5–7 distinct objections</b></li>
+        <li>Runs a second PP poll to <b style="color:var(--ink); font-weight:600;">rank</b> them by importance</li>
+        <li>Outputs a slide-by-slide blueprint for your secondary images</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 17 — SKILL 4: EVERGREEN TESTER
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="17 Skill 04 — Evergreen Tester">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">04 · Skills</div>
+
+  <div class="skill-layout">
+    <div class="left">
+      <div class="head">Skill 04 of 04</div>
+      <h2>Evergreen <em>Image Tester.</em></h2>
+      <div class="tag-line">She closes the loop. Generate → test on real shoppers → learn → regenerate.</div>
+      <div class="solves">
+        <b>Solves:</b> "A/B testing on Amazon is slow, noisy, and expensive — and I never have time to do it."
+      </div>
+    </div>
+    <div class="right" style="display:flex; flex-direction:column; justify-content:center;">
+      <ul>
+        <li>Pits your main image against competitors and your own variations in a <b style="color:var(--ink); font-weight:600;">Product Pinion search simulation</b></li>
+        <li>Real shoppers click. Real shoppers explain why.</li>
+        <li>Win rate, qualitative themes, image attributes that drove clicks</li>
+        <li>Feeds results back into the Variation Engine for the next round</li>
+        <li>Re-triggers each quarter or when Market Informant detects a competitor change</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 18 — PRIORITIZATION FORMULA
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="18 Prioritization formula">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">04 · Skills · the prioritization layer</div>
+
+  <div class="pad">
+    <h3 class="section-num">The layer that ties it together</h3>
+    <h2 class="title" style="font-size: 76px; max-width: 22ch; margin-bottom: 80px;">
+      Every recommendation, scored. Florence does the <em>math.</em>
+    </h2>
+
+    <div class="donut-wrap">
+      <div style="display:flex; justify-content:center;">
+        <svg width="520" height="520" viewBox="0 0 200 200">
+          <!-- Donut: 40 / 30 / 15 / 15 -->
+          <!-- Segments are stroke-dasharray on a circle, circumference = 2πr -->
+          <g transform="rotate(-90 100 100)">
+            <circle cx="100" cy="100" r="78" fill="none" stroke="#1FA877" stroke-width="36"
+                    stroke-dasharray="196 294" stroke-dashoffset="0"/>
+            <circle cx="100" cy="100" r="78" fill="none" stroke="#152823" stroke-width="36"
+                    stroke-dasharray="147 343" stroke-dashoffset="-196"/>
+            <circle cx="100" cy="100" r="78" fill="none" stroke="#2BC4D8" stroke-width="36"
+                    stroke-dasharray="73.5 416.5" stroke-dashoffset="-343"/>
+            <circle cx="100" cy="100" r="78" fill="none" stroke="#5E6E68" stroke-width="36"
+                    stroke-dasharray="73.5 416.5" stroke-dashoffset="-416.5"/>
+          </g>
+          <text x="100" y="96" text-anchor="middle"
+                font-family="JetBrains Mono, monospace" font-size="9"
+                letter-spacing=".15em" fill="#5E6E68">KEPLO</text>
+          <text x="100" y="110" text-anchor="middle"
+                font-family="Fraunces, serif" font-size="18" font-style="italic"
+                fill="#152823">Score</text>
+        </svg>
+      </div>
+
+      <div class="formula">
+        <div class="row">
+          <div class="pct">40%</div>
+          <div class="label"><b>Data Strength</b><span>How many sources support this?</span></div>
+        </div>
+        <div class="row">
+          <div class="pct" style="color: var(--ink);">30%</div>
+          <div class="label"><b>Dollar Impact</b><span>What's the revenue opportunity?</span></div>
+        </div>
+        <div class="row">
+          <div class="pct" style="color: var(--accent-2);">15%</div>
+          <div class="label"><b>Effort</b><span>How hard is this to implement?</span></div>
+        </div>
+        <div class="row">
+          <div class="pct" style="color: var(--ink-3);">15%</div>
+          <div class="label"><b>Speed</b><span>How fast will we see results?</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 19 — DIVIDER 05
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="19 Divider — How she fits" class="divider">
+  <div class="num">Section 05</div>
+  <h2>How she fits into your <em>workflow.</em></h2>
+  <div class="footnote">She is only useful if she lives where you already work.</div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 20 — WHERE SHE LIVES
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="20 Where she lives">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">05 · Workflow</div>
+
+  <div class="pad" style="padding-top: 180px;">
+    <h3 class="section-num">Where she lives</h3>
+    <h2 class="title" style="font-size: 76px; max-width: 22ch; margin-bottom: 56px;">
+      She disappears into your <em>day.</em>
+    </h2>
+
+    <table class="surface">
+      <thead><tr>
+        <th style="width: 32%;">Surface</th>
+        <th>What happens there</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="s-h">Slack DM<span class="sub">Her primary home</span></td>
+          <td class="s-d">Daily brief, ad-hoc questions, alerts. A channel called <code style="font-family: var(--mono); color: var(--accent);">#florence</code> with her portrait as the avatar.</td>
+        </tr>
+        <tr>
+          <td class="s-h">Claude Code terminal<span class="sub">For deep dives</span></td>
+          <td class="s-d"><i>"Florence, run a full teardown on B07XYZ."</i> She works for 10 minutes and reports back.</td>
+        </tr>
+        <tr>
+          <td class="s-h">WhatsApp / SMS<span class="sub">Optional</span></td>
+          <td class="s-d">Same daily brief, for sellers who live on their phone.</td>
+        </tr>
+        <tr>
+          <td class="s-h">Voice brief<span class="sub">60 seconds, ElevenLabs</span></td>
+          <td class="s-d">Audio version of the morning brief. Listen with your coffee.</td>
+        </tr>
+        <tr>
+          <td class="s-h">Email digest<span class="sub">Weekly recap</span></td>
+          <td class="s-d">What changed this week, what we tested, what to do next.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 21 — THE WEEKLY RHYTHM
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="21 Weekly rhythm">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">05 · Workflow</div>
+
+  <div class="pad" style="padding-top: 180px;">
+    <h3 class="section-num">The rhythm she creates</h3>
+    <h2 class="title" style="font-size: 76px; max-width: 24ch; margin-bottom: 64px;">
+      Predictable cadence is what makes her feel like a <em>colleague.</em>
+    </h2>
+
+    <div class="week">
+      <div class="day">
+        <div class="when">Mon · 8 am</div>
+        <div class="what">Priority brief</div>
+        <p class="desc">"Three things matter this week. Here's the one I'd start with."</p>
+      </div>
+      <div class="day">
+        <div class="when">Wed</div>
+        <div class="what">Mid-week pulse</div>
+        <p class="desc">Tests in flight. Anything to pivot.</p>
+      </div>
+      <div class="day">
+        <div class="when">Fri</div>
+        <div class="what">Recap</div>
+        <p class="desc">What shipped, what we learned, what's queued for next week.</p>
+      </div>
+      <div class="day">
+        <div class="when">Anytime</div>
+        <div class="what">Real answer</div>
+        <p class="desc">DM her a question. Get an answer — not "here are some considerations."</p>
+      </div>
+      <div class="day">
+        <div class="when">On signal</div>
+        <div class="what">Alert + action</div>
+        <p class="desc">Competitor moves, SQP shifts, or PP poll results trigger an alert with a recommended action.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 22 — WHAT SHE CONNECTS TO
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="22 What she connects to">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">05 · Workflow</div>
+
+  <div class="pad" style="padding-top: 180px;">
+    <h3 class="section-num">What she connects to</h3>
+    <h2 class="title" style="font-size: 64px; margin-bottom: 64px; max-width: 30ch;">
+      In on the left. Out on the right. <em>Florence in the middle.</em>
+    </h2>
+
+    <div class="conn-grid">
+      <div class="conn-col">
+        <h4>Data she pulls in</h4>
+        <div class="item">Amazon SP-API <span>SQP, Business Reports, PPC</span></div>
+        <div class="item">Amazon scrapes <span>Competitor listings, Rufus, reviews</span></div>
+        <div class="item">Product Pinion <span>Live consumer polls</span></div>
+        <div class="item">Your spreadsheets <span>Supabase or Google Sheets</span></div>
+      </div>
+
+      <div class="conn-mark">
+        <svg class="mono-mark" viewBox="0 0 120 120" style="width: 120px; height: 120px;">
+          <rect x="36" y="22" width="14" height="76" fill="var(--ink)"/>
+          <rect x="36" y="22" width="56" height="14" fill="var(--ink)"/>
+          <rect x="36" y="54" width="34" height="12" fill="var(--ink)"/>
+          <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+          <rect x="28" y="22" width="8" height="14" fill="var(--ink)"/>
+          <rect x="28" y="84" width="30" height="14" fill="var(--ink)"/>
+        </svg>
+        <div class="wm-mini" style="font-size: 13px;">FLORENCE</div>
+      </div>
+
+      <div class="conn-col">
+        <h4>Where she hands off</h4>
+        <div class="item">Notion <span>Test backlog, full context, expected lift</span></div>
+        <div class="item">Designer brief <span>Slide-by-slide content brief</span></div>
+        <div class="item">Calendar <span>30 min on Friday to ship the test</span></div>
+        <div class="item">Slack mentions <span>Tags your VA / designer / agency</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 23 — ONE SIGNATURE MOVE
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="23 One signature move">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">05 · Workflow</div>
+
+  <div class="center">
+    <h3 class="section-num">One signature move</h3>
+    <h2 class="title" style="font-size: 84px; max-width: 22ch; margin-bottom: 80px;">
+      Every brief ends with one <em>line.</em>
+    </h2>
+
+    <div class="term" style="max-width: 1400px;">
+      <div class="bar"><span class="dot"></span> florence · monday brief · b07xj8k2n4</div>
+      <div><span class="prompt">$</span> <span class="prompt-line">florence brief</span></div>
+      <div class="blank"></div>
+      <div class="mute">  ↪ summarising the week · 3 candidate moves identified</div>
+      <div class="blank"></div>
+      <div class="h">this week's three things</div>
+      <div>  1. swap image 2 — in-hand shot      <span style="color: var(--accent);">strength 0.86</span></div>
+      <div>  2. cut bullet 3 — repeats title    <span class="mute">strength 0.41</span></div>
+      <div>  3. test a price drop to 24.99      <span class="mute">strength 0.22</span></div>
+      <div class="blank"></div>
+      <div class="reco" style="font-size: 26px; font-family: var(--serif); font-style: italic; font-weight: 400; line-height: 1.3;">
+        <span class="reco-arrow">▸ what I'd do today:</span> swap image 2 for an in-hand shot.
+      </div>
+      <div class="sub" style="margin-top: 8px;">  expected lift 8–14% · 3-day A/B · queued in notion</div>
+    </div>
+
+    <p class="lede" style="margin-top: 64px; font-size: 32px; font-style: normal; font-family: var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); font-size: 18px;">
+      Not three options. Not "consider." One thing. She has an opinion.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 24 — DIVIDER 06: HOW WE BUILD IT
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="24 Divider — How we build it" class="divider">
+  <div class="num">Section 06</div>
+  <h2>How we are going to <em>build</em> it.</h2>
+  <div class="footnote">Markdown skills. MCP servers. Six days.</div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 25 — ARCHITECTURE
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="25 Architecture">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">06 · Build</div>
+
+  <div class="twocol" style="grid-template-columns: 1fr 1.1fr;">
+    <div style="display:flex; flex-direction:column; justify-content:center;">
+      <h3 class="section-num">The architecture</h3>
+      <h2 class="title" style="font-size: 76px;">Four <em>skills,</em> one repo.</h2>
+      <p class="body" style="margin-top: 40px; font-size: 22px; max-width: 28ch;">
+        Markdown skill files following the Claude Skills spec. No framework lock-in. Knowledge files anyone can PR.
+      </p>
+
+      <div class="tags" style="margin-top: 36px;">
+        <span class="tag">Claude Code</span>
+        <span class="tag">MCP</span>
+        <span class="tag">Markdown</span>
+        <span class="tag accent">MIT</span>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center;">
+<pre class="tree"><span class="root">florence/</span>
+├── <span class="dir">skills/</span>
+│   ├── market-informant/        <span class="cmt"># SQP-triggered</span>
+│   ├── variation-engine/        <span class="cmt"># Image + technique match</span>
+│   ├── shopper-interrogator/    <span class="cmt"># Reviews + Rufus + PP</span>
+│   └── evergreen-tester/        <span class="cmt"># Image tournament</span>
+├── <span class="dir">knowledge/</span>
+│   ├── techniques.json          <span class="cmt"># Open to PRs</span>
+│   ├── prioritization.md        <span class="cmt"># 40 / 30 / 15 / 15</span>
+│   └── what-florence-ignores.md
+├── <span class="dir">integrations/</span>
+│   ├── sp-api/                  <span class="cmt"># SQP, Business Reports</span>
+│   ├── product-pinion/          <span class="cmt"># Polling tools</span>
+│   └── amazon-scrape/           <span class="cmt"># Rufus, reviews</span>
+└── <span class="dir">demo/</span>
+    └── walkthrough.md           <span class="cmt"># 5-minute path</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 26 — BUILD PLAN
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="26 Build plan">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">06 · Build · this week</div>
+
+  <div class="pad" style="padding-top: 180px;">
+    <h3 class="section-num">The build plan — this week</h3>
+    <h2 class="title" style="font-size: 76px; max-width: 28ch; margin-bottom: 64px;">
+      Six days. <em>Saturday is buffer.</em>
+    </h2>
+
+    <div class="week" style="grid-template-columns: repeat(6, 1fr);">
+      <div class="day">
+        <div class="when">Mon</div>
+        <div class="what">Repo scaffold</div>
+        <p class="desc">README v1, brand applied.</p>
+      </div>
+      <div class="day">
+        <div class="when">Tue</div>
+        <div class="what">Skill 03</div>
+        <p class="desc">Shopper Interrogator end-to-end. The live demo skill.</p>
+      </div>
+      <div class="day">
+        <div class="when">Wed</div>
+        <div class="what">PP integration</div>
+        <p class="desc">Product Pinion polling tested live.</p>
+      </div>
+      <div class="day">
+        <div class="when">Thu</div>
+        <div class="what">Skills 1 / 2 / 4</div>
+        <p class="desc">Built on existing Keplo CRO agent prompts.</p>
+      </div>
+      <div class="day">
+        <div class="when">Fri</div>
+        <div class="what">Dry-run</div>
+        <p class="desc">With Matt. Recorded backup. Handout printed.</p>
+      </div>
+      <div class="day" style="background: var(--ink); color: var(--paper);">
+        <div class="when" style="color: var(--accent);">Sat</div>
+        <div class="what" style="color: var(--paper);">Buffer</div>
+        <p class="desc" style="color: rgba(252,250,244,.7);">For the live demo to <i>actually</i> work.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px;">
+      <div>
+        <div class="footnote" style="margin-bottom: 18px; color: var(--accent);">+ This week ships</div>
+        <div class="tags">
+          <span class="tag solid">4 skills</span>
+          <span class="tag solid">PP polling</span>
+          <span class="tag solid">SP-API</span>
+          <span class="tag solid">README</span>
+          <span class="tag solid">5-min install</span>
+        </div>
+      </div>
+      <div>
+        <div class="footnote" style="margin-bottom: 18px;">− What we're NOT building this week</div>
+        <div class="tags">
+          <span class="tag" style="opacity:.5;">AEO</span>
+          <span class="tag" style="opacity:.5;">Safe prompt injection</span>
+          <span class="tag" style="opacity:.5;">Web dashboard</span>
+          <span class="tag" style="opacity:.5;">Title / bullet rewrite</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 27 — DIVIDER 07: HOW WE DELIVER
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="27 Divider — How we deliver" class="divider">
+  <div class="num">Section 07</div>
+  <h2>Two outputs. Both go <em>home</em> with you.</h2>
+  <div class="footnote">The live demo. The repo. No paywall.</div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 28 — THE LIVE DEMO
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="28 The live demo">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">07 · Delivery · Output 01</div>
+
+  <div class="pad" style="padding-top: 180px;">
+    <h3 class="section-num">Output 01 — The live demo</h3>
+    <h2 class="title" style="font-size: 76px; max-width: 22ch; margin-bottom: 56px;">
+      The room watches an agent do <em>4 hours</em> of CRO work in 8 minutes.
+    </h2>
+
+    <p class="body" style="font-size: 24px; max-width: 50ch; margin-bottom: 48px;">
+      Audience picks an ASIN from the room. On stage, in real time:
+    </p>
+
+    <div class="card-grid" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="card">
+        <div class="l">Step 01</div>
+        <div class="h">Pull</div>
+        <p class="b">Florence pulls competitor reviews + Rufus questions for that ASIN.</p>
+      </div>
+      <div class="card">
+        <div class="l">Step 02</div>
+        <div class="h">Poll</div>
+        <p class="b">Florence fires an open-ended Product Pinion poll to a real shopper panel.</p>
+      </div>
+      <div class="card">
+        <div class="l">Step 03</div>
+        <div class="h">Synthesize</div>
+        <p class="b">Florence ranks objections by importance. Evidence beside each one.</p>
+      </div>
+      <div class="card">
+        <div class="l">Step 04</div>
+        <div class="h">Brief</div>
+        <p class="b">Florence outputs a secondary-image blueprint, scored on the framework.</p>
+      </div>
+    </div>
+
+    <p class="footnote" style="margin-top: 48px; color: var(--ink-3);">
+      Recorded backup ready in case the wifi loses.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 29 — THE REPO
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="29 The repo">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">07 · Delivery · Output 02</div>
+
+  <div class="twocol" style="grid-template-columns: 1.1fr 1fr;">
+    <div style="display:flex; flex-direction:column; justify-content:center;">
+      <h3 class="section-num">Output 02 — The repo</h3>
+      <h2 class="title" style="font-size: 76px;">Every attendee leaves with the <em>QR code.</em></h2>
+
+      <div style="margin-top: 56px;">
+        <div class="footnote" style="color: var(--accent); margin-bottom: 18px;">+ What's in the repo</div>
+        <ul style="font-family: var(--sans); font-size: 22px; line-height: 1.6; color: var(--ink-2); padding-left: 0; list-style: none;">
+          <li style="padding: 8px 0;">— All 4 Florence skills, working, documented</li>
+          <li style="padding: 8px 0;">— The curated technique database (open for PRs)</li>
+          <li style="padding: 8px 0;">— 5-minute install path for non-developers</li>
+          <li style="padding: 8px 0;">— 30-minute extension path for developers</li>
+          <li style="padding: 8px 0;">— The prioritization framework</li>
+          <li style="padding: 8px 0;">— Real example outputs from the live demo</li>
+        </ul>
+      </div>
+
+      <div style="margin-top: 48px;">
+        <div class="footnote" style="margin-bottom: 14px;">What we ask in return</div>
+        <p class="body" style="font-size: 22px; max-width: 32ch;">
+          Star the repo. Open an issue if Florence breaks. Contribute a technique. Tell another seller.
+        </p>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px;">
+      <!-- Faux QR placeholder — visual stand-in -->
+      <div style="background: var(--paper); padding: 36px; border: 1px solid var(--rule); border-radius: 8px;">
+        <svg width="320" height="320" viewBox="0 0 21 21" shape-rendering="crispEdges">
+          <rect width="21" height="21" fill="#FCFAF4"/>
+          <!-- Hand-stippled fake QR pattern. Visual placeholder only. -->
+          <g fill="#152823">
+            <!-- Top-left finder -->
+            <rect x="1" y="1" width="5" height="5"/>
+            <rect x="2" y="2" width="3" height="3" fill="#FCFAF4"/>
+            <rect x="3" y="3" width="1" height="1"/>
+            <!-- Top-right finder -->
+            <rect x="15" y="1" width="5" height="5"/>
+            <rect x="16" y="2" width="3" height="3" fill="#FCFAF4"/>
+            <rect x="17" y="3" width="1" height="1"/>
+            <!-- Bottom-left finder -->
+            <rect x="1" y="15" width="5" height="5"/>
+            <rect x="2" y="16" width="3" height="3" fill="#FCFAF4"/>
+            <rect x="3" y="17" width="1" height="1"/>
+            <!-- Random data modules -->
+            <rect x="7" y="2" width="1" height="1"/><rect x="9" y="2" width="1" height="1"/><rect x="12" y="2" width="1" height="1"/>
+            <rect x="8" y="4" width="1" height="1"/><rect x="10" y="4" width="1" height="1"/><rect x="11" y="4" width="1" height="1"/><rect x="13" y="4" width="1" height="1"/>
+            <rect x="7" y="6" width="1" height="1"/><rect x="9" y="6" width="1" height="1"/><rect x="11" y="6" width="1" height="1"/><rect x="14" y="6" width="1" height="1"/>
+            <rect x="2" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="6" y="8" width="1" height="1"/><rect x="8" y="8" width="1" height="1"/><rect x="11" y="8" width="1" height="1"/><rect x="13" y="8" width="1" height="1"/><rect x="16" y="8" width="1" height="1"/><rect x="18" y="8" width="1" height="1"/>
+            <rect x="3" y="9" width="1" height="1"/><rect x="5" y="9" width="1" height="1"/><rect x="9" y="9" width="1" height="1"/><rect x="12" y="9" width="1" height="1"/><rect x="15" y="9" width="1" height="1"/><rect x="17" y="9" width="1" height="1"/>
+            <rect x="2" y="10" width="1" height="1"/><rect x="6" y="10" width="1" height="1"/><rect x="8" y="10" width="1" height="1"/><rect x="10" y="10" width="1" height="1"/><rect x="14" y="10" width="1" height="1"/><rect x="16" y="10" width="1" height="1"/><rect x="19" y="10" width="1" height="1"/>
+            <rect x="3" y="11" width="1" height="1"/><rect x="7" y="11" width="1" height="1"/><rect x="11" y="11" width="1" height="1"/><rect x="13" y="11" width="1" height="1"/><rect x="15" y="11" width="1" height="1"/><rect x="18" y="11" width="1" height="1"/>
+            <rect x="2" y="12" width="1" height="1"/><rect x="5" y="12" width="1" height="1"/><rect x="9" y="12" width="1" height="1"/><rect x="12" y="12" width="1" height="1"/><rect x="14" y="12" width="1" height="1"/><rect x="17" y="12" width="1" height="1"/>
+            <rect x="8" y="14" width="1" height="1"/><rect x="10" y="14" width="1" height="1"/><rect x="13" y="14" width="1" height="1"/><rect x="15" y="14" width="1" height="1"/><rect x="18" y="14" width="1" height="1"/>
+            <rect x="9" y="16" width="1" height="1"/><rect x="11" y="16" width="1" height="1"/><rect x="14" y="16" width="1" height="1"/><rect x="17" y="16" width="1" height="1"/><rect x="19" y="16" width="1" height="1"/>
+            <rect x="8" y="18" width="1" height="1"/><rect x="12" y="18" width="1" height="1"/><rect x="15" y="18" width="1" height="1"/><rect x="18" y="18" width="1" height="1"/>
+          </g>
+        </svg>
+      </div>
+      <div style="text-align: center;">
+        <div class="footnote" style="color: var(--accent); margin-bottom: 8px;">Scan to install</div>
+        <div style="font-family: var(--mono); font-size: 22px; color: var(--ink); letter-spacing: .04em;">
+          github.com/keplo/florence
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 30 — THE PITCH IN ONE SENTENCE
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="30 The pitch">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">The pitch · in one sentence</div>
+
+  <div class="rose" style="bottom: -200px; left: -200px;">
+    <svg width="900" height="900" viewBox="0 0 120 120" style="opacity:.10">
+      <g id="rose-wedges-3"></g>
+    </svg>
+  </div>
+
+  <div class="center" style="position:relative; z-index:2;">
+    <div class="pitch-card">
+      <p class="pitch">
+        Florence is an open-source AI agent that turns your Amazon data into <em>prioritized decisions</em> —
+      </p>
+      <p class="pitch" style="margin-top: 32px; font-size: 64px; color: rgba(252,250,244,.7);">
+        like Florence Nightingale turned mortality data into the sanitation system that dropped death rates from <em style="color: var(--accent);">40% to 2%.</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 31 — Q&A
+     ════════════════════════════════════════════════════════ -->
+<section data-slide data-screen-label="31 Q and A">
+  <div class="chrome-tl">
+    <svg class="mono-mark" viewBox="0 0 120 120">
+      <rect x="36" y="22" width="14" height="76" fill="currentColor"/>
+      <rect x="36" y="22" width="56" height="14" fill="currentColor"/>
+      <rect x="36" y="54" width="34" height="12" fill="currentColor"/>
+      <rect x="78" y="54" width="12" height="12" fill="var(--accent)"/>
+      <rect x="28" y="22" width="8" height="14" fill="currentColor"/>
+      <rect x="28" y="84" width="30" height="14" fill="currentColor"/>
+    </svg>
+    <span class="wm-mini">FLORENCE</span>
+  </div>
+  <div class="chrome-tr">Q & A · thank you</div>
+
+  <div class="twocol" style="grid-template-columns: 1fr 1fr; padding: 140px 120px;">
+    <div style="display:flex; flex-direction:column; justify-content:center;">
+      <div class="qa-mark">?</div>
+    </div>
+    <div style="display:flex; flex-direction:column; justify-content:center;">
+      <h3 class="section-num">Built by</h3>
+
+      <div class="signature" style="grid-template-columns: 1fr; gap: 48px; margin-top: 32px;">
+        <div class="person">
+          <p class="name">Dorian Gorski</p>
+          <p class="role">CRO Partner Program · 200+ optimization projects</p>
+          <p class="org">Keplo</p>
+        </div>
+        <div class="person">
+          <p class="name">Matt Kostan</p>
+          <p class="role">Consumer panel polling for Amazon</p>
+          <p class="org">Product Pinion</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--rule);">
+        <div class="footnote" style="margin-bottom: 8px;">The repo · live the morning of the talk</div>
+        <div style="font-family: var(--mono); font-size: 22px; color: var(--ink); letter-spacing: .04em;">
+          github.com/keplo/florence
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</deck-stage>
+
+<!-- Rose-stamp wedge generator (avoid 3 inline SVG re-typing) -->
+<script>
+(function() {
+  const slices = [38, 30, 44, 36, 28, 40, 50, 34, 30, 42, 36, 32];
+  const cx = 60, cy = 60, n = 12, TAU = Math.PI * 2;
+  const wedges = slices.map((r, i) => {
+    const a0 = (i / n) * TAU - Math.PI / 2;
+    const a1 = ((i + 1) / n) * TAU - Math.PI / 2;
+    const x0 = cx + r * Math.cos(a0), y0 = cy + r * Math.sin(a0);
+    const x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
+    const large = (a1 - a0) > Math.PI ? 1 : 0;
+    return { d: `M ${cx} ${cy} L ${x0} ${y0} A ${r} ${r} 0 ${large} 1 ${x1} ${y1} Z`,
+             fill: i % 2 === 0 ? '#1FA877' : '#152823' };
+  });
+  ['rose-wedges-1', 'rose-wedges-2', 'rose-wedges-3'].forEach(id => {
+    const g = document.getElementById(id);
+    if (!g) return;
+    wedges.forEach(w => {
+      const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      p.setAttribute('d', w.d);
+      p.setAttribute('fill', w.fill);
+      g.appendChild(p);
+    });
+  });
+})();
+</script>
+
+<script src="deck-stage.js"></script>
+
+</body>
+</html>

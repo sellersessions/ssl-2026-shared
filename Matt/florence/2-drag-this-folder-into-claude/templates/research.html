@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Florence — Research</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --ink: #152823;
+    --ink-2: #2A3D37;
+    --ink-3: #5E6E68;
+    --cream: #F4F1EA;
+    --cream-2: #E9E5DA;
+    --paper: #FCFAF4;
+    --accent: #1FA877;
+    --accent-2: #178A60;
+    --green-soft: #D6F0E5;
+    --gold: #D4A53A;
+    --gold-soft: #F4E5BC;
+    --red: #B84A3D;
+    --red-soft: #F4D8D2;
+    --slate: #5E6E68;
+    --slate-2: #8C9A93;
+    --slate-3: #B5C0BB;
+    --rule: #D4D0C4;
+    --rule-soft: #E2DED2;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Inter", sans-serif;
+    --mono: ui-monospace, "SF Mono", "Menlo", "Cascadia Mono", "Roboto Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-size: 13.5px; line-height: 1.55; letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
+  em { font-style: normal; color: var(--accent); font-weight: 700; }
+  strong { color: var(--ink); font-weight: 700; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 28px 56px; }
+
+  header { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 24px; border-bottom: 1px solid var(--rule); margin-bottom: 28px; gap: 24px; }
+  .head-l { min-width: 0; }
+  .eyebrow { font-family: var(--mono); font-size: 10.5px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.16em; color: var(--slate); }
+  .title { font-size: 24px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.18; margin-top: 6px; }
+  .title em { color: var(--accent); }
+  .product-strip { display: flex; align-items: center; gap: 14px; padding-top: 14px; }
+  .product-strip img { width: 56px; height: 56px; object-fit: contain; background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; }
+  .product-strip-meta { min-width: 0; }
+  .product-strip-meta .pname { font-size: 13.5px; font-weight: 600; color: var(--ink); letter-spacing: -0.012em; }
+  .product-strip-meta .pasin { font-family: var(--mono); font-size: 10.5px; color: var(--slate); margin-top: 2px; letter-spacing: 0.06em; }
+
+  .meta { text-align: right; flex-shrink: 0; }
+  .meta .num { font-size: 24px; font-weight: 800; letter-spacing: -0.025em; }
+  .meta .num em { color: var(--accent); }
+  .meta .lbl { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--slate); margin-top: 4px; }
+
+  .lede {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 22px 24px;
+    margin-bottom: 28px;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    letter-spacing: -0.008em;
+  }
+
+  .h2 {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--slate);
+    margin: 28px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule-soft);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .h2 .counter { color: var(--ink); font-weight: 700; }
+  .h2:first-of-type { margin-top: 0; }
+
+  .section { margin-bottom: 8px; }
+  .section-body {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 18px 22px;
+  }
+  .section-body p + p { margin-top: 10px; }
+  .section-body .kv { display: grid; grid-template-columns: 140px 1fr; gap: 10px 18px; align-items: baseline; }
+  .section-body .kv .k { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--slate); padding-top: 1px; }
+  .section-body .kv .v { font-size: 13.5px; color: var(--ink-2); }
+
+  .objection-list, .driver-list, .competitor-list { display: flex; flex-direction: column; gap: 10px; }
+  .objection, .driver {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px 18px;
+    border-left: 3px solid var(--rule);
+  }
+  .objection.high { border-left-color: var(--red); }
+  .objection.med  { border-left-color: var(--gold); }
+  .driver.high    { border-left-color: var(--accent); }
+  .driver.med     { border-left-color: var(--gold); }
+  .obj-head, .drv-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; gap: 14px; }
+  .obj-name, .drv-name { font-size: 14px; font-weight: 700; letter-spacing: -0.012em; color: var(--ink); }
+  .obj-freq, .drv-freq { font-family: var(--mono); font-size: 10.5px; color: var(--slate); letter-spacing: 0.06em; white-space: nowrap; }
+  .quote {
+    border-left: 2px solid var(--accent);
+    padding: 4px 0 4px 12px;
+    margin-top: 6px;
+    color: var(--ink-2);
+    font-size: 12.5px;
+    line-height: 1.55;
+    font-style: italic;
+  }
+  .quote-source { font-family: var(--mono); font-size: 10px; color: var(--slate-2); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; font-style: normal; }
+
+  .competitor-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .competitor {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+  .competitor .casin { font-family: var(--mono); font-size: 10.5px; font-weight: 600; color: var(--ink); letter-spacing: 0.06em; }
+  .competitor .ctitle { font-size: 12.5px; color: var(--slate); margin-top: 4px; line-height: 1.4; }
+  .competitor .crows { display: flex; flex-direction: column; gap: 4px; margin-top: 10px; }
+  .competitor .crow { display: flex; justify-content: space-between; font-size: 12px; }
+  .competitor .crow .k { color: var(--slate); font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .competitor .crow .v { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+
+  .must-show {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .must-row {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+  .must-num { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--slate); padding-top: 2px; }
+  .must-body .what { font-size: 14px; font-weight: 600; letter-spacing: -0.012em; color: var(--ink); }
+  .must-body .why  { font-size: 12.5px; color: var(--slate); margin-top: 4px; line-height: 1.5; }
+  .must-body .source { font-family: var(--mono); font-size: 10px; color: var(--slate-2); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 6px; }
+
+  footer {
+    margin-top: 24px;
+    padding: 18px 22px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    border-radius: 6px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .footer-msg { font-size: 13.5px; font-weight: 500; color: var(--ink-2); }
+  .footer-msg em { color: var(--accent); font-weight: 700; }
+  .footer-meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); white-space: nowrap; }
+
+  .empty-block { background: var(--paper); border: 1px dashed var(--rule); border-radius: 6px; padding: 18px 22px; color: var(--slate-2); font-size: 13px; font-style: italic; text-align: center; }
+</style>
+</head>
+<body>
+
+<!--
+  TEMPLATE — substitute {{placeholders}} before writing to disk.
+  See templates/_placeholders.md § research.html for the full contract.
+  Strip this comment before substitution.
+
+  Quick reference:
+    {{brand}}              "Lumen Sleep"
+    {{asin}}               "B07XYZ4231"
+    {{geo}}                "uk"
+    {{product-title}}      Real product title from cache
+    {{product-image-url}}  Live image URL (from track-products cache)
+    {{action-count}}       integer
+    {{action-lbl}}         "Recommended action" / "Recommended actions"
+    {{lede-html}}          one-paragraph diagnosis
+    {{customer-html}}      paragraph(s) describing customer profile
+    {{drivers-html}}       driver rows OR empty-state
+    {{drivers-count}}      integer or "—"
+    {{objections-html}}    objection rows OR empty-state
+    {{objections-count}}   integer or "—"
+    {{competitors-html}}   competitor cards OR empty-state
+    {{competitors-count}}  integer or "—"
+    {{must-show-html}}     numbered must-show rows OR empty-state
+    {{must-show-count}}    integer or "—"
+    {{footer-msg-html}}    e.g. "<strong>What I'd do today:</strong> rerun main image with the no-grease angle. <em>Score 87/100.</em>"
+    {{generated-at}}       "Tue 5 May · 14:22"
+    {{sources}}            "Reviews · Rufus · SERP · KW Research V2"
+-->
+
+<div class="wrap">
+  <header>
+    <div class="head-l">
+      <div class="eyebrow">Research brief · <span>{{brand}}</span></div>
+      <h1 class="title">{{product-title}}</h1>
+      <div class="product-strip">
+        <img src="{{product-image-url}}" alt="{{product-title}}" />
+        <div class="product-strip-meta">
+          <p class="pname">{{product-title}}</p>
+          <p class="pasin">{{asin}} · {{geo}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="num"><em>{{action-count}}</em></div>
+      <div class="lbl">{{action-lbl}}</div>
+    </div>
+  </header>
+
+  <div class="lede">
+    {{lede-html}}
+  </div>
+
+  <div class="h2">Customer profile</div>
+  <div class="section"><div class="section-body">
+    {{customer-html}}
+  </div></div>
+
+  <div class="h2">Purchase drivers <span class="counter">{{drivers-count}}</span></div>
+  <div class="section"><div class="driver-list">
+    {{drivers-html}}
+  </div></div>
+
+  <div class="h2">Objections to address <span class="counter">{{objections-count}}</span></div>
+  <div class="section"><div class="objection-list">
+    {{objections-html}}
+  </div></div>
+
+  <div class="h2">Competitive landscape <span class="counter">{{competitors-count}}</span></div>
+  <div class="section"><div class="competitor-list">
+    {{competitors-html}}
+  </div></div>
+
+  <div class="h2">What the visuals must show <span class="counter">{{must-show-count}}</span></div>
+  <div class="section"><div class="must-show">
+    {{must-show-html}}
+  </div></div>
+
+  <footer>
+    <div class="footer-msg">{{footer-msg-html}}</div>
+    <div class="footer-meta">{{sources}} · {{generated-at}}</div>
+  </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1257 @@
+{
+  "name": "Florence MCP — SellerApp",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Florence MCP — SellerApp\n\n17 SellerApp endpoints exposed as MCP tools for Florence (Cowork) to call directly from chat.\n\n**Setup**:\n1. Replace `support_keplo` and `fbfa59f5-43fb-460e-ac0b-4740132a81f1` in every HTTP Request Tool node's headers section. Get values from your SellerApp dashboard → API settings.\n2. Activate the workflow (top-right toggle).\n3. Copy the MCP Server Trigger's Production URL (ends in `/sse`).\n4. In your terminal: `claude mcp add --transport sse florence-sellerapp '<URL>'`.\n5. Restart Claude Code or Cowork to load.\n\n**Auth**: hardcoded `client-id` + `token` headers per tool. Workshop-shared credentials get distributed out-of-band; never commit to git.\n\n**SellerApp IP allowlist**: the API account must allow n8n.cloud's egress IPs. Check your SellerApp dashboard if calls return 403 host_not_allowed.",
+        "color": 4
+      },
+      "id": "0a000030-0000-0000-0000-fffffffffffe",
+      "name": "About this workflow",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "none",
+        "path": "florence-sellerapp"
+      },
+      "id": "0a000030-0000-0000-0000-ffffffffffff",
+      "name": "MCP Server — Florence SellerApp",
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        100,
+        400
+      ],
+      "webhookId": "florence-sellerapp-mcp"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get Amazon product details for one or more ASINs. Returns title, brand, BSR, price, ratings, sales estimate, fees, promotions. Use fee_detail/price_detail/potential_detail/ratings/realtime_data/promotions = \"1\" for full audit. Token cost: 1 base + 1-4 per flag.",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/products",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "productIds",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('asin', 'Amazon ASIN(s). Single or comma-delimited (max 20).') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Lowercase geo: us, uk, de, fr, it, es, ca, mx, br, au, jp, in, ae, sg.') }}"
+            },
+            {
+              "name": "fee_detail",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fee_detail', '1 for fee attributes, blank otherwise') }}"
+            },
+            {
+              "name": "price_detail",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('price_detail', '1 for price attributes') }}"
+            },
+            {
+              "name": "potential_detail",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('potential_detail', '1 for sales/revenue estimates') }}"
+            },
+            {
+              "name": "ratings",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('ratings', '1 for ratings') }}"
+            },
+            {
+              "name": "realtime_data",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('realtime_data', '1 for real-time scrape (3 extra tokens)') }}"
+            },
+            {
+              "name": "promotions",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('promotions', '1 for promotions (4 extra tokens)') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000000",
+      "name": "Get Product Details",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        400,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get Amazon reviews for a single ASIN. Filterable by rating (1-5, single value), sentiment, keyword. up_to_page=N fetches N pages (10 reviews/page, 10 tokens/page). For objection mining call 3x with rating=1, rating=2, rating=3.",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/reviews",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "productId",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('asin', 'Single Amazon ASIN.') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Geo code.') }}"
+            },
+            {
+              "name": "rating",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('rating', 'Single star value 1-5. Blank = all stars.') }}"
+            },
+            {
+              "name": "up_to_page",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('up_to_page', 'Pages to fetch (10 reviews each). Max 10. Blank = single page.') }}"
+            },
+            {
+              "name": "sort",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('sort', 'recent for newest first. Blank = relevance.') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000001",
+      "name": "Get Product Reviews",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        400,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get the natural-language queries Amazon Rufus AI surfaces for a product. Reveals what shoppers actually ask before buying. Token cost: 30/call.",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/rufus_queries",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "productId",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('asin', 'Amazon ASIN.') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Geo code.') }}"
+            },
+            {
+              "name": "search_query",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('search_query', 'Optional: filter Rufus to a topic.') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000002",
+      "name": "Get Rufus AI Queries",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        400,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "PREFERRED keyword tool. type=asin returns keywords this ASIN ranks for + CTR/CVR/competition/demand_momentum. type=keyword returns related keywords. Use additional_details=1 for the rich metrics. Note: V2 may 500 on very new ASINs; fall back to V1 if needed.",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetrics/v2/keyword_research",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "type",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('type', 'asin for reverse ASIN, keyword for keyword research.') }}"
+            },
+            {
+              "name": "key",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('key', 'ASIN if type=asin, keyword if type=keyword.') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Geo code.') }}"
+            },
+            {
+              "name": "results_count",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('results_count', 'Multiples of 50, max 500. Default 50.') }}"
+            },
+            {
+              "name": "additional_details",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('additional_details', '1 for CTR/CVR/competition. Recommended.') }}"
+            },
+            {
+              "name": "pagenumber",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('pagenumber', 'Page number, default 1.') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000003",
+      "name": "Keyword Research V2 (Reverse ASIN)",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        400,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get Amazon SERP for a search term. Returns top ranking ASINs. Use extended_response=1 for full product details. Use to find competitors that rank for keywords your ASIN ranks for.",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/keyword_search_result",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "search",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('search', 'Search term.') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Geo code.') }}"
+            },
+            {
+              "name": "extended_response",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('extended_response', '1 for full product details. Recommended.') }}"
+            },
+            {
+              "name": "include_sponsored_results",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('include_sponsored_results', '1 to include sponsored.') }}"
+            },
+            {
+              "name": "sort",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('sort', 'low-to-high / high-to-low / avg-review / newest-arrivals / best-seller.') }}"
+            },
+            {
+              "name": "pagenumber",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('pagenumber', 'Page number.') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000004",
+      "name": "Keyword Search Result (SERP)",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        400,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get metrics for a single keyword: CPC, search volume, relative score, match type. Cheap (2 tokens). Use when evaluating one specific keyword.",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/keyword_metrics",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "keyword",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('keyword', 'Keyword to lookup.') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Geo code.') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000005",
+      "name": "Keyword Metrics",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        700,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get all sellers and offers for an ASIN. Returns seller name/id, price, delivery, FBA status. Identifies buy-box and same-ASIN competitors.",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/offers",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "productId",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('asin', 'Amazon ASIN.') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Geo code.') }}"
+            },
+            {
+              "name": "pagenumber",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('pagenumber', 'Page number.') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000006",
+      "name": "Get Product Offers",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        700,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get questions and answers posted on a product page. Useful for objection-mining alongside reviews and Rufus.",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/product_qna",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "productId",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('asin', 'Amazon ASIN.') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Geo code.') }}"
+            },
+            {
+              "name": "isAnswered",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('isAnswered', 'true for answered (default), false for unanswered.') }}"
+            },
+            {
+              "name": "pageNumber",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('pageNumber', 'Page number.') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000007",
+      "name": "Get Product Q and A",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        700,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get historical price, BSR, ratings, review count, sellers count for an ASIN. Default 30 days. Set price=1, bsr=1, rating=1, review_count=1, sellers_count=1 per series. 1 token per flag.",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/products/history",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "productId",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('asin', 'Amazon ASIN.') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Geo code.') }}"
+            },
+            {
+              "name": "price",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('price', '1 for price history.') }}"
+            },
+            {
+              "name": "bsr",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('bsr', '1 for BSR history.') }}"
+            },
+            {
+              "name": "rating",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('rating', '1 for rating history.') }}"
+            },
+            {
+              "name": "review_count",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('review_count', '1 for review count history.') }}"
+            },
+            {
+              "name": "sellers_count",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('sellers_count', '1 for sellers count history.') }}"
+            },
+            {
+              "name": "days",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('days', 'Number of days, default 30.') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000008",
+      "name": "Get Product History (30d)",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        700,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "Calculate Amazon fees (referral, FBA, variable closing, per-item) for an ASIN at a given price. Use to estimate profit before recommending price changes.",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/profit_calculator",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "product_id",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('asin', 'Amazon ASIN.') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Geo code.') }}"
+            },
+            {
+              "name": "listing_price",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('listing_price', 'New listing price to estimate. Blank = current.') }}"
+            },
+            {
+              "name": "shipping_price",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('shipping_price', 'New shipping price.') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000009",
+      "name": "Profit Calculator",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        700,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get top 50 ASINs in a category. Type: bestsellers (default) / new-releases / most-gifted / movers-and-shakers / most-wished-for. Use Get Category Tree first to find the right category_id.",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/bestsellers",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "category_id",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('category_id', 'Amazon category/node ID.') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Geo code.') }}"
+            },
+            {
+              "name": "type",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('type', 'bestsellers / new-releases / most-gifted / movers-and-shakers / most-wished-for.') }}"
+            },
+            {
+              "name": "pagenumber",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('pagenumber', 'Page number.') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000010",
+      "name": "Get Category Bestsellers",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        1000,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "Navigate Amazon category hierarchy. key_type=id with a category_id, or key_type=name with a category name. FREE (0 tokens).",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/category_tree",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('key', 'Category ID or category name.') }}"
+            },
+            {
+              "name": "key_type",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('key_type', 'id or name.') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Geo code.') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000011",
+      "name": "Get Category Tree",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        1000,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get products listed in a specific Amazon category. Use extended_response=1 for image/title/rating/price.",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/category_products",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "category_id",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('category_id', 'Amazon category/node ID.') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Geo code.') }}"
+            },
+            {
+              "name": "pagenumber",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('pagenumber', 'Page number.') }}"
+            },
+            {
+              "name": "extended_response",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('extended_response', '1 for full product details.') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000012",
+      "name": "Get Category Products",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        1000,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get an Amazon seller profile by seller_id. Returns name, ratings, review count, address.",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/seller_profile",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "seller_id",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('seller_id', 'Amazon seller ID.') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Geo code.') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000013",
+      "name": "Get Seller Profile",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        1000,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get all products sold by a specific seller. Pair with Get Seller Profile. Useful for competitor catalog mapping.",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/seller_products",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "seller_id",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('seller_id', 'Amazon seller ID.') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Geo code.') }}"
+            },
+            {
+              "name": "pagenumber",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('pagenumber', 'Page number.') }}"
+            },
+            {
+              "name": "extended_response",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('extended_response', '1 for full product details.') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000014",
+      "name": "Get Seller Products",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        1000,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "Legacy keyword research. Prefer Keyword Research V2 — V2 includes CTR/CVR/competition. V1 kept as fallback when V2 returns 500 (e.g. for very new ASINs).",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/keyword_research",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "type",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('type', 'asin or keyword.') }}"
+            },
+            {
+              "name": "key",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('key', 'ASIN or keyword.') }}"
+            },
+            {
+              "name": "geo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('geo', 'Geo code.') }}"
+            },
+            {
+              "name": "results_count",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('results_count', 'Number of results, max 500.') }}"
+            },
+            {
+              "name": "pagenumber",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('pagenumber', 'Page number.') }}"
+            }
+          ]
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000015",
+      "name": "Keyword Research V1 (legacy)",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        1300,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get current SellerApp token quota and per-API usage breakdown. FREE (0 tokens). Call before expensive operations.",
+        "method": "GET",
+        "url": "https://api.sellerapp.com/sellmetricsv2/token_status",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "client-id",
+              "value": "support_keplo"
+            },
+            {
+              "name": "token",
+              "value": "fbfa59f5-43fb-460e-ac0b-4740132a81f1"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "0a000030-0000-0000-0000-000000000016",
+      "name": "Get Token Status",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        1300,
+        280
+      ]
+    }
+  ],
+  "connections": {
+    "Get Product Details": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Product Reviews": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Rufus AI Queries": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Keyword Research V2 (Reverse ASIN)": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Keyword Search Result (SERP)": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Keyword Metrics": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Product Offers": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Product Q and A": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Product History (30d)": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Profit Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Category Bestsellers": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Category Tree": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Category Products": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Seller Profile": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Seller Products": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Keyword Research V1 (legacy)": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Token Status": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server — Florence SellerApp",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  },
+  "tags": [
+    {
+      "name": "florence"
+    },
+    {
+      "name": "sellerapp"
+    },
+    {
+      "name": "mcp"
+    },
+    {
+      "name": "p1"
+    }
+  ],
+  "meta": {
+    "templateCreatedBy": "florence",
+    "templateVersion": "0.1.0",
+    "description": "Single workflow exposing 17 SellerApp endpoints as MCP tools for Florence to call directly. Auth via hardcoded headers (workshop-shared creds baked in for v0.1.10+; replace with your own SellerApp client_id + token for production). Activate, copy production URL, register with claude mcp add."
+  },
+  "pinData": {}
+}

@@ -1,0 +1,295 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://florence/brain.schema.json",
+  "title": "Florence Brain",
+  "description": "Persistent state Florence carries across sessions. Emitted as brain.json by onboard and rehydrated by restore-brain. Per-product full SellerApp responses live as side files at brain/products/{asin}-{geo}.json (the cache layer for track-products and optimize-listing).",
+  "type": "object",
+  "required": ["schema_version", "business"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0",
+      "description": "Lock to 1.0. Migrations live in skills/restore-brain.md when this bumps."
+    },
+    "business": {
+      "type": "object",
+      "required": ["brand"],
+      "properties": {
+        "brand":        { "type": "string", "minLength": 1 },
+        "marketplaces": { "type": "array",  "items": { "type": "string" } },
+        "team_size":    { "type": ["integer", "null"] },
+        "category":     { "type": ["string", "null"], "description": "Primary Amazon category — supplements, beauty oils, kitchen tools, etc. Captured during onboard or by image-strategy if missing. Drives category-bestseller research." },
+        "brand_guidelines": {
+          "type": "object",
+          "description": "Optional brand visual identity. Read by render and the cro-library visual-content skills (main-image-creative-director.md, listing-image-creative-director.md). All fields are nullable; empty struct works (Florence falls back to neutral premium aesthetic). Captured optionally during onboard Stage 4 or via render's pre-flight if the user wants better-fitting concepts.",
+          "properties": {
+            "logo_url":              { "type": ["string", "null"], "description": "URL to the wordmark / logo image (transparent PNG ideal)." },
+            "primary_color":         { "type": ["string", "null"], "description": "Hex e.g. #1FA877" },
+            "secondary_color":       { "type": ["string", "null"], "description": "Hex" },
+            "accent_color":          { "type": ["string", "null"], "description": "Hex" },
+            "headline_font":         { "type": ["string", "null"], "description": "Font name used in the brand's headlines" },
+            "body_font":             { "type": ["string", "null"], "description": "Font name used in the brand's body copy" },
+            "tone_descriptors":      { "type": "array", "items": { "type": "string" }, "description": "How the brand sounds (informs any text overlay copy on listing/A+ slots)." },
+            "visual_style_keywords": { "type": "array", "items": { "type": "string" }, "description": "Adjectives that describe the brand's visual identity. e.g. ['minimal', 'editorial', 'premium', 'soft-natural', 'lived-in']. Drives Higgsfield prompt sections 1 + 4." }
+          }
+        }
+      }
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["asin"],
+        "properties": {
+          "asin":                    { "type": "string", "pattern": "^B0[A-Z0-9]{8}$" },
+          "geo":                     { "type": "string", "description": "SellerApp geo code: us, uk, de, fr, it, es, ca, mx, br, au, jp, in, ae, sg. Defaults to brain.business.marketplaces[0] in skills if omitted." },
+          "title":                   { "type": ["string", "null"] },
+          "current_main_image_url":  { "type": ["string", "null"] },
+          "goal":                    { "type": ["string", "null"] },
+          "status":                  { "type": "string", "enum": ["tracked", "paused", "archived"] }
+        }
+      }
+    },
+    "competitors": {
+      "type": "object",
+      "description": "Map: ASIN → list of competitor ASINs",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string", "pattern": "^B0[A-Z0-9]{8}$" }
+      }
+    },
+    "voice": {
+      "type": "object",
+      "properties": {
+        "adjectives": { "type": "array", "items": { "type": "string" }, "maxItems": 5 },
+        "forbiddens": { "type": "array", "items": { "type": "string" }, "maxItems": 10 }
+      }
+    },
+    "goals": {
+      "type": "object",
+      "description": "Map: ASIN → one-sentence goal",
+      "additionalProperties": { "type": "string" }
+    },
+    "personnel": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name":   { "type": "string" },
+          "handle": { "type": "string" }
+        }
+      }
+    },
+    "integrations": {
+      "type": "object",
+      "description": "Wired-up backend services. Skills check these before calling.",
+      "properties": {
+        "n8n": {
+          "type": "object",
+          "properties": {
+            "webhooks": {
+              "type": "object",
+              "description": "Map: workflow key → webhook URL. Filled from integrations/n8n-webhooks.md.",
+              "additionalProperties": { "type": "string" }
+            },
+            "secret_set": { "type": "boolean" }
+          }
+        },
+        "product_pinion": {
+          "type": "object",
+          "properties": {
+            "client_id_set":  { "type": "boolean" },
+            "plan":           { "type": "string" }
+          }
+        },
+        "slack": {
+          "type": "object",
+          "properties": {
+            "channel": { "type": "string" }
+          }
+        },
+        "sellerapp": {
+          "type": "object",
+          "description": "SellerApp API exposed as an n8n MCP server. Florence calls 16 tools directly via the Cowork MCP connector. Credentials live as hardcoded headers inside the n8n workflow nodes, not in the brain. Setup walkthrough in integrations/sellerapp.md (or live during onboard Stage 2c).",
+          "properties": {
+            "mcp_connected": { "type": "boolean", "description": "Whether the Florence MCP — SellerApp connector is registered with Claude (claude mcp add)." },
+            "n8n_workflow_active": { "type": "boolean", "description": "Whether the florence-mcp-sellerapp workflow is active in n8n." },
+            "geo":           { "type": "string", "description": "SellerApp geo code mapped from brain.business.marketplaces[0]. Lowercase 2 letters: us, uk, de, fr, it, es, ca, mx, br, au, jp, in, ae, sg." },
+            "token_cap":     { "type": "number", "description": "Optional cached value from Get Token Status tool. Refresh weekly." }
+          }
+        },
+        "higgsfield": {
+          "type": "object",
+          "description": "Higgsfield image-generation MCP. Florence's render and the cro-library visual-content skills route through it. OAuth-only — no API key. Setup walkthrough in integrations/higgsfield.md (or live during onboard Stage 2b). Added in v0.1.8.",
+          "properties": {
+            "mcp_connected": { "type": "boolean", "description": "Whether the Higgsfield MCP connector is registered with Claude and tools are visible." },
+            "last_check":    { "type": ["string", "null"], "description": "ISO 8601 of last successful tool-manifest check." }
+          }
+        }
+      }
+    },
+    "history": {
+      "type": "object",
+      "properties": {
+        "last_brief":      { "type": ["string", "null"], "description": "YYYY-MM-DD" },
+        "briefs_emitted":  { "type": "integer", "minimum": 0 },
+        "shopper_runs":    { "type": "integer", "minimum": 0, "description": "Count of shopper-interrogator end-to-end completions" },
+        "artifacts": {
+          "type": "object",
+          "description": "Map: ASIN → emitted-artifact metadata. Lets Florence know which per-product artifacts already exist (so she calls update_artifact instead of create_artifact, and renders the dossier with the right link summaries). Keys are ASINs, values are objects with research/concepts/tests slots. Each slot is null until first emission, then carries last_updated (ISO 8601), summary (short prose), and counts (kind-specific).",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "research": {
+                "type": ["object", "null"],
+                "properties": {
+                  "last_updated":   { "type": "string", "description": "ISO 8601" },
+                  "summary":        { "type": "string", "description": "One-line headline finding" },
+                  "drivers_count":  { "type": "integer", "minimum": 0 },
+                  "objections_count": { "type": "integer", "minimum": 0 },
+                  "competitors_count": { "type": "integer", "minimum": 0 },
+                  "must_show_count": { "type": "integer", "minimum": 0 }
+                }
+              },
+              "concepts": {
+                "type": ["object", "null"],
+                "properties": {
+                  "last_updated":   { "type": "string" },
+                  "summary":        { "type": "string", "description": "e.g. '5 main-image concepts, top score 91'" },
+                  "concepts_count": { "type": "integer", "minimum": 0 },
+                  "model":          { "type": "string", "description": "Image model used" },
+                  "top_score":      { "type": ["number", "null"] }
+                }
+              },
+              "tests": {
+                "type": ["object", "null"],
+                "properties": {
+                  "last_updated":   { "type": "string" },
+                  "summary":        { "type": "string", "description": "e.g. 'Concept #3 won at 76% confidence'" },
+                  "tests_count":    { "type": "integer", "minimum": 0 },
+                  "running_count":  { "type": "integer", "minimum": 0 },
+                  "complete_count": { "type": "integer", "minimum": 0 }
+                }
+              },
+              "dossier": {
+                "type": ["object", "null"],
+                "properties": {
+                  "last_updated": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    ,
+    "ideas": {
+      "type": "array",
+      "description": "Captured hypotheses / things-to-try-later. Populated by idea or auto-suggested during optimize-listing / render. Renders on the cockpit Ideas page.",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "status", "created_at"],
+        "properties": {
+          "id":          { "type": "string", "description": "Stable id, e.g. idea_2026_05_08_001" },
+          "title":       { "type": "string", "minLength": 1 },
+          "notes":       { "type": ["string", "null"] },
+          "status":      { "type": "string", "enum": ["captured", "tested", "shipped", "parked"] },
+          "created_at":  { "type": "string", "description": "ISO 8601" },
+          "linked_asin": { "type": ["string", "null"], "pattern": "^(B0[A-Z0-9]{8}|)$" },
+          "source":      { "type": ["string", "null"], "description": "Skill that surfaced this — idea, optimize-listing, render, or null for manual" }
+        }
+      }
+    },
+    "projects": {
+      "type": "array",
+      "description": "Portfolio dashboard — one entry per Florence skill invocation that does work for an ASIN. Populated by track-products, optimize-listing, render, pinion. Renders on the cockpit Projects page. Linked artifacts stay as standalone cards (see history.artifacts) — projects are a higher-level index over those.",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "purpose", "status", "created_at"],
+        "properties": {
+          "id":          { "type": "string", "description": "Stable id, e.g. proj_B07XYZ4231_audit_001" },
+          "name":        { "type": "string", "description": "Auto-generated or user-renamed via project rename" },
+          "purpose":     { "type": "string", "description": "Plain-language intent — 'CRO audit', 'Main image redesign', 'Test image split', etc." },
+          "asin":        { "type": ["string", "null"], "pattern": "^(B0[A-Z0-9]{8}|)$" },
+          "status":      { "type": "string", "enum": ["running", "complete", "blocked", "parked"] },
+          "created_at":  { "type": "string", "description": "ISO 8601" },
+          "updated_at":  { "type": "string", "description": "ISO 8601 — most recent skill_invocations entry" },
+          "next_steps":  { "type": ["string", "null"], "description": "Florence's recommended next move — kept short, one sentence" },
+          "linked_artifacts": {
+            "type": "array",
+            "description": "References to standalone per-product artifact cards (research / concepts / tests / dossier). Cockpit Projects page renders these as inline pills; user scrolls to find the matching card.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kind":         { "type": "string", "enum": ["research", "concepts", "tests", "dossier"] },
+                "artifact_id":  { "type": "string", "description": "e.g. florence-research-B07XYZ4231" },
+                "last_updated": { "type": "string" }
+              }
+            }
+          },
+          "skill_invocations": {
+            "type": "array",
+            "description": "Append-only event log — every skill run that touched this project.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "skill":   { "type": "string", "description": "optimize-listing, render, pinion, etc." },
+                "at":      { "type": "string", "description": "ISO 8601" },
+                "summary": { "type": "string", "description": "One-line summary of what happened" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "resources_pinned": {
+      "type": "array",
+      "description": "User-pinned reference docs surfaced on the cockpit Resources page. Pinning is opt-in via pin <path>; un-pinning via unpin <path>.",
+      "items": {
+        "type": "object",
+        "required": ["path", "pinned_at"],
+        "properties": {
+          "path":      { "type": "string", "description": "Path under reference/, e.g. reference/02-visual-content/main-image-creative-director.md" },
+          "pinned_at": { "type": "string", "description": "ISO 8601" },
+          "note":      { "type": ["string", "null"], "description": "Why this is pinned — short user note, optional" }
+        }
+      }
+    },
+    "image_strategy": {
+      "type": ["object", "null"],
+      "description": "Brand-level image strategy (added in v0.1.12). Populated by skills/image-strategy.md after analysing top 15 category bestsellers. Read by every render skill (top-level + cro-library) and injected into Higgsfield prompts so renders are tuned to what wins in this category, not generic neutral aesthetic. One strategy per brand at a time; superseded on re-run via 'image-strategy --refresh'.",
+      "properties": {
+        "category":             { "type": "string", "description": "e.g. supplements, beauty oils, kitchen tools" },
+        "main_keyword":         { "type": "string", "description": "Highest-volume keyword used to pull bestsellers. e.g. ashwagandha capsules" },
+        "competitors_analysed": { "type": "array", "items": { "type": "string", "pattern": "^B0[A-Z0-9]{8}$" }, "description": "Top 15 ASINs analysed in the run" },
+        "table_stakes":         { "type": "array", "items": { "type": "string" }, "description": "Techniques used by ≥70% of top 15 — must-match to compete in the category" },
+        "differentiation_gaps": { "type": "array", "items": { "type": "string" }, "description": "Techniques used by <20% of top 15 — opportunity space" },
+        "directional_bets": {
+          "type": "array",
+          "description": "3-5 directional bets per surface (main / listing / aplus). Each bet names what to bias toward + what to avoid + the data point that drives it.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "surface":                   { "type": "string", "enum": ["main", "listing", "aplus"] },
+              "description":               { "type": "string", "description": "The bet in one line" },
+              "techniques_to_bias_toward": { "type": "array", "items": { "type": "string" } },
+              "techniques_to_avoid":       { "type": "array", "items": { "type": "string" } },
+              "evidence":                  { "type": "string", "description": "The data point — e.g. '12 of 15 winners use X but the top 3 use NONE'" }
+            }
+          }
+        },
+        "prompt_adjustments": {
+          "type": "object",
+          "description": "Concrete tokens render skills inject into Higgsfield prompts. Section 1 gets scene_keywords; section 4 gets palette + mood keywords; anti_patterns become 'do NOT include {X}' clauses near the end of the prompt.",
+          "properties": {
+            "scene_keywords":   { "type": "array", "items": { "type": "string" } },
+            "palette_keywords": { "type": "array", "items": { "type": "string" } },
+            "mood_keywords":    { "type": "array", "items": { "type": "string" } },
+            "anti_patterns":    { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "last_updated":         { "type": "string", "description": "ISO 8601. Render skills flag as stale if >90 days old and recommend image-strategy --refresh." }
+      }
+    }
+  }
+}

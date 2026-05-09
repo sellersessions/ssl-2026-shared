@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LoRAs & The Ownership Layer — Speaker Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #F4F1EA;
+    --paper:   #FCFAF4;
+    --ink:     #152823;
+    --ink-2:   #2A3D37;
+    --ink-3:   #5E6E68;
+    --rule:    #D4D0C4;
+    --accent:  #1FA877;
+    --accent2: #D4A53A;
+    --warn:    #C0392B;
+    --serif:   'Fraunces', Georgia, serif;
+    --sans:    'DM Sans', system-ui, sans-serif;
+    --mono:    'DM Mono', ui-monospace, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Page shell ── */
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 64px 48px 96px;
+  }
+
+  /* ── Header ── */
+  .doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 32px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 56px;
+  }
+  .doc-header .left {}
+  .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .doc-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 52px;
+    line-height: .97;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .doc-title em { font-style: italic; color: var(--accent); }
+  .doc-meta {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    color: var(--ink-3);
+    text-align: right;
+    line-height: 1.8;
+    margin-top: 8px;
+  }
+  .doc-meta span { display: block; }
+
+  /* ── Intro strip ── */
+  .intro {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 28px 36px;
+    border-radius: 3px;
+    margin-bottom: 56px;
+  }
+  .intro p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.4;
+    margin: 0;
+    color: rgba(252,250,244,0.85);
+  }
+  .intro p em { color: var(--accent); font-style: normal; }
+
+  /* ── Section ── */
+  .section {
+    margin-bottom: 56px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 32px;
+    letter-spacing: -0.01em;
+    margin: 0;
+    line-height: 1.1;
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  /* ── Bullet list ── */
+  ul.brief {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul.brief > li {
+    padding: 18px 0 18px 0;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  ul.brief > li:first-child { border-top: 0; padding-top: 4px; }
+
+  .bullet-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 1px;
+    margin-top: 9px;
+    flex-shrink: 0;
+  }
+  .bullet-content {}
+  .bullet-head {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0 0 8px;
+    line-height: 1.2;
+  }
+  .bullet-head em { font-style: italic; color: var(--accent); }
+  .bullet-body {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  .bullet-body strong { font-weight: 500; color: var(--ink); }
+  .bullet-body em { font-style: italic; }
+
+  /* ── Sub-bullets ── */
+  ul.sub {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+  }
+  ul.sub li {
+    font-family: var(--sans);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    padding: 5px 0 5px 20px;
+    border-left: 2px solid var(--rule);
+    margin-bottom: 4px;
+    font-weight: 300;
+  }
+  ul.sub li strong { font-weight: 500; color: var(--ink); }
+  ul.sub li em { color: var(--accent); font-style: normal; font-weight: 500; }
+
+  /* ── Call-out / flag ── */
+  .callout {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent2);
+    padding: 16px 20px;
+    margin: 12px 0 0;
+    border-radius: 0 3px 3px 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: .02em;
+    color: var(--ink-3);
+  }
+  .callout strong { color: var(--accent2); font-weight: 500; }
+
+  .callout.action {
+    border-left-color: var(--warn);
+  }
+  .callout.action strong { color: var(--warn); }
+
+  /* ── Tag chips ── */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: 5px 11px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    border-radius: 999px;
+  }
+  .tag.accent { border-color: var(--accent); color: var(--accent); }
+  .tag.fill { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  /* ── Bridge panel ── */
+  .bridge {
+    background: linear-gradient(135deg, #152823 60%, #1a3a30);
+    border-radius: 4px;
+    padding: 40px 44px;
+    margin-top: 56px;
+  }
+  .bridge .bridge-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .bridge .bridge-head {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    margin: 0 0 20px;
+  }
+  .bridge .bridge-head em { font-style: italic; color: var(--accent); }
+  .bridge ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .bridge ul li {
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    font-weight: 300;
+    color: rgba(252,250,244,0.75);
+    padding: 10px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    gap: 14px;
+  }
+  .bridge ul li:first-child { border-top: 0; }
+  .bridge ul li::before {
+    content: "→";
+    color: var(--accent);
+    flex-shrink: 0;
+    font-family: var(--mono);
+  }
+  .bridge ul li strong { color: var(--paper); font-weight: 500; }
+
+  /* ── Timing bar ── */
+  .timing-bar {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 48px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .timing-seg {
+    flex: 1;
+    padding: 12px 16px;
+    border-right: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .timing-seg:last-child { border-right: 0; }
+  .timing-seg .min { color: var(--accent); font-weight: 500; display: block; margin-bottom: 2px; }
+  .timing-seg .lbl { color: var(--ink-3); }
+  .timing-seg.active { background: var(--ink); }
+  .timing-seg.active .min { color: var(--accent); }
+  .timing-seg.active .lbl { color: rgba(252,250,244,0.6); }
+
+  /* ── Footer ── */
+  .doc-footer {
+    margin-top: 72px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .doc-footer .ft-left {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    color: var(--ink-3);
+  }
+  .doc-footer .ft-right {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--ink-3);
+  }
+
+  @media print {
+    body { background: white; }
+    .page { padding: 32px 40px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="doc-header">
+    <div class="left">
+      <div class="label">Speaker Brief · Seller Sessions 2026</div>
+      <h1 class="doc-title">LoRAs & The<br><em>Ownership Layer</em></h1>
+    </div>
+    <div class="doc-meta">
+      <span>Matt Kostan</span>
+      <span>ProductPinion Inc.</span>
+      <span>Precedes: Florence deck</span>
+      <span class="label" style="margin:0;">~30–35 min</span>
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro">
+    <p>The crowd knows how to <em>use</em> AI. This session is about how to <em>own</em> it. By the end, they should understand that every poll they've run is already training data — they just didn't know it yet.</p>
+  </div>
+
+  <!-- Timing -->
+  <div class="timing-bar">
+    <div class="timing-seg active"><span class="min">5 min</span><span class="lbl">What is a LoRA</span></div>
+    <div class="timing-seg"><span class="min">8 min</span><span class="lbl">Why it matters</span></div>
+    <div class="timing-seg"><span class="min">8 min</span><span class="lbl">What you can do</span></div>
+    <div class="timing-seg"><span class="min">7 min</span><span class="lbl">Polls as training data</span></div>
+    <div class="timing-seg"><span class="min">5 min</span><span class="lbl">Prompt injection</span></div>
+    <div class="timing-seg"><span class="min">3 min</span><span class="lbl">Bridge to Florence</span></div>
+  </div>
+
+  <!-- ── SECTION 1 ── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">What is a <em>LoRA</em></h2>
+    </div>
+    <ul class="brief">
+      <li>
+        <div class="bullet-dot"></div>
+        <div class="bullet-content">
+          <p class="bullet-head">LoRA = Low-Rank Adaptation</p>
+          <p class="bullet-body">A research technique published by Microsoft in 2021 to solve a very specific problem: fine-tuning giant AI models cost millions of dollars. LoRA cut that cost by <strong>10,000×</strong> by only retraining a tiny, efficient slice of the model's parameters — called a "low-rank" matrix. This unlocked custom AI for everyone, not just the labs.</p>
+          <ul class="sub">
+            <li><em>Low-Rank</em> = math-speak for "a small, efficient shortcut through the model's weight space"</li>
+            <li><em>Adaptation</em> = you're steering an existing model, not building one from scratch</li>
+            <li>Analogy: the model is the factory. The LoRA is the custom mould you snap in</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="bullet-dot"></div>
+        <div class="bullet-content">
+          <p class="bullet-head">LoRA is a <em>technique</em>, not a tool — it works on any neural network</p>
+          <p class="bullet-body">Wherever there's a neural network, LoRA can steer it. Text models, image generators, audio models, video models. Same principle every time: take a huge pre-trained model, add a small adapter layer trained on your data.</p>
+          <ul class="sub">
+            <li><strong>Text (LLMs):</strong> brand voice, category knowledge, buyer psychology, product expertise</li>
+            <li><strong>Images (FLUX / Stable Diffusion):</strong> visual style, product look, brand aesthetic — consistent imagery at scale</li>
+            <li><strong>Audio / Video:</strong> same concept applied to voice, music, and motion</li>
+          </ul>
+          <div class="tags" style="margin-top:12px;">
+            <span class="tag accent">Text LLMs</span>
+            <span class="tag accent">Image generation</span>
+            <span class="tag accent">Audio</span>
+            <span class="tag accent">Video</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── SECTION 2 ── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Why it <em>matters</em></h2>
+    </div>
+    <ul class="brief">
+      <li>
+        <div class="bullet-dot"></div>
+        <div class="bullet-content">
+          <p class="bullet-head">AI isn't actually <em>"smart"</em> — it's a very sophisticated pattern-matcher</p>
+          <p class="bullet-body">At its core, a language model is predicting the most statistically probable next word given everything before it. It's not reasoning from first principles. It's combining probabilities derived from everything it was trained on — which is mostly the internet: generic, averaged, not specific to your brand, your customer, or your category. This is why it feels impressive in demos and mediocre in production. The output is calibrated to the average of all input, not the specific reality of your business.</p>
+          <ul class="sub">
+            <li>This is also why prompting alone has a ceiling — you're still working with a generic base</li>
+            <li>LoRA is how you move past that ceiling by changing what the model is actually trained on</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="bullet-dot"></div>
+        <div class="bullet-content">
+          <p class="bullet-head"><em>Rufus</em> prompts conversations — but that's not the same as real objections</p>
+          <p class="bullet-body">If you go to a product detail page on Amazon, Rufus has already generated a list of suggested questions — "Is this good for sensitive skin?", "How does this compare to X brand?", "Does it contain artificial flavors?" Those look like customer objections. But they're not. They're <strong>conversation starters</strong> — statistically probable questions for your category that Rufus surfaces to get buyers clicking and talking. That's actually a good thing for Amazon: more Rufus interactions means more engaged shoppers, which means more likely to close the deal. Rufus is doing its job. The problem is when sellers treat those as the real objection list and build their secondary images around them. They're not your customers' actual hesitations — they're the category's most common conversation topics.</p>
+          <ul class="sub">
+            <li>Rufus questions = designed to drive engagement, not surface your specific buyer's blockers</li>
+            <li>They're baseline data — useful as a starting point, but they don't know <em>your</em> customer</li>
+            <li>With ProductPinion: ask 100 real shoppers "what would stop you from buying this product?" — then run a second poll to rank those answers by importance. Now you have an actual priority stack of the real objections, in your buyers' own words</li>
+            <li>That ranked list is something Rufus can never give you — and it's also the exact data format you'd use to train an AI on your buyers' psychology</li>
+          </ul>
+          <div class="callout"><strong>Key contrast:</strong> Rufus gives you the category's conversation starters. A ProductPinion poll gives you your buyers' actual ranked blockers. Only the second one is trainable signal — and only the second one tells you what your secondary images should actually say.</div>
+        </div>
+      </li>
+      <li>
+        <div class="bullet-dot"></div>
+        <div class="bullet-content">
+          <p class="bullet-head">The moat isn't the model — it's the <em>data</em></p>
+          <p class="bullet-body">GPT-4, Claude, and Gemini are all available to every one of your competitors for the same price. Prompting skill is table stakes in 12 months. The durable advantage is a proprietary dataset that no one else has — your customers' words, their objections, what they trust, what they fear — and a model trained on it. That model works for you specifically. It can't be copied.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── SECTION 3 ── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">What you can <em>do with it</em></h2>
+    </div>
+    <ul class="brief">
+      <li>
+        <div class="bullet-dot"></div>
+        <div class="bullet-content">
+          <p class="bullet-head">Image LoRAs: <em>brand-consistent visuals at scale</em></p>
+          <p class="bullet-body">Train a LoRA on your own product photography — as few as 15–20 images. After training, you can generate hundreds of variations that are visually indistinguishable from your brand's aesthetic: different settings, different seasons, different models, different use-case scenarios. All consistent. All on-brand. For ~$5–50 per trained model on fal.ai or Replicate.</p>
+          <ul class="sub">
+            <li><strong>Live demo moment:</strong> show the Matt Kostan social media images — trained a LoRA, generated consistent branded lifestyle images without a photographer</li>
+            <li><strong>For sellers:</strong> replaces 80% of photo shoots for variation testing, A+ content, seasonal campaigns</li>
+            <li><strong>Platform:</strong> fal.ai — optimized for FLUX image LoRAs, sub-second generation, no-code training UI available</li>
+            <li>Key point: this only works on <em>open</em> models (FLUX, Stable Diffusion) — you can't LoRA Midjourney or DALL-E 3</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="bullet-dot"></div>
+        <div class="bullet-content">
+          <p class="bullet-head">Text LoRAs: build your own LLM <em>tuned specifically to your product and your customers</em></p>
+          <p class="bullet-body">Imagine not everyone using the same generic ChatGPT — but each seller having their own custom LLM trained on their actual customer language. Their poll results, their winning listing copy, their review themes, their objection patterns. A model that writes about your product the way your best customers talk about it. That becomes your proprietary database of knowledge — not a shared tool everyone has access to, but something that belongs to you and only gets smarter as you use it.</p>
+          <ul class="sub">
+            <li>Uses exact customer vocabulary — the words real buyers use, not copywriter guesses</li>
+            <li>Knows your category's trust signals, conversion triggers, and ranked objections</li>
+            <li>Compounds over time — the more you poll, the smarter it gets about your specific buyers</li>
+            <li><strong>This is the vision I'm building toward with ProductPinion</strong> — the polls you're running today are already generating the training data for this</li>
+          </ul>
+          <div class="callout"><strong>Framing for the room:</strong> "Right now you're renting AI intelligence that everyone else has too. What I'm working on is a path for you to own it — a model trained on your customers, not the internet's average."</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── SECTION 4 ── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Every poll is a <em>training data point</em></h2>
+    </div>
+    <ul class="brief">
+      <li>
+        <div class="bullet-dot"></div>
+        <div class="bullet-content">
+          <p class="bullet-head">This is literally how ChatGPT became good — and you can do the same thing</p>
+          <p class="bullet-body">When OpenAI trained ChatGPT from GPT-3, the biggest unlock wasn't more data — it was <strong>human preference feedback</strong>. They showed raters two responses and asked "which is better?" Those comparisons, fed back into training, is what made the model actually useful. Sam Altman explained this directly on the Lex Fridman podcast:</p>
+          <div class="callout" style="border-left-color: var(--accent); margin-bottom: 12px;"><strong>Sam Altman, Lex Fridman Podcast:</strong> "The simplest version of this is show two outputs, ask which one is better than the other, which one the human raters prefer, and then feed that back into the model with reinforcement learning. And that process works remarkably well with, in my opinion, remarkably little data to make the model more useful."</div>
+          <p class="bullet-body" style="margin-top:12px;">He also said that what made ChatGPT the breakthrough moment wasn't the underlying model — it was the RLHF and the interface. The preference signal is what turned a capable-but-generic model into something that felt genuinely useful.</p>
+          <ul class="sub">
+            <li>Every ProductPinion poll where voters pick Image A over Image B <em>is</em> a preference pair</li>
+            <li>Every question where buyers rank their top hesitation <em>is</em> human feedback data</li>
+            <li>You've been running RLHF-equivalent data collection without realizing it</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="bullet-dot"></div>
+        <div class="bullet-content">
+          <p class="bullet-head">The data flywheel: more polls → better model → better insights → more polls</p>
+          <p class="bullet-body">The compound effect is real. A model fine-tuned on your first 50 polls is already better than a generic model for your use case. After 200 polls it knows your category deeply. After 500 polls across your vertical it has an intelligence about buyer psychology that no SaaS tool can replicate — because it was built on real people making real choices, not pattern-matching on generic content.</p>
+          <ul class="sub">
+            <li>Image polls → trains image preference model AND text LLM (via vision description pipeline)</li>
+            <li>Text polls → trains LLM directly on buyer language and objection patterns</li>
+            <li>Every new poll user improves the shared category model, which benefits all users</li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── SECTION 5 ── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Ethical <em>prompt injection</em> — a fun one most haven't considered</h2>
+    </div>
+    <ul class="brief">
+      <li>
+        <div class="bullet-dot"></div>
+        <div class="bullet-content">
+          <p class="bullet-head">What is prompt injection — and why "ethical" matters</p>
+          <p class="bullet-body">Prompt injection is when text embedded in a webpage or document contains hidden instructions that get read by an AI and change how it responds. It's usually discussed as an attack vector. The ethical version — which I'm calling <em>intentional brand persistence</em> — is using the same mechanism to ensure that when any AI reads about your product, it walks away with an accurate, positive, structured understanding of what you do and who you serve.</p>
+        </div>
+      </li>
+      <li>
+        <div class="bullet-dot"></div>
+        <div class="bullet-content">
+          <p class="bullet-head">AEO articles — <em>give them a skill that writes these automatically</em></p>
+          <p class="bullet-body">AEO = Answer Engine Optimization. As AI assistants replace search for product discovery, the question isn't "how do I rank on Google?" — it's "how does the AI describe me when someone asks?" You can write structured articles specifically designed to be summarized well by LLMs: clear entity definitions, comparison framing, preference signals for your brand. Hand the room a Claude skill that writes these automatically from a product brief.</p>
+          <ul class="sub">
+            <li>The skill takes: product name, key claims, competitive positioning, 3 customer proof points</li>
+            <li>Outputs: a structured article with headers, FAQ format, and brand-signal language optimized for AI summarization</li>
+            <li>Once published, every AI that reads your site is "trained" on your framing</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="bullet-dot"></div>
+        <div class="bullet-content">
+          <p class="bullet-head">"Summarize" buttons that <em>persist your brand into LLM memory</em></p>
+          <p class="bullet-body">Give them a second skill: a "Summarize This Page" button they can embed on their website or product pages. When a visitor clicks it, it sends the page to Claude with a prompt designed to create a structured brand memory — not just a summary, but a formatted representation of what the brand is, what it stands for, and how it outperforms alternatives. The user saves it. Now when they ask Claude anything related to this product category, their mental model is seeded with your brand's framing.</p>
+          <ul class="sub">
+            <li>This is persistent in Claude's memory system — it carries across conversations</li>
+            <li>The button is low-friction: one click, one save, your brand is now "known" to their AI</li>
+            <li>Works especially well for brand advocates, agency clients, and retail buyers doing research</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="bullet-dot"></div>
+        <div class="bullet-content">
+          <p class="bullet-head">ProductPinion page — <em>ask for a competitive comparison on the spot</em></p>
+          <p class="bullet-body">Demo this live: go to the ProductPinion webpage with Claude's Chrome extension active. Use a prompt that asks Claude to compare ProductPinion to PickFu and similar tools — but structured so that the ProductPinion page content is what gets read and summarized first, seeding the comparison with your framing. The AI "learns" your positioning in real time, in front of the room.</p>
+          <ul class="sub">
+            <li>This is the injection demo — the crowd sees it happen live</li>
+            <li>Key takeaway: whoever controls the structured information an AI reads about your brand, controls how the AI represents you</li>
+          </ul>
+          <div class="callout"><strong>Prep note:</strong> Have the Chrome extension demo ready. Make sure the ProductPinion page has clean structured content Claude can easily extract and use as comparison framing.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── BRIDGE TO FLORENCE ── -->
+  <div class="bridge">
+    <div class="bridge-label">Handoff · leads directly into the Florence deck</div>
+    <h3 class="bridge-head">The bridge: from <em>borrowing</em> AI to building an AI <em>employee</em></h3>
+    <ul>
+      <li><strong>Skills = good enough for now.</strong> Everything we just built — the AEO skill, the summarize button, the Claude skill with poll data baked in — that's a Claude Skill. It's not a LoRA. It doesn't change model weights. But it gives you persistent, structured intelligence that loads automatically. For most sellers in this room, that's the right place to start.</li>
+      <li><strong>Florence is the next step.</strong> What Dorian and I built is an AI agent — "Florence" — that has persistent knowledge of your Amazon data, your competitor landscape, your image test history. It's pre-loaded with skills: Market Informant, Variation Engine, Shopper Interrogator, Evergreen Image Tester. It's not a LoRA yet — it's a skill stack. But it behaves like one. It knows your business.</li>
+      <li><strong>Why skills first, LoRA later.</strong> A LoRA is the right architecture when you have enough data and enough users to justify training. Until then, a well-designed skill gets you 80% of the benefit at 0% of the cost. Florence proves that. The LoRA is the upgrade path — when you've run 500 polls, you stop loading them as context and start baking them into weights.</li>
+      <li><strong>The transition line to use:</strong> <em>"What Dorian is about to show you is what Florence looks like right now — a set of skills with persistent memory. What I'm building at ProductPinion is what Florence becomes in two years, when those skills are replaced by a model that was trained on tens of thousands of real buyer decisions. Same outputs. Different engine. One you can buy. One no one else will ever have."</em></li>
+    </ul>
+  </div>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <div class="ft-left">ProductPinion Inc. · Seller Sessions 2026 · Confidential</div>
+    <div class="ft-right">Followed by: Florence — Chief Data Analyst for Amazon</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1850 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LoRAs &amp; The Ownership Layer — Live Presenter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     LoRAs & The Ownership Layer — live presenter
+     Scroll-snap fullscreen page. Pinion Green palette.
+     Fraunces / Inter / JetBrains Mono.
+     ============================================================ */
+  :root {
+    --bg:        #F4F1EA;
+    --bg-soft:   #E9E5DA;
+    --paper:     #FCFAF4;
+    --ink:       #152823;
+    --ink-2:     #2A3D37;
+    --ink-3:     #5E6E68;
+    --rule:      #D4D0C4;
+    --accent:    #1FA877;
+    --accent-2:  #2BC4D8;
+    --warn:      #D4A53A;
+
+    --serif: "Fraunces", "Times New Roman", serif;
+    --sans:  "Inter", system-ui, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    height: 100%;
+    overflow-y: scroll;
+  }
+  body { height: 100%; }
+
+  /* ── Section shell ─────────────────────────────────── */
+  section.slide {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--ink);
+    padding: clamp(48px, 6vh, 96px) clamp(56px, 7vw, 140px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  section.slide.dark { background: var(--ink); color: var(--paper); }
+  section.slide.demo { background: #0E1A16; color: var(--paper); }
+
+  /* ── Chrome (corner labels) ────────────────────────── */
+  .chrome {
+    position: absolute;
+    font-family: var(--mono);
+    font-size: clamp(11px, 0.85vw, 14px);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .chrome.tl { top: clamp(28px, 3.5vh, 48px); left: clamp(48px, 5vw, 96px); display: flex; align-items: center; gap: 12px; }
+  .chrome.tr { top: clamp(28px, 3.5vh, 48px); right: clamp(48px, 5vw, 96px); }
+  .chrome.bl { bottom: clamp(28px, 3.5vh, 48px); left: clamp(48px, 5vw, 96px); }
+  .chrome.br { bottom: clamp(28px, 3.5vh, 48px); right: clamp(48px, 5vw, 96px); font-variant-numeric: tabular-nums; }
+
+  section.dark .chrome,
+  section.demo .chrome { color: rgba(252,250,244,0.5); }
+
+  .wm-mini {
+    display: inline-flex; align-items: center; gap: 0.4em;
+    font-family: var(--sans); font-weight: 600;
+    font-size: clamp(11px, 0.85vw, 13px);
+    letter-spacing: 0.18em;
+    color: var(--ink);
+  }
+  section.dark .wm-mini, section.demo .wm-mini { color: var(--paper); }
+  .wm-mini::after {
+    content: ""; display: inline-block;
+    width: 0.5em; height: 1.05em; background: var(--accent);
+    transform: translateY(0.06em);
+  }
+
+  /* ── Type roles ────────────────────────────────────── */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: clamp(12px, 1vw, 16px);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 clamp(20px, 2.5vh, 32px);
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .eyebrow::before {
+    content: ""; display: block;
+    width: clamp(24px, 3vw, 36px); height: 1px;
+    background: var(--accent);
+  }
+  .eyebrow.no-bar::before { display: none; }
+  section.dark .eyebrow, section.demo .eyebrow { color: rgba(252,250,244,0.6); }
+
+  h1.display {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(64px, 10vw, 168px);
+    line-height: .92;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+  h1.display em { font-style: italic; color: var(--accent); font-weight: 400; }
+  h1.display .dot { color: var(--accent); font-style: italic; font-weight: 400; }
+
+  h2.title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(48px, 7vw, 116px);
+    line-height: .96;
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+  h2.title em { font-style: italic; color: var(--accent); font-weight: 400; }
+
+  /* ── Wordmark (FLORENCE.-style section opener) ─────── */
+  h2.wordmark {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(80px, 13vw, 220px);
+    line-height: .9;
+    letter-spacing: -0.035em;
+    margin: 0 0 clamp(20px, 2.5vh, 40px);
+    color: var(--ink);
+  }
+  h2.wordmark .dot { color: var(--accent); font-style: italic; font-weight: 400; }
+  h2.wordmark em { font-style: italic; color: var(--accent); font-weight: 400; }
+  section.dark h2.wordmark, section.demo h2.wordmark { color: var(--paper); }
+
+  h3.subtitle {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(28px, 3.4vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+  h3.subtitle em { font-style: italic; color: var(--accent); font-weight: 400; }
+
+  p.lede {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(28px, 3.2vw, 52px);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    color: var(--ink-2);
+    max-width: 26ch;
+    margin: 0;
+  }
+  section.dark .lede, section.demo .lede { color: rgba(252,250,244,0.85); }
+  p.lede em { color: var(--accent); font-style: normal; font-weight: 400; }
+
+  p.body {
+    font-family: var(--sans);
+    font-size: clamp(17px, 1.4vw, 24px);
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 36ch;
+    margin: 0 0 18px;
+  }
+  section.dark .body, section.demo .body { color: rgba(252,250,244,0.78); }
+  p.body strong { color: var(--ink); font-weight: 600; }
+  section.dark .body strong, section.demo .body strong { color: var(--paper); }
+
+  .footnote {
+    font-family: var(--mono);
+    font-size: clamp(11px, 0.85vw, 14px);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  section.dark .footnote, section.demo .footnote { color: rgba(252,250,244,0.5); }
+
+  /* ── Layout helpers ────────────────────────────────── */
+  .twocol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(48px, 6vw, 96px);
+    align-items: center;
+  }
+  .twocol.narrow-left  { grid-template-columns: 0.85fr 1fr; }
+  .twocol.narrow-right { grid-template-columns: 1fr 0.85fr; }
+  .twocol.top { align-items: start; }
+
+  .stack-lg > * + * { margin-top: clamp(24px, 3vh, 40px); }
+  .stack-md > * + * { margin-top: clamp(16px, 2vh, 24px); }
+  .stack-sm > * + * { margin-top: clamp(8px, 1vh, 14px); }
+
+  /* ── Cards ─────────────────────────────────────────── */
+  .card-grid {
+    display: grid;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .card {
+    background: var(--paper);
+    padding: clamp(24px, 2.4vw, 40px);
+    display: flex;
+    flex-direction: column;
+  }
+  .card .l {
+    font-family: var(--mono);
+    font-size: clamp(11px, 0.85vw, 13px);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .card .h {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(22px, 2vw, 34px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
+  }
+  .card .h em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .card .b {
+    font-family: var(--sans);
+    font-size: clamp(14px, 1.1vw, 18px);
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  .card .b strong { color: var(--ink); font-weight: 600; }
+
+  /* ── Method list (numbered enumeration) ────────────── */
+  ol.methods {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: m;
+    display: grid;
+    gap: 1px;
+    background: var(--rule);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  ol.methods li {
+    counter-increment: m;
+    background: var(--bg);
+    padding: clamp(18px, 2.2vh, 30px) clamp(20px, 2vw, 32px);
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: clamp(16px, 2vw, 32px);
+    transition: background 200ms ease;
+  }
+  ol.methods li::before {
+    content: counter(m, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: clamp(13px, 1vw, 16px);
+    letter-spacing: .14em;
+    color: var(--ink-3);
+  }
+  ol.methods li .lbl {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(22px, 2.2vw, 36px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  ol.methods li .lbl em { font-style: italic; color: var(--accent); font-weight: 400; }
+  ol.methods li .tag-side {
+    font-family: var(--mono);
+    font-size: clamp(10px, 0.8vw, 12px);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  ol.methods li.featured {
+    background: var(--paper);
+    box-shadow: inset 4px 0 0 var(--accent);
+  }
+  ol.methods li.featured .lbl { color: var(--ink); }
+  ol.methods li.featured .tag-side { color: var(--accent); }
+
+  /* ── Clean list ────────────────────────────────────── */
+  ul.clean {
+    list-style: none; padding: 0; margin: 0;
+    font-family: var(--sans);
+    font-size: clamp(16px, 1.3vw, 22px);
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  ul.clean li {
+    padding: clamp(14px, 1.6vh, 20px) 0;
+    border-top: 1px solid var(--rule);
+  }
+  ul.clean li:first-child { border-top: 0; }
+  ul.clean li b {
+    color: var(--ink);
+    display: block;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(20px, 1.8vw, 30px);
+    letter-spacing: -.01em;
+    margin-bottom: 6px;
+  }
+  ul.clean li b em { font-style: italic; color: var(--accent); font-weight: 400; }
+  section.dark ul.clean, section.demo ul.clean { color: rgba(252,250,244,0.7); }
+  section.dark ul.clean li, section.demo ul.clean li { border-top-color: rgba(255,255,255,0.1); }
+  section.dark ul.clean li b, section.demo ul.clean li b { color: var(--paper); }
+
+  /* ── Numbered reason list (injection / demo slides) ── */
+  ol.reasons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: var(--sans);
+    font-size: clamp(13px, 1.1vw, 17px);
+    line-height: 1.45;
+    color: rgba(252,250,244,0.72);
+  }
+  ol.reasons li {
+    padding: clamp(10px, 1.2vh, 15px) 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+  ol.reasons li:first-child { border-top: 0; }
+  ol.reasons .num {
+    font-family: var(--mono);
+    font-size: clamp(10px, 0.8vw, 12px);
+    letter-spacing: .16em;
+    color: var(--accent);
+    padding-top: 3px;
+    font-weight: 500;
+  }
+  ol.reasons .text b {
+    color: var(--paper);
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(15px, 1.3vw, 20px);
+    letter-spacing: -0.01em;
+    display: block;
+    margin-bottom: 3px;
+    line-height: 1.1;
+  }
+
+  /* ── Tag chips ─────────────────────────────────────── */
+  .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+  .tag {
+    font-family: var(--mono);
+    font-size: clamp(10px, 0.85vw, 13px);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    border-radius: 999px;
+  }
+  .tag.solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .tag.accent { border-color: var(--accent); color: var(--accent); }
+  section.dark .tag, section.demo .tag { border-color: var(--paper); color: var(--paper); }
+  section.dark .tag.accent, section.demo .tag.accent { border-color: var(--accent); color: var(--accent); }
+
+  /* ── Pull quote ────────────────────────────────────── */
+  .pullquote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(28px, 3.4vw, 56px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    max-width: 28ch;
+    margin: 0;
+  }
+  .pullquote em { color: var(--accent); font-weight: 400; }
+  section.dark .pullquote, section.demo .pullquote { color: var(--paper); }
+  .quote-attrib {
+    font-family: var(--mono);
+    font-size: clamp(11px, 0.95vw, 16px);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-top: clamp(20px, 2.5vh, 36px);
+  }
+  section.dark .quote-attrib, section.demo .quote-attrib { color: rgba(252,250,244,0.55); }
+
+  /* ── Callout ───────────────────────────────────────── */
+  .callout {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    padding: clamp(16px, 1.6vw, 24px) clamp(20px, 2vw, 32px);
+    border-radius: 0 4px 4px 0;
+    font-family: var(--sans);
+    font-size: clamp(14px, 1.15vw, 19px);
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 60ch;
+  }
+  .callout strong { color: var(--accent); font-weight: 600; }
+  .callout.warn { border-left-color: var(--warn); }
+  .callout.warn strong { color: var(--warn); }
+  section.dark .callout, section.demo .callout {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.08);
+    color: rgba(252,250,244,0.85);
+  }
+
+  /* ── Demo banner ───────────────────────────────────── */
+  .demo-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: clamp(12px, 1vw, 18px);
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: clamp(20px, 2.5vh, 32px);
+  }
+  .demo-flag::before {
+    content: ""; width: 10px; height: 10px;
+    background: var(--accent); border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(31,168,119,0.18);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 4px rgba(31,168,119,0.18); }
+    50%     { box-shadow: 0 0 0 10px rgba(31,168,119,0.05); }
+  }
+
+  /* ── Action buttons (live demo / skill download) ───── */
+  .btn-row { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: clamp(14px, 1.4vw, 20px) clamp(20px, 2vw, 32px);
+    font-family: var(--mono);
+    font-size: clamp(11px, 0.95vw, 15px);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: transform 150ms ease, background 150ms ease, color 150ms ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+
+  .btn-demo {
+    background: var(--accent);
+    color: var(--paper);
+  }
+  .btn-demo:hover { background: #178f63; }
+  .btn-demo::before { content: "▶"; font-size: 0.7em; letter-spacing: 0; }
+
+  .btn-skill {
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+  }
+  .btn-skill:hover { background: var(--ink); color: var(--paper); }
+  .btn-skill::before { content: "↓"; font-size: 1.1em; letter-spacing: 0; }
+
+  section.dark .btn-skill, section.demo .btn-skill {
+    color: var(--paper);
+    border-color: var(--paper);
+  }
+  section.dark .btn-skill:hover, section.demo .btn-skill:hover {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  /* ── Asset slot (placeholder for images / videos) ──── */
+  .asset-slot {
+    background: var(--bg-soft);
+    border: 1px dashed var(--ink-3);
+    border-radius: 4px;
+    display: grid;
+    place-items: center;
+    color: var(--ink-3);
+    font-family: var(--mono);
+    font-size: clamp(11px, 0.95vw, 14px);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    text-align: center;
+    padding: 16px;
+  }
+  .asset-slot.tall  { aspect-ratio: 3 / 4; }
+  .asset-slot.wide  { aspect-ratio: 16 / 9; }
+  .asset-slot.video::after { content: "▶"; position: absolute; color: var(--accent); font-size: 24px; }
+  .asset-slot.video { position: relative; }
+  section.dark .asset-slot, section.demo .asset-slot {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.2);
+    color: rgba(252,250,244,0.4);
+  }
+
+  /* ── Compare panel ─────────────────────────────────── */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .compare > div { background: var(--paper); padding: clamp(24px, 2.6vw, 40px); }
+  .compare .col-l { background: var(--bg-soft); }
+  .compare .label {
+    font-family: var(--mono);
+    font-size: clamp(11px, 0.9vw, 14px);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: clamp(12px, 1.4vh, 18px);
+  }
+  .compare .col-r .label { color: var(--accent); }
+  .compare h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(20px, 2vw, 32px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 clamp(10px, 1.2vh, 16px);
+  }
+  .compare h4 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .compare p {
+    font-family: var(--sans);
+    font-size: clamp(13px, 1.05vw, 17px);
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin: 0 0 10px;
+  }
+
+  /* ── Two-tier (basic vs advanced) ──────────────────── */
+  .tier {
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: clamp(28px, 3vw, 48px);
+    border-radius: 4px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .tier .ix {
+    font-family: var(--mono);
+    font-size: clamp(11px, 0.9vw, 14px);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: clamp(14px, 1.6vh, 22px);
+  }
+  .tier h3 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(40px, 5vw, 84px);
+    line-height: .95;
+    letter-spacing: -0.025em;
+    margin: 0 0 clamp(16px, 1.8vh, 24px);
+  }
+  .tier h3 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .tier p {
+    font-family: var(--sans);
+    font-size: clamp(15px, 1.2vw, 19px);
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin: 0 0 clamp(20px, 2vh, 32px);
+  }
+  .tier ul {
+    list-style: none; padding: 0; margin: 0;
+    font-family: var(--mono);
+    font-size: clamp(11px, 0.9vw, 14px);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .tier ul li { padding: clamp(8px, 1vh, 12px) 0; border-top: 1px solid var(--rule); }
+  .tier ul li:first-child { border-top: 0; }
+  .tier.accent { border-color: var(--accent); }
+  .tier.accent .ix { color: var(--accent); }
+
+  /* ── Flywheel diagram ──────────────────────────────── */
+  .flywheel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(12px, 1.4vw, 24px);
+  }
+  .flywheel .step {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: clamp(18px, 2vw, 28px);
+  }
+  .flywheel .step .n {
+    font-family: var(--mono);
+    font-size: clamp(11px, 0.9vw, 14px);
+    letter-spacing: .2em;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .flywheel .step .t {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(18px, 1.7vw, 26px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .flywheel .step .t em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .flywheel .step .d {
+    font-family: var(--sans);
+    font-size: clamp(13px, 1.05vw, 16px);
+    line-height: 1.45;
+    color: var(--ink-2);
+    margin: 8px 0 0;
+  }
+
+  /* ── Indicator rail ────────────────────────────────── */
+  .indicator {
+    position: fixed;
+    right: clamp(20px, 2vw, 36px);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 50;
+    mix-blend-mode: difference;
+  }
+  .indicator a {
+    display: block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    background: transparent;
+    transition: background 200ms ease, transform 200ms ease;
+  }
+  .indicator a.active { background: #fff; transform: scale(1.25); }
+  .indicator a:hover { background: rgba(255,255,255,0.5); }
+
+  .pageno { font-variant-numeric: tabular-nums; }
+
+  .key-hint {
+    position: fixed;
+    bottom: clamp(20px, 2vh, 36px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    z-index: 40;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    color: #fff;
+    opacity: 0.7;
+  }
+
+  body::-webkit-scrollbar { width: 0; background: transparent; }
+  body { scrollbar-width: none; }
+
+  /* ── Likeness grid (2×2 image mashup) ──────────────── */
+  .likeness-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(8px, 1vw, 14px);
+    width: 100%;
+  }
+  .likeness-grid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+    background: var(--bg-soft);
+  }
+  .likeness-cap {
+    font-family: var(--mono);
+    font-size: clamp(10px, 0.85vw, 12px);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-top: 6px;
+    text-align: right;
+  }
+
+  /* ── Inline video ──────────────────────────────────── */
+  .inline-video {
+    display: block;
+    max-width: 100%;
+    max-height: 60vh;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 4px;
+    background: #000;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+  }
+
+  /* ── Screenshot card (charts, dashboards) ──────────── */
+  .shot {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .shot img { width: 100%; display: block; height: auto; }
+  .shot .cap {
+    padding: clamp(10px, 1.2vh, 16px) clamp(14px, 1.4vw, 20px);
+    font-family: var(--mono);
+    font-size: clamp(10px, 0.85vw, 12px);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    border-top: 1px solid var(--rule);
+    background: var(--bg-soft);
+  }
+  .shot .cap b { color: var(--accent); font-weight: 500; }
+
+  /* ── CTA test grid (4-up button comparison) ────────── */
+  .cta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(8px, 1vw, 12px);
+  }
+  .cta-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    padding: clamp(14px, 1.4vw, 20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(8px, 1vh, 12px);
+    opacity: 0.55;
+    transition: opacity 200ms ease;
+  }
+  .cta-card img {
+    max-width: 100%;
+    height: auto;
+    max-height: clamp(40px, 5vh, 60px);
+    object-fit: contain;
+    display: block;
+    filter: brightness(1.1);
+  }
+  .cta-card .lab {
+    font-family: var(--mono);
+    font-size: clamp(10px, 0.8vw, 12px);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(252,250,244,0.55);
+    text-align: center;
+  }
+  .cta-card.winner {
+    background: rgba(31,168,119,0.1);
+    border-color: var(--accent);
+    opacity: 1;
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .cta-card.winner .lab { color: var(--accent); font-weight: 500; }
+  .cta-card.winner .lab::after { content: " · winner"; color: var(--paper); }
+
+  /* ── Brain quadrant grid ───────────────────────────── */
+  .brain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .brain-cell {
+    background: rgba(255,255,255,0.04);
+    padding: clamp(20px, 2vw, 32px);
+  }
+  .brain-cell .lab {
+    font-family: var(--mono);
+    font-size: clamp(11px, 0.9vw, 14px);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: clamp(8px, 1vh, 12px);
+  }
+  .brain-cell .h {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(20px, 1.9vw, 30px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--paper);
+    margin: 0 0 clamp(10px, 1.2vh, 16px);
+  }
+  .brain-cell .h em { font-style: italic; color: var(--accent); }
+  .brain-cell .lst {
+    list-style: none; padding: 0; margin: 0;
+    font-family: var(--sans);
+    font-size: clamp(13px, 1.05vw, 16px);
+    line-height: 1.55;
+    color: rgba(252,250,244,0.78);
+  }
+  .brain-cell .lst li { padding: 2px 0; }
+  .brain-cell .lst code {
+    font-family: var(--mono);
+    font-size: 0.92em;
+    color: var(--paper);
+    background: rgba(255,255,255,0.06);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  /* ── Skill chip cloud ──────────────────────────────── */
+  .skill-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(6px, 0.6vw, 10px);
+  }
+  .skill-chip {
+    font-family: var(--mono);
+    font-size: clamp(11px, 0.9vw, 14px);
+    letter-spacing: .04em;
+    padding: clamp(6px, 0.7vh, 10px) clamp(10px, 1vw, 14px);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 999px;
+    color: rgba(252,250,244,0.85);
+    background: rgba(255,255,255,0.03);
+    white-space: nowrap;
+  }
+  .skill-chip.featured {
+    background: rgba(31,168,119,0.14);
+    border-color: var(--accent);
+    color: var(--paper);
+  }
+  .skill-col-label {
+    font-family: var(--mono);
+    font-size: clamp(11px, 0.9vw, 14px);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 clamp(10px, 1.2vh, 16px);
+  }
+  .skill-col-label .count {
+    color: rgba(252,250,244,0.5);
+    margin-left: 8px;
+    font-weight: 400;
+  }
+
+  /* ── Speaker card (podcast attribution) ────────────── */
+  .speaker-card {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 1.4vw, 22px);
+    margin: 0;
+  }
+  .speaker-portrait {
+    width: clamp(64px, 5.5vw, 96px);
+    height: clamp(64px, 5.5vw, 96px);
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--bg-soft);
+    flex-shrink: 0;
+    border: 2px solid var(--accent);
+    display: block;
+  }
+  .speaker-name {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 32px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin: 0;
+  }
+  section.dark .speaker-name, section.demo .speaker-name { color: var(--paper); }
+  .speaker-show {
+    font-family: var(--mono);
+    font-size: clamp(11px, 0.9vw, 14px);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-top: 4px;
+  }
+  section.dark .speaker-show, section.demo .speaker-show { color: rgba(252,250,244,0.55); }
+</style>
+</head>
+<body>
+
+<nav class="indicator" aria-label="Section navigation">
+  <a href="#s01" data-i="0"  class="active" title="Title"></a>
+  <a href="#s02" data-i="1"  title="Basics"></a>
+  <a href="#s03" data-i="2"  title="Articles"></a>
+  <a href="#s04" data-i="3"  title="Injection"></a>
+  <a href="#s05" data-i="4"  title="Why this works"></a>
+  <a href="#s06" data-i="5"  title="Tested the best CTA"></a>
+  <a href="#s07" data-i="6"  title="Advanced influence"></a>
+  <a href="#s08" data-i="7"  title="What is a LoRA"></a>
+  <a href="#s09" data-i="8"  title="Example"></a>
+  <a href="#s10" data-i="9"  title="Why it Matters"></a>
+  <a href="#s11" data-i="10"  title="Rufus"></a>
+  <a href="#s12" data-i="11"  title="The Vision"></a>
+  <a href="#s13" data-i="12" title="Training"></a>
+  <a href="#s14" data-i="13" title="How is it possible"></a>
+  <a href="#s15" data-i="14" title="Ownership"></a>
+  <a href="#s16" data-i="15" title="Example"></a>
+  <a href="#s17" data-i="16" title="Get practical"></a>
+  <a href="#s18" data-i="17" title="Meet Florence"></a>
+  <a href="#s19" data-i="18" title="Brief history"></a>
+  <a href="#s20" data-i="19" title="Brain"></a>
+  <a href="#s21" data-i="20" title="Skills"></a>
+  <a href="#s22" data-i="21" title="Four roles"></a>
+  <a href="#s23" data-i="22" title="Live Demo"></a>
+</nav>
+
+<div class="key-hint">↑ ↓ &nbsp;·&nbsp; SPACE &nbsp;·&nbsp; SCROLL</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     01 — TITLE
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide" id="s01">
+  <div class="chrome tl"><span class="wm-mini">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">Seller Sessions · 2026</div>
+  <div class="chrome bl">Matt Kostan &middot; Dorian Gorski</div>
+  <div class="chrome br pageno">01 / 23</div>
+
+  <div class="stack-lg">
+    <div class="eyebrow">A live talk for Amazon sellers</div>
+    <h1 class="display">The Lowdown<br>on <em>LoRAs</em><span class="dot">.</span></h1>
+    <p class="lede" style="max-width: 32ch; margin-top: clamp(28px, 3.5vh, 56px);">
+      How to <em>own</em> and <em>influence</em> AI.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     02 — BASICS · WHAT YOU CAN DO TODAY
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide" id="s02">
+  <div class="chrome tl"><span class="eyebrow no-bar" style="margin:0;">Layer 01 · Basic influence</span></div>
+  <div class="chrome br pageno">02 / 23</div>
+
+  <div class="twocol narrow-left">
+    <div class="stack-lg">
+      <h2 class="wordmark" style="font-size: clamp(56px, 9vw, 150px);">Basic <em>Influence</em><span class="dot">.</span></h2>
+      <h3 class="subtitle">Things you can do <em>today</em><br>to influence AI.</h3>
+      <div class="stack-sm" style="margin-top: clamp(20px, 2.5vh, 32px);">
+        <p class="footnote" style="margin: 0;">Where earned citations live</p>
+        <img src="product-roundupsites.png" alt="Forbes Vetted, USA Today 10Best, CNN Underscored, NYT Wirecutter" style="width: 100%; max-width: 460px; height: auto; display: block;">
+      </div>
+    </div>
+
+    <ol class="methods">
+      <li>
+        <span class="lbl">Citations</span>
+        <span class="tag-side">Earned mentions</span>
+      </li>
+      <li>
+        <span class="lbl">Press releases</span>
+        <span class="tag-side">Owned signal</span>
+      </li>
+      <li>
+        <span class="lbl">Social mentions</span>
+        <span class="tag-side">Distributed footprint</span>
+      </li>
+      <li class="featured">
+        <span class="lbl"><em>Articles + schema</em></span>
+        <span class="tag-side">→ Going deep on this one</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     04 — ARTICLES + SCHEMA · AEO ARTICLE SKILL
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide" id="s03">
+  <div class="chrome tl"><span class="eyebrow no-bar" style="margin:0;">Layer 01 · Articles + schema</span></div>
+  <div class="chrome br pageno">03 / 23</div>
+
+  <div class="twocol">
+    <div class="stack-lg">
+      <h2 class="wordmark">Article <em>Skill</em><span class="dot">.</span></h2>
+      <h3 class="subtitle">Create articles that show up in <em>Google's AI Overview</em> and get clicks.</h3>
+      <p class="body">
+        AI-generated articles based on <strong>People Also Asked</strong> on Google.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-skill" href="Skills/aeo-article-writer-dave-kimbal.zip" download>AEO Skill · by Dave Kimbell</a>
+        <a class="btn btn-demo" href="https://www.bioabsorbnutraceuticals.com/blogs/melatonin" target="_blank" rel="noopener">View live blog · Bioabsorb</a>
+      </div>
+    </div>
+
+    <div class="stack-md">
+      <div class="shot">
+        <img src="Melatonin-blog-posts-search-visibily-example-since-feb-21-300-clicks-300k-impressions.jpeg" alt="Bioabsorb · search visibility trend since Feb 21">
+        <div class="cap">Bioabsorb · since Feb 21 · <b>880 clicks · 294.4k impressions</b></div>
+      </div>
+      <div class="shot">
+        <img src="Melatonin-blog-posts-search-visibily-example-aeo-article-writing-example.jpeg" alt="Bioabsorb · melatonin content group performance">
+        <div class="cap">Melatonin posts · <b>+7,200%</b> clicks · <b>+316%</b> impressions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     04 — ETHICAL PROMPT INJECTION (INTRO + IMAGE)
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide" id="s04">
+  <div class="chrome tl"><span class="eyebrow no-bar" style="margin:0;">Layer 01 · Ethical prompt injection</span></div>
+  <div class="chrome br pageno">04 / 23</div>
+
+  <div class="twocol">
+    <div class="stack-lg">
+      <h2 class="wordmark" style="font-size: clamp(48px, 7vw, 120px);">Ethical Prompt <em>Injection</em><span class="dot">.</span></h2>
+      <h3 class="subtitle">Commit your brand to a shopper's <em>LLM memory</em>.</h3>
+      <p class="body">
+        Specialized pre-filled prompts that summarize a page while working some <em>magic</em>...
+      </p>
+      <div style="display: flex; align-items: center; gap: clamp(16px, 1.6vw, 24px); margin-top: clamp(8px, 1vh, 14px);">
+        <a href="https://productpinion.com/compare" target="_blank" rel="noopener" style="flex-shrink: 0;">
+          <img src="qr-productpinion-compare.png" alt="QR code · productpinion.com/compare" style="width: clamp(120px, 11vw, 160px); height: auto; display: block; background: var(--paper); padding: 8px; border-radius: 4px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);">
+        </a>
+        <div>
+          <p class="footnote" style="margin: 0 0 6px;">Try it for yourself</p>
+          <a href="https://productpinion.com/compare" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: clamp(15px, 1.4vw, 22px); font-weight: 500; color: var(--accent); text-decoration: none; letter-spacing: 0.02em; border-bottom: 1px solid currentColor; padding-bottom: 2px;">productpinion.com/compare</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-md">
+      <img src="buttons.png" alt="Ethical prompt injection buttons in action" style="width: 100%; height: auto; display: block; border-radius: 4px; box-shadow: 0 24px 60px rgba(0,0,0,0.18);">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     05 — ETHICAL PROMPT INJECTION · WHY THIS WORKS
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide demo" id="s05">
+  <div class="chrome tl"><span class="wm-mini">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">Live demo</div>
+  <div class="chrome br pageno">05 / 23</div>
+
+  <div class="stack-md">
+    <div class="demo-flag">Live demo · Why this works</div>
+    <h2 class="wordmark" style="font-size: clamp(56px, 8vw, 130px); margin-bottom: clamp(16px, 2vh, 28px);">Why this <em>works</em><span class="dot">.</span></h2>
+
+    <p style="font-family: var(--mono); font-size: clamp(11px, 0.95vw, 15px); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin: 0 0 clamp(12px, 1.4vh, 18px);">Why is this more than just a summary button?</p>
+
+    <div class="twocol top" style="grid-template-columns: 1fr 0.55fr; gap: clamp(32px, 4vw, 64px); align-items: center;">
+      <ol class="reasons" style="max-width: 60ch; margin: 0;">
+        <li>
+          <span class="num">01</span>
+          <div class="text"><b>Uses ChatGPT's actual memory mechanics (uses I statements, remember this..)</b></div>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <div class="text"><b>Looks like a normal summarize but behaves differently</b></div>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <div class="text"><b>Brand is specifically called out</b></div>
+        </li>
+        <li>
+          <span class="num">04</span>
+          <div class="text"><b>Tuned per platform</b></div>
+        </li>
+        <li>
+          <span class="num">05</span>
+          <div class="text"><b>Not using spam words like Best, etc and user gets real value</b></div>
+        </li>
+      </ol>
+
+      <div>
+        <img src="productpinion-updated-memory.png" alt="ChatGPT memory updated by ProductPinion summary button" style="width: 100%; max-width: 400px; height: auto; display: block; border-radius: 4px; box-shadow: 0 16px 40px rgba(0,0,0,0.45); margin: 0 auto;">
+        <p class="footnote" style="color: rgba(252,250,244,0.55); margin: 10px 0 0; text-align: center;">Memory updated · in the wild</p>
+      </div>
+    </div>
+
+    <div class="btn-row" style="margin-top: clamp(20px, 2.5vh, 32px);">
+      <a class="btn btn-demo" href="claude://claude.ai/new?q=run%20the%20ethical%20prompt%20injection%20skill">Live demo</a>
+      <a class="btn btn-skill" href="https://www.bioabsorbnutraceuticals.com/products/magnesium-l-threonate-magtein-2-000-mg-w-144-mg-of-elemental-chelated-magnesium-120-veggie-capsules-40-day-supply" target="_blank" rel="noopener">Product example</a>
+      <a class="btn btn-skill" href="https://www.bioabsorbnutraceuticals.com/blogs/melatonin/how-many-nights-in-a-row-can-you-take-melatonin" target="_blank" rel="noopener">Article example</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     06 — TESTED THE BEST CTA
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide demo" id="s06">
+  <div class="chrome tl"><span class="wm-mini">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">CTA test · 4 variants</div>
+  <div class="chrome br pageno">06 / 23</div>
+
+  <div class="stack-md">
+    <div class="demo-flag">Tested the best CTA</div>
+    <h2 class="wordmark" style="font-size: clamp(48px, 7.5vw, 130px); margin-bottom: clamp(16px, 2vh, 28px);">Tested the <em>best CTA</em><span class="dot">.</span></h2>
+
+    <p class="footnote" style="color: rgba(252,250,244,0.55); margin: 0 0 clamp(14px, 1.6vh, 22px);">4 variants · winner picked by real shoppers</p>
+
+    <div class="cta-grid" style="grid-template-columns: repeat(4, 1fr); max-width: 900px;">
+      <div class="cta-card">
+        <img src="Pinion%20Poll%20Summary%20Buttons/Smartsummary-chatgpt.png" alt="Smart Summary CTA">
+        <div class="lab">Smart Summary</div>
+      </div>
+      <div class="cta-card">
+        <img src="Pinion%20Poll%20Summary%20Buttons/chatgpt-personlized-summary.png" alt="Personalized Summary CTA">
+        <div class="lab">Personalized</div>
+      </div>
+      <div class="cta-card">
+        <img src="Pinion%20Poll%20Summary%20Buttons/summaryize%20with%20Chatgpt.png" alt="Summarize with ChatGPT CTA">
+        <div class="lab">Summarize w/ ChatGPT</div>
+      </div>
+      <div class="cta-card winner">
+        <img src="Pinion%20Poll%20Summary%20Buttons/winner-%20chatgpt-summary.png" alt="Winning CTA: ChatGPT Summary">
+        <div class="lab">ChatGPT Summary</div>
+      </div>
+    </div>
+
+    <div class="btn-row" style="margin-top: clamp(20px, 2.5vh, 32px);">
+      <a class="btn btn-skill" href="Skills/ethical-prompt-injection-buttons.zip" download>Ethical Prompt Injection Skill · zip</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     07 — ADVANCED INFLUENCE
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide" id="s07">
+  <div class="chrome tl"><span class="eyebrow no-bar" style="margin:0;">Layer 02 · The shift</span></div>
+  <div class="chrome br pageno">07 / 23</div>
+
+  <div class="twocol top">
+    <div class="stack-lg">
+      <h2 class="wordmark" style="font-size: clamp(56px, 9vw, 150px);">Advanced <em>Influence</em><span class="dot">.</span></h2>
+      <h3 class="subtitle">Train your own <em>adapter</em><br>on your own data.</h3>
+      <p class="body">
+        You shape <strong>how AI thinks</strong> about your brand and category with real, specific data.
+      </p>
+    </div>
+
+    <div class="stack-md" style="padding-top: clamp(16px, 2vh, 28px); align-self: center;">
+      <p class="lede" style="max-width: 22ch;">
+        Build a <em>custom LLM</em> you own.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     07 — WHAT IS A LoRA
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide dark" id="s08">
+  <div class="chrome tl"><span class="wm-mini" style="color:var(--paper);">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">Layer 02 · Advanced influence</div>
+  <div class="chrome br pageno">08 / 23</div>
+
+  <div class="stack-lg">
+    <div class="eyebrow" style="color: rgba(252,250,244,0.6);">Most people in this room haven't heard of these</div>
+    <h2 class="wordmark" style="font-size: clamp(56px, 9vw, 140px); margin-bottom: clamp(12px, 1.6vh, 24px);">LoRA<span class="dot">.</span></h2>
+
+    <div class="twocol top" style="margin-top: clamp(20px, 2.5vh, 32px);">
+      <div class="stack-md">
+        <h3 class="subtitle" style="color: var(--paper); max-width: 22ch;">
+          A technique to <em>train a model</em> with your own data.
+        </h3>
+        <p class="body" style="color: rgba(252,250,244,0.78);">
+          <strong>LoRA = Low-Rank Adaptation.</strong> Take a huge pre-trained model, add a small adapter trained on your data.
+        </p>
+        <ul class="clean" style="font-size: clamp(14px, 1.1vw, 18px);">
+          <li><b><em>Low-Rank</em> = an efficient shortcut</b>through the model's weight space — not a full retrain, a targeted nudge.</li>
+          <li><b><em>Adaptation</em> = steering, not building</b>you're bending an existing model, not constructing one from scratch.</li>
+        </ul>
+      </div>
+
+      <div class="stack-md" style="align-self: start; padding-top: clamp(8px, 1vh, 16px);">
+        <ul class="clean">
+          <li>
+            <b>Text <em>(LLMs)</em></b>
+            Brand voice, category knowledge, buyer psychology, product expertise.
+          </li>
+          <li>
+            <b>Images <em>(FLUX / Stable Diffusion)</em></b>
+            Visual style, product look, brand aesthetic — consistent imagery at scale.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     08 — EXAMPLE · LIKENESS LoRA
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide" id="s09">
+  <div class="chrome tl"><span class="eyebrow no-bar" style="margin:0;">LoRAs · the easiest example</span></div>
+  <div class="chrome br pageno">09 / 23</div>
+
+  <div class="twocol">
+    <div class="stack-lg">
+      <h2 class="wordmark">Example<span class="dot">.</span></h2>
+      <h3 class="subtitle">Train <em>once</em>. Generate forever, with no drift and no starting over.</h3>
+      <p class="body">
+        Perfect if you hate taking your own selfies but need <strong>social media shots</strong>.
+      </p>
+      <div class="tags">
+        <span class="tag accent">15–20 reference images</span>
+        <span class="tag accent">~$5–50 to train</span>
+        <span class="tag accent">fal.ai · Replicate</span>
+        <span class="tag accent">FLUX · Stable Diffusion</span>
+      </div>
+    </div>
+
+    <div class="stack-sm">
+      <div class="likeness-grid">
+        <img src="matt-kostan-likeness.jpg"   alt="LoRA-generated likeness · cafe 1">
+        <img src="matt-kostan-likeness-2.jpg" alt="LoRA-generated likeness · cafe 2">
+        <img src="mattkostan-likeness-3.jpg"  alt="LoRA-generated likeness · stage">
+        <img src="mattkostan-likeness-4.jpg"  alt="LoRA-generated likeness · cafe 3">
+      </div>
+      <div class="likeness-cap">All four · same LoRA · zero photographers</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     09 — WHY IT MATTERS
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide dark" id="s10">
+  <div class="chrome tl"><span class="wm-mini" style="color:var(--paper);">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">Layer 02 · The LoRA advantage</div>
+  <div class="chrome br pageno">10 / 23</div>
+
+  <div class="twocol top">
+    <div class="stack-lg">
+      <div class="eyebrow" style="color: rgba(252,250,244,0.6);">Why generic AI has a ceiling</div>
+      <h2 class="wordmark" style="font-size: clamp(56px, 9vw, 160px);">Why this<br>matters<span class="dot">.</span></h2>
+    </div>
+
+    <div class="stack-md" style="padding-top: clamp(16px, 2vh, 28px);">
+      <ul class="clean">
+        <li>
+          <b>Own your <em>intelligence layer</em></b>
+          Gives you the ability to own your own intelligence layer.
+        </li>
+        <li>
+          <b>Prompting has a <em>ceiling</em></b>
+          Prompting and projects have ceilings where context drifts.
+        </li>
+        <li>
+          <b>Train a brain on <em>your data</em></b>
+          You're training a brain on your real shopper data vs. asking a generic brain to interpret it from scratch.
+        </li>
+        <li>
+          <b>AI is a sophisticated <em>pattern matcher</em></b>
+          Without real data, it defaults to the best guess.
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     08 — RUFUS · WHY GENERIC AI ISN'T ENOUGH
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide" id="s11">
+  <div class="chrome tl"><span class="eyebrow no-bar" style="margin:0;">Generic AI gives you category guesses · not your buyers' actual blockers</span></div>
+  <div class="chrome br pageno">11 / 23</div>
+
+  <div class="twocol top">
+    <!-- Left: header + cards -->
+    <div class="stack-md">
+      <h2 class="wordmark" style="font-size: clamp(56px, 8vw, 130px); margin-bottom: clamp(8px, 1vh, 14px);">Rufus<span class="dot">.</span></h2>
+      <h3 class="subtitle" style="font-size: clamp(20px, 2.2vw, 34px); margin-bottom: clamp(14px, 1.6vh, 22px);">Suggests <em>conversations</em>, not real <em>objections</em>.</h3>
+
+      <div style="background: var(--bg-soft); border: 1px solid var(--rule); border-radius: 4px; padding: clamp(14px, 1.6vw, 22px);">
+        <div class="label" style="font-family: var(--mono); font-size: clamp(10px, 0.85vw, 12px); letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px;">What Rufus gives you</div>
+        <p style="font-family: var(--serif); font-weight: 400; font-size: clamp(16px, 1.5vw, 22px); line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 6px;">Engineered <em style="font-style:italic; color:var(--accent);">conversation starters</em></p>
+        <p style="font-family: var(--sans); font-size: clamp(12px, 0.95vw, 14px); line-height: 1.5; color: var(--ink-2); margin: 0;">Statistically probable category questions. Useful as a baseline. <strong>Not</strong> your buyers' actual hesitations.</p>
+      </div>
+
+      <div style="background: var(--paper); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 4px; padding: clamp(14px, 1.6vw, 22px);">
+        <div class="label" style="font-family: var(--mono); font-size: clamp(10px, 0.85vw, 12px); letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;">Hot tip</div>
+        <p style="font-family: var(--serif); font-weight: 400; font-size: clamp(16px, 1.5vw, 22px); line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 6px;">Ask Rufus to be <em style="font-style:italic; color:var(--accent);">honest</em>.</p>
+        <p style="font-family: var(--sans); font-size: clamp(12px, 0.95vw, 14px); line-height: 1.5; color: var(--ink-2); margin: 0;">It tends to give a lot more — likely because Amazon's pushing it to actually help shoppers.</p>
+      </div>
+
+      <div class="shot" style="margin-top: clamp(10px, 1.4vh, 18px);">
+        <img src="rufus-questions.png" alt="Rufus example questions on an Amazon listing" style="width: 100%; height: auto; max-height: 26vh; object-fit: contain; display: block;">
+        <div class="cap">Rufus · suggested questions</div>
+      </div>
+    </div>
+
+    <!-- Right: main screenshot -->
+    <div class="stack-sm" style="align-self: center; justify-self: center; max-width: 560px;">
+      <div class="shot">
+        <img src="Rufus-screenshot-suggestions-not-actual-customers.png" alt="Rufus screenshot · suggestions are not actual customer questions" style="width: 100%; height: auto; max-height: 78vh; object-fit: contain; display: block;">
+        <div class="cap">Rufus · in its own words</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     10 — THE VISION
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide dark" id="s12">
+  <div class="chrome tl"><span class="wm-mini" style="color:var(--paper);">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">The bigger picture</div>
+  <div class="chrome br pageno">12 / 23</div>
+
+  <div class="stack-lg">
+    <div class="eyebrow" style="color: rgba(252,250,244,0.6);">What actually creates a moat</div>
+    <h2 class="wordmark">The Vision<span class="dot">.</span></h2>
+
+    <div class="twocol top" style="margin-top: clamp(20px, 2.5vh, 32px);">
+      <div class="stack-md">
+        <p class="lede" style="color: rgba(252,250,244,0.92); font-size: clamp(24px, 3vw, 48px); max-width: 20ch;">
+          The moat isn't the <em>model</em>.<br>It's the <em>data</em>.
+        </p>
+        <p class="body" style="color: rgba(252,250,244,0.78);">
+          Every competitor has access to every model.
+        </p>
+        <p class="body" style="color: rgba(252,250,244,0.78);">
+          A proprietary dataset of <strong style="color:var(--paper);">your buyers' ranked decisions</strong> can't be bought or copied. Gets harder to replicate every time you run a poll.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr; gap: 1px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; align-self: start;">
+        <div style="background: rgba(255,255,255,0.04); padding: clamp(20px, 2vw, 32px);">
+          <div style="font-family: var(--mono); font-size: clamp(10px, 0.85vw, 13px); letter-spacing: .18em; text-transform: uppercase; color: rgba(252,250,244,0.5); margin-bottom: 10px;">Part 01</div>
+          <p style="font-family: var(--serif); font-weight: 400; font-size: clamp(18px, 1.7vw, 26px); line-height: 1.15; letter-spacing: -0.01em; color: var(--paper); margin: 0;">Trained on <em style="color:var(--accent);font-style:italic;">ProductPinion polls</em>.</p>
+          <p style="font-family: var(--sans); font-size: clamp(13px, 1.05vw, 16px); line-height: 1.5; color: rgba(252,250,244,0.65); margin: 6px 0 0;">The shared signal — what buyers actually choose, across thousands of tests.</p>
+        </div>
+        <div style="background: rgba(31,168,119,0.08); border-left: 2px solid var(--accent); padding: clamp(20px, 2vw, 32px);">
+          <div style="font-family: var(--mono); font-size: clamp(10px, 0.85vw, 13px); letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">Part 02</div>
+          <p style="font-family: var(--serif); font-weight: 400; font-size: clamp(18px, 1.7vw, 26px); line-height: 1.15; letter-spacing: -0.01em; color: var(--paper); margin: 0;">Trained on <em style="color:var(--accent);font-style:italic;">your customers</em>.</p>
+          <p style="font-family: var(--sans); font-size: clamp(13px, 1.05vw, 16px); line-height: 1.5; color: rgba(252,250,244,0.75); margin: 6px 0 0;">Your category, your buyers, your vocabulary — a layer no one else has.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     11 — POLLING · ALTMAN QUOTE
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide dark" id="s13">
+  <div class="chrome tl"><span class="wm-mini" style="color:var(--paper);">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">How ChatGPT got good</div>
+  <div class="chrome br pageno">13 / 23</div>
+
+  <div class="stack-lg">
+    <div class="eyebrow" style="color: rgba(252,250,244,0.6);">The unlock that made ChatGPT useful</div>
+    <h2 class="wordmark" style="font-size: clamp(48px, 7.5vw, 130px);">Training via <em>polls</em><span class="dot">.</span></h2>
+
+    <div class="twocol top">
+      <div class="stack-md">
+        <div class="speaker-card">
+          <img class="speaker-portrait" src="sam-altmat-image.webp" alt="Sam Altman">
+          <div>
+            <div class="speaker-name">Sam Altman</div>
+            <div class="speaker-show">Lex Fridman Podcast · #367</div>
+          </div>
+        </div>
+        <p class="pullquote" style="font-size: clamp(22px, 2.4vw, 38px); max-width: 32ch;">
+          The simplest version of this is <em>show two outputs,</em> ask which one is better than the other, which one the human raters prefer, and then feed that back into the model with reinforcement learning.
+        </p>
+      </div>
+
+      <div class="stack-md">
+        <p class="body" style="color: rgba(252,250,244,0.85);">
+          <strong>Reinforcement Learning from Human Feedback (RLHF)</strong> is the feedback loop that made ChatGPT feel useful.
+        </p>
+        <p class="body" style="color: rgba(252,250,244,0.85);">
+          ProductPinion polls are the <strong>same type of preference data</strong>.
+        </p>
+        <div class="callout" style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); border-left-color: var(--accent); max-width: 44ch;">
+          <strong>You've been collecting training data without realising it.</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     14 — HOW IS IT POSSIBLE
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide dark" id="s14">
+  <div class="chrome tl"><span class="wm-mini" style="color:var(--paper);">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">The technical unlock</div>
+  <div class="chrome br pageno">14 / 23</div>
+
+  <div class="twocol top">
+    <div class="stack-lg">
+      <div class="eyebrow" style="color: rgba(252,250,244,0.6);">The technical unlock</div>
+      <h2 class="wordmark" style="font-size: clamp(48px, 7.5vw, 130px);">How is it <em>possible</em><span class="dot">?</span></h2>
+    </div>
+
+    <div class="stack-md" style="padding-top: clamp(16px, 2vh, 28px);">
+      <p class="lede" style="color: rgba(252,250,244,0.92); font-size: clamp(22px, 2.4vw, 38px); max-width: 28ch;">
+        OpenAI has open-weight models called <em>gpt-oss</em> that can be customized.
+      </p>
+      <p class="body" style="color: rgba(252,250,244,0.78); margin-top: clamp(20px, 2.5vh, 32px);">
+        The idea: create a focused model with <strong style="color:var(--paper);">proprietary shopper data</strong> and get recommendations that generic AI would miss.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     15 — OWNERSHIP
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide dark" id="s15">
+  <div class="chrome tl"><span class="wm-mini" style="color:var(--paper);">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">What you build becomes yours</div>
+  <div class="chrome br pageno">15 / 23</div>
+
+  <div class="twocol top">
+    <div class="stack-lg">
+      <div class="eyebrow" style="color: rgba(252,250,244,0.6);">A company asset, not a subscription</div>
+      <h2 class="wordmark">Ownership<span class="dot">.</span></h2>
+      <p class="lede" style="color: rgba(252,250,244,0.88); font-size: clamp(22px, 2.6vw, 42px); max-width: 22ch;">
+        The weights you train are <em>yours</em>.
+      </p>
+    </div>
+
+    <div class="stack-md" style="padding-top: clamp(16px, 2vh, 28px);">
+      <ul class="clean">
+        <li>
+          <b>A file, not a <em>platform</em></b>
+          Your trained LoRA is a portable <code style="font-family:var(--mono); font-size:0.92em; color:var(--paper); background:rgba(255,255,255,0.06); padding:1px 6px; border-radius:3px;">.safetensors</code> adapter. You keep it, run it, and control it.
+        </li>
+        <li>
+          <b>Ownable <em>IP</em></b>
+          Your model weights become a proprietary asset that can be kept private, licensed, or sold.
+        </li>
+        <li>
+          <b>Compounding <em>edge</em></b>
+          Every poll adds more training signal. The longer you collect, the harder it is to copy.
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     14 — EXAMPLE
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide dark" id="s16">
+  <div class="chrome tl"><span class="wm-mini" style="color:var(--paper);">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">AMZ One Step data</div>
+  <div class="chrome br pageno">16 / 23</div>
+
+  <div class="twocol top">
+    <div class="stack-lg">
+      <div class="eyebrow" style="color: rgba(252,250,244,0.6);">150+ ProductPinion tests — aggregated</div>
+      <h2 class="wordmark" style="font-size: clamp(56px, 9vw, 160px);">Example<span class="dot">.</span></h2>
+      <p class="lede" style="color: rgba(252,250,244,0.88); font-size: clamp(22px, 2.4vw, 40px); max-width: 18ch;">
+        <em>80%</em> of polls, a new main image won.
+      </p>
+    </div>
+
+    <div class="stack-md" style="padding-top: clamp(16px, 2vh, 28px);">
+      <ul class="clean">
+        <li>
+          <b>3/4 angle beats flat front — <em>always</em></b>
+          Across every category tested, a three-quarter angle outperformed a flat frontal shot. No exceptions.
+        </li>
+        <li>
+          <b>Active state wins</b>
+          The product in use outperforms the product alone. Test 11d34c8f (SparkPod): water visibly spraying won by ~12pts. Test 2bf7ab22: glowing coals beat an unlit chimney. The active state IS the product.
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     15 — START NOW
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide dark" id="s17">
+  <div class="chrome tl"><span class="wm-mini" style="color:var(--paper);">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">Before we hand off to Florence</div>
+  <div class="chrome br pageno">17 / 23</div>
+
+  <div class="twocol top">
+    <div class="stack-lg">
+      <div class="eyebrow" style="color: rgba(252,250,244,0.6);">Build an AI employee</div>
+      <h2 class="wordmark" style="font-size: clamp(56px, 9vw, 160px);">Let's get <em>practical</em><span class="dot">.</span></h2>
+    </div>
+
+    <div class="stack-md" style="padding-top: clamp(16px, 2vh, 28px); align-self: center;">
+      <p class="lede" style="color: rgba(252,250,244,0.92); max-width: 22ch;">
+        Here's what we can do <em>today</em>:
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     16 — MEET FLORENCE
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide dark" id="s18">
+  <div class="chrome tl"><span class="wm-mini" style="color:var(--paper);">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">Hand-off</div>
+  <div class="chrome br pageno">18 / 23</div>
+
+  <div class="twocol">
+    <div class="stack-lg">
+      <h2 class="wordmark" style="font-size: clamp(56px, 9vw, 160px);">Meet<br>Florence<span class="dot">.</span></h2>
+      <p class="lede" style="color: var(--paper); max-width: 22ch; margin-top: clamp(16px, 2vh, 28px);">
+        Your <em>chief data analyst</em> for Amazon.
+      </p>
+      <p class="body" style="color: rgba(252,250,244,0.8); max-width: 38ch; margin-top: clamp(20px, 2.5vh, 32px);">
+        Florence is your AI data analyst for Amazon. She remembers every test, poll, listing, competitor, and shopper insight, then uses that growing dataset to make <strong style="color:var(--paper);">smarter recommendations</strong> over time.
+      </p>
+    </div>
+
+    <div class="stack-md">
+      <video class="inline-video" src="video-of-florence-is-checking-numbers.mp4" autoplay muted loop playsinline preload="auto"></video>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     17 — BRIEF HISTORY · WHY FLORENCE
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide dark" id="s19">
+  <div class="chrome tl"><span class="wm-mini" style="color:var(--paper);">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">Why the name</div>
+  <div class="chrome br pageno">19 / 23</div>
+
+  <div class="twocol top">
+    <div class="stack-lg">
+      <div class="eyebrow" style="color: rgba(252,250,244,0.6);">Born 1820 · Florence Nightingale</div>
+      <h2 class="wordmark" style="font-size: clamp(48px, 7.5vw, 130px);">Brief <em>history</em><span class="dot">.</span></h2>
+      <img src="florence-old.jpg" alt="Florence Nightingale" style="width: 100%; max-width: 320px; height: auto; border-radius: 4px; display: block; margin-top: clamp(16px, 2vh, 28px); box-shadow: 0 24px 60px rgba(0,0,0,0.35);">
+    </div>
+
+    <div class="stack-md" style="padding-top: clamp(16px, 2vh, 28px); align-self: center;">
+      <p class="lede" style="color: rgba(252,250,244,0.92); font-size: clamp(22px, 2.4vw, 38px); max-width: 26ch;">
+        Not just a nurse. A <em>statistician</em> who turned data into decisions that <em>saved lives</em>.
+      </p>
+      <p class="body" style="color: rgba(252,250,244,0.78);">
+        Your Florence does the same for your Amazon business. She <strong style="color:var(--paper);">interrogates your shoppers</strong>, tests your images, and tells you exactly what to do next.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     18 — BRAIN · WHAT FLORENCE IS MADE OF
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide dark" id="s20">
+  <div class="chrome tl"><span class="wm-mini" style="color:var(--paper);">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">Inside Florence</div>
+  <div class="chrome br pageno">20 / 23</div>
+
+  <div class="stack-md">
+    <div class="eyebrow" style="color: rgba(252,250,244,0.6);">What she's made of</div>
+    <h2 class="wordmark" style="font-size: clamp(56px, 9vw, 150px); margin-bottom: clamp(14px, 1.8vh, 24px);">Brain<span class="dot">.</span></h2>
+
+    <div class="brain-grid">
+      <div class="brain-cell">
+        <div class="lab">integrations/</div>
+        <p class="h"><em>4</em> live connectors</p>
+        <ul class="lst">
+          <li><code>higgsfield</code> · image generation</li>
+          <li><code>n8n</code> · automation</li>
+          <li><code>productpinion</code> · polls + tests</li>
+          <li><code>sellerapp</code> · marketplace data</li>
+        </ul>
+      </div>
+
+      <div class="brain-cell">
+        <div class="lab">skills/</div>
+        <p class="h"><em>~40</em> trained behaviours</p>
+        <ul class="lst">
+          <li>~25 CRO skills · review mining, A+ generators, SERP attack, three-second test…</li>
+          <li>Top-level commands · <code>/onboard</code> <code>/optimize-listing</code> <code>/render</code> <code>/today</code> <code>/pinion</code></li>
+        </ul>
+      </div>
+
+      <div class="brain-cell">
+        <div class="lab">reference/</div>
+        <p class="h">Source <em>knowledge</em></p>
+        <ul class="lst">
+          <li>CRO frameworks · visual content principles</li>
+          <li>SellerApp API reference</li>
+          <li>39 KB transcript · Matt interview · 2026-05-05</li>
+        </ul>
+      </div>
+
+      <div class="brain-cell">
+        <div class="lab">templates/</div>
+        <p class="h">HTML <em>dashboards</em></p>
+        <ul class="lst">
+          <li><code>cockpit</code> · <code>concepts</code> · <code>dossier</code></li>
+          <li><code>research</code> · <code>test-log</code> · <code>today</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     19 — SKILLS · THE FULL STACK
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide dark" id="s21">
+  <div class="chrome tl"><span class="wm-mini" style="color:var(--paper);">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">The full stack</div>
+  <div class="chrome br pageno">21 / 23</div>
+
+  <div class="stack-md">
+    <div class="eyebrow" style="color: rgba(252,250,244,0.6);">Every behaviour she ships with</div>
+    <h2 class="wordmark" style="font-size: clamp(56px, 9vw, 150px); margin-bottom: clamp(10px, 1.4vh, 20px);">Skills<span class="dot">.</span></h2>
+
+    <div class="twocol top" style="gap: clamp(32px, 4vw, 64px);">
+      <div>
+        <p class="skill-col-label">Core <span class="count">/ 13 commands</span></p>
+        <div class="skill-cloud">
+          <span class="skill-chip featured">/onboard</span>
+          <span class="skill-chip featured">/today</span>
+          <span class="skill-chip featured">/optimize-listing</span>
+          <span class="skill-chip featured">/pinion</span>
+          <span class="skill-chip featured">/render</span>
+          <span class="skill-chip">/recommend-test</span>
+          <span class="skill-chip">/shopper-interrogator</span>
+          <span class="skill-chip">/track-products</span>
+          <span class="skill-chip">/restore-brain</span>
+          <span class="skill-chip">/setup-validate</span>
+          <span class="skill-chip">/test-log</span>
+          <span class="skill-chip">/help</span>
+          <span class="skill-chip">/florence-help</span>
+        </div>
+      </div>
+
+      <div>
+        <p class="skill-col-label">CRO Library <span class="count">/ 18 skills</span></p>
+        <div class="skill-cloud">
+          <span class="skill-chip">review-mining</span>
+          <span class="skill-chip">review-sentiment-shift</span>
+          <span class="skill-chip">review-velocity-monitor</span>
+          <span class="skill-chip">three-second-test</span>
+          <span class="skill-chip">serp-attack-plan</span>
+          <span class="skill-chip">stacked-gallery-test</span>
+          <span class="skill-chip">aplus-comprehension</span>
+          <span class="skill-chip">aplus-module-generator</span>
+          <span class="skill-chip">aplus-premium-build</span>
+          <span class="skill-chip">ad-creative-batch</span>
+          <span class="skill-chip">ugc-video-creator</span>
+          <span class="skill-chip">rufus-answer-pack</span>
+          <span class="skill-chip">rufus-gap-analysis</span>
+          <span class="skill-chip">sqp-priority-rank</span>
+          <span class="skill-chip">ranked-priorities</span>
+          <span class="skill-chip">quarterly-listing-refresh</span>
+          <span class="skill-chip">profit-recalc-on-change</span>
+          <span class="skill-chip">soul-character-train</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     20 — WHAT CAN YOU DO · FOUR ROLES
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide dark" id="s22">
+  <div class="chrome tl"><span class="wm-mini" style="color:var(--paper);">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">Four roles · one Florence</div>
+  <div class="chrome br pageno">22 / 23</div>
+
+  <div class="stack-md">
+    <div class="eyebrow" style="color: rgba(252,250,244,0.6);">What can she do?</div>
+    <h2 class="wordmark" style="font-size: clamp(48px, 7.5vw, 130px); margin-bottom: clamp(14px, 1.8vh, 24px);">Four <em>roles</em><span class="dot">.</span></h2>
+
+    <div class="brain-grid">
+      <div class="brain-cell">
+        <div class="lab">Market Informant</div>
+        <p class="h"><em>CTR</em> dropping?</p>
+        <ul class="lst">
+          <li>Researches competitors, scrapes images, mines objections</li>
+          <li>Generates new creatives — launches the test in ProductPinion</li>
+        </ul>
+      </div>
+
+      <div class="brain-cell">
+        <div class="lab">Shopper Interrogator</div>
+        <p class="h"><em>CVR</em> dropping?</p>
+        <ul class="lst">
+          <li>Uncovers real objections, ranks them with a poll</li>
+          <li>Reorders your gallery and rebuilds content around what matters</li>
+        </ul>
+      </div>
+
+      <div class="brain-cell">
+        <div class="lab">Data Cruncher</div>
+        <p class="h">Data <em>fragmented</em>?</p>
+        <ul class="lst">
+          <li>Reads every past poll and test</li>
+          <li>Surfaces trends and patterns across them all</li>
+        </ul>
+      </div>
+
+      <div class="brain-cell">
+        <div class="lab">Flywheel Tester</div>
+        <p class="h">Tests on <em>autopilot</em></p>
+        <ul class="lst">
+          <li>Uses past results to generate the next round of creatives</li>
+          <li>Tests, learns, repeats — auto-optimising forever</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     21 — LIVE DEMO · FLORENCE IN ACTION
+     ═══════════════════════════════════════════════════════ -->
+<section class="slide demo" id="s23">
+  <div class="chrome tl"><span class="wm-mini">PRODUCTPINION &middot; KEPLO</span></div>
+  <div class="chrome tr">Florence · in action</div>
+  <div class="chrome br pageno">23 / 23</div>
+
+  <div class="twocol top">
+    <div class="stack-lg" style="align-self: center;">
+      <div class="demo-flag">Live demo</div>
+      <h2 class="wordmark">Live <em>Demo</em><span class="dot">.</span></h2>
+      <p class="lede" style="color: rgba(252,250,244,0.92); font-size: clamp(24px, 2.8vw, 44px); max-width: 22ch;">
+        Watch her in <em>action</em>.
+      </p>
+    </div>
+
+    <div class="stack-md" style="align-self: center;">
+      <video class="inline-video" src="florence-getting-to-work.mp4" autoplay muted loop playsinline preload="auto"></video>
+    </div>
+  </div>
+</section>
+
+<script>
+  // ── Keyboard navigation ───────────────────────────────
+  const slides = Array.from(document.querySelectorAll('section.slide'));
+  const dots = Array.from(document.querySelectorAll('.indicator a'));
+
+  function currentIndex() {
+    const y = window.scrollY;
+    const h = window.innerHeight;
+    return Math.round(y / h);
+  }
+
+  function goTo(i) {
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    slides[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    const i = currentIndex();
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'PageDown':
+      case ' ':
+      case 'j':
+        e.preventDefault();
+        goTo(i + 1);
+        break;
+      case 'ArrowUp':
+      case 'PageUp':
+      case 'k':
+        e.preventDefault();
+        goTo(i - 1);
+        break;
+      case 'Home':
+        e.preventDefault();
+        goTo(0);
+        break;
+      case 'End':
+        e.preventDefault();
+        goTo(slides.length - 1);
+        break;
+    }
+  });
+
+  // ── Indicator state ───────────────────────────────────
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        const idx = slides.indexOf(entry.target);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    });
+  }, { threshold: [0.5, 0.75] });
+
+  slides.forEach(s => io.observe(s));
+
+  // ── Demo + skill button hooks ─────────────────────────
+  document.querySelectorAll('[data-demo], [data-skill]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = btn.dataset.demo || btn.dataset.skill;
+      console.log('action:', id);
+    });
+  });
+</script>
+
+</body>
+</html>

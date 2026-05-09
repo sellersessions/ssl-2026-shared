@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Florence — Today</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --ink: #152823;
+    --ink-2: #2A3D37;
+    --ink-3: #5E6E68;
+    --cream: #F4F1EA;
+    --cream-2: #E9E5DA;
+    --paper: #FCFAF4;
+    --accent: #1FA877;
+    --accent-2: #178A60;
+    --green-soft: #D6F0E5;
+    --gold: #D4A53A;
+    --gold-soft: #F4E5BC;
+    --red: #B84A3D;
+    --red-soft: #F4D8D2;
+    --slate: #5E6E68;
+    --slate-2: #8C9A93;
+    --slate-3: #B5C0BB;
+    --rule: #D4D0C4;
+    --rule-soft: #E2DED2;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Inter", sans-serif;
+    --mono: ui-monospace, "SF Mono", "Menlo", "Cascadia Mono", "Roboto Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-size: 13.5px; line-height: 1.55; letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
+  em { font-style: normal; color: var(--accent); font-weight: 700; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 28px 56px; }
+
+  header { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 24px; border-bottom: 1px solid var(--rule); margin-bottom: 28px; }
+  .eyebrow { font-family: var(--mono); font-size: 10.5px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.16em; color: var(--slate); }
+  .title { font-size: 28px; font-weight: 800; letter-spacing: -0.028em; line-height: 1.15; margin-top: 6px; }
+  .title em { color: var(--accent); }
+  .meta { text-align: right; }
+  .meta .num { font-size: 26px; font-weight: 800; letter-spacing: -0.025em; }
+  .meta .num em { color: var(--accent); }
+  .meta .lbl { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--slate); margin-top: 4px; }
+
+  .lede {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 22px 24px;
+    margin-bottom: 24px;
+    font-size: 16.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    letter-spacing: -0.01em;
+  }
+  .lede strong { color: var(--ink); font-weight: 700; }
+
+  .h2 { font-family: var(--mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--slate); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--rule-soft); }
+  .h2-counter { color: var(--ink); font-weight: 700; margin-left: 4px; }
+
+  .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+  .action {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 13px 16px;
+    display: grid;
+    grid-template-columns: 22px 1fr auto;
+    align-items: start;
+    gap: 14px;
+  }
+  .action.priority-high { border-left: 3px solid var(--red); padding-left: 14px; }
+  .action.priority-med  { border-left: 3px solid var(--gold); padding-left: 14px; }
+  .action.priority-low  { border-left: 3px solid var(--slate-3); padding-left: 14px; }
+  .action-num { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--slate); padding-top: 2px; }
+  .action-body .what { font-size: 14px; font-weight: 600; letter-spacing: -0.012em; color: var(--ink); }
+  .action-body .why  { font-size: 12.5px; color: var(--slate); margin-top: 3px; line-height: 1.5; }
+  .action-tags { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; padding-top: 2px; }
+  .tag { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 7px; border-radius: 3px; background: var(--cream); color: var(--slate); }
+  .tag.asin  { color: var(--ink-2); background: var(--cream-2); }
+  .tag.owner { color: var(--accent-2); background: var(--green-soft); }
+  .tag.high  { color: var(--red); background: var(--red-soft); }
+  .tag.med   { color: var(--gold); background: var(--gold-soft); }
+
+  .signals { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-bottom: 28px; }
+  .sig {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+  .sig .top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+  .sig .asin { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: var(--ink); }
+  .sig .name { font-size: 12.5px; color: var(--slate); margin-top: 2px; line-height: 1.4; }
+  .sig-rows { display: flex; flex-direction: column; gap: 6px; }
+  .sig-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 12.5px; }
+  .sig-row .k { color: var(--slate); font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .sig-row .v { font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .sig-row .v.up   { color: var(--accent); }
+  .sig-row .v.down { color: var(--red); }
+  .sig-row .v .delta { font-family: var(--mono); font-size: 10.5px; font-weight: 500; margin-left: 4px; opacity: 0.85; }
+
+  .noticed { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .note {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 13px 16px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: start;
+  }
+  .note .text { font-size: 13.5px; line-height: 1.55; color: var(--ink-2); }
+  .note .text strong { color: var(--ink); font-weight: 700; }
+  .note .source { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate-2); white-space: nowrap; padding-top: 3px; }
+
+  footer {
+    margin-top: 8px;
+    padding: 18px 22px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    border-radius: 6px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  }
+  .footer-msg { font-size: 14px; font-weight: 500; color: var(--ink-2); }
+  .footer-msg em { color: var(--accent); font-weight: 700; }
+  .footer-time { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); white-space: nowrap; }
+
+  .empty-block { background: var(--paper); border: 1px dashed var(--rule); border-radius: 6px; padding: 18px 22px; color: var(--slate-2); font-size: 13px; font-style: italic; margin-bottom: 28px; text-align: center; }
+</style>
+</head>
+<body>
+
+<!--
+  TEMPLATE — substitute {{placeholders}} before writing to disk.
+  See templates/_placeholders.md for the full contract.
+
+  Quick reference:
+    {{weekday}}            "Tuesday"
+    {{who}}                "Tom" or "friend"
+    {{action-count}}       integer
+    {{action-lbl}}         "Thing to decide" / "Things to decide"
+    {{lede-html}}          inline HTML, may contain <strong>...</strong>
+    {{actions-count}}      integer or "—"
+    {{actions-html}}       full action rows OR <div class="empty-block">…</div>
+    {{signals-count}}      e.g. "2 ASINs" or "—"
+    {{signals-html}}       full signal cards OR <div class="empty-block" style="grid-column: 1 / -1;">…</div>
+    {{noticed-html}}       full noticed rows OR <div class="empty-block">…</div>
+    {{footer-msg-html}}    inline HTML, may contain <em>...</em>
+    {{generated-at}}       "Tue 5 May · 06:42" or "Not yet generated"
+-->
+
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Daily brief · <span>{{weekday}}</span></div>
+      <h1 class="title">Good morning, <em>{{who}}</em>.</h1>
+    </div>
+    <div class="meta">
+      <div class="num"><em>{{action-count}}</em></div>
+      <div class="lbl">{{action-lbl}}</div>
+    </div>
+  </header>
+
+  <div class="lede">
+    {{lede-html}}
+  </div>
+
+  <div class="h2">Action items <span class="h2-counter">{{actions-count}}</span></div>
+  <div class="actions">
+    {{actions-html}}
+  </div>
+
+  <div class="h2">Signals <span class="h2-counter">{{signals-count}}</span></div>
+  <div class="signals">
+    {{signals-html}}
+  </div>
+
+  <div class="h2">What I noticed</div>
+  <div class="noticed">
+    {{noticed-html}}
+  </div>
+
+  <footer>
+    <div class="footer-msg">{{footer-msg-html}}</div>
+    <div class="footer-time">{{generated-at}}</div>
+  </footer>
+</div>
+
+</body>
+</html>

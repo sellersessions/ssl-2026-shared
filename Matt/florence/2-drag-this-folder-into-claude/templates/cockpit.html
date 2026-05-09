@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Florence — Cockpit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --ink: #152823;
+    --ink-2: #2A3D37;
+    --ink-3: #5E6E68;
+    --cream: #F4F1EA;
+    --cream-2: #E9E5DA;
+    --paper: #FCFAF4;
+    --accent: #1FA877;
+    --accent-2: #178A60;
+    --green-soft: #D6F0E5;
+    --gold: #D4A53A;
+    --gold-soft: #F4E5BC;
+    --red: #C8553D;
+    --red-soft: #F5DDD5;
+    --slate: #5E6E68;
+    --slate-2: #8C9A93;
+    --slate-3: #B5C0BB;
+    --rule: #D4D0C4;
+    --rule-soft: #E2DED2;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Inter", sans-serif;
+    --mono: ui-monospace, "SF Mono", "Menlo", "Cascadia Mono", "Roboto Mono", monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: var(--cream); color: var(--ink);
+    font-family: var(--sans); font-size: 13.5px; line-height: 1.55;
+    letter-spacing: -0.005em; -webkit-font-smoothing: antialiased;
+  }
+  em { font-style: normal; color: var(--accent); font-weight: 700; }
+  strong { font-weight: 700; color: var(--ink); }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 28px 24px 80px; }
+
+  header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding-bottom: 18px; border-bottom: 1px solid var(--rule); margin-bottom: 20px;
+  }
+  .wordmark {
+    font-size: 22px; font-weight: 800; letter-spacing: -0.03em;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .block { width: 12px; height: 28px; background: var(--accent); border-radius: 2px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.16em; color: var(--slate);
+    margin-bottom: 4px;
+  }
+  .title { font-size: 22px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; }
+  .stage-meta { text-align: right; font-family: var(--mono); font-size: 11px; color: var(--slate); }
+  .stage-meta .stage-num { font-size: 22px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
+
+  /* Tab navigation */
+  .tabs {
+    display: flex; gap: 0;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 20px;
+    overflow-x: auto;
+  }
+  .tab {
+    padding: 10px 16px;
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--slate);
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    background: transparent;
+    cursor: default;
+    white-space: nowrap;
+    margin-bottom: -1px;
+  }
+  .tab .count { color: var(--ink); font-weight: 700; margin-left: 4px; }
+  .tab.active {
+    color: var(--ink);
+    background: var(--paper);
+    border-color: var(--rule);
+    border-bottom: 1px solid var(--paper);
+  }
+
+  /* Section containers — only one is .active at a time */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* Sub-section heading inside a tab section */
+  .subhead {
+    font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.16em; color: var(--slate);
+    margin: 22px 0 10px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule-soft);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .subhead .counter { color: var(--ink); font-weight: 700; }
+  .subhead:first-child { margin-top: 0; }
+
+  /* Generic card surface used across sections */
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+
+  /* ── Onboarding pages (lives inside .section-brand → Setup sub-section) ── */
+  .page {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin-bottom: 14px;
+  }
+  .page.current { border-color: var(--accent); box-shadow: 0 1px 0 var(--green-soft); }
+  .page.locked { border-style: dashed; background: var(--cream-2); color: var(--slate-2); }
+  .page-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 10px;
+  }
+  .page-num {
+    font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+    color: var(--slate); letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .page-num .badge {
+    margin-left: 8px; padding: 2px 6px; border-radius: 3px;
+    font-size: 9.5px; letter-spacing: 0.14em;
+  }
+  .page-num .badge.done { background: var(--green-soft); color: var(--accent-2); }
+  .page-num .badge.current { background: var(--gold-soft); color: var(--gold); }
+  .page-num .badge.locked { background: var(--cream-2); color: var(--slate-2); }
+  .page-title { font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
+  .page.locked .page-title { color: var(--slate-2); }
+
+  .page-body { font-size: 13.5px; color: var(--ink-2); }
+  .page-body strong { font-weight: 600; color: var(--ink); }
+  .page-body .muted { color: var(--slate); font-style: italic; font-size: 12.5px; }
+  .page-body ul { margin: 8px 0 0 0; padding: 0; list-style: none; }
+  .page-body li { padding: 4px 0; border-bottom: 1px solid var(--rule-soft); }
+  .page-body li:last-child { border-bottom: none; }
+  .page-body .kv { display: flex; justify-content: space-between; gap: 10px; }
+  .page-body .kv .k { color: var(--slate); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .page-body .kv .v { font-weight: 500; }
+
+  /* Setup sub-section in Brand info — collapses once stage 5 reached */
+  .setup-collapsed {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 18px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--slate);
+  }
+  .setup-collapsed strong { color: var(--ink); }
+  .setup-collapsed .pill {
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    color: var(--accent-2); background: var(--green-soft);
+    padding: 3px 7px; border-radius: 3px; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+
+  /* Product cards (Brand info → Products sub-section) */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .product-card {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: var(--paper);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .product-card img {
+    width: 100%; aspect-ratio: 1 / 1; object-fit: contain;
+    background: var(--cream-2);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .product-meta { padding: 10px 12px; }
+  .product-title {
+    font-size: 13px; font-weight: 600; color: var(--ink);
+    line-height: 1.3; margin: 0 0 4px 0;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .product-asin {
+    font-family: var(--mono); font-size: 10.5px; color: var(--slate);
+    margin: 0; letter-spacing: 0.04em;
+  }
+
+  .lock-msg {
+    font-family: var(--mono); font-size: 11.5px; color: var(--slate-2);
+    font-style: italic;
+  }
+
+  /* ── Ideas rows ──────────────────────────────────────────────────── */
+  .idea-row {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+  }
+  .idea-row.status-captured { border-left-color: var(--gold); }
+  .idea-row.status-tested   { border-left-color: var(--accent); }
+  .idea-row.status-shipped  { border-left-color: var(--accent-2); background: var(--green-soft); }
+  .idea-row.status-parked   { border-left-color: var(--slate-3); opacity: 0.7; }
+  .idea-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 12px; flex-wrap: wrap; margin-bottom: 6px;
+  }
+  .idea-title { font-size: 14px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
+  .idea-meta { font-family: var(--mono); font-size: 10.5px; color: var(--slate); letter-spacing: 0.06em; white-space: nowrap; }
+  .idea-notes { font-size: 13px; color: var(--ink-2); line-height: 1.5; margin-top: 6px; }
+  .idea-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .badge {
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 7px; border-radius: 3px;
+  }
+  .badge.status-captured { color: var(--gold); background: var(--gold-soft); }
+  .badge.status-tested   { color: var(--accent-2); background: var(--green-soft); }
+  .badge.status-shipped  { color: var(--accent-2); background: var(--green-soft); }
+  .badge.status-parked   { color: var(--slate); background: var(--cream-2); }
+  .badge.status-running  { color: var(--gold); background: var(--gold-soft); }
+  .badge.status-complete { color: var(--accent-2); background: var(--green-soft); }
+  .badge.status-blocked  { color: var(--red); background: var(--red-soft); }
+  .badge.asin { color: var(--ink-2); background: var(--cream-2); }
+  .badge.source { color: var(--slate); background: var(--cream-2); }
+
+  /* ── Project rows ────────────────────────────────────────────────── */
+  .project-row {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--rule);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .project-row.status-running  { border-left-color: var(--gold); }
+  .project-row.status-complete { border-left-color: var(--accent); }
+  .project-row.status-blocked  { border-left-color: var(--red); }
+  .project-row.status-parked   { border-left-color: var(--slate-3); opacity: 0.7; }
+  .project-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 12px; flex-wrap: wrap; margin-bottom: 8px;
+  }
+  .project-name { font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: -0.012em; }
+  .project-when { font-family: var(--mono); font-size: 10.5px; color: var(--slate); letter-spacing: 0.06em; white-space: nowrap; }
+  .project-purpose {
+    font-size: 13px; color: var(--ink-2); line-height: 1.5;
+    margin: 4px 0 8px 0;
+  }
+  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+  .project-artifacts {
+    display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0;
+  }
+  .artifact-pill {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    letter-spacing: 0.06em;
+    padding: 4px 8px; border-radius: 3px;
+    background: var(--cream); color: var(--ink-2);
+    border: 1px solid var(--rule-soft);
+  }
+  .artifact-pill .kind { color: var(--accent-2); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-right: 4px; font-size: 9.5px; }
+  .project-next {
+    margin-top: 10px; padding: 10px 14px;
+    background: var(--green-soft); border-left: 2px solid var(--accent);
+    border-radius: 3px;
+    font-size: 13px; color: var(--ink-2);
+  }
+  .project-next .lbl {
+    font-family: var(--mono); font-size: 9.5px; font-weight: 600;
+    color: var(--accent-2); text-transform: uppercase; letter-spacing: 0.14em;
+    margin-bottom: 3px;
+  }
+
+  /* ── Resource rows ───────────────────────────────────────────────── */
+  .resource-row {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    display: flex; gap: 14px; align-items: center;
+  }
+  .resource-row.pinned { border-left: 3px solid var(--accent); }
+  .resource-icon {
+    font-family: var(--mono); font-size: 10px; font-weight: 700;
+    color: var(--slate); width: 36px; text-align: center;
+    flex-shrink: 0;
+  }
+  .resource-meta { flex: 1; min-width: 0; }
+  .resource-path {
+    font-family: var(--mono); font-size: 11.5px; color: var(--ink);
+    word-break: break-all;
+  }
+  .resource-note {
+    font-size: 12px; color: var(--slate); margin-top: 3px; font-style: italic;
+  }
+  .resource-pin-state {
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    color: var(--accent-2); letter-spacing: 0.1em; text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  /* ── About / health ──────────────────────────────────────────────── */
+  .about-summary {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 18px;
+  }
+  .about-summary.ready { border-color: var(--accent); background: var(--green-soft); }
+  .about-summary.degraded { border-color: var(--gold); background: var(--gold-soft); }
+  .about-summary.broken { border-color: var(--red); background: var(--red-soft); }
+  .about-summary strong { font-weight: 700; }
+
+  .about-stat-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px 16px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+  }
+  .about-stat .k { font-family: var(--mono); font-size: 10px; color: var(--slate); text-transform: uppercase; letter-spacing: 0.1em; }
+  .about-stat .v { font-size: 13.5px; color: var(--ink); font-weight: 600; margin-top: 2px; }
+
+  .check-section { margin-bottom: 18px; }
+  .check-label {
+    font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.16em; color: var(--slate);
+    margin-bottom: 8px;
+  }
+  .check {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 14px; background: var(--paper);
+    border: 1px solid var(--rule); border-top: none;
+  }
+  .check:first-of-type { border-top: 1px solid var(--rule); border-radius: 6px 6px 0 0; }
+  .check:last-of-type { border-radius: 0 0 6px 6px; }
+  .check:only-of-type { border-radius: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .dot.green { background: var(--accent); }
+  .dot.yellow { background: var(--gold); }
+  .dot.red { background: var(--red); }
+  .check-name { flex: 1; font-weight: 500; color: var(--ink); }
+  .check-msg { font-family: var(--mono); font-size: 11px; color: var(--slate); }
+  .fix {
+    font-family: var(--mono); font-size: 11px; color: var(--accent); font-weight: 500;
+    padding: 3px 7px; border: 1px solid var(--accent); border-radius: 3px;
+  }
+
+  /* Empty-state placeholder */
+  .empty-block {
+    background: var(--paper); border: 1px dashed var(--rule);
+    border-radius: 6px; padding: 18px 22px;
+    color: var(--slate-2); font-size: 13px; font-style: italic; text-align: center;
+  }
+
+  /* Sticky progress footer */
+  footer {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--paper); border-top: 1px solid var(--rule);
+    padding: 10px 24px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .footer-bar {
+    flex: 1; height: 6px; background: var(--rule-soft);
+    border-radius: 3px; overflow: hidden;
+  }
+  .footer-fill {
+    height: 100%; background: var(--accent);
+  }
+  .footer-pct { font-family: var(--mono); font-size: 11.5px; font-weight: 600; color: var(--ink); min-width: 40px; text-align: right; }
+  .footer-msg { font-size: 12.5px; color: var(--slate); }
+  .footer-msg em { color: var(--accent); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!--
+  TEMPLATE — substitute {{placeholders}} before writing to disk.
+  See templates/_placeholders.md § cockpit.html for the full contract.
+
+  Quick reference:
+    {{eyebrow}}                "Cockpit" / "Brand info" / "Projects" / etc. — page-specific subtitle
+    {{title}}                  Page-specific H1 — e.g. "Florence is ready", "Lumen Sleep — 3 ASINs"
+    {{stage-num}}              Page-specific number — e.g. 5/5 onboarding, 3 projects, 2 ideas
+    {{stage-label}}            Page-specific caption — "Ready", "Projects", "Ideas captured"
+    {{progress-pct}}           0-100 (footer bar fill)
+    {{footer-msg-html}}        inline HTML, may contain <em>...</em>
+
+    Active-tab tokens — exactly ONE should be "active":
+      {{tab-ideas-active}}, {{tab-brand-active}}, {{tab-projects-active}},
+      {{tab-resources-active}}, {{tab-about-active}}
+      (matching {{view-X-active}} for the section containers below)
+
+    Tab counters (rendered next to each tab label):
+      {{tab-ideas-count}}, {{tab-brand-count}}, {{tab-projects-count}},
+      {{tab-resources-count}}, {{tab-about-count}}
+
+    Section bodies (one per page):
+      {{section-ideas-html}}     ideas rows OR empty-state
+      {{section-brand-html}}     brand summary + Setup sub-section + product grid
+      {{section-projects-html}}  project rows OR empty-state
+      {{section-resources-html}} resource rows OR empty-state
+      {{section-about-html}}     about summary + stats + integrations health rows
+
+    Backward-compat aliases (still accepted by older skill emissions):
+      {{view-onboard-active}} → maps to {{view-brand-active}} + onboarding sub-section unfolded
+      {{view-health-active}}  → maps to {{view-about-active}}
+
+  Strip this comment before substitution.
+-->
+
+<div class="wrap">
+  <header>
+    <div>
+      <div class="wordmark">Florence<span class="block"></span></div>
+      <div class="eyebrow" style="margin-top: 8px;">{{eyebrow}}</div>
+      <div class="title">{{title}}</div>
+    </div>
+    <div class="stage-meta">
+      <div class="stage-num">{{stage-num}}</div>
+      <div>{{stage-label}}</div>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Cockpit pages">
+    <span class="tab {{tab-ideas-active}}">Ideas <span class="count">{{tab-ideas-count}}</span></span>
+    <span class="tab {{tab-brand-active}}">Brand</span>
+    <span class="tab {{tab-projects-active}}">Projects <span class="count">{{tab-projects-count}}</span></span>
+    <span class="tab {{tab-resources-active}}">Resources <span class="count">{{tab-resources-count}}</span></span>
+    <span class="tab {{tab-about-active}}">About</span>
+  </nav>
+
+  <!-- ── Ideas section ──────────────────────────────────────────────── -->
+  <div class="section section-ideas {{tab-ideas-active}}">
+    <div class="subhead">Captured ideas <span class="counter">{{tab-ideas-count}}</span></div>
+    {{section-ideas-html}}
+  </div>
+
+  <!-- ── Brand info section (also hosts onboarding Setup sub-section) ── -->
+  <div class="section section-brand {{tab-brand-active}}">
+    {{section-brand-html}}
+  </div>
+
+  <!-- ── Projects section ───────────────────────────────────────────── -->
+  <div class="section section-projects {{tab-projects-active}}">
+    <div class="subhead">Project tracker <span class="counter">{{tab-projects-count}}</span></div>
+    {{section-projects-html}}
+  </div>
+
+  <!-- ── Resources section ──────────────────────────────────────────── -->
+  <div class="section section-resources {{tab-resources-active}}">
+    <div class="subhead">Reference library <span class="counter">{{tab-resources-count}}</span></div>
+    {{section-resources-html}}
+  </div>
+
+  <!-- ── About / Health section ─────────────────────────────────────── -->
+  <div class="section section-about {{tab-about-active}}">
+    {{section-about-html}}
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-msg">{{footer-msg-html}}</div>
+  <div class="footer-bar"><div class="footer-fill" style="width: {{progress-pct}}%;"></div></div>
+  <div class="footer-pct">{{progress-pct}}%</div>
+</footer>
+
+</body></html>

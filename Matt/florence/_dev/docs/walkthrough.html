@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Florence — How It Works, Two Perspectives</title>
+<style>
+  :root {
+    --navy: #0F1B3D;
+    --navy-2: #1A2A55;
+    --cream: #F5F1E8;
+    --cream-2: #EAE3D0;
+    --rose: #D9536F;
+    --rose-soft: #F4D4DB;
+    --gold: #C9A961;
+    --slate: #5A6B8F;
+    --ink: #1A1A1A;
+    --green: #4A8B6F;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    background: var(--navy);
+    color: var(--cream);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", sans-serif;
+    line-height: 1.5;
+    overflow: hidden;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  .deck {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    flex: 1;
+  }
+  .deck::-webkit-scrollbar { display: none; }
+  .deck { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .slide {
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6vh 8vw;
+    position: relative;
+  }
+  .slide-number {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+  .slide-tag {
+    position: absolute;
+    top: 24px;
+    left: 32px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid var(--slate);
+    border-radius: 100px;
+    color: var(--cream-2);
+  }
+  .tag-delegate { border-color: var(--gold); color: var(--gold); }
+  .tag-dorian { border-color: var(--rose); color: var(--rose); }
+
+  h1 { font-size: 64px; line-height: 1.05; font-weight: 700; letter-spacing: -0.02em; max-width: 1100px; }
+  h2 { font-size: 44px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; max-width: 1100px; margin-bottom: 0.4em; }
+  h3 { font-size: 22px; font-weight: 600; color: var(--gold); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 12px; }
+  p { font-size: 22px; line-height: 1.5; max-width: 900px; color: var(--cream-2); }
+  .lead { font-size: 26px; color: var(--cream); }
+
+  ul { list-style: none; max-width: 1000px; }
+  ul li {
+    font-size: 20px;
+    color: var(--cream-2);
+    padding: 10px 0 10px 32px;
+    position: relative;
+    line-height: 1.45;
+  }
+  ul li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--rose);
+    font-weight: 700;
+  }
+
+  .center { text-align: center; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; max-width: 1400px; width: 100%; align-items: start; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; max-width: 1400px; width: 100%; align-items: start; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1400px; width: 100%; align-items: start; }
+  .stack { display: flex; flex-direction: column; gap: 24px; }
+
+  .panel {
+    background: var(--navy-2);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px;
+    color: var(--cream-2);
+  }
+  .panel h4 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .panel.rose h4 { color: var(--rose); }
+
+  .pill {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 13px;
+    background: rgba(217,83,111,0.15);
+    color: var(--rose);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .pill.gold { background: rgba(201,169,97,0.15); color: var(--gold); }
+  .pill.green { background: rgba(74,139,111,0.18); color: var(--green); }
+
+  /* Title slide */
+  .title-slide {
+    background: linear-gradient(135deg, #0F1B3D 0%, #1A2A55 50%, #2A1F3D 100%);
+    text-align: center;
+  }
+  .title-slide h1 { color: var(--cream); }
+  .title-slide .accent { color: var(--rose); font-style: italic; }
+  .title-meta { margin-top: 32px; font-size: 16px; color: var(--slate); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* Section divider */
+  .divider {
+    background: var(--cream);
+    color: var(--navy);
+  }
+  .divider h2 { color: var(--navy); font-size: 56px; }
+  .divider .sub { color: var(--slate); font-size: 22px; margin-top: 16px; max-width: 800px; }
+  .divider-stripe {
+    width: 80px;
+    height: 4px;
+    background: var(--rose);
+    margin: 24px 0;
+  }
+
+  /* Mock UI elements */
+  .terminal {
+    background: #0a0e1f;
+    border: 1px solid #2a3050;
+    border-radius: 10px;
+    padding: 24px;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 16px;
+    color: #b9c5e3;
+    text-align: left;
+    max-width: 800px;
+    width: 100%;
+  }
+  .terminal .prompt { color: var(--gold); }
+  .terminal .out { color: #6b7a99; display: block; padding-top: 6px; }
+  .terminal .ok { color: var(--green); }
+
+  .mock-window {
+    background: #f5f1e8;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    overflow: hidden;
+    color: #1a1a1a;
+    text-align: left;
+  }
+  .mock-titlebar {
+    background: #e0d9c8;
+    padding: 10px 16px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    border-bottom: 1px solid #d0c8b5;
+  }
+  .mock-dot { width: 12px; height: 12px; border-radius: 50%; background: #c0b9a8; }
+  .mock-dot.r { background: #e35d5d; }
+  .mock-dot.y { background: #e3b85d; }
+  .mock-dot.g { background: #5dc777; }
+  .mock-title { margin-left: 12px; font-size: 13px; color: #6b6555; }
+  .mock-body { padding: 20px; font-size: 14px; }
+
+  .cockpit {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 0;
+    background: #f5f1e8;
+  }
+  .cockpit-left {
+    background: #ebe3d0;
+    padding: 20px;
+    border-right: 1px solid #d8cfba;
+  }
+  .cockpit-step {
+    font-size: 13px;
+    padding: 8px 0;
+    color: #6b6555;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .cockpit-step.done { color: #0F1B3D; font-weight: 600; }
+  .cockpit-step.active { color: var(--rose); font-weight: 600; }
+  .step-bullet { width: 16px; height: 16px; border-radius: 50%; background: #d0c8b5; flex-shrink: 0; }
+  .step-bullet.done { background: var(--green); }
+  .step-bullet.active { background: var(--rose); }
+  .cockpit-right { padding: 20px; }
+  .brain-card {
+    background: white;
+    border: 1px solid #e0d9c8;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+  .brain-card .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #999; margin-bottom: 6px; }
+  .brain-card .value { color: #1a1a1a; font-weight: 500; }
+  .brain-card.empty .value { color: #999; font-style: italic; }
+
+  .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .product-card {
+    background: white;
+    border: 1px solid #e0d9c8;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 12px;
+  }
+  .product-thumb {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #ebe3d0, #d8cfba);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b6555;
+    font-size: 11px;
+  }
+  .product-asin { font-family: monospace; font-size: 11px; color: #6b6555; }
+  .product-title { font-weight: 600; margin: 4px 0; line-height: 1.3; }
+  .product-meta { color: #6b6555; font-size: 11px; }
+  .product-toggle { margin-top: 8px; font-size: 11px; color: var(--green); font-weight: 600; }
+
+  .connector-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .ctile {
+    background: white;
+    border: 1px solid #e0d9c8;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 13px;
+    text-align: center;
+  }
+  .ctile.connected { background: #e8f3ec; border-color: #4A8B6F; }
+  .ctile-name { font-weight: 600; color: #1a1a1a; }
+  .ctile-status { font-size: 11px; color: #6b6555; margin-top: 4px; }
+  .ctile.connected .ctile-status { color: var(--green); }
+
+  .slack-dm {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    color: #1a1a1a;
+    font-size: 14px;
+    max-width: 480px;
+  }
+  .slack-from { font-weight: 700; font-size: 13px; margin-bottom: 4px; color: #4A1D6B; }
+  .slack-time { font-size: 11px; color: #999; font-weight: 400; }
+  .slack-msg { line-height: 1.55; color: #2a2a2a; }
+  .slack-msg .key { background: #fff5d6; padding: 0 4px; }
+  .slack-action { margin-top: 12px; padding: 10px; background: #f7f3eb; border-left: 3px solid var(--rose); border-radius: 4px; font-weight: 600; }
+
+  .arrow-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  .arrow-step {
+    background: var(--navy-2);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--cream-2);
+  }
+  .arrow { color: var(--rose); font-size: 22px; font-weight: 700; }
+
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1400px; width: 100%; }
+  .stat {
+    text-align: center;
+    padding: 32px 16px;
+    background: var(--navy-2);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat-num { font-size: 56px; font-weight: 700; color: var(--rose); line-height: 1; letter-spacing: -0.03em; }
+  .stat-label { font-size: 14px; color: var(--slate); margin-top: 8px; letter-spacing: 0.05em; }
+
+  /* Nav */
+  .nav {
+    position: fixed;
+    bottom: 16px;
+    right: 24px;
+    display: flex;
+    gap: 8px;
+    z-index: 100;
+  }
+  .nav button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(15,27,61,0.7);
+    color: var(--cream);
+    cursor: pointer;
+    font-size: 16px;
+    backdrop-filter: blur(8px);
+  }
+  .nav button:hover { background: var(--rose); border-color: var(--rose); }
+  .progress {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: var(--rose);
+    transition: width 0.2s;
+    z-index: 99;
+  }
+
+  .hint {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    font-size: 11px;
+    color: var(--slate);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 100;
+  }
+
+  .two-up {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1400px;
+    width: 100%;
+  }
+
+  .quote {
+    font-size: 28px;
+    font-style: italic;
+    color: var(--cream);
+    border-left: 4px solid var(--rose);
+    padding-left: 24px;
+    max-width: 900px;
+    line-height: 1.4;
+  }
+  .quote .attr { display: block; font-style: normal; font-size: 16px; color: var(--slate); margin-top: 12px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    max-width: 1400px;
+    width: 100%;
+  }
+  .day {
+    background: var(--navy-2);
+    border-radius: 12px;
+    padding: 20px;
+    border-top: 4px solid var(--rose);
+  }
+  .day-name { font-size: 14px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 12px; }
+  .day-item { font-size: 14px; color: var(--cream-2); padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .day-item:last-child { border-bottom: none; }
+
+  .open-q {
+    background: rgba(217,83,111,0.08);
+    border: 1px solid rgba(217,83,111,0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+  .open-q .q-num { color: var(--rose); font-weight: 700; font-size: 13px; letter-spacing: 0.1em; }
+  .open-q .q-text { color: var(--cream); font-size: 18px; margin-top: 6px; line-height: 1.4; }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- 1: TITLE -->
+<section class="slide title-slide">
+  <h1>Florence<br><span class="accent">How it works — two perspectives</span></h1>
+  <p style="margin-top:32px; color: var(--cream-2); font-size:24px;">The delegate's journey, and yours.<br>Powered by Claude Desktop, Cowork Projects, Routines.</p>
+  <div class="title-meta">Pre-launch walkthrough · May 2026</div>
+</section>
+
+<!-- 2: THE PIVOT -->
+<section class="slide">
+  <span class="slide-number">02 / 19</span>
+  <h2>The pivot at a glance</h2>
+  <div class="grid-2" style="margin-top: 32px;">
+    <div class="panel">
+      <h4>Workshop plan v2 (was)</h4>
+      <ul>
+        <li>GitHub repo + Claude Code CLI</li>
+        <li>n8n on each delegate's laptop</li>
+        <li>Postgres / Supabase per delegate</li>
+        <li>~30 min install per person</li>
+        <li>46 n8n workflows to build</li>
+      </ul>
+    </div>
+    <div class="panel rose">
+      <h4>Cowork-native (now)</h4>
+      <ul>
+        <li>Repo opened as a Cowork Project</li>
+        <li>Skills + Routines replace n8n</li>
+        <li>Brain folder + project memory</li>
+        <li>~3 min install per person</li>
+        <li>~10 skills + 3 routines + 6 MCPs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3: SECTION DIVIDER — DELEGATE -->
+<section class="slide divider">
+  <h3 style="color: var(--rose);">Section 1</h3>
+  <h2>The delegate's journey</h2>
+  <div class="divider-stripe"></div>
+  <p class="sub">From scanning a QR code on stage to having Florence run real CRO work on their own ASIN — in twelve minutes.</p>
+</section>
+
+<!-- 4: SCREEN 1 — TERMINAL INSTALL -->
+<section class="slide">
+  <span class="slide-tag tag-delegate">Delegate · Screen 1</span>
+  <span class="slide-number">04 / 19</span>
+  <h2>Scan the QR. Paste one command.</h2>
+  <p style="margin: 16px 0 32px;">Twenty seconds. No npm, no Docker, no Postgres.</p>
+  <div class="terminal">
+    <span class="prompt">$</span> curl -fsSL https://florence.keplo.com/install.sh | bash
+    <span class="out">→ Cloning keplo/florence into ~/Documents/florence</span>
+    <span class="out">→ Seeding .env with workshop-shared API keys ($500 cap)</span>
+    <span class="out">→ Registering florence-keys MCP for OS keychain access</span>
+    <span class="out ok">✓ Done. Open ~/Documents/florence in Claude Desktop.</span>
+  </div>
+</section>
+
+<!-- 5: SCREEN 2 — OPEN AS PROJECT -->
+<section class="slide">
+  <span class="slide-tag tag-delegate">Delegate · Screen 2</span>
+  <span class="slide-number">05 / 19</span>
+  <h2>Open the folder as a Cowork Project.</h2>
+  <p style="margin: 16px 0 32px;">Florence has voice and rules from message zero — before she knows anything about you.</p>
+  <div class="mock-window" style="max-width:900px; width:100%;">
+    <div class="mock-titlebar">
+      <div class="mock-dot r"></div><div class="mock-dot y"></div><div class="mock-dot g"></div>
+      <div class="mock-title">Claude — Open Project</div>
+    </div>
+    <div class="mock-body">
+      <div style="font-size:13px; color:#6b6555; margin-bottom:8px;">~/Documents/florence/</div>
+      <div style="font-family: 'SF Mono', monospace; font-size: 13px; color: #1a1a1a; line-height: 1.6;">
+        <div>📁 .claude/ <span style="color:#6b6555;">— skills, routines, instructions, MCP registry</span></div>
+        <div>📁 brain/ <span style="color:#6b6555;">— business.md, products.md, competitors.md (empty, populated by /onboard)</span></div>
+        <div>📁 knowledge/ <span style="color:#6b6555;">— techniques.json, prioritization.md (Florence's DNA)</span></div>
+        <div>📄 README.md</div>
+        <div>📄 .env <span style="color:#6b6555;">— workshop-shared API keys (replace at home)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6: SCREEN 3 — CONNECTORS -->
+<section class="slide">
+  <span class="slide-tag tag-delegate">Delegate · Screen 3</span>
+  <span class="slide-number">06 / 19</span>
+  <h2>Connect Slack, Notion, Calendar.</h2>
+  <p style="margin: 16px 0 32px;">One click each via Cowork's connector UI. ~90 seconds total. PP and Amazon scrape pre-wired with shared workshop credentials.</p>
+  <div class="mock-window" style="max-width:900px; width:100%;">
+    <div class="mock-titlebar">
+      <div class="mock-dot r"></div><div class="mock-dot y"></div><div class="mock-dot g"></div>
+      <div class="mock-title">Florence · Connectors</div>
+    </div>
+    <div class="mock-body">
+      <div class="connector-tiles">
+        <div class="ctile connected"><div class="ctile-name">Slack</div><div class="ctile-status">✓ Connected</div></div>
+        <div class="ctile connected"><div class="ctile-name">Notion</div><div class="ctile-status">✓ Connected</div></div>
+        <div class="ctile connected"><div class="ctile-name">Calendar</div><div class="ctile-status">✓ Connected</div></div>
+        <div class="ctile connected"><div class="ctile-name">Product Pinion</div><div class="ctile-status">Workshop key</div></div>
+        <div class="ctile connected"><div class="ctile-name">Amazon scrape</div><div class="ctile-status">Workshop key</div></div>
+        <div class="ctile"><div class="ctile-name">SP-API</div><div class="ctile-status">Skip for now</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7: COCKPIT -->
+<section class="slide">
+  <span class="slide-tag tag-delegate">Delegate · Screen 4</span>
+  <span class="slide-number">07 / 19</span>
+  <h2>Type <code style="color:var(--rose); background:rgba(217,83,111,0.1); padding:4px 10px; border-radius:4px;">/onboard</code> — the Cockpit appears.</h2>
+  <p style="margin: 16px 0 24px;">A live HTML artifact in the side panel. Progress on the left, brain preview on the right. Re-renders after every reply.</p>
+  <div class="mock-window" style="max-width:1100px; width:100%;">
+    <div class="mock-titlebar">
+      <div class="mock-dot r"></div><div class="mock-dot y"></div><div class="mock-dot g"></div>
+      <div class="mock-title">Florence · Cockpit</div>
+    </div>
+    <div class="cockpit">
+      <div class="cockpit-left">
+        <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:#6b6555; margin-bottom:14px;">Setup · 6 min left</div>
+        <div class="cockpit-step done"><div class="step-bullet done"></div>Brand</div>
+        <div class="cockpit-step done"><div class="step-bullet done"></div>Products</div>
+        <div class="cockpit-step active"><div class="step-bullet active"></div>Competitors</div>
+        <div class="cockpit-step"><div class="step-bullet"></div>Team</div>
+        <div class="cockpit-step"><div class="step-bullet"></div>Goals</div>
+        <div class="cockpit-step"><div class="step-bullet"></div>Voice</div>
+        <div class="cockpit-step"><div class="step-bullet"></div>Connectors</div>
+        <div class="cockpit-step"><div class="step-bullet"></div>Routines</div>
+      </div>
+      <div class="cockpit-right">
+        <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:#6b6555; margin-bottom:10px;">Florence's brain · live preview</div>
+        <div class="brain-card"><div class="label">Brand</div><div class="value">Lumen Sleep · Premium melatonin</div></div>
+        <div class="brain-card"><div class="label">Products</div><div class="value">B07XYZ · B08ABC · B09DEF (3 ASINs)</div></div>
+        <div class="brain-card empty"><div class="label">Competitors</div><div class="value">Florence doesn't know this yet — fetching candidates...</div></div>
+        <div class="brain-card empty"><div class="label">Goals</div><div class="value">Florence doesn't know this yet</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8: ASIN CONFIRM -->
+<section class="slide">
+  <span class="slide-tag tag-delegate">Delegate · Onboarding step 2</span>
+  <span class="slide-number">08 / 19</span>
+  <h2>Paste ASINs. Florence fetches and confirms.</h2>
+  <p style="margin: 16px 0 24px;">No typing product titles. Florence pulls thumbnails, prices, BSR — you confirm in chat.</p>
+  <div class="mock-window" style="max-width:1000px; width:100%;">
+    <div class="mock-titlebar">
+      <div class="mock-dot r"></div><div class="mock-dot y"></div><div class="mock-dot g"></div>
+      <div class="mock-title">Florence · ASIN confirm</div>
+    </div>
+    <div class="mock-body">
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-thumb">[image]</div>
+          <div class="product-asin">B07XYZ</div>
+          <div class="product-title">Lumen Sleep Melatonin 5mg, 120ct</div>
+          <div class="product-meta">$24.99 · BSR #847</div>
+          <div class="product-toggle">✓ Looks right</div>
+        </div>
+        <div class="product-card">
+          <div class="product-thumb">[image]</div>
+          <div class="product-asin">B08ABC</div>
+          <div class="product-title">Lumen Sleep Magnesium Glycinate</div>
+          <div class="product-meta">$19.99 · BSR #2,134</div>
+          <div class="product-toggle">✓ Looks right</div>
+        </div>
+        <div class="product-card">
+          <div class="product-thumb">[image]</div>
+          <div class="product-asin">B09DEF</div>
+          <div class="product-title">Lumen Sleep Bundle Pack</div>
+          <div class="product-meta">$39.99 · BSR #5,201</div>
+          <div class="product-toggle" style="color: #c0b9a8;">○ Remove</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9: COMPETITOR SUGGEST -->
+<section class="slide">
+  <span class="slide-tag tag-delegate">Delegate · Onboarding step 3</span>
+  <span class="slide-number">09 / 19</span>
+  <h2>Florence suggests competitors. You tick the right ones.</h2>
+  <p style="margin: 16px 0 24px;">No staring at SERP screenshots. Florence pulls top-10 same-category ASINs by SQP rank. You pick 3–5 per product.</p>
+  <div class="mock-window" style="max-width:1000px; width:100%;">
+    <div class="mock-titlebar">
+      <div class="mock-dot r"></div><div class="mock-dot y"></div><div class="mock-dot g"></div>
+      <div class="mock-title">Florence · Competitor suggest · B07XYZ</div>
+    </div>
+    <div class="mock-body">
+      <div class="product-grid">
+        <div class="product-card"><div class="product-thumb">[image]</div><div class="product-asin">B0COMP1</div><div class="product-title">Natrol Melatonin Fast Dissolve</div><div class="product-toggle">✓ Selected</div></div>
+        <div class="product-card"><div class="product-thumb">[image]</div><div class="product-asin">B0COMP2</div><div class="product-title">Nature Made Melatonin Plus</div><div class="product-toggle">✓ Selected</div></div>
+        <div class="product-card"><div class="product-thumb">[image]</div><div class="product-asin">B0COMP3</div><div class="product-title">Olly Sleep Gummies</div><div class="product-toggle">✓ Selected</div></div>
+        <div class="product-card"><div class="product-thumb">[image]</div><div class="product-asin">B0COMP4</div><div class="product-title">ZzzQuil Pure Zzzs</div><div class="product-toggle" style="color:#c0b9a8;">○ Skip</div></div>
+        <div class="product-card"><div class="product-thumb">[image]</div><div class="product-asin">B0COMP5</div><div class="product-title">Vicks Pure Zzzs</div><div class="product-toggle" style="color:#c0b9a8;">○ Skip</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10: FIRST RUN — SHOPPER INTERROGATOR -->
+<section class="slide">
+  <span class="slide-tag tag-delegate">Delegate · 12 minutes in</span>
+  <span class="slide-number">10 / 19</span>
+  <h2>First useful run: Shopper Interrogator.</h2>
+  <p style="margin: 16px 0 32px;">Florence's opening act on the delegate's first ASIN — the same flow we'll demo on stage.</p>
+  <div class="arrow-row">
+    <div class="arrow-step">Mine 1★/3★ reviews</div>
+    <div class="arrow">→</div>
+    <div class="arrow-step">Pull Rufus questions</div>
+    <div class="arrow">→</div>
+    <div class="arrow-step">Launch PP poll</div>
+    <div class="arrow">→</div>
+    <div class="arrow-step">Synthesize objections</div>
+    <div class="arrow">→</div>
+    <div class="arrow-step">Rank via PP</div>
+    <div class="arrow">→</div>
+    <div class="arrow-step">Image blueprint</div>
+  </div>
+  <div class="slack-dm" style="margin-top: 40px;">
+    <div class="slack-from">Florence <span class="slack-time">· 12:14 PM</span></div>
+    <div class="slack-msg">Done. 5 ranked objections, image blueprint as artifact, scored on the <span class="key">40/30/15/15</span> framework.</div>
+    <div class="slack-action">What I'd do today: redesign image #2 with the "show in hand" angle. Score 87/100.</div>
+  </div>
+</section>
+
+<!-- 11: DAILY LIFE -->
+<section class="slide">
+  <span class="slide-tag tag-delegate">Delegate · Day 2 onwards</span>
+  <span class="slide-number">11 / 19</span>
+  <h2>The rhythm she creates.</h2>
+  <div class="grid-3" style="margin-top: 32px;">
+    <div class="panel">
+      <h4>Mon–Fri 08:00</h4>
+      <p style="font-size:16px; color:var(--cream-2);">Slack DM: overnight signals → priority pick → "What I'd do today: [one action]"</p>
+    </div>
+    <div class="panel">
+      <h4>Wednesday</h4>
+      <p style="font-size:16px; color:var(--cream-2);">Mid-week pulse — tests in flight, anything to pivot.</p>
+    </div>
+    <div class="panel">
+      <h4>Friday 16:00</h4>
+      <p style="font-size:16px; color:var(--cream-2);">Recap: what shipped, what we learned, what's queued for next week.</p>
+    </div>
+  </div>
+  <p style="margin-top: 32px; font-size:18px; color:var(--slate);">Project memory keeps her scoped. She remembers your tests, your goals, your shared history — without bleeding into your other Cowork work.</p>
+</section>
+
+<!-- 12: MOBILE / DISPATCH -->
+<section class="slide">
+  <span class="slide-tag tag-delegate">Delegate · Bonus (Max plan)</span>
+  <span class="slide-number">12 / 19</span>
+  <h2>Mobile via Dispatch.</h2>
+  <p style="margin: 16px 0 32px;">Pro tier covers the full P0 experience. Max ($200) adds remote routines + phone-to-desktop Dispatch.</p>
+  <div class="grid-2" style="max-width: 1200px;">
+    <div class="slack-dm">
+      <div class="slack-from">You <span class="slack-time">· 2:47 PM, on your phone</span></div>
+      <div class="slack-msg">"Florence, what's our worst objection on B07XYZ?"</div>
+    </div>
+    <div class="slack-dm">
+      <div class="slack-from">Florence <span class="slack-time">· 2:47 PM, replies on phone</span></div>
+      <div class="slack-msg">Top objection from this week's PP panel: <span class="key">"3mg is too strong — I want to test 1mg first"</span> (43% of respondents). Same desktop thread waiting when you're back at your laptop.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 13: SECTION DIVIDER — DORIAN -->
+<section class="slide divider">
+  <h3 style="color: var(--rose);">Section 2</h3>
+  <h2>Your journey</h2>
+  <div class="divider-stripe"></div>
+  <p class="sub">Build week, workshop day, after the workshop — what you ship, what you operate, what you maintain.</p>
+</section>
+
+<!-- 14: BUILD WEEK -->
+<section class="slide">
+  <span class="slide-tag tag-dorian">Your build · 5 days</span>
+  <span class="slide-number">14 / 19</span>
+  <h2>Build week.</h2>
+  <div class="timeline" style="margin-top: 32px;">
+    <div class="day">
+      <div class="day-name">Mon</div>
+      <div class="day-item">Repo scaffold</div>
+      <div class="day-item">.claude/ structure</div>
+      <div class="day-item">instructions.md</div>
+      <div class="day-item">brain templates</div>
+      <div class="day-item">Fix .gitignore</div>
+    </div>
+    <div class="day">
+      <div class="day-name">Tue</div>
+      <div class="day-item">Skills 9, 10</div>
+      <div class="day-item">Review mining</div>
+      <div class="day-item">Rufus extract</div>
+      <div class="day-item">Cockpit artifact</div>
+    </div>
+    <div class="day">
+      <div class="day-name">Wed</div>
+      <div class="day-item">Skills 11, 13 (PP)</div>
+      <div class="day-item">Connector tiles</div>
+      <div class="day-item">florence-keys MCP</div>
+      <div class="day-item">SP-API shared MCP</div>
+    </div>
+    <div class="day">
+      <div class="day-name">Thu</div>
+      <div class="day-item">Skills 12, 14, 25, 26</div>
+      <div class="day-item">Synthesis + blueprint</div>
+      <div class="day-item">Routine configs</div>
+      <div class="day-item">Slack handoff</div>
+    </div>
+    <div class="day">
+      <div class="day-name">Fri</div>
+      <div class="day-item">Full dry run</div>
+      <div class="day-item">Record video backup</div>
+      <div class="day-item">Print QR codes</div>
+      <div class="day-item">Bug-fix only Sat</div>
+    </div>
+  </div>
+</section>
+
+<!-- 15: STAGE FLOW -->
+<section class="slide">
+  <span class="slide-tag tag-dorian">Workshop · 60 min</span>
+  <span class="slide-number">15 / 19</span>
+  <h2>Workshop stage flow.</h2>
+  <ul style="margin-top: 24px;">
+    <li><b>0–5 min</b> · Florence Nightingale story + "AI slop vs. connected systems" framing</li>
+    <li><b>5–12 min</b> · LORAs primer (Matt)</li>
+    <li><b>12–22 min</b> · Ethical Prompt Injection skill (Matt)</li>
+    <li><b>22–40 min</b> · Systems Consultant Agent (Dorian)</li>
+    <li><b>40–55 min</b> · <span class="pill rose">Florence stage demo</span> — Matt presents, Dorian operates</li>
+    <li><b>55–60 min</b> · Repo handoff + QR + Q&amp;A</li>
+  </ul>
+</section>
+
+<!-- 16: STAGE DEMO TRIGGER -->
+<section class="slide">
+  <span class="slide-tag tag-dorian">Workshop demo · LOCKED</span>
+  <span class="slide-number">16 / 19</span>
+  <h2>The stage demo: typed slash command.</h2>
+  <p style="margin: 16px 0 24px;">No iPad form. No Dispatch theatrics. No Routine API endpoint to maintain. Zero infra to fail on stage.</p>
+  <div class="mock-window" style="max-width: 900px; width: 100%;">
+    <div class="mock-titlebar">
+      <div class="mock-dot r"></div><div class="mock-dot y"></div><div class="mock-dot g"></div>
+      <div class="mock-title">Florence · Stage demo · Audience pick: B07XYZ</div>
+    </div>
+    <div class="mock-body" style="font-family: 'SF Mono', monospace; font-size:14px; color: #1a1a1a;">
+      <div style="padding: 8px 0;"><span style="color: var(--rose); font-weight: 600;">Dorian</span> /shopper-interrogator B07XYZ</div>
+      <div style="padding: 8px 0; color: #6b6555;">Florence is mining 1★ and 3★ reviews on 5 competitors...</div>
+      <div style="padding: 8px 0; color: #6b6555;">Florence pulled 23 Rufus questions on B07XYZ.</div>
+      <div style="padding: 8px 0; color: #6b6555;">PP poll launched (sample: 50). Waiting on results...</div>
+      <div style="padding: 8px 0; color: #6b6555;">Synthesizing 5 objection clusters...</div>
+      <div style="padding: 8px 0; color: var(--green); font-weight: 600;">✓ Image blueprint rendered as artifact. Score 87/100. Posted to Slack.</div>
+    </div>
+  </div>
+  <p style="margin-top: 24px; font-size:18px; color:var(--slate);">Audience watches the chat + the artifact panel update in real time. Recorded video as backup if the Wi-Fi dies.</p>
+</section>
+
+<!-- 17: SECRETS -->
+<section class="slide">
+  <span class="slide-tag tag-dorian">Architecture · Secrets</span>
+  <span class="slide-number">17 / 19</span>
+  <h2>How keys are handled.</h2>
+  <p style="margin: 16px 0 32px;">Resolution order: Cowork connector → OS keychain → .env → workshop default → fail with helpful message.</p>
+  <div class="grid-4">
+    <div class="panel">
+      <h4>1 · Cowork connectors</h4>
+      <p style="font-size:14px;">Slack, Notion, Calendar, Drive, GitHub. OAuth handled by Anthropic. Florence never sees raw tokens.</p>
+    </div>
+    <div class="panel">
+      <h4>2 · OS keychain</h4>
+      <p style="font-size:14px;">Mac Keychain, Windows DPAPI, libsecret. Wrapped by a local <code>florence-keys</code> MCP. Keys never written to disk in plaintext.</p>
+    </div>
+    <div class="panel">
+      <h4>3 · .env file</h4>
+      <p style="font-size:14px;">Last-resort fallback. Gitignored. Used in CI or when keychain unavailable.</p>
+    </div>
+    <div class="panel rose">
+      <h4>4 · Workshop default</h4>
+      <p style="font-size:14px;">$500-cap shared keys ship in <code>.env.example</code>. Nothing is blank on day one. Retired the Monday after.</p>
+    </div>
+  </div>
+  <p style="margin-top: 32px; font-size:16px; color:var(--slate);">SP-API splits two ways: shared workshop read-only token (allow-listed to demo ASINs) for the workshop, then <code>/florence-spapi-link</code> at home for own data.</p>
+</section>
+
+<!-- 18: BOTTOM LINE -->
+<section class="slide">
+  <span class="slide-number">18 / 19</span>
+  <h2>The bottom line.</h2>
+  <div class="stat-row" style="margin-top: 40px;">
+    <div class="stat">
+      <div class="stat-num">46→10</div>
+      <div class="stat-label">n8n flows → skills</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">30→3</div>
+      <div class="stat-label">Install minutes</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">$0</div>
+      <div class="stat-label">Cost to delegate</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">$20</div>
+      <div class="stat-label">Pro tier baseline</div>
+    </div>
+  </div>
+  <p style="margin-top: 40px; font-size: 22px; color: var(--cream); text-align:center; max-width: 1000px;">Florence is free. Delegates paid £999 for the workshop ticket — Florence is the takeaway.</p>
+</section>
+
+<!-- 19: DECISIONS + OPEN -->
+<section class="slide">
+  <span class="slide-number">19 / 19</span>
+  <h2>What's locked, what's open.</h2>
+  <div class="two-up" style="margin-top: 32px;">
+    <div>
+      <h3 style="color: var(--green);">Locked</h3>
+      <ul>
+        <li>Cowork-primary runtime</li>
+        <li>Pro tier baseline</li>
+        <li>Typed slash command for stage demo</li>
+        <li>Visual onboarding via artifacts</li>
+        <li>Three-tier secrets resolution</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="color: var(--rose);">Still open — need your call</h3>
+      <div class="open-q">
+        <div class="q-num">Q1</div>
+        <div class="q-text">n8n during build week — port now or run dual-stack until Friday?</div>
+      </div>
+      <div class="open-q">
+        <div class="q-num">Q2</div>
+        <div class="q-text">Workshop-mode brain — pre-built for one ASIN, or hot-fetch any audience pick?</div>
+      </div>
+      <div class="open-q">
+        <div class="q-num">Q3</div>
+        <div class="q-text">CLI documentation status — fully drop, or "works but unsupported"?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="hint">↓ scroll · ← → arrow keys · space to advance</div>
+<div class="nav">
+  <button onclick="nav(-1)" title="Previous">←</button>
+  <button onclick="nav(1)" title="Next">→</button>
+</div>
+<div class="progress" id="progress" style="width: 0%"></div>
+
+<script>
+const deck = document.getElementById('deck');
+const slides = document.querySelectorAll('.slide');
+const progress = document.getElementById('progress');
+let current = 0;
+
+function nav(d) {
+  current = Math.max(0, Math.min(slides.length - 1, current + d));
+  slides[current].scrollIntoView({behavior: 'smooth'});
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); nav(1); }
+  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); nav(-1); }
+  else if (e.key === 'Home') { current = 0; slides[0].scrollIntoView(); }
+  else if (e.key === 'End') { current = slides.length - 1; slides[current].scrollIntoView(); }
+});
+
+deck.addEventListener('scroll', () => {
+  const idx = Math.round(deck.scrollTop / window.innerHeight);
+  current = idx;
+  progress.style.width = ((idx + 1) / slides.length * 100) + '%';
+});
+</script>
+</body>
+</html>
