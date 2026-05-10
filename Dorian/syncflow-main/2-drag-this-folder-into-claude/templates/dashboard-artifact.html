@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{cover_pill}} · {{brand_name}}</title>
+
+  <!--
+    syncflow · Connected Systems Roadmap (vanilla template)
+    No external dependencies. Compatible with Claude Cowork artifact sandbox.
+    Brand: {{brand_name}} · Generated: {{report_date}}
+
+    The agent fills {{vars}} at emission time. Locked pages render with
+    .locked class on the <section>; pages with their data populated drop
+    that class. Progress footer width is set inline by agent.
+  -->
+
+  <style>
+    /* syncflow brand fonts — Inter (display + body) + JetBrains Mono (mono labels).
+       Falls back to system fonts if Cowork sandbox blocks the external request. */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    /* ───────── force light-mode rendering (Cowork artifact panel safety) ───────── */
+    :root { color-scheme: light; }
+    html, body {
+      color-scheme: light;
+      background-color: #ECEFF3;
+      color: #0A0E1A;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root, html, body {
+        color-scheme: light;
+        background-color: #ECEFF3 !important;
+        color: #0A0E1A !important;
+      }
+    }
+
+    /* ───────── design tokens (inline; no external CSS apart from font @import above) ─────────
+       Palette swapped to syncflow (per docs/design-handoff/motion/README.md) — legacy token
+       names kept for back-compat with existing var() references; values resolve to the new
+       syncflow palette. The three rules from the handoff: motion runs once on open · accent
+       green (#00D67A) is the only animating color · prefer a static rule over a primitive when
+       meaning is preserved. */
+    :root {
+      /* Neutrals */
+      --ink: #0A0E1A;
+      --ink-2: #11151F;
+      --graphite: #5C6473;     /* legacy; alias for --gray-1 */
+      --mist: #9AA1AE;          /* legacy; alias for --gray-2 */
+      --fog: #C9CDD4;           /* legacy; alias for --gray-3 */
+      --line: #E2E6EC;          /* legacy; alias for --paper-3 */
+      --line-2: #E2E6EC;        /* collapsed into --paper-3 */
+      --paper: #F7F8FA;
+      --paper-2: #ECEFF3;
+      --paper-3: #E2E6EC;       /* syncflow canonical */
+      --gray-1: #5C6473;        /* syncflow canonical */
+      --gray-2: #9AA1AE;        /* syncflow canonical */
+      --gray-3: #C9CDD4;        /* syncflow canonical */
+
+      /* Single accent color — the only thing that animates */
+      --accent: #00D67A;        /* syncflow canonical · signal green */
+      --accent-tint: #E6FAF1;   /* ~8% accent on white */
+
+      /* Legacy cobalt names retained for back-compat — values now resolve to neutrals or accent */
+      --cobalt-50: #ECEFF3;
+      --cobalt-100: #ECEFF3;
+      --cobalt-200: #9AA1AE;
+      --cobalt-400: #5C6473;
+      --cobalt-500: #00D67A;
+      --cobalt-600: #11151F;
+      --cobalt-700: #0A0E1A;
+      --cobalt-800: #0A0E1A;
+
+      /* Status names retained — the multi-color (red/amber/green/blue) palette collapses to
+         ink + accent + paper. Visual differentiation now happens via type weight, position,
+         and accent placement, not multi-color pills. */
+      --rented: #0A0E1A;
+      --rented-bg: #ECEFF3;
+      --owned: #00D67A;
+      --owned-bg: #ECEFF3;
+      --savings: #00D67A;
+      --savings-bg: #E6FAF1;
+      --warn: #0A0E1A;
+      --warn-bg: #ECEFF3;
+
+      /* syncflow canonical type stack — Inter (display + body), JetBrains Mono (mono labels).
+         Letter-spacing -0.035 to -0.045em on display, 0.06–0.10em uppercase on mono.
+         Each var() falls back through system fonts so the page renders cleanly even when the
+         Google Fonts @import is blocked by the Cowork sandbox. */
+      --font-display: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      --font-body:    'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      --font-editorial: 'Inter', "New York", "Iowan Old Style", "Apple Garamond", "Hoefler Text", Georgia, serif;
+      --font-mono:    'JetBrains Mono', ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      color: #0A0E1A;
+      background: #ECEFF3;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .editorial { font-family: var(--font-editorial); letter-spacing: -0.02em; }
+    .display   { font-family: var(--font-display);   letter-spacing: -0.035em; }
+    .mono      { font-family: var(--font-mono); }
+
+    /* ───────── nav rail (sticky top) ───────── */
+    .nav-rail {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      padding: 12px 24px;
+      background: #0A0E1A;
+      color: rgba(255,255,255,0.6);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-rail .brand {
+      color: #fff;
+      font-weight: 600;
+      margin-right: auto;
+    }
+    .nav-rail a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+    .nav-rail a:hover { color: #fff; background: rgba(255,255,255,0.05); }
+
+    /* ───────── pages ───────── */
+    .page {
+      width: 880px;
+      max-width: 100%;
+      min-height: 1100px;
+      padding: 64px 72px;
+      margin: 32px auto;
+      background: #fff;
+      box-shadow: 0 4px 14px rgba(10,14,26,0.06), 0 1px 3px rgba(10,14,26,0.04);
+      position: relative;
+    }
+    .page--dark {
+      background: #0A0E1A;
+      color: #fff;
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+    }
+    .page--dark .pill { color: rgba(255,255,255,0.4); }
+
+    /* ───────── locked-page state ───────── */
+    .page.locked {
+      min-height: 220px;
+      padding: 48px 72px;
+      border-left: 4px solid #E2E6EC;
+      opacity: 0.78;
+    }
+    .page.locked .locked-pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: #ECEFF3;
+      color: #5C6473;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .page.locked h2 {
+      font-family: var(--font-editorial);
+      font-size: 28px;
+      font-weight: 500;
+      color: #11151F;
+      margin: 16px 0 0 0;
+      letter-spacing: -0.02em;
+    }
+    .page.locked p {
+      color: #5C6473;
+      margin-top: 10px;
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: 540px;
+    }
+
+    /* ───────── pill ───────── */
+    .pill {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: #ECEFF3;
+      color: #0A0E1A;
+    }
+    .pill.savings { background: #E6FAF1; color: #00D67A; }
+    .pill.owned   { background: #ECEFF3;   color: #0A0E1A; }
+    .pill.rented  { background: #ECEFF3;  color: #0A0E1A; }
+    .pill.warn    { background: #ECEFF3;    color: #0A0E1A; }
+
+    /* ───────── headings + body ───────── */
+    h1.cover-headline {
+      font-family: var(--font-editorial);
+      font-size: 84px;
+      line-height: 0.96;
+      font-weight: 500;
+      margin: 24px 0 0 0;
+    }
+    h1.page-title {
+      font-family: var(--font-display);
+      font-size: 36px;
+      margin: 0;
+    }
+    h1.closing-headline {
+      font-family: var(--font-editorial);
+      font-size: 56px;
+      line-height: 1.04;
+      font-weight: 500;
+      margin: 16px 0 0 0;
+    }
+    h1.closing-headline .accent { color: #11151F; }
+    h1.module-title {
+      font-family: var(--font-display);
+      font-size: 40px;
+      margin: 12px 0 0 0;
+    }
+    p.lead {
+      color: #5C6473;
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: 580px;
+      margin-top: 12px;
+    }
+    p.cover-body {
+      color: rgba(255,255,255,0.6);
+      font-size: 18px;
+      line-height: 1.55;
+      max-width: 520px;
+      margin-top: 24px;
+    }
+    p.module-subtitle {
+      font-family: var(--font-editorial);
+      font-style: italic;
+      color: #5C6473;
+      font-size: 20px;
+      margin-top: 8px;
+    }
+
+    /* ───────── cards / grids ───────── */
+    .card {
+      background: #fff;
+      border: 1px solid #E2E6EC;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+
+    .label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #9AA1AE;
+    }
+    .label--rented { color: #0A0E1A; }
+    .label--savings { color: #00D67A; }
+    .label--cobalt { color: #0A0E1A; }
+    .label--warn { color: #0A0E1A; }
+
+    /* ───────── replacement-row card ───────── */
+    .replace-card {
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #E2E6EC;
+      margin-top: 12px;
+      background: #fff;
+    }
+    .replace-card.keep        { background: #E6FAF1; border-color: #00D67A; }
+    .replace-card.consolidate { background: #ECEFF3;    border-color: #0A0E1A; }
+    .replace-card.retire      { background: #ECEFF3;  border-color: #0A0E1A; }
+    .replace-card .row-head { display: flex; justify-content: space-between; align-items: baseline; }
+    .replace-card .row-tool { font-weight: 600; font-size: 15px; }
+    .replace-card .row-cost { font-family: var(--font-mono); font-size: 12px; color: #5C6473; margin-left: 12px; }
+    .replace-card .row-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: #fff;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+    .replace-card.keep .row-pill        { color: #00D67A; border: 1px solid #00D67A; }
+    .replace-card.consolidate .row-pill { color: #0A0E1A;    border: 1px solid #0A0E1A; }
+    .replace-card.retire .row-pill      { color: #0A0E1A;  border: 1px solid #0A0E1A; }
+    .replace-card .row-why { color: #5C6473; font-size: 13px; line-height: 1.5; margin-top: 8px; }
+    .replace-card .row-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+
+    /* ───────── module card ───────── */
+    .module-card {
+      background: #fff;
+      border: 1px solid #E2E6EC;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 16px;
+    }
+    .module-card .head { display: flex; gap: 16px; align-items: flex-start; }
+    .module-card .num {
+      width: 38px; height: 38px; flex-shrink: 0;
+      background: #00D67A; color: #fff;
+      border-radius: 9999px;
+      font-family: var(--font-mono); font-weight: 600; font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .module-card .body { flex: 1; }
+    .module-card .name { font-weight: 600; font-size: 15px; }
+    .module-card .status { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: #0A0E1A; margin-top: 2px; }
+    .module-card .meta { font-family: var(--font-mono); font-size: 12px; color: #5C6473; text-align: right; }
+    .module-card .meta .deps { color: #9AA1AE; }
+
+    /* ───────── Page 07.5 · Project Board (kanban) ─────────
+       6-column CSS grid mapping the 13 status states onto 6 visible columns
+       (Recommended / Planned / In Progress / Built / Deployed / T+4 Audit).
+       Tolerated modules render in a footer strip beneath the kanban (out-of-flow).
+       Compact cards: ~80×60px so 7 modules fit vertically per column.
+       Render-roadmap.md owns the status→column mapping; this stylesheet only
+       provides the visual primitives (column + card + variants).
+
+       Width math: page is 880px - 144px padding = 736px content. 6 cols at ~118px
+       each + 5 × 4px gap = ~728px — fits comfortably. */
+    .kanban {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .kanban-col {
+      background: #F7F8FA;
+      border: 1px solid #E2E6EC;
+      border-radius: 10px;
+      padding: 12px 10px;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+    }
+    .kanban-col-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #E2E6EC;
+    }
+    .kanban-col-header .col-title {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #11151F;
+      font-weight: 600;
+    }
+    .kanban-col-header .col-count {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: #9AA1AE;
+    }
+    .kanban-col--accent .col-title { color: #00D67A; }
+    .kanban-col--accent { border-color: #00D67A; background: rgba(0,214,122,0.04); }
+
+    .kanban-card {
+      background: #fff;
+      border: 1px solid #E2E6EC;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: transform 120ms ease-out, box-shadow 120ms ease-out, border-color 120ms ease-out;
+    }
+    .kanban-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(10,14,26,0.08);
+      border-color: #00D67A;
+    }
+    .kanban-card .num-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .kanban-card .num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: #9AA1AE;
+      letter-spacing: 0.04em;
+    }
+    .kanban-card .phase {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: #0A0E1A;
+    }
+    .kanban-card .name {
+      font-size: 12.5px;
+      line-height: 1.35;
+      margin-top: 4px;
+      color: #0A0E1A;
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .kanban-card .meta {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      color: #5C6473;
+      margin-top: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    /* Variants per column — type weight + accent placement instead of multi-color fills */
+    .kanban-card--recommended { border-style: dashed; border-color: #C9CDD4; background: #F7F8FA; }
+    .kanban-card--planned     { border-color: #9AA1AE; }
+    .kanban-card--in-progress { border-left: 3px solid #00D67A; }
+    .kanban-card--built       { border-color: #00D67A; }
+    .kanban-card--built::before { content: "✓ "; color: #00D67A; font-weight: 600; }
+    .kanban-card--deployed    { border-left: 3px solid #00D67A; background: rgba(0,214,122,0.04); }
+    .kanban-card--audit       { border: 1px solid #00D67A; background: rgba(0,214,122,0.04); }
+
+    /* Tolerated footer strip — out-of-flow below the kanban */
+    .kanban-tolerated {
+      margin-top: 16px;
+      padding: 10px 14px;
+      border-top: 1px dashed #E2E6EC;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: baseline;
+    }
+    .kanban-tolerated .label {
+      flex-shrink: 0;
+      color: #9AA1AE;
+    }
+    .kanban-tolerated .tol-card {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #5C6473;
+      padding: 3px 8px;
+      border: 1px dashed #C9CDD4;
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    /* Toast — fades in top-right when a clipboard copy fires (Track E3).
+       Pure CSS keyframes; gated by JS visibility (display: none unless triggered).
+       Print + reduced-motion: forced hidden via the existing motion gate below. */
+    .copy-toast {
+      position: fixed;
+      top: 60px;
+      right: 24px;
+      z-index: 100;
+      background: #0A0E1A;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      max-width: 360px;
+      box-shadow: 0 4px 14px rgba(10,14,26,0.18);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 180ms ease-out, transform 180ms ease-out;
+      pointer-events: none;
+    }
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .copy-toast .toast-trigger {
+      color: #00D67A;
+      font-weight: 600;
+    }
+
+    /* Optimistic-update badge on cards the user clicked but hasn't pasted yet (Track E3) */
+    .kanban-card .opt-badge,
+    .module-card .opt-badge {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: rgba(0,214,122,0.12);
+      color: #00D67A;
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-left: 6px;
+    }
+
+    /* Print + reduced-motion: kanban renders as a static grid; toast hidden completely.
+       Cards lose their hover affordance (no cursor) and the click-handlers no-op. */
+    @media print, (prefers-reduced-motion: reduce) {
+      .kanban-card { cursor: default !important; transform: none !important; }
+      .kanban-card:hover { transform: none !important; box-shadow: none !important; border-color: inherit !important; }
+      .copy-toast { display: none !important; }
+    }
+    @media print {
+      .kanban-card .opt-badge, .module-card .opt-badge { display: none; }
+    }
+
+    /* ───────── module deep-dive callouts ───────── */
+    .callout {
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 12px;
+    }
+    .callout--problem { background: #ECEFF3; border: 1px solid #0A0E1A; }
+    .callout--outcome { background: #E6FAF1; border: 1px solid #00D67A; }
+    .callout--week    { background: #ECEFF3; border-left: 3px solid #00D67A; padding: 20px; }
+    .callout--week .editorial { font-size: 17px; line-height: 1.5; font-weight: 500; color: #0A0E1A; margin: 8px 0 0 0; }
+
+    /* ───────── verification box ───────── */
+    .verif {
+      border: 1px dashed #00D67A;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+      background: #fff;
+    }
+    .verif ul { list-style: none; padding: 0; margin: 12px 0 0 0; }
+    .verif li { color: #5C6473; font-size: 14px; padding: 4px 0; }
+    .verif li::before { content: "✓ "; color: #00D67A; }
+
+    /* ───────── totals strip (bottom of replacement page) ───────── */
+    .totals {
+      margin-top: 24px;
+      background: #0A0E1A;
+      color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .totals .savings { font-family: var(--font-display); font-size: 28px; color: #9AA1AE; text-align: right; }
+    .totals .hours   { font-family: var(--font-display); font-size: 28px; color: #00D67A; text-align: right; }
+    .totals .total-label { font-family: var(--font-display); font-size: 18px; }
+    .totals .sub { font-family: var(--font-mono); font-size: 12px; color: rgba(255,255,255,0.55); }
+
+    /* ───────── progress footer (sticky bottom) ───────── */
+    .progress-footer {
+      position: sticky;
+      bottom: 0;
+      z-index: 50;
+      background: #0A0E1A;
+      color: #fff;
+      padding: 14px 32px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .progress-footer .label-text { color: rgba(255,255,255,0.6); }
+    .progress-footer .stage { color: #fff; font-weight: 600; }
+    .progress-footer .bar {
+      flex: 1; max-width: 360px; height: 6px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+    .progress-footer .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #5C6473, #00D67A);
+      border-radius: 9999px;
+      transition: width 0.4s ease-out;
+    }
+    .progress-footer .pct { color: #fff; min-width: 36px; text-align: right; }
+
+    /* ───────── cover specifics ───────── */
+    .cover-top    { display: flex; justify-content: space-between; align-items: baseline; }
+    .cover-middle { flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 680px; }
+    .cover-meta   { display: flex; justify-content: space-between; align-items: flex-end; padding-top: 32px; font-family: var(--font-mono); font-size: 12px; }
+    .cover-meta .meta-label { color: rgba(255,255,255,0.4); margin-top: 8px; }
+    .cover-meta .meta-value { color: #fff; }
+
+    /* ───────── print / PDF export ─────────
+       The artifact is designed page-at-a-time on screen; without these rules
+       the browser splits cards mid-paragraph at the A4 boundary on PDF export.
+       Strategy: each `.page` starts a fresh PDF page; cards never split
+       internally; left nav rail and progress footer are hidden.
+       Content length budgets per page live in `skills/render-roadmap.md`. */
+    @page {
+      size: A4;
+      margin: 0;
+    }
+    @media print {
+      body { background: #fff; }
+      .nav-rail, .progress-footer { display: none !important; }
+      .page {
+        width: 100%;
+        max-width: 100%;
+        min-height: auto;
+        margin: 0;
+        padding: 56px 56px 64px;
+        box-shadow: none;
+        page-break-after: always;
+        page-break-inside: avoid;
+        break-after: page;
+        break-inside: avoid;
+      }
+      .page:last-of-type {
+        page-break-after: auto;
+        break-after: auto;
+      }
+      .page.locked { display: none; }   /* skip not-yet-rendered pages in PDFs */
+      .card,
+      .callout,
+      .replace-card,
+      .module-card,
+      .verif,
+      .totals,
+      .grid-2 > *,
+      .grid-3 > * {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      h1, h2, h3 { page-break-after: avoid; break-after: avoid; }
+      a { color: inherit; text-decoration: none; }
+    }
+
+    /* ───────── motion primitives — syncflow handoff ─────────
+       Seven named primitives. Three pages get motion (Cover, Summary, Migration);
+       the other 8 stay static — animating every page would feel like a screensaver.
+       Three rules:
+         1. Motion runs once on open — never on scroll, never on hover.
+         2. Accent green (#00D67A) is the only animating color.
+         3. If a primitive can be replaced by a static rule, do that instead.
+       Each animation is `iteration-count: 1` + `fill-mode: forwards` so it fires once
+       and holds the final state. Print + reduced-motion gates collapse every primitive
+       to its final state with no entrance — the printed PDF is static. */
+
+    @keyframes is-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(0,214,122,0.55); }
+      100% { box-shadow: 0 0 0 8px rgba(0,214,122,0); }
+    }
+    @keyframes is-pulse-soft {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.18); }
+    }
+    @keyframes is-sweep {
+      0%   { transform: translateX(-110%); opacity: 0; }
+      20%  { opacity: 1; }
+      100% { transform: translateX(110%); opacity: 0; }
+    }
+    @keyframes is-rule-draw {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+    @keyframes is-settle {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes is-snap-to-grid {
+      0%   { opacity: 0; transform: scale(0.88); }
+      60%  { opacity: 1; transform: scale(1.02); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Settle — list items / cards / meta-lines fade up 8px on entrance */
+    .is-settle      { animation: is-settle 250ms ease-out 0ms 1 backwards; }
+    .is-settle.s-1  { animation-delay:  80ms; }
+    .is-settle.s-2  { animation-delay: 160ms; }
+    .is-settle.s-3  { animation-delay: 240ms; }
+    .is-settle.s-4  { animation-delay: 320ms; }
+    .is-settle.s-5  { animation-delay: 400ms; }
+    .is-settle.s-6  { animation-delay: 480ms; }
+
+    /* Rule-draw — horizontal hairlines draw L→R via scaleX */
+    .is-rule-draw   { transform-origin: left center; animation: is-rule-draw 500ms ease-in-out 0ms 1 forwards; }
+
+    /* Sweep — accent gradient sheen passes once across the headline.
+       Wrap the headline element with `.is-sweep-host`; sweep itself is a `::after` pseudo. */
+    .is-sweep-host  { position: relative; overflow: hidden; }
+    .is-sweep-host::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(110deg, transparent 0%, rgba(0,214,122,0.22) 50%, transparent 100%);
+      filter: blur(20px);
+      animation: is-sweep 1.4s ease-in-out 200ms 1 forwards;
+      transform: translateX(-110%);
+    }
+
+    /* Pulse — accent dot breathes (live status). Colour fixed to accent green per rule 2. */
+    .is-pulse       { position: relative; border-radius: 9999px; background: #00D67A; animation: is-pulse 1.6s ease-out infinite; }
+    .is-pulse-soft  { animation: is-pulse-soft 1.4s ease-in-out infinite; }
+
+    /* Snap-to-grid — modules drop into a grid in dependency order with overshoot */
+    .is-snap        { animation: is-snap-to-grid 320ms cubic-bezier(0.34, 1.56, 0.64, 1) 0ms 1 backwards; transform-origin: center; }
+    .is-snap.s-1    { animation-delay:  90ms; }
+    .is-snap.s-2    { animation-delay: 180ms; }
+    .is-snap.s-3    { animation-delay: 270ms; }
+    .is-snap.s-4    { animation-delay: 360ms; }
+    .is-snap.s-5    { animation-delay: 450ms; }
+    .is-snap.s-6    { animation-delay: 540ms; }
+    .is-snap.s-7    { animation-delay: 630ms; }
+
+    /* Tally — number count-up. Driven by JS at bottom of <body>; the element renders the
+       final value as static text so the no-JS / reduced-motion fallback is correct. The
+       script reads `data-target` and animates from 0 → final value over 500ms ease-out.
+       Tabular-nums keeps width steady during the count. */
+    .is-tally       { font-variant-numeric: tabular-nums; }
+
+    /* Print + reduced-motion — every primitive collapses to its final state with no entrance.
+       Use !important to override any inline animation-delay / iteration-count overrides. */
+    @media print, (prefers-reduced-motion: reduce) {
+      .is-settle, .is-rule-draw, .is-snap,
+      .is-sweep-host::after, .is-pulse, .is-pulse-soft {
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ───────── nav rail ───────── -->
+  <nav class="nav-rail">
+    <span class="brand">{{brand_name}} · Connected Systems Roadmap</span>
+    <a href="#page-00">00 · Cover</a>
+    <a href="#page-01">01 · Manifesto</a>
+    <a href="#page-02">02 · Summary</a>
+    <a href="#page-03">03 · TOC</a>
+    <a href="#page-04">04 · Current</a>
+    <a href="#page-05">05 · Future</a>
+    <a href="#page-06">06 · Replacement</a>
+    <a href="#page-07">07 · Plan</a>
+    <a href="#page-07-5">07.5 · Board</a>
+    <a href="#page-08">08 · Module</a>
+    <a href="#page-09">09 · Closing</a>
+    <a href="#page-10">10 · Appendix</a>
+  </nav>
+
+  <!-- ─────── PAGE 00 · Cover (always rendered) ─────── -->
+  <!-- Motion: Settle on entrance for the four meta-blocks · Sweep across headline once ·
+       Rule-draw on the hairline beneath the headline. Per the syncflow handoff, the cover
+       is one of three pages that earn motion — the other 8 stay static. -->
+  <section id="page-00" class="page page--dark">
+    <div class="cover-top">
+      <span class="mono is-settle s-1" style="font-size:11px;color:rgba(255,255,255,0.4)">{{cover_pill}}</span>
+      <span class="mono is-settle s-1" style="font-size:11px;color:rgba(255,255,255,0.5)">{{report_version}} · {{report_date}}</span>
+    </div>
+    <div class="cover-middle">
+      <h1 class="cover-headline is-settle s-2 is-sweep-host">
+        {{cover_headline_lead}}<br>{{cover_headline_brand}}
+      </h1>
+      <div class="is-rule-draw" style="height:1px;background:rgba(255,255,255,0.85);width:100%;max-width:540px;margin:22px 0 0 0;animation-delay:340ms"></div>
+      <p class="cover-body is-settle s-3">{{cover_body}}</p>
+    </div>
+    <div class="cover-meta">
+      <div>
+        <div class="meta-label is-settle s-4" style="margin-top:0">FOR</div>
+        <div class="meta-value is-settle s-4">{{cover_for_line}}</div>
+        <div class="meta-label is-settle s-5">BY</div>
+        <div class="meta-value is-settle s-5">{{cover_by_line}}</div>
+        <div class="meta-label is-settle s-6">SEAT</div>
+        <div class="meta-value is-settle s-6">{{cover_seat_line}}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────── PAGE 01 · Manifesto (always rendered) ─────── -->
+  <section id="page-01" class="page">
+    <span class="pill">{{manifesto_pill}}</span>
+    <h1 class="closing-headline" style="margin-top:16px">
+      {{manifesto_headline_lead}}<br>
+      <span class="accent">{{manifesto_headline_accent}}</span>
+    </h1>
+    <p class="lead" style="margin-top:24px;max-width:600px">{{manifesto_body}}</p>
+    <div class="grid-2" style="margin-top:32px">
+      <div class="card" style="background:#ECEFF3;border-color:#0A0E1A">
+        <div class="label label--rented">Today · most brands</div>
+        <p style="margin-top:8px;font-size:15px;line-height:1.55;color:#0A0E1A">{{manifesto_card_today}}</p>
+      </div>
+      <div class="card" style="background:#ECEFF3;border-color:#00D67A">
+        <div class="label label--cobalt">What scales</div>
+        <p style="margin-top:8px;font-size:15px;line-height:1.55;color:#0A0E1A">{{manifesto_card_owned}}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────── PAGE 02 · Summary (locked until stage ≥ team) ─────── -->
+  <section id="page-02" class="page {{page_02_class}}">
+    {{page_02_content}}
+  </section>
+
+  <!-- ─────── PAGE 03 · TOC (locked until stage ≥ deriving) ─────── -->
+  <section id="page-03" class="page {{page_03_class}}">
+    {{page_03_content}}
+  </section>
+
+  <!-- ─────── PAGE 04 · Current state (locked until stage ≥ stack) ─────── -->
+  <section id="page-04" class="page {{page_04_class}}">
+    {{page_04_content}}
+  </section>
+
+  <!-- ─────── PAGE 05 · Future state (locked until stage ≥ deriving) ─────── -->
+  <section id="page-05" class="page {{page_05_class}}">
+    {{page_05_content}}
+  </section>
+
+  <!-- ─────── PAGE 06 · Replacement (locked until stage ≥ deriving) ─────── -->
+  <section id="page-06" class="page {{page_06_class}}">
+    {{page_06_content}}
+  </section>
+
+  <!-- ─────── PAGE 07 · Migration plan (locked until stage ≥ deriving) ─────── -->
+  <section id="page-07" class="page {{page_07_class}}">
+    {{page_07_content}}
+  </section>
+
+  <!-- ─────── PAGE 07.5 · Project Board (kanban; locked until stage ≥ deriving) ─────── -->
+  <!-- Slotted between Page 07 (Migration plan) and Page 08 (Featured module). Numbered
+       07.5 deliberately so existing pages 08/09/10 keep their IDs, nav-rail entries, TOC
+       entries and prose references — no cascade renumber. Status→column mapping derived
+       in render-roadmap.md § Page 07.5 derivation rules. -->
+  <section id="page-07-5" class="page {{page_07_5_class}}">
+    {{page_07_5_content}}
+  </section>
+
+  <!-- ─────── PAGE 08 · Featured module (locked until stage ≥ deriving) ─────── -->
+  <section id="page-08" class="page {{page_08_class}}">
+    {{page_08_content}}
+  </section>
+
+  <!-- ─────── PAGE 09 · Closing (locked until stage = complete) ─────── -->
+  <section id="page-09" class="page {{page_09_class}}">
+    {{page_09_content}}
+  </section>
+
+  <!-- ─────── PAGE 10 · Appendix (always rendered) ─────── -->
+  <section id="page-10" class="page">
+    <h1 class="page-title">Appendix.</h1>
+    <div class="grid-2" style="margin-top:24px">
+      <div>
+        <div class="label">Glossary</div>
+        <dl style="margin-top:12px">
+          <dt style="font-weight:600;font-size:14px;margin-top:12px">Owned</dt>
+          <dd style="color:#5C6473;font-size:14px;line-height:1.5;margin:4px 0 0 0">A capability your business owns the data, schema, and workflow for. Compounds over time.</dd>
+          <dt style="font-weight:600;font-size:14px;margin-top:12px">Rented</dt>
+          <dd style="color:#5C6473;font-size:14px;line-height:1.5;margin:4px 0 0 0">A SaaS subscription. Stops working the moment payments stop or vendor pivots.</dd>
+          <dt style="font-weight:600;font-size:14px;margin-top:12px">Glue-human</dt>
+          <dd style="color:#5C6473;font-size:14px;line-height:1.5;margin:4px 0 0 0">A person paid to copy data between tools that don't talk to each other.</dd>
+          <dt style="font-weight:600;font-size:14px;margin-top:12px">CSV moment</dt>
+          <dd style="color:#5C6473;font-size:14px;line-height:1.5;margin:4px 0 0 0">A recurring "export from one tool, edit, import to another" ritual. Visible tax of stack sprawl.</dd>
+          <dt style="font-weight:600;font-size:14px;margin-top:12px">Module</dt>
+          <dd style="color:#5C6473;font-size:14px;line-height:1.5;margin:4px 0 0 0">A discrete owned-system build (e.g. Demand Planning, Branded Documents) that retires specific rented surface.</dd>
+          <dt style="font-weight:600;font-size:14px;margin-top:12px">Claude Cowork</dt>
+          <dd style="color:#5C6473;font-size:14px;line-height:1.5;margin:4px 0 0 0">Claude's project workspace where syncflow lives. You're (probably) reading this PDF because someone ran a syncflow session in Cowork. The project keeps the brain, the modules, and the per-module build plans together in one shared canvas.</dd>
+          <dt style="font-weight:600;font-size:14px;margin-top:12px">Claude Code</dt>
+          <dd style="color:#5C6473;font-size:14px;line-height:1.5;margin:4px 0 0 0">Anthropic's command-line developer tool. The "tech-savvy operator" path uses Claude Code on a laptop, with the syncflow build plan + per-module CLAUDE.md as the input.</dd>
+          <dt style="font-weight:600;font-size:14px;margin-top:12px">MCP</dt>
+          <dd style="color:#5C6473;font-size:14px;line-height:1.5;margin:4px 0 0 0">Model Context Protocol — how Claude connects to your tools (ClickUp, Supabase, n8n, Slack, etc.). Each MCP is a one-time setup; once wired, Claude reads/writes to that tool natively without copy-paste.</dd>
+          <dt style="font-weight:600;font-size:14px;margin-top:12px">Brain (brain.json)</dt>
+          <dd style="color:#5C6473;font-size:14px;line-height:1.5;margin:4px 0 0 0">A snapshot of every fact captured about your business in the syncflow interview. Drag it back into a fresh Cowork project to resume from where you left off, or hand it to your tech lead so they don't have to re-explain the company.</dd>
+        </dl>
+      </div>
+      <div>
+        <div class="label">Brain snapshot</div>
+        <div class="card mono" style="margin-top:12px;font-size:12px;color:#5C6473;background:#F7F8FA">
+          brain · {{brand_name}}<br>
+          {{fact_count}} facts captured · last updated {{last_updated_at}}
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:48px;background:#0A0E1A;color:#fff;border-radius:12px;padding:20px">
+      <div class="label" style="color:rgba(255,255,255,0.55)">{{about_header}}</div>
+      <div style="margin-top:8px;font-size:14px;line-height:1.5;color:rgba(255,255,255,0.9)">{{about_body}}</div>
+    </div>
+  </section>
+
+  <!-- Track E3 · clipboard-copy toast (hidden unless a click fires the copy script).
+       Fixed top-right of the artifact viewport. Print + reduced-motion gate hides it. -->
+  <div id="copy-toast" class="copy-toast" role="status" aria-live="polite">
+    <span class="toast-prefix">Copied</span> <span class="toast-trigger" id="copy-toast-trigger"></span> <span class="toast-suffix">— paste in chat to update brain.</span>
+  </div>
+
+  <!-- ───────── progress footer ───────── -->
+  <div class="progress-footer">
+    <span class="label-text">syncflow</span>
+    <span class="stage">{{progress_label}}</span>
+    <div class="bar"><div class="bar-fill" style="width:{{progress_pct}}%"></div></div>
+    <span class="pct">{{progress_pct}}%</span>
+  </div>
+
+  <!-- Tally — count-up animation for `.is-tally` elements. Parses the static text content
+       (already the final value, so the no-JS / reduced-motion / Cowork-sandbox-blocks-JS
+       fallback shows the correct number) and animates from 0 → final over 500ms ease-out.
+       Tabular-nums on the element keeps width steady during the count.
+       Gated on print + reduced-motion + script-execution-permission. If any gate fails,
+       the static text already has the correct number — nothing breaks. -->
+  <script>
+  (function () {
+    try {
+      if (window.matchMedia('print').matches) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var els = document.querySelectorAll('.is-tally');
+      if (!els.length) return;
+      var DURATION = 500;
+      els.forEach(function (el) {
+        var text = el.textContent || '';
+        var match = text.match(/-?[\d,.]+/);
+        if (!match) return;
+        var target = parseFloat(match[0].replace(/,/g, ''));
+        if (isNaN(target)) return;
+        var prefix = text.slice(0, match.index);
+        var suffix = text.slice(match.index + match[0].length);
+        var hasDecimal = match[0].indexOf('.') > -1;
+        var startTime = null;
+        function tick(now) {
+          if (startTime === null) startTime = now;
+          var t = Math.min(1, (now - startTime) / DURATION);
+          var eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+          var value = target * eased;
+          var formatted;
+          if (hasDecimal) formatted = value.toFixed(1);
+          else if (target >= 1000) formatted = Math.round(value).toLocaleString();
+          else formatted = String(Math.round(value));
+          el.textContent = prefix + formatted + suffix;
+          if (t < 1) requestAnimationFrame(tick);
+          else el.textContent = text; // restore exact final formatting verbatim
+        }
+        requestAnimationFrame(tick);
+      });
+    } catch (_) {
+      // Cowork sandbox can throw on getComputedStyle/matchMedia in some configs.
+      // Static text is already the final value; the failure is invisible.
+    }
+  })();
+  </script>
+
+  <!-- Track E3 · clickable bidirectional state.
+       Every element with `data-trigger="<phrase>"` becomes a clipboard-copy affordance:
+       click → copy the trigger phrase → show toast → persist optimistic state to
+       localStorage so a re-render of the same artifact within the session shows a
+       pending-state badge on the clicked card.
+       The actual brain.json write happens when the user pastes the trigger into chat
+       and update-module-status fires (existing skill); this script just shortens
+       "type the right phrase" to "click the right element".
+       Cowork sandbox: navigator.clipboard requires a user gesture (click satisfies it)
+       + a secure context. If clipboard is blocked, fall back to text selection so the
+       user can ⌘C / Ctrl+C the trigger themselves.
+       Print + reduced-motion: gated to no-op so the printed PDF has no click affordance
+       (the toast is also display:none under @media print). -->
+  <script>
+  (function () {
+    try {
+      if (window.matchMedia('print').matches) return;
+      // We DON'T gate on prefers-reduced-motion here — clicking is information, not
+      // animation; reduced-motion users still get the click + toast (toast itself has
+      // its own reduced-motion gate via the CSS rule).
+
+      var triggers = document.querySelectorAll('[data-trigger]');
+      if (!triggers.length) return;
+
+      var toast = document.getElementById('copy-toast');
+      var toastTriggerEl = document.getElementById('copy-toast-trigger');
+      var toastTimer = null;
+      var STORAGE_PREFIX = 'syncflow.optimistic-status.';
+
+      function showToast(phrase) {
+        if (!toast || !toastTriggerEl) return;
+        toastTriggerEl.textContent = "'" + phrase + "'";
+        toast.classList.add('show');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+          toast.classList.remove('show');
+        }, 2500);
+      }
+
+      function selectFallback(el) {
+        // Last-resort visual fallback when clipboard API is blocked: select the
+        // trigger text so the user can ⌘C themselves. The toast still fires with
+        // a different prefix so they know what to do.
+        try {
+          var range = document.createRange();
+          var label = document.createElement('span');
+          label.textContent = el.dataset.trigger;
+          label.style.position = 'absolute';
+          label.style.left = '-9999px';
+          document.body.appendChild(label);
+          range.selectNodeContents(label);
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          setTimeout(function () { document.body.removeChild(label); }, 100);
+        } catch (_) {}
+      }
+
+      function persistOptimistic(el) {
+        try {
+          var moduleN = el.dataset.module;
+          if (!moduleN) return;
+          var key = STORAGE_PREFIX + moduleN;
+          window.localStorage.setItem(key, JSON.stringify({
+            from: el.dataset.currentStatus || null,
+            trigger: el.dataset.trigger,
+            at: Date.now()
+          }));
+          // Immediately reflect on every clickable element bound to this module.
+          markPending(moduleN);
+        } catch (_) {
+          // localStorage can be disabled in private browsing or by sandbox; no-op.
+        }
+      }
+
+      function markPending(moduleN) {
+        var matches = document.querySelectorAll('[data-module="' + moduleN + '"]');
+        matches.forEach(function (m) {
+          if (m.querySelector('.opt-badge')) return; // already badged
+          var badge = document.createElement('span');
+          badge.className = 'opt-badge';
+          badge.textContent = '✓ pending paste';
+          m.appendChild(badge);
+        });
+      }
+
+      function loadOptimisticState() {
+        try {
+          var keys = [];
+          for (var i = 0; i < window.localStorage.length; i++) {
+            var k = window.localStorage.key(i);
+            if (k && k.indexOf(STORAGE_PREFIX) === 0) keys.push(k);
+          }
+          keys.forEach(function (key) {
+            var raw = window.localStorage.getItem(key);
+            if (!raw) return;
+            var record = JSON.parse(raw);
+            var moduleN = key.slice(STORAGE_PREFIX.length);
+            // Clear stale records (>24h old or where the current status no longer matches
+            // the recorded `from` — meaning the user pasted and the brain caught up).
+            if (Date.now() - record.at > 86400000) {
+              window.localStorage.removeItem(key);
+              return;
+            }
+            var sample = document.querySelector('[data-module="' + moduleN + '"]');
+            if (sample && record.from && sample.dataset.currentStatus !== record.from) {
+              // Real status has advanced past the optimistic state; clear.
+              window.localStorage.removeItem(key);
+              return;
+            }
+            markPending(moduleN);
+          });
+        } catch (_) {}
+      }
+
+      function handleClick(event) {
+        var el = event.currentTarget;
+        var phrase = el.dataset.trigger;
+        if (!phrase) return;
+        event.preventDefault();
+        event.stopPropagation();
+
+        var copied = false;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(phrase).then(function () {
+            copied = true;
+            showToast(phrase);
+            persistOptimistic(el);
+          }).catch(function () {
+            selectFallback(el);
+            showToast(phrase);
+            persistOptimistic(el);
+          });
+        } else {
+          selectFallback(el);
+          showToast(phrase);
+          persistOptimistic(el);
+        }
+      }
+
+      triggers.forEach(function (el) {
+        el.addEventListener('click', handleClick);
+        // Keyboard: Enter / Space activates the trigger for accessibility.
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('role', 'button');
+        el.addEventListener('keydown', function (event) {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            handleClick({ currentTarget: el, preventDefault: function () {}, stopPropagation: function () {} });
+          }
+        });
+      });
+
+      // On load: replay any unresolved optimistic states from prior clicks in the same session.
+      loadOptimisticState();
+    } catch (_) {
+      // Defensive: if anything in this block throws (sandbox quirks), the artifact
+      // still renders; the click affordance just doesn't activate. Static content
+      // already shows the right modules in the right columns.
+    }
+  })();
+  </script>
+
+</body>
+</html>

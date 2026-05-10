@@ -1,0 +1,154 @@
+# syncflow
+
+**Connected Systems Consultant for Amazon brands. Lives in a folder. Runs in Claude Desktop.**
+
+> **Version: v2.4 · pivot-13 dogfood · 2026-05-06 · build 20260509-082827**
+> *Visual-first onboarding — the artifact appears with introduction + table of contents BEFORE the interview begins. Reduced update cadence: 4 verification-gated milestones (not per-section). Cross-session restore: open a new chat in the same project after saving brain.json, and the artifact rebuilds at the right stage with a context-aware greeting. If the artifact ever disappears in the chat: click the Artifacts icon at the top — it's still there.*
+
+---
+
+## How to use it
+
+4 actions. Maybe 2 minutes. That's the whole setup.
+
+The folder you downloaded has 3 things in it. Each one is named after what to do with it:
+
+| | What | Action |
+|---|---|---|
+| **`0-paste-this-into-custom-instructions.txt`** | The system prompt | Copy contents → paste into Custom Instructions |
+| **`1-read-me.txt`** | This file | Read it |
+| **`2-drag-this-folder-into-claude/`** | Skills + templates + reference + integrations | Drag the whole folder into Project Knowledge |
+
+### Prerequisites
+
+You need a **Claude Pro or Team** account. Free accounts can't use Project Custom Instructions, Project Knowledge, or Artifacts — all of which syncflow needs.
+
+### Step 1 · Open `0-paste-this-into-custom-instructions.txt` and copy everything
+
+Double-click the file *(opens in TextEdit or your default markdown app)*. **⌘A** to select all, **⌘C** to copy. Done — the system prompt is on your clipboard.
+
+### Step 2 · New Project → paste into Custom Instructions
+
+In Claude Desktop, click **Projects** in the sidebar → **New Project**. Name it whatever you want *(e.g. `syncflow · Cordova`)*. Click into the new Project.
+
+Open the **Custom Instructions** panel *(usually a button or section labelled "Project instructions" or "Custom instructions")*. **⌘V** to paste. **Save**.
+
+### Step 3 · Drag `2-drag-this-folder-into-claude/` into Project Knowledge
+
+Open the **Project Knowledge** panel. Drag the folder named **`2-drag-this-folder-into-claude/`** *(the one sitting next to this file)* into it.
+
+Claude Desktop will index everything inside — all skills, templates, reference brain, integrations. **Wait ~30 seconds** for indexing to finish *(the spinner stops)*.
+
+### Step 4 · Type `let's start`
+
+In the Project chat, type:
+
+```
+let's start
+```
+
+syncflow introduces itself, **opens the Connected Systems Roadmap artifact in your right panel right away** *(with an introduction, manifesto, and table of contents — read these before the interview begins)*, then asks if you're ready. Say `ready` or just answer the next question.
+
+The interview runs ~10–15 minutes across 4 sections. The artifact updates at 4 verification gates *(after Stack section, after Goals section, and at completion)* — at each gate you'll be asked to look at the artifact and confirm before moving on.
+
+---
+
+## "The artifact disappeared!" *(don't panic)*
+
+Cowork artifacts are conversation-scoped. They sometimes hide when you reopen a chat, and they don't carry across to a new chat in the same project — but they're not lost.
+
+**To find the artifact in the current chat:** click the **Artifacts** icon at the top of the chat *(the icon next to the model name)*. Find `Connected Systems Roadmap`. It's still there.
+
+**To resume in a new chat:** at the end of your first interview syncflow emits a `brain.json` artifact and tells you to drag it into Project Knowledge. Once you've done that, **any new chat in the same project** can rebuild the roadmap from your saved brain. Say `let's continue` to trigger the restore — syncflow will read the brain, recreate the roadmap artifact at the stage you left off, and propose your next step.
+
+---
+
+## What you get
+
+- A **Connected Systems Roadmap** *(11-page interactive artifact)* covering current sprawl, future-state owned blueprint, keep / consolidate / retire table, migration plan, featured module deep-dive
+- A **`brain.json`** *(portable JSON of every fact captured)* — drag this back into Knowledge later to resume in a fresh conversation
+
+---
+
+## Coming back later
+
+After your first roadmap, syncflow offers to save your brain. Click **Download** on the `brain.json` artifact, then drag the file into the same Project's Knowledge.
+
+In any future conversation in that Project, type:
+
+```
+let's continue
+```
+
+syncflow reads the saved brain and picks up where you left off. Update facts, swap modules, generate build plans for specific modules — all on the same brain.
+
+---
+
+## Things you can ask after the roadmap
+
+- *"Re-render the roadmap"* — regenerates the artifact from the current brain
+- *"Save my brain"* — re-emits a fresh `brain.json`
+- *"Implement Module 02"* — generates a build plan + verification plan you can paste into your own Claude Code session
+- *"Swap Module 03 for Branded Documents"* — revises the plan, surfaces consequences
+- *"Summon the Amazon expert"* — switches to Sim's voice for category-specific advice
+- *"What is X?"* / *"Tell me more about Module N"* — focused explainer
+
+---
+
+## Things syncflow will NOT do *(by design)*
+
+- Connect to your Amazon SP-API or Ads API
+- Read or process your sales / inventory / ad data
+- Run anything on a schedule *(no cron, no nightly runs)*
+- Replace your team
+
+If you want hands-off building or scheduled automations, talk to **syncflow** directly — that's a separate engagement.
+
+---
+
+## Troubleshooting
+
+If syncflow doesn't introduce itself properly when you type `let's start` — type:
+
+```
+/health-check
+```
+
+If something feels off mid-conversation:
+
+```
+/diagnose
+```
+
+Both produce structured diagnostics with one concrete fix to try.
+
+---
+
+## What's in the folder
+
+You don't need to look inside. But for reference:
+
+```
+2-drag-this-folder-into-claude/
+├── skills/                            What syncflow can do (23 capabilities)
+├── prompts/                           The 8 expert lenses syncflow can switch into
+├── templates/                         Roadmap artifact + brain JSON schema
+├── reference/                         Architecture, Sim's KB, skills catalogue
+└── integrations/                      MCP setup snippets for ClickUp, Slack, Notion, Supabase, n8n
+```
+
+---
+
+## Forking / customizing
+
+The whole bundle is markdown + HTML + a JSON schema. No build step. Open any file, edit it, drop the modified folder into Project Knowledge — it just works.
+
+Source repo: `ctrboost/idealsync-systems`. Apply your own branding, swap modules, add skills.
+
+---
+
+## Support
+
+- Questions: Seller Sessions WhatsApp/Telegram thread
+- Bugs: open an issue at `ctrboost/idealsync-systems`
+- Built by **syncflow**
