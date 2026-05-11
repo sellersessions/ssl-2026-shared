@@ -1,12 +1,12 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../assets/logo-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="../assets/logo-light.svg">
-  <img alt="Dorian Gorski + Sim : SSL 2026" src="../assets/logo-dark.svg" width="700">
+  <img alt="Dorian Gorski + Sim Mahon : SSL 2026" src="../assets/logo-dark.svg" width="700">
 </picture>
 
 <br/>
 
-![Speakers](https://img.shields.io/badge/Speakers-Dorian_Gorski_%2B_Sim-4A9BD9?style=for-the-badge)
+![Speakers](https://img.shields.io/badge/Speakers-Dorian_Gorski_%2B_Sim_Mahon-4A9BD9?style=for-the-badge)
 ![Project](https://img.shields.io/badge/Project-syncflow-6C5CE7?style=for-the-badge)
 ![Runtime](https://img.shields.io/badge/Runs_in-Claude_Cowork-E74C3C?style=for-the-badge)
 ![Date](https://img.shields.io/badge/Sat_9_May-SSL_2026-00B894?style=for-the-badge)
@@ -178,8 +178,8 @@ Both produce structured diagnostics with one concrete fix to try.
 
 - Source repo: [ctrboost/idealsync-systems](https://github.com/ctrboost/idealsync-systems) (canonical, fork-friendly)
 - Bugs: [open an issue at ctrboost/idealsync-systems](https://github.com/ctrboost/idealsync-systems/issues)
-- Questions: SSL 2026 attendee channel, or message Dorian or Sim directly
+- Questions: SSL 2026 attendee channel, or message Dorian or Sim Mahon directly
 
 ## Credits
 
-Presented at SSL 2026 by **Dorian Gorski** ([syncflow](https://www.syncflow.coach/)) and **Sim**, who voices the Amazon-expert persona inside syncflow. The session covered both the system design (Dorian) and the category-specific framing it generates for Amazon brands (Sim).
+Presented at SSL 2026 by **Dorian Gorski** ([syncflow](https://www.syncflow.coach/)) and **Sim Mahon**, who voices the Amazon-expert persona inside syncflow. The session covered both the system design (Dorian) and the category-specific framing it generates for Amazon brands (Sim).
