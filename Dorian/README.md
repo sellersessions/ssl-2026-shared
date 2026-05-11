@@ -12,14 +12,24 @@
 ![Date](https://img.shields.io/badge/Sat_9_May-SSL_2026-00B894?style=for-the-badge)
 
 **syncflow: Connected Systems Consultant for Amazon brands.**
-**Lives in a folder. Runs in Claude Desktop. ~10-15 minutes from `let's start` to a Connected Systems Roadmap.**
+**Lives in a folder. Runs in Claude Desktop. ~15 minutes from `let's start` to a Connected Systems Roadmap.**
 
 > [!NOTE]
 > **TL;DR.** Drag a folder into a Claude Cowork project, paste a system prompt, type `let's start`. ~15 minutes later you have an 11-page Connected Systems Roadmap artifact + a portable `brain.json` you can resume from in any future chat.
 
 ---
 
-## What's in this folder
+## Why this exists
+
+Most Amazon operators are running 6–12 disconnected SaaS tools: one for reviews, one for ads, one for inventory, one for content, one for compliance. The bill is high, the data doesn't talk, and switching tools is painful because each one owns a slice of your context.
+
+syncflow flips the model. Instead of buying more SaaS, you generate an **owned blueprint** of the systems you actually need — what to keep, what to consolidate, what to retire, and what to build inside Claude. The roadmap is yours. The brain is portable. The work compounds.
+
+> *"Stop renting your operations. Own the blueprint, run the modules, keep the data."*
+
+---
+
+## syncflow at a glance
 
 ```mermaid
 %%{init: {'theme': 'dark', 'themeVariables': {'nodeTextColor': '#e8e8e8', 'primaryTextColor': '#e8e8e8', 'clusterBkg': 'transparent', 'clusterBorder': '#8b949e'}}}%%
@@ -37,6 +47,17 @@ flowchart LR
     style TEMPL fill:none,stroke:#EC4899,stroke-width:1px,color:#fff
     style INTEG fill:none,stroke:#F59E0B,stroke-width:1px,color:#fff
 ```
+
+---
+
+## syncflow vs the alternatives
+
+| Approach | What you pay | What you own | Switching cost |
+|---|---|---|---|
+| **Stack of 6-12 SaaS tools** | £400-£2,000/mo | Nothing. Data lives in vendor schemas | High. Each tool re-onboards from zero |
+| **Hire a Connected Systems consultant** | £5,000-£20,000 one-off | The deliverables they leave behind | Locked to one consultant's framing |
+| **Build it yourself from scratch** | Months of your time | Everything | High. No starting point, no patterns |
+| **syncflow** | Time of a 15-min interview | The roadmap, the brain, the build plans | Zero. `brain.json` is portable |
 
 ---
 
@@ -63,10 +84,33 @@ The full guide lives in [`syncflow-main/1-read-me.txt`](./syncflow-main/1-read-m
 
 ---
 
+## Build timeline (minute-by-minute)
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': {'nodeTextColor': '#e8e8e8', 'primaryTextColor': '#e8e8e8', 'clusterBkg': 'transparent', 'clusterBorder': '#8b949e'}}}%%
+flowchart LR
+    M0["00:00<br/>let's start"] --> M2["02:00<br/>Section 1<br/>current sprawl"]
+    M2 --> M5["05:00<br/>Section 2<br/>future state"]
+    M5 --> M9["09:00<br/>Section 3<br/>keep/consolidate/retire"]
+    M9 --> M12["12:00<br/>Section 4<br/>migration plan"]
+    M12 --> M15["15:00<br/>Roadmap +<br/>brain.json"]
+
+    style M0 fill:none,stroke:#4A9BD9,stroke-width:1px,color:#fff
+    style M2 fill:none,stroke:#14B8A6,stroke-width:1px,color:#fff
+    style M5 fill:none,stroke:#14B8A6,stroke-width:1px,color:#fff
+    style M9 fill:none,stroke:#8B5CF6,stroke-width:1px,color:#fff
+    style M12 fill:none,stroke:#8B5CF6,stroke-width:1px,color:#fff
+    style M15 fill:none,stroke:#EC4899,stroke-width:1px,color:#fff
+```
+
+Four verification gates between sections. You confirm what syncflow heard before it locks the bit of the roadmap that depends on it. No silent assumptions.
+
+---
+
 ## What you walk away with
 
-- **Connected Systems Roadmap** : 11-page interactive artifact covering current sprawl, future-state owned blueprint, keep / consolidate / retire table, migration plan, featured module deep-dive
-- **`brain.json`** : portable JSON of every fact captured. Drag it back into Project Knowledge in any future chat to resume
+- **Connected Systems Roadmap** — 11-page interactive artifact covering current sprawl, future-state owned blueprint, keep / consolidate / retire table, migration plan, featured module deep-dive
+- **`brain.json`** — portable JSON of every fact captured. Drag it back into Project Knowledge in any future chat to resume
 
 ---
 
@@ -80,29 +124,29 @@ In any future conversation in that project, type:
 let's continue
 ```
 
-syncflow reads the saved brain and picks up where you left off. Update facts, swap modules, generate build plans for specific modules : all on the same brain.
+syncflow reads the saved brain and picks up where you left off. Update facts, swap modules, generate build plans for specific modules, all on the same brain.
 
 ---
 
-## Things you can ask after the roadmap
+## What if... (things you can ask after the roadmap)
 
-- *"Re-render the roadmap"* : regenerates the artifact from the current brain
-- *"Save my brain"* : re-emits a fresh `brain.json`
-- *"Implement Module 02"* : generates a build plan + verification plan you can paste into your own Claude Code session
-- *"Swap Module 03 for Branded Documents"* : revises the plan, surfaces consequences
-- *"Summon the Amazon expert"* : switches to Sim's voice for category-specific advice
-- *"What is X?"* / *"Tell me more about Module N"* : focused explainer
+- *"Re-render the roadmap"* — regenerates the artifact from the current brain
+- *"Save my brain"* — re-emits a fresh `brain.json`
+- *"Implement Module 02"* — generates a build plan + verification plan you can paste into your own Claude Code session
+- *"Swap Module 03 for Branded Documents"* — revises the plan, surfaces consequences
+- *"Summon the Amazon expert"* — switches to Sim's voice for category-specific advice
+- *"What is X?"* / *"Tell me more about Module N"* — focused explainer
 
 ---
 
-## Things syncflow will NOT do *(by design)*
+## What syncflow will NOT do *(by design)*
 
 - Connect to your Amazon SP-API or Ads API
 - Read or process your sales / inventory / ad data
 - Run anything on a schedule *(no cron, no nightly runs)*
 - Replace your team
 
-If you want hands-off building or scheduled automations, talk to **syncflow** directly : that's a separate engagement.
+If you want hands-off building or scheduled automations, talk to **syncflow** directly — that's a separate engagement.
 
 ---
 
@@ -114,13 +158,13 @@ syncflow runs end-to-end inside **Claude Cowork (Claude Desktop)**, not Claude C
 
 ## Troubleshooting
 
-If syncflow doesn't introduce itself when you type `let's start` :
+If syncflow doesn't introduce itself when you type `let's start`:
 
 ```
 /health-check
 ```
 
-If something feels off mid-conversation :
+If something feels off mid-conversation:
 
 ```
 /diagnose
