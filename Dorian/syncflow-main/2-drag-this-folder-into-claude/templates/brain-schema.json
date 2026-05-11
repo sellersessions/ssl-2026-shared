@@ -1,0 +1,634 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://syncflow.dev/schemas/brain-1.0.json",
+  "title": "syncflow brain",
+  "description": "Locked schema for the syncflow in-context brain. Forward-compatible across tier-0 (conversation), tier-1 (brain.json artifact in Project Knowledge), tier-2 (filesystem MCP disk) and v1.5 hosted (Supabase row).",
+  "type": "object",
+  "required": ["schema_version", "brand", "brand_display", "captured_at", "sections"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.2",
+      "description": "Bumped on breaking schema changes. Migration script ships alongside any bump. 1.1 (Track F): adds top-level email_suite, wispr_flow, revenue_band; team.capacity_hours_per_week, team.maintenance_tolerance; per-module complexity_grade, dependency_failure_mode, min_revenue_band; per stack.tools[] monthly_cost (required) replacing cost, prerequisite (boolean). 1.2 (Track G3 · workshop-2026-05): adds top-level team_interviews[] for per-employee time-sink interviews (interview-employee skill captures; analyse-team-interviews aggregates onto Page 04)."
+    },
+    "brand": {
+      "type": "string",
+      "pattern": "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$",
+      "description": "Lowercase-hyphenated brand slug. Used for artifact identifiers + filesystem paths."
+    },
+    "brand_display": {
+      "type": "string",
+      "description": "Human-readable brand name with original casing."
+    },
+    "captured_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp when the brain was first initialised."
+    },
+    "last_updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp of the most recent capture-fact or update-brain operation."
+    },
+    "interview_minutes": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total elapsed minutes of interview time. Bumped by run-interview between sections."
+    },
+    "fact_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total facts captured across all sections. Drives manifest + cover-page metadata."
+    },
+    "email_suite": {
+      "type": ["object", "null"],
+      "description": "Top-level capture of the brand's email/comms suite. Drives the Track F bundled-tool rule: any tool flagged as bundled with this suite (e.g. Teams under Microsoft 365) renders as 'bundled · £0' on Page 02 and is excluded from retire-candidate logic. Captured in run-interview Section 3 as the first stack question.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "e.g. 'Google Workspace', 'Microsoft 365', 'Zoho One'. Free-text; not enum'd to avoid drift across plans/SKUs."
+        },
+        "bundled_apps": {
+          "type": "array",
+          "description": "Apps the delegate considers covered by this suite. Drives the bundled-cost rule: any stack.tools[].name that appears here defaults to monthly_cost='bundled'.",
+          "items": { "type": "string" }
+        },
+        "monthly_cost": {
+          "oneOf": [
+            { "type": "number", "minimum": 0 },
+            { "type": "string", "enum": ["bundled", "unknown"] },
+            { "type": "string", "pattern": "^unknown \\(est\\. £\\d+(?:\\.\\d+)?\\)$" }
+          ],
+          "description": "Total suite cost in GBP/month. Number for a fixed figure; 'bundled' if covered by another higher-level subscription; 'unknown (est. £X)' when delegate doesn't have the number to hand."
+        }
+      }
+    },
+    "wispr_flow": {
+      "type": ["boolean", "null"],
+      "description": "Whether the delegate already uses Wispr Flow (voice-to-text). Drives the Page 07 Wispr referral card render — only shown when false. Captured in run-interview Section 2 as the first goals/capacity question."
+    },
+    "revenue_band": {
+      "type": ["string", "null"],
+      "enum": ["<£250k", "£250k-1M", "£1M-5M", "£5M-20M", ">£20M", null],
+      "description": "Annual revenue band. Drives capacity-fit filter (F3), salary-anchored ROI fallback rates (F2), and scope_mode (starter/full module bundle, F-conflict #16). Captured in run-interview Section 2 as part of capacity question."
+    },
+    "team_interviews": {
+      "type": "array",
+      "description": "Per-employee time-sink interviews. Optional — populated by `interview-employee` skill (one entry per named team member) or loaded en masse from a fixture (`templates/sample-team-interviews-<brand>.json` for demo / workshop). Aggregated by `analyse-team-interviews` into Page 04's team time-sink map. Captured AFTER the main 5-section interview completes and `recommend-modules` has run, so the diagnosis can be refined per actual employee bottleneck rather than just the founder's view.",
+      "items": {
+        "type": "object",
+        "required": ["name", "role"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Employee name (matches an entry in sections.team.roles[].name when possible)."
+          },
+          "role": {
+            "type": "string",
+            "description": "Role label — also a match against sections.team.roles[].role when possible."
+          },
+          "interviewed_at": {
+            "type": ["string", "null"],
+            "format": "date-time",
+            "description": "ISO timestamp when the interview was captured. Null for fixture-loaded entries."
+          },
+          "interview_minutes": {
+            "type": ["number", "null"],
+            "description": "Duration of the per-employee interview. Typically 6-10 min."
+          },
+          "time_pattern": {
+            "type": "string",
+            "description": "Free-text — how the employee describes their typical week. Mornings vs afternoons, ritual tasks, fire-fighting cycles. Verbatim phrasing valuable."
+          },
+          "top_tasks": {
+            "type": "array",
+            "description": "The 3 tasks the employee says take the most time, with hours/week each.",
+            "items": {
+              "type": "object",
+              "required": ["task"],
+              "properties": {
+                "task": { "type": "string" },
+                "hours_per_week": { "type": ["number", "null"] },
+                "tedium_score": {
+                  "type": ["integer", "null"],
+                  "minimum": 1,
+                  "maximum": 5,
+                  "description": "1 = energising / valued / wouldn't change. 5 = soul-destroying / would automate tomorrow. Drives ranking on the Page 04 time-sink map."
+                }
+              }
+            }
+          },
+          "blockers": {
+            "type": "array",
+            "description": "What the employee is most often waiting on. People, data, decisions, tool friction. Surfaces glue-human dependencies syncflow's main interview misses.",
+            "items": { "type": "string" }
+          },
+          "wished_for": {
+            "type": "string",
+            "description": "Free-text — *'if a system could do one thing for me, what would it be?'*. Anchors per-employee module recommendations and Page 04's wish-list column."
+          },
+          "clockify_data": {
+            "type": ["object", "null"],
+            "description": "Optional Clockify CSV summary. Null when the employee doesn't track time. When present, validates self-reported hours against measured hours.",
+            "properties": {
+              "week_start": { "type": "string", "format": "date" },
+              "total_hours_tracked": { "type": "number" },
+              "top_categories": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["category", "hours"],
+                  "properties": {
+                    "category": { "type": "string" },
+                    "hours": { "type": "number" }
+                  }
+                }
+              }
+            }
+          },
+          "derived_glue_human_flow": {
+            "type": ["string", "null"],
+            "description": "Set by analyse-team-interviews when the interview surfaces a glue-human pattern not already captured in sections.stack.glue_humans[]. Format matches glue_humans[].flow."
+          },
+          "module_recommendations_refined": {
+            "type": "array",
+            "description": "Module IDs whose recommendation logic was refined by this employee's interview (e.g. employee said image upload is 4 hrs/wk → Module 05's projected_hours_saved_per_week bumps from 1.5 to 4).",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "sections": {
+      "type": "object",
+      "required": ["business", "team", "stack", "goals"],
+      "properties": {
+        "business": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Identity, scale, operating model. Flat key-value map of captured facts.",
+          "properties": {
+            "brand": { "type": "string" },
+            "category": { "type": "string" },
+            "years_in_business": { "type": ["string", "number"] },
+            "market_position": { "type": "string", "enum": ["leader", "challenger", "niche", null] },
+            "monthly_revenue_band": { "type": "string" },
+            "channels": { "type": ["string", "array"] },
+            "sku_count": { "type": ["string", "number"] },
+            "top3_concentration": { "type": "string" },
+            "model": { "type": "string", "enum": ["private label", "white label", "reseller", "hybrid", null] },
+            "growth_posture": { "type": "string" },
+            "launch_cadence": { "type": "string" }
+          }
+        },
+        "team": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Headcount, roles, bottlenecks. Flat key-value with one nested array (roles).",
+          "properties": {
+            "headcount": { "type": ["string", "number"] },
+            "roles": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["name", "role"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "role": { "type": "string" },
+                  "main_outputs": { "type": "string" },
+                  "salary_gbp": {
+                    "type": ["number", "null"],
+                    "description": "Annual salary in GBP, when delegate volunteers it. Drives F2 salary-anchored ROI: loaded_hourly_rate = salary × 1.3 / 1872. Optional — falls back to revenue_band default when absent."
+                  }
+                }
+              }
+            },
+            "capacity_hours_per_week": {
+              "type": ["number", "null"],
+              "description": "Total team hours/week available for build work. Drives F3 capacity-fit filter: capacity_hours_per_week × 16 weeks × 0.4 = available_hours envelope; modules whose summed effort exceeds the envelope drop to a 'Phase 2 — once capacity expands' footer on Page 07. Solo founder ≈ 40; small team ≈ 100-160."
+            },
+            "maintenance_tolerance": {
+              "type": ["string", "null"],
+              "enum": ["n8n_self_host", "claude_code_app", "neither", null],
+              "description": "What the team will operate post-build. Drives F4 build-path fork: n8n_self_host forks generate-build-plan to n8n workflow JSON; claude_code_app forks to a TypeScript scaffold + scheduler; neither defers to Sim's discretion (defaults to n8n_self_host with a footnote). Captured in run-interview Section 2."
+            },
+            "outsourced_functions": { "type": ["string", "array"] },
+            "tool_fluency": { "type": "string" },
+            "imminent_hires": { "type": "string" },
+            "clockify_data": { "type": "string", "enum": ["yes", "no", "partial", null] },
+            "bottleneck": { "type": "string" },
+            "failure_mode": { "type": "string" }
+          }
+        },
+        "stack": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Tools, integrations, glue points. Multiple typed arrays.",
+          "properties": {
+            "tools": {
+              "type": "array",
+              "description": "Paid SaaS tools.",
+              "items": {
+                "type": "object",
+                "required": ["name", "monthly_cost"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "monthly_cost": {
+                    "oneOf": [
+                      { "type": "number", "minimum": 0 },
+                      { "type": "string", "enum": ["bundled", "unknown"] },
+                      { "type": "string", "pattern": "^unknown \\(est\\. £\\d+(?:\\.\\d+)?\\)$" }
+                    ],
+                    "description": "Monthly cost in GBP. Number for a fixed price; 'bundled' if covered by another suite (e.g. Microsoft 365 → Teams) — diagnose-sprawl treats bundled as £0 contribution to current spend; 'unknown (est. £X)' when delegate didn't have the figure to hand. Required as of schema 1.1."
+                  },
+                  "prerequisite": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "True for tools that are table-stakes for the brand_type (e.g. Helium 10 / Datadive / JungleScout / Keepa for Amazon FBA; KaloData for TikTok Shop). diagnose-sprawl renders these as 'prerequisite (table stakes)' on Page 03 and excludes them from retire-recommendations. Whitelist source: reference/prerequisite-tools.md."
+                  },
+                  "category": { "type": "string" },
+                  "notes": { "type": "string" },
+                  "tone": { "type": "string", "enum": ["rented", "owned", "owned-untouched", "keep", "consolidate", "retire", null] }
+                }
+              }
+            },
+            "ai_tools": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "use": { "type": "string" },
+                  "output_destination": { "type": "string" }
+                }
+              }
+            },
+            "custom_tools": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "description": { "type": "string" },
+                  "cadence": { "type": "string" },
+                  "owner": { "type": "string" }
+                }
+              }
+            },
+            "data_sources": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["source"],
+                "properties": {
+                  "source": { "type": "string" },
+                  "connection_state": { "type": "string" }
+                }
+              }
+            },
+            "reporting_cadence": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["report"],
+                "properties": {
+                  "report": { "type": "string" },
+                  "cadence": { "type": "string" },
+                  "owner": { "type": "string" }
+                }
+              }
+            },
+            "csv_moments": {
+              "type": "array",
+              "description": "Manual export-edit-import rituals. The visible tax of sprawl.",
+              "items": {
+                "type": "object",
+                "required": ["flow"],
+                "properties": {
+                  "flow": { "type": "string" },
+                  "hours_per_week": { "type": ["string", "number"] },
+                  "owner": { "type": "string" },
+                  "tone": { "type": "string", "const": "csv-moment" }
+                }
+              }
+            },
+            "glue_humans": {
+              "type": "array",
+              "description": "People paid to copy data between tools that don't talk.",
+              "items": {
+                "type": "object",
+                "required": ["flow"],
+                "properties": {
+                  "flow": { "type": "string" },
+                  "hours_per_week": { "type": ["string", "number"] },
+                  "owner": { "type": "string" },
+                  "tone": { "type": "string", "const": "glue-human" }
+                }
+              }
+            },
+            "pm_tool": { "type": "string" },
+            "comms_tool": { "type": "string" }
+          }
+        },
+        "goals": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Vision, bottlenecks, blockers. Flat key-value.",
+          "properties": {
+            "vision_12_month": { "type": "string" },
+            "founder_involvement": { "type": "string" },
+            "single_biggest_bottleneck": { "type": "string" },
+            "magic_wand_automation": { "type": "string" },
+            "why_not_yet": { "type": "string" }
+          }
+        }
+      }
+    },
+    "recommendations": {
+      "type": "object",
+      "description": "Derived outputs from diagnose-sprawl, design-future-state, derive-replacement-table, recommend-modules. Populated post-interview.",
+      "properties": {
+        "diagnosis": {
+          "type": ["object", "null"],
+          "properties": {
+            "csv_moments": { "type": "array" },
+            "glue_humans": { "type": "array" },
+            "redundancies": { "type": "array" },
+            "black_boxes": { "type": "array" }
+          }
+        },
+        "architecture": {
+          "type": ["object", "null"],
+          "properties": {
+            "primitives": { "type": "array" },
+            "modules": { "type": "array" }
+          }
+        },
+        "replacement": {
+          "type": ["object", "null"],
+          "properties": {
+            "rows": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["tool", "verdict"],
+                "properties": {
+                  "tool": { "type": "string" },
+                  "cost": { "type": "string" },
+                  "verdict": { "type": "string", "enum": ["keep", "consolidate", "retire"] },
+                  "dest": { "type": "string" },
+                  "why": { "type": "string", "description": "One-line rationale: why this verdict for this tool. Pivot-9c addition." },
+                  "replaced_by": { "type": "string", "description": "What takes over the function (Module N, owned primitive, or specific tool)." },
+                  "transition_effort": { "type": "string", "description": "Low / Medium / High estimate." },
+                  "gotchas": { "type": "string", "description": "Migration risks or pitfalls — e.g. 'historical data export needed first'." }
+                }
+              }
+            },
+            "net_savings": { "type": "string" },
+            "net_hours_reclaimed": { "type": "string" }
+          }
+        },
+        "modules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["n", "name"],
+            "properties": {
+              "n": { "type": "string" },
+              "name": { "type": "string" },
+              "weeks": { "type": "string" },
+              "effort": { "type": "string" },
+              "deps": { "type": "string" },
+              "rung": {
+                "type": ["integer", "null"],
+                "minimum": 1,
+                "maximum": 7,
+                "description": "Simplicity Ladder rung 1-7. 1 = already owned, untouched. 7 = custom build. Required from recommend-modules onward; surfaced as a pill on Page 07 module cards."
+              },
+              "rung_label": {
+                "type": ["string", "null"],
+                "description": "Short rendered version of the rung — e.g. 'rung 2 — extend Cowork you already pay for'. ≤ 14 words to fit a Page 07 pill."
+              },
+              "tag": {
+                "type": ["string", "null"],
+                "enum": ["foundation", "recommended start", null],
+                "description": "Sequencing tag. Distinct from `status` which tracks lifecycle. Set during recommend-modules."
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "recommended",
+                  "planned",
+                  "in_progress",
+                  "phase_1_complete",
+                  "phase_2_complete",
+                  "phase_3_complete",
+                  "phase_4_complete",
+                  "phase_5_complete",
+                  "built_v1",
+                  "deployed",
+                  "redeployed",
+                  "audit_t4_passed",
+                  "tolerated"
+                ],
+                "default": "recommended",
+                "description": "Lifecycle state. Updated only via `update-module-status` skill — never ad-hoc. Each transition triggers brain re-emit + optional PM-tool sync."
+              },
+              "current_phase": {
+                "type": ["integer", "null"],
+                "minimum": 1,
+                "maximum": 5,
+                "description": "Which of the 5 build phases (Schema/Ingestion/Logic/Surface/Deploy+monitor) is currently in progress. Null until status reaches `in_progress`. Read from disk status.json when filesystem MCP is available."
+              },
+              "started_at": {
+                "type": ["string", "null"],
+                "format": "date-time",
+                "description": "ISO timestamp when status first transitioned past `recommended` (i.e. when start-implementation fired)."
+              },
+              "last_status_update": {
+                "type": ["string", "null"],
+                "format": "date-time",
+                "description": "ISO timestamp of the most recent status change."
+              },
+              "status_history": {
+                "type": "array",
+                "description": "Audit trail of every status change. Append-only.",
+                "items": {
+                  "type": "object",
+                  "required": ["status", "at"],
+                  "properties": {
+                    "status": { "type": "string" },
+                    "at": { "type": "string", "format": "date-time" },
+                    "note": { "type": "string", "description": "Optional context — e.g. why this transition happened, what blockers were resolved." }
+                  }
+                }
+              },
+              "deliverables": {
+                "type": "object",
+                "description": "Paths (relative to ~/syncflow-projects/<brand>/) to the artifacts generated by start-implementation.",
+                "properties": {
+                  "module_folder": { "type": "string", "description": "e.g. modules/02-demand-planning" },
+                  "build_plan_path": { "type": "string" },
+                  "verification_plan_path": { "type": "string" },
+                  "claude_md_path": { "type": "string" },
+                  "status_json_path": { "type": "string" },
+                  "readme_path": { "type": "string" }
+                }
+              },
+              "audit_t4": {
+                "type": "object",
+                "description": "T+4 weeks audit (Sim's method P9). Populated when status hits `deployed`; checked when `audit-module-t4` fires.",
+                "properties": {
+                  "scheduled_for": { "type": ["string", "null"], "format": "date-time" },
+                  "passed": { "type": ["boolean", "null"] },
+                  "hours_saved_per_week_actual": { "type": ["number", "null"] },
+                  "hours_saved_per_week_target": { "type": ["number", "null"] },
+                  "tool_uptime_percent": { "type": ["number", "null"] },
+                  "redeployed_to": { "type": ["string", "null"], "description": "What the recovered hours were used for. Sim P6 enforcement." },
+                  "audit_notes": { "type": ["string", "null"] }
+                }
+              },
+              "pm_tracking": {
+                "type": "object",
+                "description": "Optional PM tool mirror config. Populated when delegate accepts `recommend-pm-integration`. Brain stays primary regardless.",
+                "properties": {
+                  "tool": {
+                    "type": ["string", "null"],
+                    "enum": ["clickup", "notion", "asana", null]
+                  },
+                  "task_id_per_phase": {
+                    "type": "object",
+                    "description": "Phase number (1-5) → task ID in the PM tool. e.g. { '1': 'CU-abc123', '2': 'CU-def456' }",
+                    "additionalProperties": { "type": "string" }
+                  },
+                  "parent_task_id": {
+                    "type": ["string", "null"],
+                    "description": "Top-level module task in the PM tool, parent of the per-phase tasks."
+                  }
+                }
+              },
+              "problem": { "type": "string", "description": "The bottleneck this module kills, in the delegate's own words. Pivot-9c addition." },
+              "outcome": { "type": "string", "description": "What changes once it's live — hours saved, error rate dropped, KPI moved." },
+              "prerequisites": {
+                "type": "array",
+                "description": "Skills, tools, data, or people needed before starting this module.",
+                "items": { "type": "string" }
+              },
+              "owners": {
+                "type": ["object", "null"],
+                "description": "Who runs this module day-to-day. Derived from brain.sections.team.roles by recommend-modules. Surfaces on Page 07 module cards as 'Owner: X · Approver: Y' and drives the 'Whose Monday changes' column on the Page 07 First 30 Days table. If brain.team.roles is empty, fall back to generic role labels (e.g. 'recruitment lead', 'tech lead', 'ops director') — never fabricate a name.",
+                "properties": {
+                  "primary": {
+                    "type": "string",
+                    "description": "The single person whose Monday changes most when this module ships. Name (e.g. 'Cara') or role label (e.g. 'recruitment lead')."
+                  },
+                  "contributors": {
+                    "type": "array",
+                    "description": "Others who do meaningful work on the build or run. 0-4 names/roles.",
+                    "items": { "type": "string" }
+                  },
+                  "approver": {
+                    "type": "string",
+                    "description": "Who signs off — usually the founder/director or a delegated lead. Name or role label."
+                  }
+                }
+              },
+              "key_metrics": {
+                "type": "array",
+                "description": "2-3 measurable signals to know it worked. Each item is a concrete metric + target.",
+                "items": { "type": "string" }
+              },
+              "projected_savings_per_year_gbp": {
+                "type": ["number", "null"],
+                "description": "Projected £/yr saved/recovered from this module (range midpoint). Aggregates into the Page 02 ROI card. Null if the brain doesn't support a number; don't fabricate."
+              },
+              "projected_hours_saved_per_week": {
+                "type": ["number", "null"],
+                "description": "Projected hrs/week reclaimed for the affected role(s). Aggregates into the Page 02 ROI card. Null if not derivable; don't fabricate."
+              },
+              "roi_confidence": {
+                "type": ["string", "null"],
+                "enum": ["high", "medium", "low", null],
+                "description": "Confidence in the ROI projection. High = brain has explicit numbers (Clockify, SaaS spend). Medium = inferred from stack scale. Low = best-guess. Null if no projection."
+              },
+              "week_after": {
+                "type": "string",
+                "description": "Narrative description: what a typical week looks like for the affected role once this module is live. 1-3 sentences, present tense."
+              },
+              "risks": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["risk"],
+                  "properties": {
+                    "risk": { "type": "string" },
+                    "mitigation": { "type": "string" }
+                  }
+                }
+              },
+              "complexity_grade": {
+                "type": ["string", "null"],
+                "enum": ["Beginner", "Intermediate", "Advanced", null],
+                "description": "Track F (F3) replacement for raw hour counts on Page 07 module cards. Derived in recommend-modules from effort_hours + deps.length + tool count: Beginner ≤ 16 hrs, ≤1 dep, ≤2 tools; Intermediate 16-32 hrs OR 2 deps OR 3-4 tools; Advanced > 32 hrs OR ≥3 deps OR ≥5 tools. Page 07 still surfaces hours in a tooltip; the badge is the headline."
+              },
+              "dependency_failure_mode": {
+                "type": ["string", "null"],
+                "description": "Track F (F1 schema, F5 render). One-line answer to 'what breaks if a dependency fails or is skipped' — e.g. 'Skip Module 01 first and Module 02 has nowhere to put candidate tasks.' Surfaced as a callout on Page 07 module cards when deps is non-empty. Captured by recommend-modules from prerequisites + deps; null for foundation modules with no upstream."
+              },
+              "min_revenue_band": {
+                "type": ["string", "null"],
+                "enum": ["<£250k", "£250k-1M", "£1M-5M", "£5M-20M", ">£20M", null],
+                "description": "Track F (F3). Revenue floor at which this module becomes worth running. Modules with min_revenue_band above brain.revenue_band are dropped from the recommended set and rendered under 'Phase 2 — once revenue scales' on Page 07. Examples: recruitment pipeline → £1M-5M; demand planning → £250k-1M; image upload → <£250k (no floor). Null = no revenue floor."
+              }
+            }
+          }
+        },
+        "universal_opportunities": {
+          "type": "array",
+          "description": "Top 3-5 systemic Amazon wins (UW-01 to UW-08) cross-checked against the brand profile. Always populated when modules are populated. Surfaced on Page 07 below the modules list.",
+          "items": {
+            "type": "object",
+            "required": ["uw_id", "name", "why_relevant"],
+            "properties": {
+              "uw_id": { "type": "string", "pattern": "^UW-0[1-8]$" },
+              "name": { "type": "string" },
+              "why_relevant": { "type": "string", "description": "1 sentence — what brain signal triggered this UW." },
+              "effort": { "type": "string", "description": "e.g. '1 day', '2-3 days'" },
+              "deps": {
+                "type": "array",
+                "description": "Module IDs (e.g. ['02', '04']) this UW pairs with or depends on.",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        },
+        "featured_module": {
+          "type": ["string", "null"],
+          "description": "Module n (e.g. '02') of the featured module for page 08."
+        },
+        "future_state_narrative": {
+          "type": ["string", "null"],
+          "description": "1-2 paragraph narrative for page 09 closing: what the delegate's week looks like 6 months after the migration plan is complete. Pivot-9c addition."
+        }
+      }
+    },
+    "transcript": {
+      "type": "array",
+      "description": "Verbatim record of the interview + key capture events. Append-only.",
+      "items": {
+        "type": "object",
+        "required": ["ts", "kind"],
+        "properties": {
+          "ts": { "type": "string", "format": "date-time" },
+          "kind": { "type": "string", "enum": ["speaker:user", "speaker:syncflow", "capture", "correction", "retraction"] },
+          "text": { "type": "string" },
+          "section": { "type": "string" },
+          "key": { "type": "string" },
+          "value": { "type": "string" },
+          "tone": { "type": "string" }
+        }
+      }
+    }
+  }
+}

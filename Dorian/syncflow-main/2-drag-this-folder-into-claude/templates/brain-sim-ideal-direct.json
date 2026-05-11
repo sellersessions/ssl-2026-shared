@@ -1,0 +1,397 @@
+{
+  "schema_version": "1.1",
+  "brand": "ideal-direct",
+  "brand_display": "Ideal Direct",
+  "captured_at": "2026-05-07T12:00:00Z",
+  "last_updated_at": "2026-05-08T00:00:00Z",
+  "baseline_note": "Sim playing himself a year ago — May 2025 IDL state. Used as the deterministic test-run fixture so Sim can re-test new syncflow features without redoing the 30-min interview. Source: docs/for-sim-pivot-13-retest.md follow-up + Sim's first test-run feedback report (2026-05-07). Updated 2026-05-08 for schema 1.1 / Track F: email_suite, wispr_flow, revenue_band, team.capacity_hours_per_week, team.maintenance_tolerance, per-tool monthly_cost + prerequisite, per-module complexity_grade + dependency_failure_mode + min_revenue_band.",
+  "fact_count": 64,
+  "email_suite": {
+    "provider": "Microsoft 365",
+    "bundled_apps": ["Microsoft Teams", "OneDrive", "Outlook", "Word", "Excel", "PowerPoint"],
+    "monthly_cost": "unknown (est. £200)"
+  },
+  "wispr_flow": false,
+  "revenue_band": "£1M-5M",
+  "sections": {
+    "business": {
+      "brand": "ideal-direct",
+      "category": "Amazon FBA / eCommerce — multi-brand house",
+      "brands": [
+        "Deer & Oak",
+        "Pest X Pro",
+        "Tydi",
+        "iMedic",
+        "DIY Doctor",
+        "Rooted Human (idea stage in May 2025)"
+      ],
+      "years_in_business": "~8 (Sim took over 2017)",
+      "monthly_revenue_band": "~£833k/mo (£10M ARR)",
+      "annual_revenue_band_gbp": 10000000,
+      "channels": ["Amazon UK", "Amazon EU (early)", "D2C (nascent)"],
+      "sku_count": "~100 active parent ASINs",
+      "top3_concentration": "~80% of revenue (Pareto holds)",
+      "model": "FBA primary",
+      "growth_posture": "aggressive scale",
+      "launch_cadence": "10–20 new parent ASINs per year; Pest X Pro (UK manufacturer) opening up additional opportunities"
+    },
+    "team": {
+      "headcount": "~15 named, plus warehouse + junior designers",
+      "roles": [
+        { "name": "Sim", "role": "Director" },
+        { "name": "Jack", "role": "Director" },
+        { "name": "Chris", "role": "Head of Supply Chain (Linnworks owner)" },
+        { "name": "Adam", "role": "Head of Sales" },
+        { "name": "Franc", "role": "Head of Finance — sole Power BI operator" },
+        { "name": "Red", "role": "Brand Manager" },
+        { "name": "Jude", "role": "Brand Manager" },
+        { "name": "Tom", "role": "Brand Director" },
+        { "name": "Michael", "role": "Brand Director" },
+        { "name": "Simon", "role": "Creative Lead — Figma owner" },
+        { "name": "Enrico", "role": "Junior Designer" },
+        { "name": "Owen", "role": "Junior Designer" },
+        { "name": "Cara", "role": "Head of People" },
+        { "name": "Adam Chambers", "role": "Warehouse Manager" }
+      ],
+      "outsourced_functions": "none — fully in-house",
+      "tool_fluency": "PPC: brand managers + brand directors (Helium 10, Scale Insights, Seller Central). Finance/reporting: Franc only (Power BI). Design: Simon (Figma). Supply chain: Chris (Linnworks). All on ClickUp at task-tracking level only. Slack primary comms; Microsoft Teams also installed but unused. WhatsApp personally.",
+      "bottleneck": "Recruitment is #1 — no ATS, no scoring rubric, no structured pipeline. Cara + Sim manage candidates from memory. Every unfilled brand manager role caps growth. Franc is also an existential single point of failure for all financial data via Power BI.",
+      "imminent_hires": "Brand managers — actively recruiting; recruitment flow itself is broken",
+      "capacity_hours_per_week": 40,
+      "capacity_note": "Build-relevant capacity: Sim + Jack (directors, ~10 hrs/wk on systems work) + Cara (Head of People, can absorb ~10 hrs/wk) + 1 brought-in tech lead (~20 hrs/wk). Remaining 11 named roles run the day-to-day and are downstream owners post-build, not build contributors.",
+      "maintenance_tolerance": "n8n_self_host"
+    },
+    "stack": {
+      "tools": [
+        { "name": "Helium 10", "category": "amazon-intel", "tone": "rented", "monthly_cost": 150, "prerequisite": true, "notes": "Amazon FBA prerequisite — keyword research, Cerebro/Magnet. Table stakes, not retire-candidate." },
+        { "name": "Scale Insights", "category": "amazon-ppc", "tone": "rented", "monthly_cost": 300, "prerequisite": false },
+        { "name": "Data Dive", "category": "amazon-research", "tone": "rented", "monthly_cost": "unknown (est. £80)", "prerequisite": true, "notes": "Amazon FBA prerequisite — niche research. Table stakes." },
+        { "name": "Linnworks", "category": "multi-channel-ops", "tone": "rented", "monthly_cost": "unknown (est. £400)", "prerequisite": false, "notes": "Chris's source of truth. Keep — multi-channel ops backbone." },
+        { "name": "Power BI", "category": "bi-reporting", "tone": "rented", "monthly_cost": 100, "prerequisite": false },
+        { "name": "ClickUp", "category": "pm", "tone": "owned-untouched", "monthly_cost": "unknown (est. £30)", "prerequisite": false },
+        { "name": "Slack", "category": "comms", "tone": "owned", "monthly_cost": "unknown (est. £100)", "prerequisite": false },
+        { "name": "Microsoft Teams", "category": "comms", "tone": "rented", "monthly_cost": "bundled", "prerequisite": false, "notes": "Bundled with Microsoft 365 (email_suite). Team doesn't actually use — diagnose-sprawl flags as retire candidate at £0 net (no spend recovered, just clutter removed)." },
+        { "name": "WhatsApp", "category": "comms", "tone": "rented", "monthly_cost": 0, "prerequisite": false, "notes": "personal use, free tier" },
+        { "name": "Figma", "category": "design", "tone": "owned", "monthly_cost": "unknown (est. £40)", "prerequisite": false },
+        { "name": "Canva", "category": "design", "tone": "rented", "monthly_cost": "unknown (est. £15)", "prerequisite": false },
+        { "name": "Seller Central", "category": "amazon-platform", "tone": "rented", "monthly_cost": 0, "prerequisite": true, "notes": "Amazon platform fee paid as referral % on sales, not subscription. Prerequisite — primary source of truth." }
+      ],
+      "ai_tools": [
+        { "name": "ChatGPT", "usage": "basic text-based work, some imagery, occasional product compliance / development advice" }
+      ],
+      "custom_tools": [
+        "SP-API integration (basic)",
+        "Reporting dashboards via Power BI",
+        "Some n8n automations"
+      ],
+      "csv_moments": [
+        "PPC data exports (Scale Insights → Excel → manual review)",
+        "Demand planning spreadsheets (Chris pulls Linnworks → spreadsheet → gut-feel decision)",
+        "Figma → Seller Central image upload (Simon's manual ritual)",
+        "Power BI export → Sheets → Slack reporting (Franc)",
+        "Manual returns data → QC handoff"
+      ],
+      "glue_humans": [
+        { "person": "Chris", "role": "demand planning glue — manually checks Linnworks + makes reorder decisions" },
+        { "person": "Simon", "role": "image upload glue — Figma → manually upload to Seller Central" },
+        { "person": "Cara + Sim", "role": "recruitment glue — manage all candidates from memory" },
+        { "person": "Franc", "role": "all financial reporting glue — Power BI single point of failure" },
+        { "person": "Adam + Sim", "role": "ad-hoc pricing spot-checks — competitive monitoring" }
+      ],
+      "saas_spend_gbp": 10000,
+      "saas_spend_note": "easily £10k+/year across SaaS",
+      "reporting_cadence": [
+        "Seller Central as primary source of truth",
+        "Helium 10 + other tools for analytics",
+        "Weekly Power BI for finance (Franc-only)"
+      ],
+      "biggest_integration_gap": "PPC decisions disconnected from stock levels — overbid on near-OOS ASINs because the systems don't talk",
+      "pm_tool": "clickup",
+      "comms_tool": "slack"
+    },
+    "goals": {
+      "vision_12_month": "Launch Rooted Human. Scale into US and EU properly. Hire A-players and empower them to grow the business through real systems rather than ad hoc firefighting.",
+      "founder_involvement": "Scale then step back — same involvement on strategy, but systems carry the operational load Sim+Jack currently carry",
+      "single_biggest_bottleneck": "Recruitment — no system to hire A-players. This is THE blocker between current state and 12-month vision.",
+      "magic_wand_automation": "Three things: (1) scalable recruitment pipeline, (2) real demand planning system, (3) ClickUp as a true operating system rather than just a task tracker.",
+      "why_not_yet": "Time + clarity on where to start"
+    }
+  },
+  "recommendations": {
+    "diagnosis": {
+      "csv_moments_count": 5,
+      "glue_humans_count": 5,
+      "rented_subs_total_gbp_per_month": 670,
+      "rented_subs_breakdown": [
+        { "tool": "Scale Insights", "monthly_cost_gbp": 300, "verdict": "retire" },
+        { "tool": "Helium 10", "monthly_cost_gbp": 150, "verdict": "consolidate (keep KW research, retire stock analytics)" },
+        { "tool": "Microsoft Teams", "monthly_cost_gbp": 120, "verdict": "retire (unused)" },
+        { "tool": "Power BI", "monthly_cost_gbp": 100, "verdict": "retire (replace with SQL MCP)" }
+      ]
+    },
+    "replacement": {
+      "retire": [
+        { "tool": "Scale Insights", "monthly_cost_gbp": 300, "replaced_by": "Module 04 PPC + Stock Interlock (in-house, n8n)", "transition_effort": "8-10 weeks", "gotchas": "team needs to learn the new flow; brand managers need buy-in" },
+        { "tool": "Microsoft Teams", "monthly_cost_gbp": 120, "replaced_by": "Slack only (already primary)", "transition_effort": "1 week — just switch off Teams", "gotchas": "any historical messages on Teams need to be exported first" },
+        { "tool": "Power BI", "monthly_cost_gbp": 100, "replaced_by": "Module 06 SQL MCP + Supabase", "transition_effort": "2 weeks transition", "gotchas": "Franc needs to transition from gatekeeper to query expert" }
+      ],
+      "consolidate": [
+        { "tool": "Helium 10", "monthly_cost_gbp": 150, "keep_part": "Cerebro + Magnet keyword research only", "retire_part": "stock analytics, review automation (move to native flows)", "net_savings_gbp_per_month": 0, "transition_effort": "1 week", "gotchas": "downgrade to a lower tier of Helium 10 if available" }
+      ],
+      "keep": [
+        { "tool": "ClickUp", "rationale": "operating system foundation — Module 01" },
+        { "tool": "Slack", "rationale": "primary comms; pairs with all alerts" },
+        { "tool": "Linnworks", "rationale": "multi-channel ops; Chris's source of truth" },
+        { "tool": "Seller Central", "rationale": "primary source of truth — Amazon-side, can't replace" },
+        { "tool": "Data Dive", "rationale": "niche research — keep, not in critical path" },
+        { "tool": "Figma", "rationale": "design source-of-truth; Simon's tool; Module 05 builds on top" }
+      ],
+      "net_savings_gbp_per_month": 700,
+      "net_savings_gbp_per_year": 8400,
+      "net_hours_reclaimed_per_week": 17
+    },
+    "modules": [
+      {
+        "n": "01",
+        "name": "ClickUp OS — Foundation",
+        "weeks": "wk 1-3",
+        "effort": "12-16 hrs",
+        "deps": "",
+        "tag": "foundation",
+        "status": "recommended",
+        "rung": 2,
+        "rung_label": "rung 2 — extend ClickUp you already pay for",
+        "problem": "ClickUp is in the stack but used as a task tracker only. No brand-as-OS template, no multi-brand parent structure, no ScaleReady, no daily-checks. Every other module has nowhere to land without this.",
+        "outcome": "True OS. Brand-as-OS template (6 departments) × each brand. Three-stage NPD pipeline. Per-role Ad-Hoc Boards. ScaleReady Stage 1 for HR. Report Hub separation. The base layer everything else lands on.",
+        "prerequisites": ["Active ClickUp workspace (have it)", "Owner who'll maintain structure post-build (Cara or Sim)", "1-2 weeks dedicated focus"],
+        "owners": { "primary": "Cara", "contributors": ["tech lead", "Sim"], "approver": "Sim" },
+        "key_metrics": ["All 7 module outputs land in ClickUp (target: 100%)", "Team works from ClickUp not ad-hoc Slack threads (target: <10% ops conversations off-ClickUp)", "Time-to-find-task target <30 sec from any team member"],
+        "projected_savings_per_year_gbp": 6000,
+        "projected_hours_saved_per_week": 4,
+        "roi_confidence": "high",
+        "week_after": "Ideal Direct has one place work happens. Every module that follows has a home. Cara opens ClickUp Monday morning and sees recruitment, not Slack.",
+        "risks": [
+          { "risk": "Team adoption — going from light-touch ClickUp to full OS is a big shift", "mitigation": "Roll out one brand first (Pest X Pro), prove the win, expand" },
+          { "risk": "Structure rigidity — folder/list hierarchy locks in early decisions", "mitigation": "Start with Sim's Ideal-Direct template; iterate after 4 weeks of use" }
+        ],
+        "complexity_grade": "Beginner",
+        "dependency_failure_mode": null,
+        "min_revenue_band": null
+      },
+      {
+        "n": "02",
+        "name": "Recruitment Pipeline",
+        "weeks": "wk 4-7",
+        "effort": "30-40 hrs",
+        "deps": "01",
+        "tag": "recommended start",
+        "status": "recommended",
+        "rung": 4,
+        "rung_label": "rung 4 — n8n-orchestrated pipeline + ClickUp (already owned)",
+        "problem": "Fully ad hoc recruitment. No ATS, no scoring rubric, no structured flow from job post to decision. Cara and Sim manage candidates from memory. Every unfilled brand manager role is a direct cap on growth — Sim's stated #1 bottleneck.",
+        "outcome": "n8n-orchestrated pipeline. Applications ingest automatically (form / email alias). Scoring rubric applied. ClickUp task per candidate in HR/Recruitment folder. Interview scheduling via n8n. Decision logged to Supabase. Sim exits the loop until shortlist. Cara owns the surface.",
+        "prerequisites": ["Module 01 (HR folder in ClickUp)", "Scoring rubric agreed with Cara (1-day workshop)", "n8n hosted instance", "Application intake form or email alias", "Supabase project for candidate database"],
+        "owners": { "primary": "Cara", "contributors": ["tech lead"], "approver": "Sim" },
+        "key_metrics": ["Time from application to first-stage review (target: <48 hrs)", "Sim hrs/week on recruitment admin (target: <1 hr/wk vs current ~5)", "Pipeline visibility: any open role has 4+ candidates at various stages at all times"],
+        "projected_savings_per_year_gbp": 18000,
+        "projected_hours_saved_per_week": 7,
+        "roi_confidence": "high",
+        "week_after": "Cara opens ClickUp Monday. 4 brand manager candidates at various pipeline stages — all auto-scored. Sim hasn't seen a CV. The Monday recruitment crisis call is gone.",
+        "risks": [
+          { "risk": "Rubric poorly calibrated first pass", "mitigation": "Run first 3 candidates manually alongside the system; refine the rubric from real data" },
+          { "risk": "Cara adoption resistance", "mitigation": "Cara helps design the rubric — ownership = adoption" }
+        ],
+        "complexity_grade": "Advanced",
+        "dependency_failure_mode": "Without Module 01's HR/Recruitment folder structure, n8n posts have nowhere to land — candidate tasks scatter across Slack DMs and Cara's notes app. Build it first.",
+        "min_revenue_band": "£1M-5M"
+      },
+      {
+        "n": "03",
+        "name": "Demand Planning",
+        "weeks": "wk 4-7 (parallel with 02)",
+        "effort": "20-30 hrs",
+        "deps": "01",
+        "status": "recommended",
+        "rung": 4,
+        "rung_label": "rung 4 — n8n + Supabase, glued to existing SP-API",
+        "problem": "Chris is the human reorder system. Gut-feel + Linnworks spot-checks. No system linking sell-velocity to reorder triggers. Overstock write-downs and OOS events on every new market launch.",
+        "outcome": "Supabase + n8n. Real sell-through from SP-API. Blended 7/14/30-day velocity. Reorder triggers at <21 days cover. ClickUp tasks assigned to Chris. Foundation for Module 04.",
+        "prerequisites": ["Module 01", "Linnworks API access", "SP-API credentials", "Brand Analytics access", "Chris available for onboarding (~6 hrs over 3 weeks)"],
+        "owners": { "primary": "Chris", "contributors": ["tech lead"], "approver": "Sim" },
+        "key_metrics": ["OOS events per month (target: <2)", "Overstock write-down value (target: -50% YoY)", "Chris hrs/week on reorder decisions (target: <2 vs current ~6)"],
+        "projected_savings_per_year_gbp": 65000,
+        "projected_hours_saved_per_week": 4,
+        "roi_confidence": "high",
+        "week_after": "Chris checks the Demand Forecast folder. Three ASINs flagged below 21 days cover, quantities and lead times calculated overnight. He approves reorders in 5 minutes.",
+        "risks": [
+          { "risk": "Seller Central API rate limits hit during 14-day moving window calc", "mitigation": "Cache intermediate results; run incrementally, not all-at-once" },
+          { "risk": "Brand managers resist owning the number — historically Chris's job", "mitigation": "Roll out with one brand (Pest X Pro), prove the win, expand" }
+        ],
+        "complexity_grade": "Intermediate",
+        "dependency_failure_mode": "Without Module 01, reorder tasks have no Demand Forecast folder and Chris falls back to spreadsheet alerts — the velocity math runs but no one acts on it.",
+        "min_revenue_band": "£250k-1M"
+      },
+      {
+        "n": "04",
+        "name": "PPC + Stock Interlock",
+        "weeks": "wk 8-10",
+        "effort": "20-25 hrs",
+        "deps": "03",
+        "status": "recommended",
+        "rung": 5,
+        "rung_label": "rung 5 — Claude Code routine + n8n; retires Scale Insights",
+        "problem": "Scale Insights (~£300/mo) as a black-box PPC automation. Overbidding on near-OOS ASINs. SQPR keywords unactioned. Brand managers flying blind.",
+        "outcome": "Stock data from Supabase connected to PPC logic via n8n. ASINs under 14 days cover have bids suppressed automatically. SQPR harvested on schedule. Scale Insights retired.",
+        "prerequisites": ["Module 03 (stock data in Supabase)", "SP-API Advertising credentials", "Brand managers available for rubric input"],
+        "owners": { "primary": "Red", "contributors": ["Chris", "tech lead"], "approver": "Sim" },
+        "key_metrics": ["Wasted ad spend on near-OOS ASINs (target: -90%)", "SQPR harvest rate (target: weekly, all brands)", "Scale Insights subscription cancelled (binary)"],
+        "projected_savings_per_year_gbp": 12000,
+        "projected_hours_saved_per_week": 2,
+        "roi_confidence": "high",
+        "week_after": "Red checks PPC. Two Deer & Oak ASINs had bids automatically suppressed overnight because stock dipped. £200 in wasted spend that didn't happen.",
+        "risks": [
+          { "risk": "Bid suppression too aggressive — kills sales on borderline ASINs", "mitigation": "Configurable threshold per brand; start conservative (21 days cover); tighten over time" },
+          { "risk": "Scale Insights cancellation premature — features we're not replacing", "mitigation": "Audit Scale Insights usage for 2 weeks before retiring; add anything missing" }
+        ],
+        "complexity_grade": "Intermediate",
+        "dependency_failure_mode": "Without Module 03's stock data in Supabase, the bid-suppression rules have nothing to read — Scale Insights stays in the loop and Red flies blind on near-OOS ASINs.",
+        "min_revenue_band": "£1M-5M"
+      },
+      {
+        "n": "05",
+        "name": "Image Upload Automation",
+        "weeks": "wk 4-5 (parallel with 02/03)",
+        "effort": "12-16 hrs",
+        "deps": "",
+        "status": "recommended",
+        "rung": 2,
+        "rung_label": "rung 2 — Figma plugin extending tool you already own",
+        "problem": "Simon's manual Figma → download → Seller Central ritual. 3-5 hrs/week minimum. Every listing launch constrained by one person's bandwidth. Mirrors Sim's #01 case study.",
+        "outcome": "Figma plugin → n8n → SP-API Listings endpoint. Simon pushes from Figma; n8n handles the rest. Human all but removed.",
+        "prerequisites": ["Figma API access", "SP-API Listings endpoint credentials", "n8n hosted", "Simon involved in plugin UX (1 day)"],
+        "owners": { "primary": "Simon", "contributors": ["tech lead"], "approver": "Sim" },
+        "key_metrics": ["Simon hrs/week on manual uploads (target: <30 min vs current ~4 hrs)", "Listing launch time from Figma-complete to live (target: <15 min vs current ~half-day)"],
+        "projected_savings_per_year_gbp": 9000,
+        "projected_hours_saved_per_week": 4,
+        "roi_confidence": "high",
+        "week_after": "Simon exports from Figma. The upload is live on Seller Central 10 minutes later without him touching Seller Central.",
+        "risks": [
+          { "risk": "Figma plugin sandbox limitations", "mitigation": "Plugin handles UX; n8n + SP-API does the heavy lifting" },
+          { "risk": "SP-API rate limits on bulk uploads", "mitigation": "Queue + batch + retry-with-backoff in n8n" }
+        ],
+        "complexity_grade": "Intermediate",
+        "dependency_failure_mode": null,
+        "min_revenue_band": null
+      },
+      {
+        "n": "06",
+        "name": "SQL MCP · Self-Serve Reporting",
+        "weeks": "wk 11-12",
+        "effort": "12-16 hrs",
+        "deps": "03, 04",
+        "status": "recommended",
+        "rung": 5,
+        "rung_label": "rung 5 — Supabase + Claude SQL MCP; retires Power BI",
+        "problem": "Power BI (~£100/mo) gated through Franc only. Entire team waits for reports. If Franc leaves, reporting stops. Key-person risk flagged as existential.",
+        "outcome": "Supabase + Claude SQL MCP. Any team member queries live data in plain English via Claude Desktop. Franc transitions from gatekeeper to query expert. Report Hub in ClickUp.",
+        "prerequisites": ["Modules 03 + 04 (data in Supabase)", "Claude Desktop access for the team", "Franc buy-in (1-day pairing session)"],
+        "owners": { "primary": "Franc", "contributors": ["tech lead", "Tom", "Michael"], "approver": "Sim" },
+        "key_metrics": ["Number of team members self-serving data (target: 8+)", "Power BI subscription cancelled (binary)", "Franc single-point-of-failure resolved (binary)"],
+        "projected_savings_per_year_gbp": 8000,
+        "projected_hours_saved_per_week": 3,
+        "roi_confidence": "high",
+        "week_after": "Tom asks Claude 'which Pest X Pro ASINs are below average CVR in the last 30 days?' and has the answer in 20 seconds. Franc didn't need to be called.",
+        "risks": [
+          { "risk": "Franc sees this as job displacement", "mitigation": "Reframe his role: from gatekeeper to query expert + dashboard architect; he becomes more strategic, not less" },
+          { "risk": "Team members write expensive queries", "mitigation": "Read-only connection; query timeout; Supabase indexes on hot columns" }
+        ],
+        "complexity_grade": "Intermediate",
+        "dependency_failure_mode": "Without Modules 03+04 data flowing into Supabase, the SQL MCP has nothing live to query — the team falls back to Franc + Power BI and the single-point-of-failure stays.",
+        "min_revenue_band": "£1M-5M"
+      },
+      {
+        "n": "07",
+        "name": "Buybox + Competitive Monitor",
+        "weeks": "wk 13-15",
+        "effort": "16-20 hrs",
+        "deps": "01, 03",
+        "status": "recommended",
+        "rung": 6,
+        "rung_label": "rung 6 — new SaaS (Rainforest API) + n8n orchestration",
+        "problem": "Sim and Adam doing ad hoc pricing spot-checks. Pest X Pro competitors changing price overnight, discovered 3 days late. Margin leaking on the brand with the best competitive moat.",
+        "outcome": "Rainforest API → n8n → Supabase. Competitive position changes trigger ClickUp flags. Auto-reprice within defined bands. Pest X Pro and Deer & Oak protected.",
+        "prerequisites": ["Modules 01 + 03", "Rainforest API key (~£50/credits or pay-go)", "Pricing band rules defined by Adam + Sim (1 day)"],
+        "owners": { "primary": "Adam", "contributors": ["tech lead"], "approver": "Sim" },
+        "key_metrics": ["Time from competitor price change to detection (target: <12 hrs)", "Buybox win rate on monitored ASINs (target: +10pp)", "Margin delta on monitored ASINs (target: protect within 5% of target)"],
+        "projected_savings_per_year_gbp": 24000,
+        "projected_hours_saved_per_week": 1,
+        "roi_confidence": "medium",
+        "week_after": "Pest X Pro main ASIN flagged at 7am — competitor dropped price 8% overnight. Adam reviews and approves auto-reprice in 3 minutes. Previously this would have been discovered on Thursday.",
+        "risks": [
+          { "risk": "Auto-reprice too aggressive — race to bottom", "mitigation": "Hard margin floor; never let auto-reprice drop below break-even; daily reset on triggers" },
+          { "risk": "Rainforest API costs scale with ASIN count", "mitigation": "Start with top 20 monitored; expand only if ROI proves" }
+        ],
+        "complexity_grade": "Intermediate",
+        "dependency_failure_mode": "Without Module 01, alerts have no Pricing folder to land in; without Module 03, alerts have no stock context — competitor changes still get missed for days even with the API hooked up.",
+        "min_revenue_band": "£1M-5M"
+      }
+    ],
+    "universal_opportunities": [
+      {
+        "uw_id": "UW-01",
+        "name": "SQPR × PPC gap-filler",
+        "why_relevant": "Brand Analytics access + active PPC + SP-API — gap keywords visible across the catalogue.",
+        "effort": "2-3 days",
+        "deps": ["02", "04"]
+      },
+      {
+        "uw_id": "UW-04",
+        "name": "Branded search cannibalisation audit",
+        "why_relevant": "Active brand-name search volume on Pest X Pro and Deer & Oak; defunding offensive cannibalisation is a one-month win.",
+        "effort": "2 days",
+        "deps": []
+      },
+      {
+        "uw_id": "UW-05",
+        "name": "Returns reason mining",
+        "why_relevant": "Multi-brand FBA portfolio with meaningful return volume — themes per ASIN drive listing-bullet revisions and supplier feedback.",
+        "effort": "1 day to build the Cowork project; monthly thereafter",
+        "deps": []
+      },
+      {
+        "uw_id": "UW-08",
+        "name": "A+ content coverage audit",
+        "why_relevant": "Brand Registered + ~100 active ASINs — long-tail without A+ is the typical 5-10% CVR uplift.",
+        "effort": "1 day",
+        "deps": []
+      }
+    ],
+    "featured_module": "03",
+    "featured_module_derivation": {
+      "method": "F3 score = 0.5×(roi/max_roi) + 0.3×(1 − complexity_index/3) + 0.2×(tools_owned_overlap/total_tools)",
+      "scores": {
+        "01": 0.31,
+        "02": 0.18,
+        "03": 0.64,
+        "04": 0.23,
+        "05": 0.22,
+        "06": 0.20,
+        "07": 0.32
+      },
+      "notes": "Module 03 Demand Planning wins on ROI (£65k/yr — highest by 2.7×) at Intermediate complexity. Module 02 Recruitment remains the recommended-start (Sim's stated #1 bottleneck) but scores lower on the featured rubric due to Advanced complexity. F3 decouples featured (score-driven, biggest visible win) from recommended-start (sequencing, addresses stated bottleneck)."
+    },
+    "scope_mode": "full",
+    "deferred_modules": [],
+    "capacity_envelope": {
+      "available_hours": 256,
+      "computed_as": "40 hrs/wk × 16 weeks × 0.4 = 256 hrs",
+      "sum_of_kept_modules": 142.5,
+      "headroom_hours": 113.5,
+      "notes": "All 7 modules fit comfortably; no capacity-fit drops fired. Headroom available for Phase-2 revisits or universal_opportunities follow-through."
+    },
+    "future_state_narrative": "Twelve months from now, your Tuesday morning starts in ClickUp's brand-as-OS view. Pest X Pro shows three reorder candidates flagged overnight by Demand Planning — Chris approves in 5 minutes. Cara opens her recruitment list: 4 brand manager candidates at various stages, all auto-scored, ready for her shortlist. Red asks Claude in plain English which Deer & Oak ASINs underperformed PPC last week, gets the answer in 20 seconds. Simon pushes a Figma update; the listing's main image is live on Seller Central before he closes the laptop. Adam's 7am notification: a Pest X Pro competitor moved overnight; the auto-reprice held within margin. Franc shifted from Power BI gatekeeper to query architect. The team works from a system, not a gut feel. Recruitment is no longer the bottleneck — Rooted Human launched, US scaling started, Sim+Jack are spending time on strategy not Slack triage."
+  },
+  "transcript": {
+    "note": "Test-run fixture — brain rebuilt from Sim's first test-run feedback report (2026-05-07). Use as the deterministic input when re-testing new syncflow features without redoing the 30-min interview."
+  }
+}
