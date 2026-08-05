@@ -35,8 +35,9 @@ You don't need to know what an MCP server, OAuth token, or LWA app is. The wizar
 | MCP server connecting Claude → SP-API      | This folder, after `npm install` and `npm run build` |
 | Read access to Orders, Finances, Sales & Traffic | Three tools registered with Claude Code          |
 | Local credentials file (`.env`)           | This folder, git-ignored, never sent anywhere    |
-| Claude Code MCP entry                     | `~/.claude/settings.json` (additive — your existing entries are untouched) |
+| Claude Code MCP entry                     | `~/.claude.json` user scope, via `claude mcp` — command only, no credentials; your existing entries are untouched |
 | Probe matrix (`npm run smoke-test`)        | Runs any time, tells you which roles are working |
+| Health check (`npm run doctor`)            | Checks registration → server → credentials → Amazon, in order, with the fix for whichever layer is broken |
 
 ---
 
@@ -51,15 +52,18 @@ npm install
 npm run setup
 npm run build
 npm run wire-claude
+npm run doctor
 ```
 
-That's it. Restart Claude Code, then try one of the [sample questions](#try-it) below.
+That's it. Restart Claude Code, then try one of the [sample questions](#try-it) below. `doctor` confirms the whole chain (registered → server starts → credentials → Amazon) and names the fix if any layer is broken.
+
+> Upgrading from v1.0.0? Run the same commands — `wire-claude` migrates you — then read [Upgrading from v1.0.0](./SETUP.md#upgrading-from-v100) in SETUP.md: rotating your SP-API credentials is strongly recommended.
 
 If you're missing prerequisites, follow the full guide in [SETUP.md](./SETUP.md) instead.
 
 ### Prefer a guided web wizard?
 
-Open **[amazon-operator-stack-setup.vercel.app](https://amazon-operator-stack-setup.vercel.app)** in any browser. It walks you through the same 7 steps as a multi-step form, your progress is saved automatically as you go, and the final step gives you a single copy-paste command that clones this repo, drops the `.env` in place, and wires it into Claude Code.
+Open **[amazon-operator-stack-setup.vercel.app](https://amazon-operator-stack-setup.vercel.app)** in any browser. It mirrors the CLI wizard as a multi-step form, your progress is saved automatically as you go, and the final step gives you a single copy-paste command that clones this repo, drops the `.env` in place, and wires it into Claude Code.
 
 Privacy-by-design — no backend, your refresh token never leaves your browser. Optional JSON backup of in-progress answers if you want belt-and-braces on the autosave.
 
@@ -78,7 +82,7 @@ Once Claude Code has restarted, paste any of these into the chat:
 | Reconcile against Seller Central  | *"List financial events from yesterday, sum the shipment events, and tell me what to expect in my next payout."* |
 | Find unusual fees                  | *"Pull the last 14 days of financial events. Flag any service fees that look unusual relative to the average."* |
 | Sales & Traffic deep dive         | *"Get last week's Sales & Traffic report. Which ASIN had the highest sessions but the worst conversion rate?"*   |
-| Stockout risk                      | *"Pull my FBA inventory summary. Highlight any SKU with under 30 days of cover at current sales velocity."*       |
+| Sales velocity per SKU             | *"Pull the last 30 days of orders, work out daily sales velocity per SKU, and flag the fastest movers."*          |
 
 Three things Claude does well with these tools:
 
